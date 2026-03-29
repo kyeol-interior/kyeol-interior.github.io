@@ -106,7 +106,9 @@
 button:hover {
   transform: scale(1.1);
 }
-
+button {
+  margin: 5px;
+}
     footer {
       background: #333;
       color: white;
@@ -143,12 +145,21 @@ button:hover {
     <button onclick="alert('환영합니다!')">클릭해보세요</button>
   </div>
 
-  <div id="about" class="box">
-    <h2>소개</h2>
+ <div id="about" class="box">
+  <h2>소개</h2>
+
+  <button onclick="showTab('info')">소개</button>
+  <button onclick="showTab('skill')">기술</button>
+
+  <div id="info">
     <p>HTML과 CSS로 만든 사이트입니다.</p>
-    <img src="https://picsum.photos/600/300" alt="이미지">
   </div>
 
+  <div id="skill" style="display:none;">
+    <p>HTML / CSS / JavaScript 공부 중</p>
+  </div>
+
+</div>
   <div id="contact" class="box">
     <h2>연락처</h2>
     <p>이메일: kyeol999@naver.com</p>
@@ -159,6 +170,13 @@ button:hover {
 <footer>
   <p>© 2026 내 홈페이지</p>
 </footer>
+<script>
+  function showTab(tab) {
+    document.getElementById("info").style.display = "none";
+    document.getElementById("skill").style.display = "none";
 
+    document.getElementById(tab).style.display = "block";
+  }
+</script>
 </body>
 </html>
