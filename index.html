@@ -143,7 +143,7 @@ body, html {
 <body>
 
 <!-- 🔥 SNS 항상 보이게 -->
-<div class="left-menu">
+<div class="left-menu" id="sns">
   <a href="#">INSTAGRAM</a>
   <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO</a>
   <a href="https://blog.naver.com/rotte123" target="_blank">BLOG</a>
@@ -192,6 +192,8 @@ function enterSite() {
   document.getElementById("main").style.opacity = "0";
   document.getElementById("main").style.pointerEvents = "none";
 
+  document.getElementById("sns").style.display = "none"; // 🔥 숨김
+  
   const second = document.getElementById("second");
   second.style.opacity = "1";
   second.style.transform = "scale(1)";
@@ -204,6 +206,9 @@ function enterSite() {
 function goBack() {
   document.getElementById("main").style.opacity = "1";
   document.getElementById("main").style.pointerEvents = "auto";
+
+  document.getElementById("sns").style.display = "block"; // 🔥 다시 보이기
+  
   document.getElementById("second").style.opacity = "0";
 }
 
