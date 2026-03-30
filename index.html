@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>결 INTERIOR & DESIGN</title>
+<title>KYEOL</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
@@ -12,30 +12,39 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: Arial;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* 🔥 공통 화면 */
+.screen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  transition: 1s ease;
+}
+
+/* 🎬 메인 화면 */
+.main-screen {
+  z-index: 2;
 }
 
 /* 영상 */
 .video-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -1;
 }
 
-/* 오버레이 */
+/* 어둡게 */
 .overlay {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(4px);
 }
 
-/* 중앙 */
+/* 중앙 텍스트 */
 .center-text {
   position: absolute;
   top: 50%;
@@ -43,6 +52,7 @@ body, html {
   transform: translate(-50%, -50%);
   color: white;
   text-align: center;
+  cursor: pointer;
 }
 
 .center-text h1 {
@@ -56,83 +66,79 @@ body, html {
   opacity: 0.8;
 }
 
-/* 사이드 */
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 140px;
-  height: 100%;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(5px);
+/* 🔥 내부 화면 */
+.second-screen {
+  background: #111;
   color: white;
-  padding: 30px 20px;
-  font-family: 'Montserrat', sans-serif;
+  z-index: 1;
+  opacity: 0;
+  transform: scale(1.1);
 }
 
-/* MY STUDIO */
-.sidebar h3 {
-  margin-bottom: 40px; /* 🔥 여백 */
-  font-weight: 500;
+/* 내부 메뉴 */
+.inner-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
-/* 메뉴 */
-.sidebar a {
+.inner-menu a {
   display: block;
+  margin: 20px 0;
   color: white;
-  margin: 18px 0; /* 🔥 간격 균일 */
   text-decoration: none;
+  font-size: 20px;
   letter-spacing: 2px;
-  font-weight: 300;
   transition: 0.3s;
 }
 
-.sidebar a:hover {
-  opacity: 0.6;
-}
-
-/* 하단 */
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  color: white;
-  padding: 15px;
-  font-size: 12px;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(5px);
+.inner-menu a:hover {
+  opacity: 0.5;
 }
 </style>
 </head>
 
 <body>
 
-<video class="video-bg" autoplay muted loop>
-  <source src="15129223_2160_3840_30fps.mp4" type="video/mp4">
-</video>
+<!-- 🎬 메인 화면 -->
+<div class="screen main-screen" id="main">
 
-<div class="overlay"></div>
+  <video class="video-bg" autoplay muted loop>
+    <source src="15129223_2160_3840_30fps.mp4">
+  </video>
 
-<div class="sidebar">
-  <h3>MY STUDIO</h3>
+  <div class="overlay"></div>
 
-  <a href="#">INSTAGRAM</a>
-  <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO</a>
-  <a href="https://blog.naver.com/rotte123" target="_blank">BLOG</a>
-  <a href="proposal.html">PROPOSAL</a>
+  <div class="center-text" onclick="enterSite()">
+    <h1>KYEOL</h1>
+    <p>CLICK TO ENTER</p>
+  </div>
+
 </div>
 
-<div class="center-text">
-  <h1>KYEOL</h1>
-  <p>ARCHITECTURE & INTERIOR</p>
+<!-- 🔥 내부 화면 -->
+<div class="screen second-screen" id="second">
+
+  <div class="inner-menu">
+    <a href="#">ABOUT</a>
+    <a href="#">PORTFOLIO</a>
+    <a href="proposal.html">PROPOSAL</a>
+    <a href="#">CONTACT</a>
+  </div>
+
 </div>
 
-<footer>
-  <p>📍 전북특별자치도 전주시 완산구 백제대로112/3F</p>
-  <p>📞 1551-9909</p>
-  <p>© (주)결 INTERIOR</p>
-</footer>
+<script>
+function enterSite() {
+  document.getElementById("main").style.opacity = "0";
+  document.getElementById("main").style.pointerEvents = "none";
+
+  document.getElementById("second").style.opacity = "1";
+  document.getElementById("second").style.transform = "scale(1)";
+}
+</script>
 
 </body>
 </html>
