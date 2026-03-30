@@ -28,14 +28,15 @@ body, html {
 .left-menu {
   position: fixed;
   left: 40px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 40px;       /* 🔥 위로 이동 */
+  transform: none; /* 🔥 중앙정렬 제거 */
   z-index: 10;
 }
 
 .left-menu a {
   display: block;
-  margin: 18px 0;
+  margin: 12px 0;
+  font-size: 13px;
   color: white;
   text-decoration: none;
   letter-spacing: 2px;
