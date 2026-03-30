@@ -83,6 +83,16 @@ window.addEventListener("wheel", (e) => {
   slider.style.transform = `translateX(-${current * 100}vw)`;
   pageNumber.innerText = `${current + 1} / ${total}`;
 });
+  window.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") {
+    current = Math.min(current + 1, total - 1);
+  } else if (e.key === "ArrowLeft") {
+    current = Math.max(current - 1, 0);
+  }
+
+  slider.style.transform = `translateX(-${current * 100}vw)`;
+  pageNumber.innerText = `${current + 1} / ${total}`;
+});
 </script>
 
 </body>
