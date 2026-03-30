@@ -7,50 +7,83 @@
 <style>
 body {
   margin: 0;
-  background: #111;
-  color: white;
+  overflow: hidden;
   font-family: Arial;
+  background: black;
 }
 
-h1 {
-  text-align: center;
-  margin: 40px 0;
+/* 전체 슬라이드 */
+.slider {
+  display: flex;
+  width: 1400%; /* 14장 */
+  height: 100vh;
+  transition: transform 0.8s ease;
 }
 
-/* 이미지 */
-.page {
-  max-width: 900px;
-  margin: auto;
+/* 한 장 */
+.slide {
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
 }
 
-.page img {
+.slide img {
   width: 100%;
-  margin-bottom: 20px;
-  border-radius: 10px;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 페이지 번호 */
+.page-number {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+  font-size: 14px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>PROJECT PROPOSAL</h1>
+<div class="slider" id="slider">
 
-<div class="page">
-  <img src="page1.jpg">
-  <img src="page2.jpg">
-  <img src="page3.jpg">
-  <img src="page4.jpg">
-  <img src="page5.jpg">
-  <img src="page6.jpg">
-  <img src="page7.jpg">
-  <img src="page8.jpg">
-  <img src="page9.jpg">
-  <img src="page10.jpg">
-  <img src="page11.jpg">
-  <img src="page12.jpg">
-  <img src="page13.jpg">
-  <img src="page14.jpg">
+  <div class="slide"><img src="page1.jpg"></div>
+  <div class="slide"><img src="page2.jpg"></div>
+  <div class="slide"><img src="page3.jpg"></div>
+  <div class="slide"><img src="page4.jpg"></div>
+  <div class="slide"><img src="page5.jpg"></div>
+  <div class="slide"><img src="page6.jpg"></div>
+  <div class="slide"><img src="page7.jpg"></div>
+  <div class="slide"><img src="page8.jpg"></div>
+  <div class="slide"><img src="page9.jpg"></div>
+  <div class="slide"><img src="page10.jpg"></div>
+  <div class="slide"><img src="page11.jpg"></div>
+  <div class="slide"><img src="page12.jpg"></div>
+  <div class="slide"><img src="page13.jpg"></div>
+  <div class="slide"><img src="page14.jpg"></div>
+
 </div>
+
+<div class="page-number" id="pageNumber">1 / 14</div>
+
+<script>
+let current = 0;
+const total = 14;
+const slider = document.getElementById("slider");
+const pageNumber = document.getElementById("pageNumber");
+
+window.addEventListener("wheel", (e) => {
+  if (e.deltaY > 0) {
+    current = Math.min(current + 1, total - 1);
+  } else {
+    current = Math.max(current - 1, 0);
+  }
+
+  slider.style.transform = `translateX(-${current * 100}vw)`;
+  pageNumber.innerText = `${current + 1} / ${total}`;
+});
+</script>
 
 </body>
 </html>
