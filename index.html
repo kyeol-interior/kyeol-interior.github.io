@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>결 INTERIOR & DESIGN</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
 body, html {
@@ -15,7 +15,7 @@ body, html {
   font-family: Arial;
 }
 
-/* 🎬 배경 영상 */
+/* 영상 */
 .video-bg {
   position: fixed;
   top: 0;
@@ -26,18 +26,16 @@ body, html {
   z-index: -1;
 }
 
-/* 어둡게 + 블러 */
+/* 오버레이 */
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.4);
   backdrop-filter: blur(4px);
 }
 
-/* 중앙 텍스트 */
+/* 중앙 */
 .center-text {
   position: absolute;
   top: 50%;
@@ -58,7 +56,7 @@ body, html {
   opacity: 0.8;
 }
 
-/* 사이드바 */
+/* 사이드 */
 .sidebar {
   position: fixed;
   left: 0;
@@ -68,42 +66,29 @@ body, html {
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(5px);
   color: white;
-  padding: 20px;
+  padding: 30px 20px;
+  font-family: 'Montserrat', sans-serif;
 }
 
+/* MY STUDIO */
+.sidebar h3 {
+  margin-bottom: 40px; /* 🔥 여백 */
+  font-weight: 500;
+}
+
+/* 메뉴 */
 .sidebar a {
   display: block;
   color: white;
-  margin: 10px 0;
+  margin: 18px 0; /* 🔥 간격 균일 */
   text-decoration: none;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  font-weight: 300;
+  transition: 0.3s;
 }
 
 .sidebar a:hover {
   opacity: 0.6;
-}
-
-/* 🔥 1줄 */
-.menu-lines {
-  margin: 20px 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.menu-lines span {
-  width: 100px;
-  height: 2px;
-  background: white;
-  margin: 5px 0;
-  opacity: 0.7;
-  transition: 0.3s;
-}
-
-.menu-lines:hover span {
-  width: 50px;
-  opacity: 1;
 }
 
 /* 하단 */
@@ -123,43 +108,30 @@ footer {
 
 <body>
 
-<!-- 영상 -->
 <video class="video-bg" autoplay muted loop>
   <source src="15129223_2160_3840_30fps.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
 
-<!-- 메뉴 -->
 <div class="sidebar">
   <h3>MY STUDIO</h3>
 
   <a href="#">INSTAGRAM</a>
   <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO</a>
   <a href="https://blog.naver.com/rotte123" target="_blank">BLOG</a>
-
-  <!-- 1줄 -->
-  <div class="menu-lines">
-  <span></span>
-
-
-  </div>
-
-  <!-- 제안서 -->
-  <a href="proposal.html">제안서</a>
+  <a href="proposal.html">PROPOSAL</a>
 </div>
 
-<!-- 중앙 -->
 <div class="center-text">
   <h1>KYEOL</h1>
   <p>ARCHITECTURE & INTERIOR</p>
 </div>
 
-<!-- 하단 -->
 <footer>
   <p>📍 전북특별자치도 전주시 완산구 백제대로112/3F</p>
   <p>📞 1551-9909</p>
-  <p>© 2026 KYEOL INTERIOR</p>
+  <p>© (주)결 INTERIOR</p>
 </footer>
 
 </body>
