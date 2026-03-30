@@ -144,6 +144,33 @@ body, html {
   .back-area:hover {
   cursor: pointer;
 }
+.portfolio-screen {
+  background: #111;
+  z-index: 0;
+  opacity: 0;
+  transition: 1s;
+}
+
+/* 그리드 */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 20px;
+}
+
+/* 이미지 */
+.item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+/* 호버 */
+.item:hover img {
+  transform: scale(1.1);
+}  
 </style>
 </head>
 
@@ -167,6 +194,20 @@ body, html {
 
 <!-- 🔥 내부 화면 -->
 <div class="screen second-screen" id="second">
+<div class="screen portfolio-screen" id="portfolio">
+
+  <div class="portfolio-grid">
+
+    <div class="item"><img src="page1.jpg"></div>
+    <div class="item"><img src="page2.jpg"></div>
+    <div class="item"><img src="page3.jpg"></div>
+    <div class="item"><img src="page4.jpg"></div>
+
+  </div>
+<div class="item" onclick="openImage(this)">
+  <img src="page1.jpg">
+</div>
+</div>  
  <!-- 🔥 배경 클릭 영역 -->
 <div class="back-area" onclick="goBack()"></div>
    <!-- 🔥 왼쪽 SNS -->
@@ -177,7 +218,7 @@ body, html {
   </div>
   <div class="inner-menu">
     <a href="#">ABOUT</a>
-    <a href="#">PORTFOLIO</a>
+    <a href="#" onclick="openPortfolio()">PORTFOLIO</a>
     <a href="proposal.html">PROPOSAL</a>
     <a href="#">CONTACT</a>
   </div>
@@ -205,7 +246,31 @@ function enterSite() {
   second.style.opacity = "0";
   second.style.transform = "scale(1.1)";
 }
+function openPortfolio() {
+  document.getElementById("second").style.opacity = "0";
+  document.getElementById("portfolio").style.opacity = "1";
+  document.getElementById("portfolio").style.zIndex = "3";
+}
+  function openImage(el) {
+  const src = el.querySelector("img").src;
+  const viewer = document.createElement("div");
 
+  viewer.style.position = "fixed";
+  viewer.style.top = "0";
+  viewer.style.left = "0";
+  viewer.style.width = "100%";
+  viewer.style.height = "100%";
+  viewer.style.background = "rgba(0,0,0,0.9)";
+  viewer.style.display = "flex";
+  viewer.style.justifyContent = "center";
+  viewer.style.alignItems = "center";
+
+  viewer.innerHTML = `<img src="${src}" style="max-width:90%">`;
+
+  viewer.onclick = () => viewer.remove();
+
+  document.body.appendChild(viewer);
+}
   /* 🔥 메뉴 순차 등장 */
   menuItems.forEach((item, index) => {
     setTimeout(() => {
@@ -213,6 +278,7 @@ function enterSite() {
     }, index * 200); // 하나씩 0.2초 간격
   });
 }
+  
 </script>
 
 </body>
