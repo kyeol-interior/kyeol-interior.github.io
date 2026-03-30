@@ -46,7 +46,28 @@ body, html {
 .left-menu a:hover {
   opacity: 0.4;
 }
+.menu-title {
+  color: white;
+  font-size: 14px;
+  opacity: 0.6;
+  margin-bottom: 20px;
+  letter-spacing: 3px;
+  font-weight: 500;
+}
 
+.subtitle {
+  font-size: 12px;
+  letter-spacing: 5px;
+  margin-top: 10px;
+  opacity: 0.7;
+}
+
+.click-text {
+  font-size: 11px;
+  margin-top: 20px;
+  opacity: 0.5;
+}
+  
 /* 메인 */
 .main-screen { z-index: 3; }
 
@@ -144,6 +165,8 @@ body, html {
 
 <!-- 🔥 SNS 항상 보이게 -->
 <div class="left-menu" id="sns">
+  <h2 class="menu-title">MY STUDIO</h2>
+  
   <a href="#">INSTAGRAM</a>
   <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO</a>
   <a href="https://blog.naver.com/rotte123" target="_blank">BLOG</a>
@@ -158,7 +181,8 @@ body, html {
 
   <div class="center-text" onclick="enterSite()">
     <h1>KYEOL</h1>
-    <p>CLICK</p>
+    <h3 class="subtitle">ARCHITECTURE & INTERIOR</h3>
+    <p class="click-text">CLICK TO ENTER</p>
   </div>
 </div>
 
