@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Proposal</title>
 
 <style>
@@ -12,29 +13,37 @@ body {
   background: black;
 }
 
-/* 전체 슬라이드 */
+/* 슬라이드 */
 .slider {
   display: flex;
-  width: 1400%; /* 14장 */
+  width: 1400%;
   height: 100vh;
-  transition: transform 0.8s ease;
+  transition: transform 0.6s ease;
 }
 
 /* 한 장 */
 .slide {
-  min-height: 100vh;              /* 🔥 화면 꽉 채움 */
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+
   display: flex;
-  flex-direction: column;
-  justify-content: center;       /* 🔥 세로 가운데 */
-  align-items: center;  
+  justify-content: center;
+  align-items: center;
 }
 
+/* 이미지 */
 .slide img {
- width: 80%;
+  width: 80%;
   max-width: 900px;
   border-radius: 10px;
-  margin-bottom: 20px;
 }
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .slide img {
+    width: 95%;
+  }
 }
 
 /* 페이지 번호 */
@@ -44,12 +53,6 @@ body {
   right: 20px;
   color: white;
   font-size: 14px;
-}
-  @media (max-width: 768px) {
-  .slide img {
-    width: 95%;        /* 🔥 거의 꽉 채움 */
-    max-width: none;   /* 제한 제거 */
-  }
 }
 </style>
 </head>
@@ -83,7 +86,13 @@ const total = 14;
 const slider = document.getElementById("slider");
 const pageNumber = document.getElementById("pageNumber");
 
-/* 마우스 휠 */
+/* 공통 */
+function updateSlide() {
+  slider.style.transform = `translateX(-${current * 100}vw)`;
+  pageNumber.innerText = `${current + 1} / ${total}`;
+}
+
+/* 마우스 */
 window.addEventListener("wheel", (e) => {
   if (e.deltaY > 0) {
     current = Math.min(current + 1, total - 1);
@@ -103,30 +112,24 @@ window.addEventListener("keydown", (e) => {
   updateSlide();
 });
 
-/* 🔥 모바일 터치 */
-let startY = 0;
+/* 🔥 모바일 좌우 스와이프 */
+let startX = 0;
 
 window.addEventListener("touchstart", (e) => {
-  startY = e.touches[0].clientY;
+  startX = e.touches[0].clientX;
 });
 
 window.addEventListener("touchend", (e) => {
-  let endY = e.changedTouches[0].clientY;
+  let endX = e.changedTouches[0].clientX;
 
-  if (startY - endY > 50) {
+  if (startX - endX > 50) {
     current = Math.min(current + 1, total - 1);
-  } else if (endY - startY > 50) {
+  } else if (endX - startX > 50) {
     current = Math.max(current - 1, 0);
   }
 
   updateSlide();
 });
-
-/* 공통 함수 */
-function updateSlide() {
-  slider.style.transform = `translateX(-${current * 100}vw)`;
-  pageNumber.innerText = `${current + 1} / ${total}`;
-}
 </script>
 
 </body>
