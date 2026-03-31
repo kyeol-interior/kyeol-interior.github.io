@@ -13,33 +13,32 @@ body, html {
   padding:0;
   height:100%;
   overflow:hidden;
+  background:black;
   font-family:'Montserrat', sans-serif;
-  background:black;
-}
-
-/* ===== 로딩 ===== */
-#loader {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  letter-spacing:5px;
-  z-index:9999;
 }
 
 /* ===== 커서 ===== */
 #cursor {
-  width:18px;
-  height:18px;
+  width:20px;
+  height:20px;
   border:1px solid white;
   border-radius:50%;
   position:fixed;
   pointer-events:none;
   z-index:999;
+  transform:translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+
+#cursor-dot {
+  width:4px;
+  height:4px;
+  background:white;
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  z-index:1000;
+  transform:translate(-50%, -50%);
 }
 
 /* ===== 공통 ===== */
@@ -47,10 +46,10 @@ body, html {
   position:fixed;
   width:100%;
   height:100%;
-  transition:1s ease;
+  transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
-/* ===== 좌측 메뉴 ===== */
+/* ===== SNS ===== */
 .left-menu {
   position:fixed;
   left:40px;
@@ -113,26 +112,12 @@ body, html {
   font-size:70px;
   letter-spacing:10px;
   font-family:'Playfair Display';
+  text-shadow:0 0 30px rgba(255,255,255,0.25);
+  transition:0.4s;
 }
 
-.subtitle {
-  font-size:12px;
-  letter-spacing:5px;
-  margin-top:10px;
-  opacity:0.7;
-}
-
-.click-text {
-  font-size:11px;
-  margin-top:20px;
-  opacity:0.5;
-  animation:blink 1.8s infinite;
-}
-
-@keyframes blink {
-  0% {opacity:0.2;}
-  50% {opacity:0.7;}
-  100% {opacity:0.2;}
+.center-text:hover h1 {
+  letter-spacing:14px;
 }
 
 /* ===== 내부 ===== */
@@ -143,7 +128,7 @@ body, html {
   transform:scale(1.1);
 }
 
-/* 🔥 핵심 (뒤로가기 영역) */
+/* 뒤로가기 */
 .back-area {
   position:absolute;
   width:100%;
@@ -169,7 +154,24 @@ body, html {
   letter-spacing:3px;
   opacity:0;
   transform:translateY(20px);
-  transition:0.6s;
+  transition:all 0.8s cubic-bezier(0.22,1,0.36,1);
+  position:relative;
+}
+
+/* underline */
+.inner-menu a::after {
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-5px;
+  width:0;
+  height:1px;
+  background:white;
+  transition:0.4s;
+}
+
+.inner-menu a:hover::after {
+  width:100%;
 }
 
 .inner-menu a.show {
@@ -177,12 +179,7 @@ body, html {
   transform:translateY(0);
 }
 
-.inner-menu a:hover {
-  letter-spacing:6px;
-  opacity:0.5;
-}
-
-/* 모바일 */
+/* ===== 모바일 ===== */
 @media (max-width:768px){
   .left-menu { display:none; }
   .center-text h1 { font-size:40px; }
@@ -192,16 +189,8 @@ body, html {
 
 <body>
 
-<!-- 로딩 -->
-<div id="loader">LOADING...</div>
-
-<!-- 커서 -->
 <div id="cursor"></div>
-
-<!-- 사운드 -->
-<audio id="bgm" loop>
-  <source src="bgm.mp3">
-</audio>
+<div id="cursor-dot"></div>
 
 <!-- SNS -->
 <div class="left-menu" id="sns">
@@ -221,8 +210,7 @@ body, html {
 
   <div class="center-text" onclick="enterSite()">
     <h1>KYEOL</h1>
-    <div class="subtitle">ARCHITECTURE & INTERIOR</div>
-    <div class="click-text">CLICK TO ENTER</div>
+    <p>CLICK TO ENTER</p>
   </div>
 </div>
 
@@ -239,50 +227,72 @@ body, html {
 </div>
 
 <script>
-
-/* 로딩 */
-window.onload = ()=>{
-  setTimeout(()=>{
-    document.getElementById("loader").style.display="none";
-  },1000);
-}
-
-/* 커서 */
+/* ===== 커서 ===== */
 const cursor = document.getElementById("cursor");
+const dot = document.getElementById("cursor-dot");
+
+let mouseX=0, mouseY=0;
+let posX=0, posY=0;
+
 document.addEventListener("mousemove", e=>{
-  cursor.style.left = e.clientX+"px";
-  cursor.style.top = e.clientY+"px";
+  mouseX=e.clientX;
+  mouseY=e.clientY;
 });
 
-/* 진입 */
+function loop(){
+  posX += (mouseX - posX) * 0.15;
+  posY += (mouseY - posY) * 0.15;
+
+  cursor.style.left = posX + "px";
+  cursor.style.top = posY + "px";
+
+  dot.style.left = mouseX + "px";
+  dot.style.top = mouseY + "px";
+
+  requestAnimationFrame(loop);
+}
+loop();
+
+/* ===== 패럴랙스 ===== */
+document.addEventListener("mousemove", e=>{
+  const x = (e.clientX / window.innerWidth - 0.5) * 10;
+  const y = (e.clientY / window.innerHeight - 0.5) * 10;
+
+  document.getElementById("main").style.transform =
+    `scale(1.05) translate(${x}px, ${y}px)`;
+});
+
+/* ===== enter ===== */
 function enterSite(){
   const main = document.getElementById("main");
   const second = document.getElementById("second");
   const sns = document.getElementById("sns");
 
   main.style.opacity="0";
+  main.style.transform="scale(1.1)";
   main.style.pointerEvents="none";
-  sns.style.display="none";
+
+  sns.style.opacity="0";
 
   second.style.opacity="1";
   second.style.transform="scale(1)";
 
-  document.getElementById("bgm").play();
-
   document.querySelectorAll(".inner-menu a").forEach((el,i)=>{
-    setTimeout(()=>el.classList.add("show"), i*150);
+    setTimeout(()=>el.classList.add("show"), i*120);
   });
 }
 
-/* 뒤로가기 (완벽 복구) */
+/* ===== back ===== */
 function goBack(){
   const main = document.getElementById("main");
   const second = document.getElementById("second");
   const sns = document.getElementById("sns");
 
   main.style.opacity="1";
+  main.style.transform="scale(1)";
   main.style.pointerEvents="auto";
-  sns.style.display="block";
+
+  sns.style.opacity="1";
 
   second.style.opacity="0";
   second.style.transform="scale(1.1)";
@@ -291,7 +301,6 @@ function goBack(){
     el.classList.remove("show");
   });
 }
-
 </script>
 
 </body>
