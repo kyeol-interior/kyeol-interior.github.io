@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #f5f5f5;
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* 🔥 전체 구조 */
+.container {
+  display: flex;
+}
+
+/* 🔥 왼쪽 (PC) */
+.left {
+  width: 40%;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 80px;
+  background: #f5f5f5;
+}
+
+/* 🔥 오른쪽 */
+.right {
+  width: 60%;
+  margin-left: 40%;
+  overflow: hidden;
+}
+
+/* 텍스트 */
+.title {
+  font-family: 'Playfair Display';
+  font-size: 34px;
+  margin-bottom: 40px;
+}
+
+.meta {
+  display: flex;
+  gap: 30px;
+  font-size: 13px;
+  margin-bottom: 40px;
+}
+
+.meta div span {
+  display: block;
+  opacity: 0.5;
+}
+
+.desc {
+  line-height: 1.9;
+  font-size: 14px;
+}
+
+/* 이미지 */
+.image-box {
+  padding: 60px 20px;
+}
+
+.image-box img {
+  width: 100%;
+  max-width: 900px;
+  height: 70vh;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+/* 🔙 */
+.back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* 🔥🔥🔥 모바일 완전 수정 */
+@media (max-width: 768px) {
+
+  .container {
+    flex-direction: column;
+  }
+
+  .left {
+    position: relative;   /* 🔥 핵심 */
+    width: 100%;
+    height: auto;
+    padding: 40px 20px;
+  }
+
+  .right {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .desc {
+    font-size: 13px;
+  }
+
+  .image-box {
+    padding: 40px 10px;
+  }
+
+  .image-box img {
+    width: 100%;
+    height: auto;       /* 🔥 원래대로 */
+    object-fit: contain;
+    margin-left: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- 왼쪽 -->
+  <div class="left">
+    <div class="title">송정써미트아파트</div>
+
+    <div class="meta">
+      <div>
+        <span>Project</span>
+        🏛️ 공간 컨셉: "Modern Serenity"
+      </div>
+      <div>
+        <span>Interior Surface</span>
+        112㎡
+      </div>
+      <div>
+        <span>Location</span>
+        전주
+      </div>
+    </div>
+
+    <div class="desc">
+단순한 '주거'를 넘어, 삶을 채우는 아름다운 순간<br>
+"머무는 것만으로도 위로가 되는, 온전한 나만의 안식처."<br>
+똑같은 일상 속, 문을 열고 들어선 순간 차분하게 나를 감싸 안는 공간이 있습니다.<br><br>
+
+결이 살아있는 그레이 타일 위로 떨어지는 은은한 매립 조명의 온기,<br>
+커튼박스 사이로 스며드는 길게 늘어진 그림자의 평온함.<br>
+
+유행을 좇기보다, 사는 사람의 호흡을 배려하여<br>
+비워진 여백 속에 채워질 가족의 웃음소리를 먼저 생각했습니다.<br><br>
+
+✨ 공간이 건네는 감동<br>
+
+Textured Gray: 톤앤톤 배색이 주는 깊이 있는 고급스러움.<br>
+
+Light Layering: 라인 조명과 간접등이 빚어낸 따뜻한 실루엣.<br>
+
+Urban Garden: 발코니 창가, 나만의 작은 자연과 마주하는 시간.<br><br>
+
+당신의 품격을 말해주는 곳,<br>
+당신의 삶이 비로소 예술이 되는 곳.<br>
+저희가 디자인한 공간은 단순한 집이 아니라 '삶을 짓는 예술'입니다.<br>
+     
+  </div>
+  </div>
+  <!-- 오른쪽 -->
+  <div class="right">
+    <div class="image-box"><img src="3-1.jpg"></div>
+    <div class="image-box"><img src="3-2.jpg"></div>
+    <div class="image-box"><img src="3-3.jpg"></div>
+    <div class="image-box"><img src="3-4.jpg"></div>
+    <div class="image-box"><img src="3-5.jpg"></div>
+    <div class="image-box"><img src="3-6.jpg"></div>
+    <div class="image-box"><img src="3-7.jpg"></div>
+    <div class="image-box"><img src="3-8.jpg"></div>
+    <div class="image-box"><img src="3-9.jpg"></div>
+  </div>
+
+</div>
+
+<div class="back" onclick="goBack()">← BACK</div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+</body>
+</html>
