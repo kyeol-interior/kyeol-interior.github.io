@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PORTFOLIO</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #111;
+  color: white;
+}
+
+.container {
+  display: flex;
+}
+
+/* 왼쪽 */
+.left {
+  width: 40%;
+  padding: 100px 60px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.left h1 {
+  font-family: 'Playfair Display';
+  font-size: 42px;
+  letter-spacing: 4px;
+}
+
+.left p {
+  margin-top: 25px;
+  line-height: 1.7;
+  opacity: 0.6;
+}
+
+/* 오른쪽 */
+.right {
+  width: 60%;
+}
+
+.image-block {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-block img {
+  width: 85%;
+  transition: 0.5s;
+}
+
+/* 살짝 확대 느낌 */
+.image-block img:hover {
+  transform: scale(1.03);
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .right {
+    width: 100%;
+  }
+
+  .image-block img {
+    width: 95%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- 왼쪽 설명 -->
+  <div class="left">
+    <h1>KYEOL<br>SPACE</h1>
+
+    <p>
+      공간은 단순한 구조가 아니라  
+      감정을 담는 그릇입니다.
+    </p>
+
+    <p>
+      우리는 빛과 소재, 그리고 여백을 통해  
+      조용하지만 깊이 있는 공간을 만듭니다.
+    </p>
+  </div>
+
+  <!-- 오른쪽 이미지 -->
+  <div class="right">
+
+    <div class="image-block">
+      <img src="01.jpg">
+    </div>
+
+    <div class="image-block">
+      <img src="02.jpg">
+    </div>
+
+    <div class="image-block">
+      <img src="03.jpg">
+    </div>
+
+    <div class="image-block">
+      <img src="04.jpg">
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
