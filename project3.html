@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #f5f5f5;
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* 🔥 전체 구조 */
+.container {
+  display: flex;
+}
+
+/* 🔥 왼쪽 (PC) */
+.left {
+  width: 40%;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 80px;
+  background: #f5f5f5;
+}
+
+/* 🔥 오른쪽 */
+.right {
+  width: 60%;
+  margin-left: 40%;
+  overflow: hidden;
+}
+
+/* 텍스트 */
+.title {
+  font-family: 'Playfair Display';
+  font-size: 34px;
+  margin-bottom: 40px;
+}
+
+.meta {
+  display: flex;
+  gap: 30px;
+  font-size: 13px;
+  margin-bottom: 40px;
+}
+
+.meta div span {
+  display: block;
+  opacity: 0.5;
+}
+
+.desc {
+  line-height: 1.9;
+  font-size: 14px;
+}
+
+/* 이미지 */
+.image-box {
+  padding: 60px 20px;
+}
+
+.image-box img {
+  width: 100%;
+  max-width: 900px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+/* 🔙 */
+.back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* 🔥🔥🔥 모바일 완전 수정 */
+@media (max-width: 768px) {
+
+  .container {
+    flex-direction: column;
+  }
+
+  .left {
+    position: relative;   /* 🔥 핵심 */
+    width: 100%;
+    height: auto;
+    padding: 40px 20px;
+  }
+
+  .right {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .desc {
+    font-size: 13px;
+  }
+
+  .image-box {
+    padding: 40px 10px;
+  }
+
+  .image-box img {
+    width: 95%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- 왼쪽 -->
+  <div class="left">
+    <div class="title">IN THE MAKE UP</div>
+
+    <div class="meta">
+      <div>
+        <span>Project</span>
+        🏛️ 공간 컨셉: "Modern Minimalist & Warm Serenity"
+      </div>
+      <div>
+        <span>Interior Surface</span>
+        132㎡
+      </div>
+      <div>
+        <span>Location</span>
+        전주
+      </div>
+    </div>
+
+    <div class="desc">
+      "당신만의 고유한 아름다움이 피어나는 곳"<br><br>
+       차분한 그레이와 따뜻한 베이지가 어우러진<br>
+       감성적인 공간에서 오직 당신만을 위한 스타일링을 경험해 보세요.<br><br>
+       외부와 분리된 프라이빗한 메이크업 존에서 편안하게<br>
+       따스한 햇살이 드는 대기실에서 여유롭게<br>
+       머무는 모든 순간이 특별한 기억이 되도록,<br>
+       공간의 온도까지 세심하게 배려했습니다.
+     
+  </div>
+
+  <!-- 오른쪽 -->
+  <div class="right">
+    <div class="image-box"><img src="15.jpg"></div>
+    <div class="image-box"><img src="16.jpg"></div>
+    <div class="image-box"><img src="17.jpg"></div>
+    <div class="image-box"><img src="18.jpg"></div>
+    <div class="image-box"><img src="19.jpg"></div>
+    <div class="image-box"><img src="20.jpg"></div>
+    <div class="image-box"><img src="21.jpg"></div>
+  </div>
+
+</div>
+
+<div class="back" onclick="goBack()">← BACK</div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+</body>
+</html>
