@@ -139,33 +139,35 @@ body, html {
 .mobile-top {
   display: none;
 }
+/* 📞 하단 전화 버튼 */
+.call-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 20;
+}
 
-/* 모바일 전용 */
-@media (max-width: 768px) {
+.call-btn img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.4);
+  padding: 12px;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-  .mobile-top {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    justify-content: space-around;
-    padding: 15px 0;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(6px);
-    z-index: 20;
-  }
+/* hover */
+.call-btn img:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
 
-  .mobile-top a {
-    color: white;
-    font-size: 20px;
-    text-decoration: none;
-  }
-
-  /* 🔥 기존 왼쪽 메뉴 숨기기 */
-  .left-menu {
-    display: none;
-  }
+/* 클릭 */
+.call-btn img:active {
+  transform: scale(0.9);
+}
 }
 </style>
 </head>
@@ -192,10 +194,10 @@ body, html {
     <h3 class="subtitle">ARCHITECTURE & INTERIOR</h3>
     <p class="click-text">CLICK TO ENTER</p>
   </div>
-  <div class="mobile-top">
-  <a href="tel:15519909">📞</a>
-  <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">💬</a>
-  <a href="https://blog.naver.com/rotte123" target="_blank">📝</a>
+  <div class="call-btn">
+  <a href="tel:15519909">
+    <img src="phone.png">
+  </a>
 </div>
 </div>
   
