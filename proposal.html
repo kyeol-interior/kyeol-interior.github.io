@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PROPOSAL</title>
+<title>Proposal</title>
 
 <style>
 body {
@@ -12,42 +12,70 @@ body {
   background: black;
 }
 
-.bg-click {
+/* 🔙 BACK */
+.back {
   position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  top: 20px;
+  left: 20px;
+  color: white;
+  font-size: 13px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.8;
 }
 
+/* 슬라이드 */
 .slider {
   display: flex;
   width: 1400%;
   height: 100vh;
-  transition: transform 0.6s;
-  position: relative;
-  z-index: 2;
+  transition: transform 0.6s ease;
 }
 
 .slide {
   width: 100vw;
   height: 100vh;
+  flex-shrink: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background: black; /* 🔥 핵심: 밝기 문제 해결 */
 }
 
 .slide img {
   max-width: 90%;
   max-height: 90%;
+  object-fit: contain;
+}
+
+/* 페이지 표시 */
+.page {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+  font-size: 13px;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .slide img {
+    max-width: 95%;
+    max-height: 85%;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg-click" onclick="goBack()"></div>
+<div class="back" onclick="goBack()">← BACK</div>
 
 <div class="slider" id="slider">
+
   <div class="slide"><img src="page1.jpg"></div>
   <div class="slide"><img src="page2.jpg"></div>
   <div class="slide"><img src="page3.jpg"></div>
@@ -62,24 +90,40 @@ body {
   <div class="slide"><img src="page12.jpg"></div>
   <div class="slide"><img src="page13.jpg"></div>
   <div class="slide"><img src="page14.jpg"></div>
+
 </div>
+
+<div class="page" id="pageNum">1 / 14</div>
 
 <script>
 let current = 0;
 const total = 14;
 const slider = document.getElementById("slider");
+const pageNum = document.getElementById("pageNum");
 
-function updateSlide() {
+/* 업데이트 */
+function update() {
   slider.style.transform = `translateX(-${current * 100}vw)`;
+  pageNum.innerText = `${current + 1} / ${total}`;
 }
 
+/* 휠 */
 window.addEventListener("wheel", (e) => {
   if (e.deltaY > 0) current++;
   else current--;
   current = Math.max(0, Math.min(current, total - 1));
-  updateSlide();
+  update();
 });
 
+/* 키보드 */
+window.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") current++;
+  if (e.key === "ArrowLeft") current--;
+  current = Math.max(0, Math.min(current, total - 1));
+  update();
+});
+
+/* 🔥 모바일 좌우 스와이프 */
 let startX = 0;
 
 window.addEventListener("touchstart", e => {
@@ -88,12 +132,15 @@ window.addEventListener("touchstart", e => {
 
 window.addEventListener("touchend", e => {
   let endX = e.changedTouches[0].clientX;
+
   if (startX - endX > 50) current++;
   else if (endX - startX > 50) current--;
+
   current = Math.max(0, Math.min(current, total - 1));
-  updateSlide();
+  update();
 });
 
+/* 뒤로 */
 function goBack() {
   window.history.back();
 }
