@@ -10,16 +10,19 @@
 <style>
 body {
   margin: 0;
-  background: #111;
   color: white;
   font-family: 'Montserrat', sans-serif;
+  overflow: hidden; /* 🔥 스크롤 제거 */
 }
 
-/* 🔥 배경 이미지 */
+/* 🔥 전체 배경 */
 .hero {
   height: 100vh;
   background: url('about.jpg') center/cover no-repeat;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* 어둡게 */
@@ -31,14 +34,13 @@ body {
   background: rgba(0,0,0,0.5);
 }
 
-/* 텍스트 */
-.hero-text {
-  position: absolute;
+/* 🔥 전체 콘텐츠 */
+.content {
+  position: relative;
   z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   text-align: center;
+  max-width: 800px;
+  padding: 20px;
 }
 
 /* 제목 */
@@ -48,44 +50,35 @@ body {
   line-height: 1.4;
 }
 
-/* 본문 영역 */
-.container {
-  max-width: 1000px;
-  margin: auto;
-  padding: 100px 40px;
-}
-
-/* 애니메이션 */
-.fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 1s;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* 설명 */
 .desc {
+  margin-top: 30px;
   line-height: 1.8;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 /* 정보 */
 .info {
-  margin-top: 100px;
+  margin-top: 60px;
   display: flex;
+  justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
 }
 
 .info-box {
-  flex: 1;
-  min-width: 200px;
-  border-top: 1px solid rgba(255,255,255,0.2);
-  padding-top: 20px;
+  min-width: 160px;
+}
+
+.info-title {
+  font-size: 12px;
+  letter-spacing: 2px;
+  opacity: 0.6;
+}
+
+.info-desc {
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 /* 뒤로가기 */
@@ -97,6 +90,21 @@ body {
   cursor: pointer;
   opacity: 0.6;
 }
+
+/* 🔥 모바일 */
+@media (max-width: 768px) {
+  .title {
+    font-size: 26px;
+  }
+
+  .desc {
+    font-size: 13px;
+  }
+
+  .info {
+    gap: 20px;
+  }
+}
 </style>
 </head>
 
@@ -104,51 +112,46 @@ body {
 
 <div class="back" onclick="goBack()">← BACK</div>
 
-<!-- 🔥 배경 영역 -->
 <div class="hero">
-  <div class="hero-text">
+
+  <div class="content">
+
     <div class="title">
       공간은 기능을 넘어,<br>
       브랜드의 가치를 담습니다.
     </div>
-  </div>
-</div>
 
-<!-- 🔥 아래 콘텐츠 -->
-<div class="container">
+    <div class="desc">
+      KYEOL은 공간의 결을 읽고<br>
+      감성과 기능이 균형을 이루는 디자인을 추구합니다.<br><br>
 
-  <div class="desc fade">
-    KYEOL은 공간의 결을 읽으며<br>
-    감성과 기능이 균형을 이루는 디자인을 추구합니다.<br><br>
-
-    우리는 브랜드의 경험을 설계하고,<br>
-    오래 기억되는 공간을 만들어갑니다.
-  </div>
-
-  <div class="info fade">
-
-    <div class="info-box">
-      <div class="info-title">INTERIOR ARCHITECTURE</div>
-      <div class="info-desc">
-        상업공간 및 주거공간 설계<br>
-        공간 브랜딩 및 디자인
-      </div>
+      우리는 브랜드의 경험을 설계하고,<br>
+      오래 기억되는 공간을 만들어갑니다.
     </div>
 
-    <div class="info-box">
-      <div class="info-title">CORPORATION</div>
-      <div class="info-desc">
-        법인사업자 운영<br>
-        체계적인 프로젝트 관리
-      </div>
-    </div>
+    <div class="info">
 
-    <div class="info-box">
-      <div class="info-title">SOCIAL VALUE</div>
-      <div class="info-desc">
-        장애인기업 인증<br>
-        지속 가능한 디자인 실현
+      <div class="info-box">
+        <div class="info-title">INTERIOR ARCHITECTURE</div>
+        <div class="info-desc">
+          상업공간 및 주거공간 설계
+        </div>
       </div>
+
+      <div class="info-box">
+        <div class="info-title">CORPORATION</div>
+        <div class="info-desc">
+          법인사업자 운영
+        </div>
+      </div>
+
+      <div class="info-box">
+        <div class="info-title">SOCIAL VALUE</div>
+        <div class="info-desc">
+          장애인기업 인증
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -156,22 +159,6 @@ body {
 </div>
 
 <script>
-const fades = document.querySelectorAll('.fade');
-
-function checkFade() {
-  const trigger = window.innerHeight * 0.85;
-
-  fades.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < trigger) {
-      el.classList.add('show');
-    }
-  });
-}
-
-window.addEventListener('scroll', checkFade);
-window.addEventListener('load', checkFade);
-
 function goBack() {
   window.history.back();
 }
