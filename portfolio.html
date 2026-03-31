@@ -20,7 +20,7 @@ body {
   display: flex;
 }
 
-/* 🔥 왼쪽 고정 */
+/* 🔥 왼쪽 (PC) */
 .left {
   width: 40%;
   height: 100vh;
@@ -31,20 +31,19 @@ body {
   background: #f5f5f5;
 }
 
-/* 🔥 오른쪽 스크롤 */
+/* 🔥 오른쪽 */
 .right {
   width: 60%;
   margin-left: 40%;
 }
 
-/* 제목 */
+/* 텍스트 */
 .title {
   font-family: 'Playfair Display';
   font-size: 34px;
   margin-bottom: 40px;
 }
 
-/* 정보 */
 .meta {
   display: flex;
   gap: 30px;
@@ -57,13 +56,12 @@ body {
   opacity: 0.5;
 }
 
-/* 설명 */
 .desc {
   line-height: 1.9;
   font-size: 14px;
 }
 
-/* 🔥 이미지 */
+/* 이미지 */
 .image-box {
   padding: 100px 40px;
 }
@@ -76,7 +74,7 @@ body {
   border-radius: 12px;
 }
 
-/* 🔙 버튼 */
+/* 🔙 */
 .back {
   position: fixed;
   top: 20px;
@@ -85,11 +83,15 @@ body {
   z-index: 10;
 }
 
-/* 🔥 모바일 */
+/* 🔥🔥🔥 모바일 완전 수정 */
 @media (max-width: 768px) {
 
+  .container {
+    flex-direction: column;
+  }
+
   .left {
-    position: relative;
+    position: relative;   /* 🔥 핵심 */
     width: 100%;
     height: auto;
     padding: 40px 20px;
@@ -98,6 +100,23 @@ body {
   .right {
     width: 100%;
     margin-left: 0;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .desc {
+    font-size: 13px;
+  }
+
+  .image-box {
+    padding: 40px 10px;
   }
 
   .image-box img {
@@ -111,7 +130,7 @@ body {
 
 <div class="container">
 
-  <!-- 🔥 왼쪽 -->
+  <!-- 왼쪽 -->
   <div class="left">
     <div class="title">수지초등학교 생각나무 숲 도서관</div>
 
@@ -134,49 +153,30 @@ body {
       숲의 품을 담은 공간입니다.<br><br>
       천장에는 초록빛 생명력을 머금은 둥근 빛들이 떠 있고<br>
       공간 한가운데는 든든한 나무 한 그루가 서 있습니다.<br><br>
-
       나무 아래 둥글게 둘러앉아 책을 읽다 보면<br>
-      마치 숲속 비밀 기지에 들어온 듯한 아늑함을 느낄 수 있습니다.<br><br>
+      숲속 비밀 기지에 들어온 듯한 아늑함을 느낄 수 있습니다.
 
-      아이들이 자연스럽게 머무르고, 상상하고, 성장하는<br>
-      ‘책 읽는 공간’을 넘어선 경험을 제공합니다.<br><br>
+      ✨ 공간이 주는 메시지<br><br>
+      전체적으로 내추럴한 우드 톤과 부드러운 간접 조명이 어우러져,<br>
+      눈과 마음을 편안하게 감싸줍니다.<br>
+      이곳은 단순히 정보를 습득하는 장소가 아니라,<br> 
+      아이들이 스스로 이야기의 주인공이 되어<br>
+      꿈을 설계하는 **'마음의 쉼터'**이자 **'창의력의 요람'**입니다.
 
-     나만의 작은 집, 아치형의 속삭임<br><br>
-     벽면을 수놓은 부드러운 아치형 서가와 작은 집 모양의 독서 공간은<br>
-     아이들에게 '보호받고 있다'는 안도감을 줍니다.<br>
-     특히 은은한 조명이 켜진 작은 집 속에 들어가 앉으면,<br>
-     세상에 오직 책과 나만 존재하는 것 같은 신비로운 경험을 하게 될 거예요.
     </div>
   </div>
 
-  <!-- 🔥 오른쪽 -->
+  <!-- 오른쪽 -->
   <div class="right">
-
-    <div class="image-box">
-      <img src="01.jpg">
-    </div>
-
-    <div class="image-box">
-      <img src="02.jpg">
-    </div>
-
-    <div class="image-box">
-      <img src="03.jpg">
-    </div>
-
-    <div class="image-box">
-      <img src="04.jpg">
-    </div>
-
-    <div class="image-box">
-      <img src="05.jpg">
-    </div>
-
+    <div class="image-box"><img src="01.jpg"></div>
+    <div class="image-box"><img src="02.jpg"></div>
+    <div class="image-box"><img src="03.jpg"></div>
+    <div class="image-box"><img src="04.jpg"></div>
+    <div class="image-box"><img src="05.jpg"></div>
   </div>
 
 </div>
 
-<!-- 🔙 뒤로 -->
 <div class="back" onclick="goBack()">← BACK</div>
 
 <script>
