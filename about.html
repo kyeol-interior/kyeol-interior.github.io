@@ -17,28 +17,54 @@ body {
 
 /* 전체 */
 .container {
-  padding: 100px 40px;
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
+  padding: 120px 40px;
 }
 
-/* 메인 문장 */
+/* 🔥 메인 문장 */
 .title {
   font-family: 'Playfair Display';
-  font-size: 42px;
+  font-size: 48px;
   line-height: 1.4;
   letter-spacing: 2px;
 }
 
 /* 설명 */
 .desc {
-  margin-top: 40px;
+  margin-top: 50px;
   font-size: 15px;
-  line-height: 1.8;
+  line-height: 1.9;
   opacity: 0.7;
 }
 
-/* 하단 여백 */
+/* 🔥 정보 영역 */
+.info {
+  margin-top: 100px;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.info-box {
+  flex: 1;
+  min-width: 200px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 20px;
+}
+
+.info-title {
+  font-size: 13px;
+  letter-spacing: 2px;
+  opacity: 0.6;
+}
+
+.info-desc {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* 🔥 하단 여백 */
 .space {
   height: 200px;
 }
@@ -57,6 +83,13 @@ body {
 .back:hover {
   opacity: 1;
 }
+
+/* 🔥 모바일 */
+@media (max-width: 768px) {
+  .title {
+    font-size: 32px;
+  }
+}
 </style>
 </head>
 
@@ -66,20 +99,51 @@ body {
 
 <div class="container">
 
+  <!-- 🔥 메인 문장 -->
   <div class="title">
-    공간은 단순한 구조가 아니라,<br>
-    감정을 담는 그릇입니다.
+    공간은 기능을 넘어,<br>
+    브랜드의 가치를 담습니다.
   </div>
 
+  <!-- 🔥 설명 -->
   <div class="desc">
-    우리는 빛과 소재, 그리고 여백을 통해<br><br>
+    KYEOL은 공간의 본질을 탐구하며,<br>
+    감성과 기능이 균형을 이루는 디자인을 추구합니다.<br><br>
 
-    조용하지만 깊이 있는 공간을 만듭니다.<br>
-    불필요한 요소를 덜어내고,<br>
-    본질적인 아름다움을 드러냅니다.<br><br>
+    우리는 단순한 인테리어를 넘어,<br>
+    브랜드의 정체성과 경험을 설계합니다.<br><br>
 
-    KYEOL은 공간의 결을 읽고,<br>
-    그 안에 새로운 경험을 설계합니다.
+    절제된 디자인과 깊이 있는 디테일을 통해<br>
+    오래 기억되는 공간을 만들어갑니다.
+  </div>
+
+  <!-- 🔥 핵심 정보 -->
+  <div class="info">
+
+    <div class="info-box">
+      <div class="info-title">INTERIOR ARCHITECTURE</div>
+      <div class="info-desc">
+        상업공간 및 주거공간 설계<br>
+        공간 기획 및 브랜딩 디자인
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="info-title">CORPORATION</div>
+      <div class="info-desc">
+        법인사업자 운영<br>
+        체계적인 프로젝트 관리 시스템
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="info-title">SOCIAL VALUE</div>
+      <div class="info-desc">
+        장애인기업 인증<br>
+        사회적 가치 실현과 지속 가능한 디자인
+      </div>
+    </div>
+
   </div>
 
   <div class="space"></div>
