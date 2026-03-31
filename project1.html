@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #f5f5f5;
+  color: #111;
+}
+
+/* 🔥 전체 구조 */
+.container {
+  display: flex;
+}
+
+/* 🔥 왼쪽 (PC) */
+.left {
+  width: 40%;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 80px;
+  background: #f5f5f5;
+}
+
+/* 🔥 오른쪽 */
+.right {
+  width: 60%;
+  margin-left: 40%;
+}
+
+/* 텍스트 */
+.title {
+  font-family: 'Playfair Display';
+  font-size: 34px;
+  margin-bottom: 40px;
+}
+
+.meta {
+  display: flex;
+  gap: 30px;
+  font-size: 13px;
+  margin-bottom: 40px;
+}
+
+.meta div span {
+  display: block;
+  opacity: 0.5;
+}
+
+.desc {
+  line-height: 1.9;
+  font-size: 14px;
+}
+
+/* 이미지 */
+.image-box {
+  padding: 60px 20px;
+}
+
+.image-box img {
+  width: 80%;
+  max-width: 900px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+/* 🔙 */
+.back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* 🔥🔥🔥 모바일 완전 수정 */
+@media (max-width: 768px) {
+
+  .container {
+    flex-direction: column;
+  }
+
+  .left {
+    position: relative;   /* 🔥 핵심 */
+    width: 100%;
+    height: auto;
+    padding: 40px 20px;
+  }
+
+  .right {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .desc {
+    font-size: 13px;
+  }
+
+  .image-box {
+    padding: 40px 10px;
+  }
+
+  .image-box img {
+    width: 95%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- 왼쪽 -->
+  <div class="left">
+    <div class="title">수지초등학교 도서관</div>
+
+    <div class="meta">
+      <div>
+        <span>Project</span>
+        🌿 상상력이 뿌리 내리는, 책 읽는 놀이터
+      </div>
+      <div>
+        <span>Interior Surface</span>
+        115㎡
+      </div>
+      <div>
+        <span>Location</span>
+        남원
+      </div>
+    </div>
+
+    <div class="desc">
+      숲의 품을 담은 공간입니다.<br><br>
+      천장에는 초록빛 생명력을 머금은 둥근 빛들이 떠 있고<br>
+      공간 한가운데는 든든한 나무 한 그루가 서 있습니다.<br><br>
+      나무 아래 둥글게 둘러앉아 책을 읽다 보면<br>
+      숲속 비밀 기지에 들어온 듯한 아늑함을 느낄 수 있습니다.<br><br>
+      ✨ 공간이 주는 메시지<br><br>
+      전체적으로 내추럴한 우드 톤과 부드러운 간접 조명이 어우러져,<br>
+      눈과 마음을 편안하게 감싸줍니다.<br>
+      이곳은 단순히 정보를 습득하는 장소가 아니라,<br>
+      아이들이 스스로 이야기의 주인공이 되어 <br>
+      꿈을 설계하는 **'마음의 쉼터'**이자 **'창의력의 요람'**입니다.
+    </div>
+  </div>
+
+  <!-- 오른쪽 -->
+  <div class="right">
+    <div class="image-box"><img src="01.jpg"></div>
+    <div class="image-box"><img src="02.jpg"></div>
+    <div class="image-box"><img src="03.jpg"></div>
+    <div class="image-box"><img src="04.jpg"></div>
+    <div class="image-box"><img src="05.jpg"></div>
+  </div>
+
+</div>
+
+<div class="back" onclick="goBack()">← BACK</div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+</body>
+</html>
