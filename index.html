@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KYEOL</title>
+<title>KYEOL | Architecture & Interior</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
@@ -18,7 +18,7 @@ body, html {
   letter-spacing:0.5px;
 }
 
-/* 커서 */
+/* 커서 - 데스크탑 전용 */
 #cursor {
   width:20px;
   height:20px;
@@ -50,12 +50,13 @@ body, html {
   transition:opacity 1.2s ease, transform 1.2s ease;
 }
 
-/* SNS */
+/* SNS / Side Menu */
 .left-menu {
   position:fixed;
   left:60px;
   top:60px;
   z-index:10;
+  transition: opacity 0.5s ease;
 }
 
 .left-menu a {
@@ -80,6 +81,7 @@ body, html {
   opacity:0.6;
   margin-bottom:25px;
   letter-spacing:4px;
+  font-weight: 500;
 }
 
 /* 메인 */
@@ -108,6 +110,7 @@ body, html {
   color:white;
   text-align:center;
   cursor:pointer;
+  width: 100%;
 }
 
 .center-text h1 {
@@ -115,7 +118,7 @@ body, html {
   letter-spacing:14px;
   font-family:'Playfair Display';
   text-shadow:0 0 30px rgba(255,255,255,0.25);
-  margin-bottom:20px;
+  margin: 0;
   transition:0.4s;
 }
 
@@ -137,7 +140,7 @@ body, html {
   opacity:0.5;
 }
 
-/* 내부 */
+/* 내부 메뉴 화면 */
 .second-screen {
   background:#111;
   z-index:2;
@@ -145,7 +148,7 @@ body, html {
   transform:scale(1.1);
 }
 
-/* 뒤로가기 */
+/* 뒤로가기 영역 */
 .back-area {
   position:absolute;
   width:100%;
@@ -153,13 +156,14 @@ body, html {
   z-index:1;
 }
 
-/* 메뉴 */
+/* 내부 메뉴 항목 */
 .inner-menu {
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%) scale(0.95);
   z-index:2;
+  text-align: center;
 }
 
 .inner-menu a {
@@ -178,7 +182,8 @@ body, html {
 .inner-menu a::after {
   content:'';
   position:absolute;
-  left:0;
+  left:50%;
+  transform: translateX(-50%);
   bottom:-5px;
   width:0;
   height:1px;
@@ -187,7 +192,7 @@ body, html {
 }
 
 .inner-menu a:hover::after {
-  width:100%;
+  width:60%;
 }
 
 .inner-menu a.show {
@@ -195,10 +200,50 @@ body, html {
   transform:translateY(0);
 }
 
-/* 모바일 */
+/* --- 모바일 최적화 (1번 & 3번 적용) --- */
 @media (max-width:768px){
-  .left-menu { display:none; }
-  .center-text h1 { font-size:42px; }
+  /* 커서 숨기기 */
+  #cursor, #cursor-dot { display:none; }
+  
+  /* 왼쪽 메뉴 유지 및 간격 조정 */
+  .left-menu {
+    left: 25px;
+    top: 30px;
+    display: block !important; /* 명시적으로 표시 */
+  }
+
+  .menu-title {
+    font-size: 11px;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+
+  .left-menu a {
+    font-size: 10px;
+    margin: 10px 0;
+    letter-spacing: 2px;
+  }
+
+  /* 메인 타이틀 크기 조정 */
+  .center-text h1 { 
+    font-size: 42px; 
+    letter-spacing: 8px;
+  }
+  
+  .center-text:hover h1 {
+    letter-spacing: 10px;
+  }
+
+  .subtitle {
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+
+  /* 내부 메뉴 크기 조정 */
+  .inner-menu a {
+    font-size: 18px;
+    margin: 25px 0;
+  }
 }
 </style>
 </head>
@@ -208,7 +253,6 @@ body, html {
 <div id="cursor"></div>
 <div id="cursor-dot"></div>
 
-<!-- SNS -->
 <div class="left-menu" id="sns">
   <h2 class="menu-title">MY STUDIO</h2>
   <a href="#">INSTAGRAM</a>
@@ -216,10 +260,9 @@ body, html {
   <a href="https://blog.naver.com/rotte123" target="_blank">BLOG</a>
 </div>
 
-<!-- 메인 -->
 <div class="screen main-screen" id="main">
   <video class="video-bg" autoplay muted loop playsinline>
-    <source src="15129223_2160_3840_30fps.mp4">
+    <source src="15129223_2160_3840_30fps.mp4" type="video/mp4">
   </video>
 
   <div class="overlay"></div>
@@ -231,7 +274,6 @@ body, html {
   </div>
 </div>
 
-<!-- 내부 -->
 <div class="screen second-screen" id="second">
   <div class="back-area" onclick="goBack()"></div>
 
@@ -250,35 +292,47 @@ const dot = document.getElementById("cursor-dot");
 let mouseX=0, mouseY=0;
 let posX=0, posY=0;
 
+// 마우스 이동 이벤트
 document.addEventListener("mousemove", e=>{
   mouseX=e.clientX;
   mouseY=e.clientY;
 });
 
+// 커서 애니메이션 루프
 function loop(){
+  // 부드러운 따라오기 효과
   posX += (mouseX - posX) * 0.15;
   posY += (mouseY - posY) * 0.15;
 
-  cursor.style.left = posX + "px";
-  cursor.style.top = posY + "px";
+  if(cursor) {
+    cursor.style.left = posX + "px";
+    cursor.style.top = posY + "px";
+  }
 
-  dot.style.left = mouseX + "px";
-  dot.style.top = mouseY + "px";
+  if(dot) {
+    dot.style.left = mouseX + "px";
+    dot.style.top = mouseY + "px";
+  }
 
   requestAnimationFrame(loop);
 }
 loop();
 
-/* 패럴랙스 */
+/* 패럴랙스 효과 - 마우스 움직임에 따라 배경 미세하게 이동 */
 document.addEventListener("mousemove", e=>{
-  const x = (e.clientX / window.innerWidth - 0.5) * 12;
-  const y = (e.clientY / window.innerHeight - 0.5) * 12;
+  // 모바일이 아닐 때만 실행 (성능 최적화)
+  if(window.innerWidth > 768) {
+    const x = (e.clientX / window.innerWidth - 0.5) * 12;
+    const y = (e.clientY / window.innerHeight - 0.5) * 12;
 
-  document.getElementById("main").style.transform =
-    `scale(1.05) translate(${x}px, ${y}px)`;
+    const main = document.getElementById("main");
+    if(main.style.opacity !== "0") {
+        main.style.transform = `scale(1.05) translate(${x}px, ${y}px)`;
+    }
+  }
 });
 
-/* enter */
+/* 사이트 입장 */
 function enterSite(){
   const main = document.getElementById("main");
   const second = document.getElementById("second");
@@ -288,17 +342,20 @@ function enterSite(){
   main.style.transform="scale(1.1)";
   main.style.pointerEvents="none";
 
+  // 입장 시 왼쪽 메뉴도 자연스럽게 사라지게 함
   sns.style.opacity="0";
+  sns.style.pointerEvents="none";
 
   second.style.opacity="1";
   second.style.transform="scale(1)";
 
+  // 내부 메뉴 순차적으로 등장
   document.querySelectorAll(".inner-menu a").forEach((el,i)=>{
     setTimeout(()=>el.classList.add("show"), i*120);
   });
 }
 
-/* back */
+/* 뒤로 가기 (메인으로) */
 function goBack(){
   const main = document.getElementById("main");
   const second = document.getElementById("second");
@@ -309,6 +366,7 @@ function goBack(){
   main.style.pointerEvents="auto";
 
   sns.style.opacity="1";
+  sns.style.pointerEvents="auto";
 
   second.style.opacity="0";
   second.style.transform="scale(1.1)";
