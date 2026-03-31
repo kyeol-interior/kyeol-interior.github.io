@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #f5f5f5;
+  color: #111;
+  overflow-x: hidden;
+}
+
+/* 🔥 전체 구조 */
+.container {
+  display: flex;
+}
+
+/* 🔥 왼쪽 (PC) */
+.left {
+  width: 40%;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 80px;
+  background: #f5f5f5;
+}
+
+/* 🔥 오른쪽 */
+.right {
+  width: 60%;
+  margin-left: 40%;
+  overflow: hidden;
+}
+
+/* 텍스트 */
+.title {
+  font-family: 'Playfair Display';
+  font-size: 34px;
+  margin-bottom: 40px;
+}
+
+.meta {
+  display: flex;
+  gap: 30px;
+  font-size: 13px;
+  margin-bottom: 40px;
+}
+
+.meta div span {
+  display: block;
+  opacity: 0.5;
+}
+
+.desc {
+  line-height: 1.9;
+  font-size: 14px;
+}
+
+/* 이미지 */
+.image-box {
+  padding: 60px 20px;
+}
+
+.image-box img {
+  width: 100%;
+  max-width: 900px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+/* 🔙 */
+.back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* 🔥🔥🔥 모바일 완전 수정 */
+@media (max-width: 768px) {
+
+  .container {
+    flex-direction: column;
+  }
+
+  .left {
+    position: relative;   /* 🔥 핵심 */
+    width: 100%;
+    height: auto;
+    padding: 40px 20px;
+  }
+
+  .right {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .desc {
+    font-size: 13px;
+  }
+
+  .image-box {
+    padding: 40px 10px;
+  }
+
+  .image-box img {
+    width: 95%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- 왼쪽 -->
+  <div class="left">
+    <div class="title">파벽돌(치치석/컬처스톤) 조적 작업</div>
+
+    <div class="meta">
+      <div>
+        <span>Project</span>
+        🏛️ 공간 컨셉: "집의 살결을 빚다"
+      </div>
+      <div>
+        <span>Interior Surface</span>
+        400㎡
+      </div>
+      <div>
+        <span>Location</span>
+        전주
+      </div>
+    </div>
+
+    <div class="desc">
+       "세월의 깊이를 쌓아 올리다"<br><br>
+       시간의 흔적<br>
+       새하얀 외벽 아래<br>
+       거칠고 불규칙한 질감의 파벽돌을 한 장씩 붙여나가는 것은<br>
+       집에 '이야기'와 '안정감'을 부여하는 일입니다<br>
+       마치 오랜 세월 그 자리를 지켜온 듯한 묵직한 멋을 더해줍니다.<br><br>
+       디테일의 완성<br>
+       코너석 하나, 창호 주변의 마감 하나까지<br>
+       신경 쓰는 모습에서 시공팀의 장인 정신이 느껴집니다.
+  </div>
+    </div>
+
+  <!-- 오른쪽 -->
+  <div class="right">
+    <div class="image-box"><img src="29.jpg"></div>
+    <div class="image-box"><img src="37.jpg"></div>
+    <div class="image-box"><img src="30.jpg"></div>
+    <div class="image-box"><img src="31.jpg"></div>
+    <div class="image-box"><img src="32.jpg"></div>
+    <div class="image-box"><img src="33.jpg"></div>
+    <div class="image-box"><img src="34.jpg"></div>
+    <div class="image-box"><img src="35.jpg"></div>
+    <div class="image-box"><img src="36.jpg"></div>
+ 
+  </div>
+
+</div>
+
+<div class="back" onclick="goBack()">← BACK</div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+</body>
+</html>
