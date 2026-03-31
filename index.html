@@ -24,12 +24,11 @@ body, html {
   transition: 1s;
 }
 
-/* 🔥 SNS (항상 보임) */
+/* SNS */
 .left-menu {
   position: fixed;
   left: 40px;
-  top: 40px;       /* 🔥 위로 이동 */
-  transform: none; /* 🔥 중앙정렬 제거 */
+  top: 40px;
   z-index: 10;
 }
 
@@ -43,31 +42,16 @@ body, html {
   opacity: 0.8;
 }
 
-.left-menu a:hover {
-  opacity: 0.4;
-}
+.left-menu a:hover { opacity: 0.4; }
+
 .menu-title {
   color: white;
   font-size: 14px;
   opacity: 0.6;
   margin-bottom: 20px;
   letter-spacing: 3px;
-  font-weight: 500;
 }
 
-.subtitle {
-  font-size: 12px;
-  letter-spacing: 5px;
-  margin-top: 10px;
-  opacity: 0.7;
-}
-
-.click-text {
-  font-size: 11px;
-  margin-top: 20px;
-  opacity: 0.5;
-}
-  
 /* 메인 */
 .main-screen { z-index: 3; }
 
@@ -98,6 +82,19 @@ body, html {
   font-size: 60px;
   letter-spacing: 8px;
   font-family: 'Playfair Display';
+}
+
+.subtitle {
+  font-size: 12px;
+  letter-spacing: 5px;
+  margin-top: 10px;
+  opacity: 0.7;
+}
+
+.click-text {
+  font-size: 11px;
+  margin-top: 20px;
+  opacity: 0.5;
 }
 
 /* 내부 */
@@ -132,27 +129,7 @@ body, html {
   transform: translateY(0);
 }
 
-/* 포트폴리오 */
-.portfolio-screen {
-  background: #000;
-  z-index: 1;
-  opacity: 0;
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  padding: 20px;
-}
-
-.item img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-/* 뒤로 */
+/* 뒤로 클릭 영역 */
 .back-area {
   position: absolute;
   width: 100%;
@@ -163,10 +140,9 @@ body, html {
 
 <body>
 
-<!-- 🔥 SNS 항상 보이게 -->
+<!-- SNS -->
 <div class="left-menu" id="sns">
   <h2 class="menu-title">MY STUDIO</h2>
-  
   <a href="#">INSTAGRAM</a>
   <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO</a>
   <a href="https://blog.naver.com/rotte123" target="_blank">BLOG</a>
@@ -192,32 +168,17 @@ body, html {
 
   <div class="inner-menu">
     <a href="#">ABOUT</a>
-    <a href="#" onclick="openPortfolio()">PORTFOLIO</a>
     <a href="proposal.html">PROPOSAL</a>
     <a href="#">CONTACT</a>
   </div>
 </div>
 
-<!-- 포트폴리오 -->
-<div class="screen portfolio-screen" id="portfolio">
-  <div class="back-area" onclick="closePortfolio()"></div>
-
-  <div class="portfolio-grid">
-    <div class="item"><img src="page1.jpg"></div>
-    <div class="item"><img src="page2.jpg"></div>
-    <div class="item"><img src="page3.jpg"></div>
-    <div class="item"><img src="page4.jpg"></div>
-  </div>
-</div>
-
 <script>
-
 function enterSite() {
   document.getElementById("main").style.opacity = "0";
   document.getElementById("main").style.pointerEvents = "none";
+  document.getElementById("sns").style.display = "none";
 
-  document.getElementById("sns").style.display = "none"; // 🔥 숨김
-  
   const second = document.getElementById("second");
   second.style.opacity = "1";
   second.style.transform = "scale(1)";
@@ -230,25 +191,9 @@ function enterSite() {
 function goBack() {
   document.getElementById("main").style.opacity = "1";
   document.getElementById("main").style.pointerEvents = "auto";
-
-  document.getElementById("sns").style.display = "block"; // 🔥 다시 보이기
-  
+  document.getElementById("sns").style.display = "block";
   document.getElementById("second").style.opacity = "0";
 }
-
-function openPortfolio() {
-  document.getElementById("second").style.opacity = "0";
-
-  const p = document.getElementById("portfolio");
-  p.style.opacity = "1";
-  p.style.zIndex = "4";
-}
-
-function closePortfolio() {
-  document.getElementById("portfolio").style.opacity = "0";
-  document.getElementById("second").style.opacity = "1";
-}
-
 </script>
 
 </body>
