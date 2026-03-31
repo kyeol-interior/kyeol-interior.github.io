@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ABOUT</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
 body {
@@ -15,14 +15,47 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* 공통 */
+/* 🔥 배경 이미지 */
+.hero {
+  height: 100vh;
+  background: url('about.jpg') center/cover no-repeat;
+  position: relative;
+}
+
+/* 어둡게 */
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+/* 텍스트 */
+.hero-text {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* 제목 */
+.title {
+  font-family: 'Playfair Display';
+  font-size: 48px;
+  line-height: 1.4;
+}
+
+/* 본문 영역 */
 .container {
   max-width: 1000px;
   margin: auto;
-  padding: 120px 40px;
+  padding: 100px 40px;
 }
 
-/* 애니메이션 기본 */
+/* 애니메이션 */
 .fade {
   opacity: 0;
   transform: translateY(40px);
@@ -34,55 +67,13 @@ body {
   transform: translateY(0);
 }
 
-/* 제목 */
-.title {
-  font-family: 'Playfair Display';
-  font-size: 45px;
-  line-height: 1.4;
-}
-
 /* 설명 */
 .desc {
-  margin-top: 40px;
   line-height: 1.8;
   opacity: 0.7;
 }
 
-/* 🔥 숫자 영역 */
-.stats {
-  display: flex;
-  gap: 40px;
-  margin-top: 80px;
-  flex-wrap: wrap;
-}
-
-.stat {
-  flex: 1;
-  min-width: 120px;
-}
-
-.stat-number {
-  font-size: 32px;
-  font-weight: 700;
-}
-
-.stat-label {
-  font-size: 12px;
-  opacity: 0.6;
-  margin-top: 5px;
-}
-
-/* 🔥 이미지 */
-.image-section {
-  margin-top: 100px;
-}
-
-.image-section img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-/* 🔥 정보 */
+/* 정보 */
 .info {
   margin-top: 100px;
   display: flex;
@@ -97,28 +88,14 @@ body {
   padding-top: 20px;
 }
 
-.info-title {
-  font-size: 13px;
-  letter-spacing: 2px;
-  opacity: 0.6;
-}
-
-.info-desc {
-  margin-top: 10px;
-  font-size: 14px;
-}
-
 /* 뒤로가기 */
 .back {
   position: fixed;
   top: 30px;
   left: 30px;
+  z-index: 10;
   cursor: pointer;
   opacity: 0.6;
-}
-
-.back:hover {
-  opacity: 1;
 }
 </style>
 </head>
@@ -127,53 +104,32 @@ body {
 
 <div class="back" onclick="goBack()">← BACK</div>
 
+<!-- 🔥 배경 영역 -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="title">
+      공간은 기능을 넘어,<br>
+      브랜드의 가치를 담습니다.
+    </div>
+  </div>
+</div>
+
+<!-- 🔥 아래 콘텐츠 -->
 <div class="container">
 
-  <!-- 🔥 메인 문장 -->
-  <div class="title fade">
-    공간은 기능을 넘어,<br>
-    브랜드의 가치를 담습니다.
-  </div>
-
-  <!-- 설명 -->
   <div class="desc fade">
-    KYEOL은 공간의 결을 읽고<br>
+    KYEOL은 공간의 결을 읽으며<br>
     감성과 기능이 균형을 이루는 디자인을 추구합니다.<br><br>
 
     우리는 브랜드의 경험을 설계하고,<br>
     오래 기억되는 공간을 만들어갑니다.
   </div>
 
-  <!-- 🔥 숫자 -->
-  <div class="stats fade">
-    <div class="stat">
-      <div class="stat-number">3+</div>
-      <div class="stat-label">YEARS EXPERIENCE</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-number">50+</div>
-      <div class="stat-label">PROJECTS</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-number">100%</div>
-      <div class="stat-label">CLIENT SATISFACTION</div>
-    </div>
-  </div>
-
-  <!-- 🔥 이미지 -->
-  <div class="image-section fade">
-    <img src="about.jpg">
-  </div>
-
-  <!-- 🔥 정보 -->
   <div class="info fade">
 
     <div class="info-box">
       <div class="info-title">INTERIOR ARCHITECTURE</div>
       <div class="info-desc">
-        학교 교실 및 관공서 사무실 설계 및 디자인<br>
         상업공간 및 주거공간 설계<br>
         공간 브랜딩 및 디자인
       </div>
@@ -200,8 +156,6 @@ body {
 </div>
 
 <script>
-
-/* 🔥 스크롤 애니메이션 */
 const fades = document.querySelectorAll('.fade');
 
 function checkFade() {
@@ -209,7 +163,6 @@ function checkFade() {
 
   fades.forEach(el => {
     const top = el.getBoundingClientRect().top;
-
     if (top < trigger) {
       el.classList.add('show');
     }
@@ -219,11 +172,9 @@ function checkFade() {
 window.addEventListener('scroll', checkFade);
 window.addEventListener('load', checkFade);
 
-/* 뒤로가기 */
 function goBack() {
   window.history.back();
 }
-
 </script>
 
 </body>
