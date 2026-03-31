@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABOUT</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  background: #111;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* 전체 */
+.container {
+  padding: 100px 40px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* 메인 문장 */
+.title {
+  font-family: 'Playfair Display';
+  font-size: 42px;
+  line-height: 1.4;
+  letter-spacing: 2px;
+}
+
+/* 설명 */
+.desc {
+  margin-top: 40px;
+  font-size: 15px;
+  line-height: 1.8;
+  opacity: 0.7;
+}
+
+/* 하단 여백 */
+.space {
+  height: 200px;
+}
+
+/* 뒤로가기 */
+.back {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.back:hover {
+  opacity: 1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="back" onclick="goBack()">← BACK</div>
+
+<div class="container">
+
+  <div class="title">
+    공간은 단순한 구조가 아니라,<br>
+    감정을 담는 그릇입니다.
+  </div>
+
+  <div class="desc">
+    우리는 빛과 소재, 그리고 여백을 통해<br><br>
+
+    조용하지만 깊이 있는 공간을 만듭니다.<br>
+    불필요한 요소를 덜어내고,<br>
+    본질적인 아름다움을 드러냅니다.<br><br>
+
+    KYEOL은 공간의 결을 읽고,<br>
+    그 안에 새로운 경험을 설계합니다.
+  </div>
+
+  <div class="space"></div>
+
+</div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+</body>
+</html>
