@@ -4,243 +4,55 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KYEOL | EXTERIOR STONE WORK</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-
 <style>
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  background: #0a0a0a;
-  color: white;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* 🔙 상단 네비게이션 */
-.nav-header {
-  position: fixed;
-  top: 50px;
-  left: 50px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-
-.back-btn {
-  color: white;
-  text-decoration: none;
-  font-size: 10px;
-  letter-spacing: 4px;
-  opacity: 0.5;
-  cursor: pointer;
-  transition: 0.4s;
-  background: none;
-  border: none;
-  padding: 0;
-  text-transform: uppercase;
-}
-
-.back-btn:hover {
-  opacity: 1;
-  transform: translateX(-3px);
-}
-
-/* 전체 컨테이너 */
-.container {
-  display: flex;
-  min-height: 100vh;
-}
-
-/* 왼쪽 설명 섹션 (PC 고정) */
-.left {
-  width: 40%;
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  padding: 180px 80px 80px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-
-.title {
-  font-size: 26px;
-  letter-spacing: 5px;
-  margin-bottom: 50px;
-  font-weight: 500;
-  text-transform: uppercase;
-  line-height: 1.4;
-}
-
-.meta {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  margin-bottom: 50px;
-}
-
-.meta-item span {
-  display: block;
-  font-size: 9px;
-  letter-spacing: 3px;
-  opacity: 0.3;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-.meta-item p {
-  margin: 0;
-  font-size: 13px;
-  letter-spacing: 1px;
-  font-weight: 400;
-  opacity: 0.8;
-}
-
-.desc {
-  line-height: 2.2;
-  font-size: 13px;
-  font-weight: 300;
-  opacity: 0.6;
-  max-width: 400px;
-}
-
-/* 오른쪽 이미지 섹션 */
-.right {
-  width: 60%;
-  margin-left: 40%;
-  background: #0d0d0d;
-}
-
-.image-box {
-  padding: 100px 60px;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: 1.5s ease;
-}
-
-.image-box.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.image-box img {
-  width: 100%;
-  display: block;
-  filter: brightness(0.8);
-  transition: 0.8s;
-}
-
-.image-box:hover img {
-  filter: brightness(1.0);
-}
-
-/* 모바일 최적화 */
-@media (max-width: 1024px) {
-  .left { padding: 150px 40px 40px; }
-}
-
+body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; color: white; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+.nav-header { position: fixed; top: 50px; left: 50px; z-index: 1000; display: flex; align-items: center; gap: 25px; }
+.back-btn { color: white; text-decoration: none; font-size: 10px; letter-spacing: 4px; opacity: 0.5; cursor: pointer; transition: 0.4s; background: none; border: none; padding: 0; text-transform: uppercase; }
+.back-btn:hover { opacity: 1; transform: translateX(-3px); }
+.container { display: flex; min-height: 100vh; }
+.left { width: 40%; height: 100vh; position: fixed; left: 0; top: 0; padding: 180px 80px 80px; box-sizing: border-box; display: flex; flex-direction: column; }
+.title { font-size: 26px; letter-spacing: 5px; margin-bottom: 50px; font-weight: 500; text-transform: uppercase; line-height: 1.4; }
+.meta { display: flex; flex-direction: column; gap: 25px; margin-bottom: 50px; }
+.meta-item span { display: block; font-size: 9px; letter-spacing: 3px; opacity: 0.3; text-transform: uppercase; margin-bottom: 8px; }
+.meta-item p { margin: 0; font-size: 13px; letter-spacing: 1px; font-weight: 400; opacity: 0.8; }
+.desc { line-height: 2.2; font-size: 13px; font-weight: 300; opacity: 0.6; max-width: 400px; }
+.right { width: 60%; margin-left: 40%; background: #0d0d0d; }
+.image-box { padding: 60px; display: flex; justify-content: center; align-items: center; }
+.image-box img { width: auto; max-width: 100%; max-height: 80vh; display: block; object-fit: contain; filter: brightness(0.85); transition: 0.8s; border-radius: 4px; }
 @media (max-width: 768px) {
   .container { flex-direction: column; }
   .nav-header { top: 30px; left: 30px; }
-  
-  .left {
-    position: relative;
-    width: 100%;
-    height: auto;
-    padding: 140px 30px 60px;
-  }
-
-  .right {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .title { font-size: 22px; margin-bottom: 30px; }
-
-  .image-box {
-    padding: 30px 20px;
-  }
+  .left { position: relative; width: 100%; height: auto; padding: 140px 30px 60px; }
+  .right { width: 100%; margin-left: 0; }
+  .image-box { padding: 20px 10px; }
+  .image-box img { width: 100%; max-height: none; }
 }
 </style>
 </head>
-
 <body>
-
-<nav class="nav-header">
-  <button class="back-btn" onclick="goBack()">← BACK TO LIST</button>
-</nav>
-
+<nav class="nav-header"><button class="back-btn" onclick="location.href='portfolio.html'">← BACK TO LIST</button></nav>
 <div class="container">
-
   <aside class="left">
     <div class="title">파벽돌 조적 작업<br>(치치석/컬처스톤)</div>
-
     <div class="meta">
-      <div class="meta-item">
-        <span>Concept</span>
-        <p>🏛️ "집의 살결을 빚다"</p>
-      </div>
-      <div class="meta-item">
-        <span>Exterior Surface</span>
-        <p>400㎡</p>
-      </div>
-      <div class="meta-item">
-        <span>Location</span>
-        <p>JEONJU, KOREA</p>
-      </div>
+      <div class="meta-item"><span>Concept</span><p>🏛️ "집의 살결을 빚다"</p></div>
+      <div class="meta-item"><span>Exterior Surface</span><p>400㎡</p></div>
+      <div class="meta-item"><span>Location</span><p>JEONJU, KOREA</p></div>
     </div>
-
-    <div class="desc">
-      "세월의 깊이를 쌓아 올리는 작업입니다."<br><br>
-      새하얀 외벽 아래, 거칠고 불규칙한 질감의 파벽돌을 한 장씩 수놓는 과정은 집에 '이야기'와 '안정감'을 부여하는 일입니다. 이는 건축물이 마치 오랜 세월 그 자리를 지켜온 듯한 묵직한 품격을 더해줍니다.<br><br>
-      코너석의 맞물림 하나, 창호 주변의 정밀한 마감까지 세심하게 파고드는 장인 정신을 통해 공간의 디테일을 완성했습니다.
-    </div>
+    <div class="desc">세월의 깊이를 쌓아올리는 정밀한 조적 작업입니다. 거친 질감의 파벽돌을 통해 건축물의 묵직한 품격과 안정감을 완성했습니다.</div>
   </aside>
-
   <main class="right">
-    <div class="image-box"><img src="29.jpg" alt="Stone Work 01"></div>
-    <div class="image-box"><img src="37.jpg" alt="Stone Work 02"></div>
-    <div class="image-box"><img src="30.jpg" alt="Stone Work 03"></div>
-    <div class="image-box"><img src="31.jpg" alt="Stone Work 04"></div>
-    <div class="image-box"><img src="32.jpg" alt="Stone Work 05"></div>
-    <div class="image-box"><img src="33.jpg" alt="Stone Work 06"></div>
-    <div class="image-box"><img src="34.jpg" alt="Stone Work 07"></div>
-    <div class="image-box"><img src="35.jpg" alt="Stone Work 08"></div>
-    <div class="image-box"><img src="36.jpg" alt="Stone Work 09"></div>
+    <div class="image-box"><img src="29.jpg"></div>
+    <div class="image-box"><img src="37.jpg"></div>
+    <div class="image-box"><img src="30.jpg"></div>
+    <div class="image-box"><img src="31.jpg"></div>
+    <div class="image-box"><img src="32.jpg"></div>
+    <div class="image-box"><img src="33.jpg"></div>
+    <div class="image-box"><img src="34.jpg"></div>
+    <div class="image-box"><img src="35.jpg"></div>
+    <div class="image-box"><img src="36.jpg"></div>
   </main>
-
 </div>
-
-<script>
-window.addEventListener('scroll', revealImages);
-
-function revealImages() {
-  const boxes = document.querySelectorAll('.image-box');
-  boxes.forEach(box => {
-    const boxTop = box.getBoundingClientRect().top;
-    const triggerPoint = window.innerHeight * 0.85;
-    if(boxTop < triggerPoint) {
-      box.classList.add('show');
-    }
-  });
-}
-
-window.onload = () => {
-  document.body.style.opacity = "1";
-  revealImages();
-};
-
-function goBack() {
-  document.body.style.opacity = "0";
-  document.body.style.transition = "0.5s";
-  setTimeout(() => {
-    window.location.href = 'portfolio.html';
-  }, 500);
-}
-</script>
-
 </body>
 </html>
