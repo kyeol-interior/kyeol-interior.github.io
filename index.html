@@ -1,366 +1,60 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KYEOL | Architecture & Interior</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYEOL | 인테리어 디자인 스튜디오</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #0a0a0a; font-family: 'Montserrat', 'Noto Sans KR', sans-serif; }
+        
+        /* 배경 영상 설정: image 폴더 내 최적화된 영상 경로로 수정 */
+        .video-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .video-background video { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%); z-index: 0; }
 
-<style>
-body, html {
-  margin:0;
-  padding:0;
-  height:100%;
-  overflow:hidden;
-  background:black;
-  font-family:'Montserrat', sans-serif;
-  letter-spacing:0.5px;
-}
+        .content { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; z-index: 1; }
+        
+        /* 로고: 클릭 시 메인으로 (현재 파일) */
+        .logo { font-size: 32px; font-weight: 700; letter-spacing: 12px; margin-bottom: 20px; text-decoration: none; color: white; }
+        
+        .main-title { font-size: 14px; letter-spacing: 5px; color: #aaa; margin-bottom: 60px; font-weight: 300; }
 
-/* 커서 - 데스크탑 전용 */
-#cursor {
-  width:20px;
-  height:20px;
-  border:1px solid white;
-  border-radius:50%;
-  position:fixed;
-  pointer-events:none;
-  z-index:999;
-  transform:translate(-50%,-50%);
-  mix-blend-mode:difference;
-}
+        /* 포트폴리오 버튼: portfolio.html로 연결 (같은 폴더에 있음) */
+        .btn-portfolio {
+            padding: 15px 40px;
+            border: 1px solid rgba(255,255,255,0.3);
+            text-decoration: none;
+            color: white;
+            font-size: 12px;
+            letter-spacing: 4px;
+            transition: all 0.5s ease;
+            background: transparent;
+        }
+        .btn-portfolio:hover { background: white; color: black; border-color: white; }
 
-#cursor-dot {
-  width:4px;
-  height:4px;
-  background:white;
-  border-radius:50%;
-  position:fixed;
-  pointer-events:none;
-  z-index:1000;
-  transform:translate(-50%,-50%);
-}
-
-/* 공통 배경 (영상 및 오버레이) */
-.global-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.video-bg {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  filter:brightness(0.6) contrast(1.1);
-}
-
-.overlay {
-  position:absolute;
-  top: 0;
-  left: 0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.3);
-  backdrop-filter:blur(1px);
-  z-index: 2;
-}
-
-/* 화면 공통 스타일 */
-.screen {
-  position:fixed;
-  width:100%;
-  height:100%;
-  top: 0;
-  left: 0;
-  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* SNS / Side Menu */
-.left-menu {
-  position:fixed;
-  left:60px;
-  top:60px;
-  z-index:10;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.left-menu a {
-  display:block;
-  margin:16px 0;
-  font-size:13px;
-  color:white;
-  text-decoration:none;
-  letter-spacing:3px;
-  opacity:0.8;
-  transition:0.3s;
-}
-
-.left-menu a:hover {
-  opacity:0.4;
-  transform:translateX(6px);
-}
-
-.menu-title {
-  color:white;
-  font-size:14px;
-  opacity:0.6;
-  margin-bottom:25px;
-  letter-spacing:4px;
-  font-weight: 500;
-}
-
-/* 메인 화면 콘텐츠 레이어 */
-.main-screen { 
-  z-index:3; 
-  opacity: 1;
-}
-
-.center-text {
-  color:white;
-  text-align:center;
-  cursor:pointer;
-  width: 100%;
-}
-
-.center-text h1 {
-  font-size:80px;
-  letter-spacing:14px;
-  font-family:'Playfair Display';
-  text-shadow:0 0 30px rgba(255,255,255,0.2);
-  margin: 0;
-  transition: letter-spacing 0.5s ease;
-}
-
-.center-text:hover h1 {
-  letter-spacing:20px;
-}
-
-.subtitle {
-  font-size:12px;
-  letter-spacing:6px;
-  margin-top:20px;
-  opacity:0.7;
-}
-
-.click-text {
-  font-size:10px;
-  margin-top:40px;
-  letter-spacing:4px;
-  opacity:0.5;
-}
-
-/* 내부 메뉴 화면 */
-.second-screen {
-  z-index:2;
-  opacity:0;
-  transform:scale(1.05);
-  pointer-events: none;
-}
-
-/* 활성화 상태 제어 */
-.main-screen.fade-out {
-  opacity: 0;
-  transform: scale(0.95);
-  pointer-events: none;
-}
-
-.second-screen.fade-in {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 4;
-  pointer-events: auto;
-}
-
-/* 뒤로가기 영역 */
-.back-area {
-  position:absolute;
-  width:100%;
-  height:100%;
-  z-index:1;
-  cursor: pointer;
-}
-
-/* 내부 메뉴 항목 */
-.inner-menu {
-  position: relative;
-  z-index:2;
-  text-align: center;
-}
-
-.inner-menu a {
-  display:block;
-  margin:35px 0;
-  color:white;
-  text-decoration:none;
-  font-size:24px;
-  letter-spacing:4px;
-  opacity:0;
-  transform:translateY(25px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  position:relative;
-}
-
-.inner-menu a.animate {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.inner-menu a::after {
-  content:'';
-  position:absolute;
-  left:50%;
-  transform: translateX(-50%);
-  bottom:-5px;
-  width:0;
-  height:1px;
-  background:white;
-  transition: 0.4s ease;
-}
-
-.inner-menu a:hover::after {
-  width:60%;
-}
-
-/* --- 모바일 최적화 --- */
-@media (max-width:768px){
-  #cursor, #cursor-dot { display:none; }
-  
-  .left-menu {
-    left: 25px;
-    top: 30px;
-  }
-
-  .menu-title {
-    font-size: 11px;
-    margin-bottom: 12px;
-  }
-
-  .left-menu a {
-    font-size: 10px;
-    margin: 10px 0;
-  }
-
-  .center-text h1 { 
-    font-size: 42px; 
-    letter-spacing: 8px;
-  }
-  
-  .inner-menu a {
-    font-size: 18px;
-    margin: 25px 0;
-  }
-}
-</style>
+        footer { position: absolute; bottom: 40px; width: 100%; font-size: 10px; letter-spacing: 2px; color: #666; }
+    </style>
 </head>
-
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-dot"></div>
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="image/kyeol_video_optimized.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="overlay"></div>
 
-<div class="global-background" id="bg">
-  <video class="video-bg" autoplay muted loop playsinline>
-    <source src="kyeol_video_optimized.mp4" type="video/mp4">
-  </video>
-  <div class="overlay"></div>
-</div>
+    <div class="content">
+        <a href="index.html" class="logo">KYEOL</a>
+        <div class="main-title">INTERIOR DESIGN STUDIO</div>
+        <a href="portfolio.html" class="btn-portfolio">VIEW PORTFOLIO</a>
+    </div>
 
-<div class="left-menu" id="sns">
-  <h2 class="menu-title">MY STUDIO</h2>
-  <a href="#">INSTAGRAM</a>
-  <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO</a>
-  <a href="https://blog.naver.com/rotte123" target="_blank">BLOG</a>
-</div>
-
-<div class="screen main-screen" id="main-layer">
-  <div class="center-text" onclick="enterSite()">
-    <h1>KYEOL</h1>
-    <div class="subtitle">ARCHITECTURE & INTERIOR</div>
-    <div class="click-text">CLICK TO ENTER</div>
-  </div>
-</div>
-
-<div class="screen second-screen" id="second-layer">
-  <div class="back-area" onclick="goBack()"></div>
-  <div class="inner-menu">
-    <a href="about.html">ABOUT</a>
-    <a href="portfolio.html">PORTFOLIO</a>
-    <a href="proposal.html">PROPOSAL</a>
-    <a href="contact.html">CONTACT</a>
-  </div>
-</div>
-
-<script>
-const cursor = document.getElementById("cursor");
-const dot = document.getElementById("cursor-dot");
-const bg = document.getElementById("bg");
-const sns = document.getElementById("sns");
-const mainLayer = document.getElementById("main-layer");
-const secondLayer = document.getElementById("second-layer");
-const menuItems = document.querySelectorAll(".inner-menu a");
-
-// --- 마우스 커서 (데스크탑 전용) ---
-let mouseX=0, mouseY=0, posX=0, posY=0;
-
-if(window.innerWidth > 768) {
-  document.addEventListener("mousemove", e=>{
-    mouseX=e.clientX;
-    mouseY=e.clientY;
-  });
-
-  function cursorLoop(){
-    posX += (mouseX - posX) * 0.15;
-    posY += (mouseY - posY) * 0.15;
-    if(cursor) { cursor.style.left = posX + "px"; cursor.style.top = posY + "px"; }
-    if(dot) { dot.style.left = mouseX + "px"; dot.style.top = mouseY + "px"; }
-    requestAnimationFrame(cursorLoop);
-  }
-  cursorLoop();
-}
-
-// --- 패럴랙스 (배경 미세 움직임) ---
-document.addEventListener("mousemove", e=>{
-  if(window.innerWidth > 768) {
-    const moveX = (e.clientX / window.innerWidth - 0.5);
-    const moveY = (e.clientY / window.innerHeight - 0.5);
-    bg.style.transform = `scale(1.05) translate(${moveX * 15}px, ${moveY * 15}px)`;
-  }
-});
-
-// --- 사이트 입장 ---
-function enterSite(){
-  mainLayer.classList.add("fade-out");
-  sns.style.opacity = "0";
-  sns.style.pointerEvents = "none";
-
-  secondLayer.classList.add("fade-in");
-
-  // 메뉴 항목 순차 등장
-  menuItems.forEach((el, i) => {
-    setTimeout(() => {
-      el.classList.add("animate");
-    }, 600 + (i * 120)); 
-  });
-}
-
-// --- 메인으로 돌아가기 ---
-function goBack(){
-  secondLayer.classList.remove("fade-in");
-  menuItems.forEach(el => el.classList.remove("animate"));
-
-  mainLayer.classList.remove("fade-out");
-  sns.style.opacity = "1";
-  sns.style.pointerEvents = "auto";
-}
-</script>
+    <footer>
+        &copy; 2026 KYEOL. ALL RIGHTS RESERVED.
+    </footer>
 
 </body>
 </html>
