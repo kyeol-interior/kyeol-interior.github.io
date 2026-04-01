@@ -18,15 +18,30 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; co
 .meta-item p { margin: 0; font-size: 13px; letter-spacing: 1px; font-weight: 400; opacity: 0.8; }
 .desc { line-height: 2.2; font-size: 13px; font-weight: 300; opacity: 0.6; max-width: 400px; }
 .right { width: 60%; margin-left: 40%; background: #0d0d0d; }
-.image-box { padding: 60px; display: flex; justify-content: center; align-items: center; }
-.image-box img { width: auto; max-width: 100%; max-height: 80vh; display: block; object-fit: contain; filter: brightness(0.85); transition: 0.8s; border-radius: 4px; }
+.image-box {
+  padding: 40px 60px; /* 좌우 여백 유지 */
+  display: flex;
+  justify-content: center;
+}
+
+.image-box img {
+  width: 100%;          /* 가로폭은 부모 박스에 꽉 채움 */
+  max-width: 900px;     /* 너무 커지는 것 방지 */
+  height: 70vh;         /* 🔥 핵심: 세로 높이를 화면의 70%로 고정 */
+  object-fit: cover;    /* 🔥 중요: 설정한 높이에 맞춰 이미지를 가득 채움 (비율 유지하며 외곽 커팅) */
+  filter: brightness(0.9);
+  transition: 0.8s;
+  border-radius: 8px;
+}
+
+/* 모바일에서는 세로로 길게 보는 것이 자연스러우므로 제한 해제 */
 @media (max-width: 768px) {
-  .container { flex-direction: column; }
-  .nav-header { top: 30px; left: 30px; }
-  .left { position: relative; width: 100%; height: auto; padding: 140px 30px 60px; }
-  .right { width: 100%; margin-left: 0; }
-  .image-box { padding: 20px 10px; }
-  .image-box img { width: 100%; max-height: none; }
+  .image-box { padding: 20px 15px; }
+  .image-box img { 
+    height: auto;       /* 모바일은 높이 제한 없음 */
+    max-height: none;
+    object-fit: contain;
+  }
 }
 </style>
 </head>
