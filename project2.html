@@ -6,42 +6,25 @@
 <title>KYEOL | DEOKAM HIGH SCHOOL</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; color: white; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-.nav-header { position: fixed; top: 50px; left: 50px; z-index: 1000; display: flex; align-items: center; gap: 25px; }
-.back-btn { color: white; text-decoration: none; font-size: 10px; letter-spacing: 4px; opacity: 0.5; cursor: pointer; transition: 0.4s; background: none; border: none; padding: 0; text-transform: uppercase; }
-.back-btn:hover { opacity: 1; transform: translateX(-3px); }
+body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; color: white; overflow-x: hidden; }
+.nav-header { position: fixed; top: 50px; left: 50px; z-index: 1000; }
+.back-btn { color: white; text-decoration: none; font-size: 10px; letter-spacing: 4px; opacity: 0.5; cursor: pointer; background: none; border: none; text-transform: uppercase; }
 .container { display: flex; min-height: 100vh; }
-.left { width: 40%; height: 100vh; position: fixed; left: 0; top: 0; padding: 180px 80px 80px; box-sizing: border-box; display: flex; flex-direction: column; }
-.title { font-size: 26px; letter-spacing: 5px; margin-bottom: 50px; font-weight: 500; text-transform: uppercase; line-height: 1.4; }
+.left { width: 40%; height: 100vh; position: fixed; left: 0; top: 0; padding: 180px 80px 80px; box-sizing: border-box; overflow-y: auto; }
+.title { font-size: 26px; letter-spacing: 5px; margin-bottom: 50px; font-weight: 500; }
 .meta { display: flex; flex-direction: column; gap: 25px; margin-bottom: 50px; }
 .meta-item span { display: block; font-size: 9px; letter-spacing: 3px; opacity: 0.3; text-transform: uppercase; margin-bottom: 8px; }
-.meta-item p { margin: 0; font-size: 13px; letter-spacing: 1px; font-weight: 400; opacity: 0.8; }
-.desc { line-height: 2.2; font-size: 13px; font-weight: 300; opacity: 0.6; max-width: 400px; }
+.meta-item p { margin: 0; font-size: 13px; opacity: 0.8; }
+.desc { line-height: 2.2; font-size: 13px; font-weight: 300; opacity: 0.6; }
 .right { width: 60%; margin-left: 40%; background: #0d0d0d; }
-.image-box {
-  padding: 40px 60px; /* 좌우 여백 유지 */
-  display: flex;
-  justify-content: center;
-}
-
-.image-box img {
-  width: 100%;          /* 가로폭은 부모 박스에 꽉 채움 */
-  max-width: 900px;     /* 너무 커지는 것 방지 */
-  height: 70vh;         /* 🔥 핵심: 세로 높이를 화면의 70%로 고정 */
-  object-fit: cover;    /* 🔥 중요: 설정한 높이에 맞춰 이미지를 가득 채움 (비율 유지하며 외곽 커팅) */
-  filter: brightness(0.9);
-  transition: 0.8s;
-  border-radius: 8px;
-}
-
-/* 모바일에서는 세로로 길게 보는 것이 자연스러우므로 제한 해제 */
+.image-box { padding: 40px 60px; display: flex; justify-content: center; }
+.image-box img { width: auto; max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 4px; filter: brightness(0.9); }
 @media (max-width: 768px) {
-  .image-box { padding: 20px 15px; }
-  .image-box img { 
-    height: auto;       /* 모바일은 높이 제한 없음 */
-    max-height: none;
-    object-fit: contain;
-  }
+  .container { flex-direction: column; }
+  .left { position: relative; width: 100%; height: auto; padding: 120px 30px 40px; }
+  .right { width: 100%; margin-left: 0; }
+  .image-box { padding: 20px 10px; }
+  .image-box img { width: 100%; max-height: none; }
 }
 </style>
 </head>
@@ -51,11 +34,15 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; co
   <aside class="left">
     <div class="title">덕암정보고등학교<br>행정실</div>
     <div class="meta">
-      <div class="meta-item"><span>Concept</span><p>🏛️ 소통과 배려가 흐르는 행정실</p></div>
+      <div class="meta-item"><span>Project</span><p>🏛️ 공간 컨셉: "소통과 배려가 흐르는 행정실"</p></div>
       <div class="meta-item"><span>Interior Surface</span><p>77㎡</p></div>
-      <div class="meta-item"><span>Location</span><p>GIMJE, KOREA</p></div>
+      <div class="meta-item"><span>Location</span><p>김제</p></div>
     </div>
-    <div class="desc">단차와 소재가 주는 리듬을 통해 공간의 활력을 불어넣었습니다. 딥그린 포인트 월로 정서적 안정감과 신뢰를 담았습니다.</div>
+    <div class="desc">
+      "권위를 내려놓고 소통을 채우다"<br><br>
+      단차와 소재가 주는 리듬을 통해 공간의 활력을 불어넣고,<br>행정실 특유의 경직된 분위기를 걷어냈습니다.<br><br>
+      딥그린의 포인트 월은 방문객에게는 정서적 안정감을,<br>근무자에게는 신뢰의 가치를 전달합니다.
+    </div>
   </aside>
   <main class="right">
     <div class="image-box"><img src="07.jpg"></div>
