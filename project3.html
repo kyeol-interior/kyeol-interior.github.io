@@ -12,7 +12,7 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; co
 
 .container { display: flex; min-height: 100vh; }
 
-/* 왼쪽 설명창: 고정 */
+/* 왼쪽 설명창 */
 .left { 
   width: 40%; 
   height: 100vh; 
@@ -35,31 +35,28 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; co
   width: 60%; 
   margin-left: 40%; 
   background: #0d0d0d; 
-  padding: 100px 0; /* 상하 여백을 늘려 더 여유 있게 */
+  padding: 60px 0; 
 }
 
-/* 🔥 과감한 조정: 가로폭 80% + 최대 850px 제한 */
+/* 🔥 핵심 수정: 사진이 잘리지 않게 가로폭을 더 제한하고 높이를 자유롭게 둠 */
 .image-box { 
-  width: 80%;         /* 좌우 여백을 더 넓게 확보 */
-  max-width: 850px;   /* 세로가 길어지는 걸 원천 봉쇄 */
-  margin: 0 auto 80px; /* 사진 사이 간격을 넓혀 시선 분산 방지 */
+  width: 75%;         /* 캡처6보다 가로를 조금 더 줄여서 세로 길이를 압축 */
+  max-width: 650px;   /* 세로로 긴 사진들이 예쁘게 보이는 마지노선 너비 */
+  margin: 0 auto 50px; 
 }
 
 .image-box img { 
   width: 100%;      
-  height: auto;       /* 절대 자르지 않음 */
+  height: auto;       /* 🔥 원본 비율 그대로 유지 (잘림 방지 핵심) */
   display: block;   
   filter: brightness(0.9); 
-  border-radius: 3px; 
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* 입체감 살짝 추가 */
 }
 
-/* 모바일 대응 */
 @media (max-width: 768px) {
   .container { flex-direction: column; }
   .left { position: relative; width: 100%; height: auto; padding: 120px 30px 40px; }
   .right { width: 100%; margin-left: 0; padding: 40px 0; }
-  .image-box { width: 90%; margin-bottom: 40px; }
+  .image-box { width: 90%; }
 }
 </style>
 </head>
