@@ -3,21 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KYEOL | Portfolio</title>
+<title>KYEOL | PORTFOLIO</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  background: #0d0d0d;
+  font-family: 'Montserrat', sans-serif; /* 전체 폰트 통일 */
+  background: #0d0d0d; /* 더 깊은 블랙 */
   color: white;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.02em; /* 미세한 자간 조정으로 고급스럽게 */
 }
 
-/* 🔙 상단 네비게이션 (더 가늘고 미니멀하게) */
+/* 🔙 상단 네비게이션 (더 가늘고 미니멀하게, 대문자화) */
 .nav-header {
   position: fixed;
   top: 50px;
@@ -31,14 +32,15 @@ body {
 .back-btn {
   color: white;
   text-decoration: none;
-  font-size: 11px;
-  letter-spacing: 3px;
+  font-size: 10px; /* 더 축소 */
+  letter-spacing: 4px; /* 자간 확대 */
   opacity: 0.5;
   cursor: pointer;
   transition: 0.4s;
   background: none;
   border: none;
   padding: 0;
+  text-transform: uppercase; /* 대문자화 */
 }
 
 .back-btn:hover {
@@ -47,37 +49,38 @@ body {
 }
 
 .nav-title {
-  font-size: 11px;
-  letter-spacing: 4px;
-  opacity: 0.15;
+  font-size: 10px;
+  letter-spacing: 5px;
+  opacity: 0.1; /* 더 흐리게 */
   font-weight: 400;
+  text-transform: uppercase;
 }
 
-/* 타이틀 섹션 (여백 대폭 추가) */
+/* 타이틀 섹션 (여백 대폭 추가, 폰트 통일 및 축소) */
 .header-section {
-  padding: 180px 10% 80px; /* 좌우 여백을 %로 주어 유연하게 대응 */
+  padding: 180px 10% 80px;
   text-align: left;
 }
 
 .header-section h1 {
-  font-family: 'Playfair Display';
-  font-size: 32px; /* 크기 축소 */
-  letter-spacing: 6px;
+  font-size: 28px; /* 크기 축소 */
+  letter-spacing: 8px; /* 자간 대폭 확대 */
   margin: 0;
-  font-weight: 500;
-  opacity: 0.9;
+  font-weight: 500; /* 너무 굵지 않게 */
+  opacity: 0.8;
+  text-transform: uppercase; /* 대문자화 */
 }
 
-/* 그리드 시스템 (간격 및 여백 조정) */
+/* 그리드 시스템 (간격 및 여백 유지) */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  column-gap: 80px; /* 좌우 간격 확대 */
-  row-gap: 100px;   /* 상하 간격 확대 */
+  column-gap: 80px;
+  row-gap: 100px;
   padding: 0 10% 150px;
 }
 
-/* 카드 아이템 */
+/* 카드 아이템 (애니메이션 유지) */
 .item {
   position: relative;
   opacity: 0;
@@ -92,45 +95,71 @@ body {
 
 .img-box {
   width: 100%;
-  aspect-ratio: 4 / 3; /* 이미지 비율 고정으로 답답함 해소 */
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   background: #1a1a1a;
+  position: relative;
 }
 
+/* 이미지 스타일 (핵심: 흑백 필터) */
 .item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.7);
-  transition: 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: grayscale(100%) brightness(0.6) contrast(1.1); /* 기본: 완전 흑백, 어둡게 */
+  transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: filter, transform;
 }
 
+/* 호버 시 컬러 전환 및 확대 */
 .item:hover img {
+  filter: grayscale(0%) brightness(0.9) contrast(1); /* 호버: 컬러, 밝게 */
   transform: scale(1.03);
-  filter: brightness(0.9);
 }
 
-/* 텍스트 정보 (미니멀화) */
+/* 오버레이 (호버 시 질감 강조용, 선택 사항) */
+.img-box::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.2);
+  opacity: 1;
+  transition: 0.8s;
+  pointer-events: none;
+}
+
+.item:hover .img-box::after {
+  opacity: 0;
+}
+
+
+/* 텍스트 정보 (미니멀화, 폰트 통일) */
 .item .text {
   margin-top: 25px;
+  transition: 0.4s;
 }
 
 .item .title {
-  font-family: 'Playfair Display', serif;
-  font-size: 17px;
-  letter-spacing: 0.5px;
+  font-size: 15px; /* 크기 축소 */
+  letter-spacing: 1px;
   margin-bottom: 6px;
   font-weight: 500;
+  text-transform: uppercase; /* 대문자화 */
 }
 
 .item .sub {
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  opacity: 0.4;
+  font-size: 9px; /* 더 미니멀하게 */
+  letter-spacing: 2px;
+  opacity: 0.3; /* 더 흐리게 */
   text-transform: uppercase;
 }
 
-/* 모바일 모드 */
+/* 호버 시 텍스트 변화 (살짝 움직임 제거, 깔끔하게 여백만) */
+.item:hover .text {
+  /* transform: translateX(5px); */ /* 움직임 제거 */
+}
+
+/* 모바일 모드 (유지) */
 @media (max-width: 1024px) {
   .grid { column-gap: 40px; padding: 0 5%; }
 }
@@ -138,10 +167,10 @@ body {
 @media (max-width: 768px) {
   .nav-header { top: 30px; left: 30px; }
   .header-section { padding: 140px 30px 50px; }
-  .header-section h1 { font-size: 26px; }
+  .header-section h1 { font-size: 22px; letter-spacing: 6px; }
 
   .grid {
-    grid-template-columns: 1fr; /* 모바일은 1열 */
+    grid-template-columns: 1fr;
     padding: 0 30px 80px;
     row-gap: 60px;
   }
@@ -164,7 +193,7 @@ body {
 
 <main class="grid">
   <div class="item" onclick="goDetail('project1.html')">
-    <div class="img-box"><img src="01.jpg" alt=""></div>
+    <div class="img-box"><img src="01.jpg" alt="수지초등학교"></div>
     <div class="text">
       <div class="title">수지초등학교 생각나무 숲 도서관</div>
       <div class="sub">NAMWON · 115㎡ · EDUCATION</div>
@@ -172,7 +201,7 @@ body {
   </div>
 
   <div class="item" onclick="goDetail('project2.html')">
-    <div class="img-box"><img src="10.jpg" alt=""></div>
+    <div class="img-box"><img src="10.jpg" alt="덕암정보고"></div>
     <div class="text">
       <div class="title">덕암정보고등학교 행정실</div>
       <div class="sub">GIMJE · 75㎡ · OFFICE</div>
@@ -180,7 +209,7 @@ body {
   </div>
 
   <div class="item" onclick="goDetail('project3.html')">
-    <div class="img-box"><img src="3-8.jpg" alt=""></div>
+    <div class="img-box"><img src="3-8.jpg" alt="인더메이크업"></div>
     <div class="text">
       <div class="title">IN THE MAKE UP</div>
       <div class="sub">JEONJU · 132㎡ · COMMERCIAL</div>
@@ -188,7 +217,7 @@ body {
   </div>
 
   <div class="item" onclick="goDetail('project4.html')">
-    <div class="img-box"><img src="22.jpg" alt=""></div>
+    <div class="img-box"><img src="22.jpg" alt="작은미술관"></div>
     <div class="text">
       <div class="title">학교 안 작은미술관</div>
       <div class="sub">JEONJU · 24㎡ · GALLERY</div>
@@ -196,7 +225,7 @@ body {
   </div>
 
   <div class="item" onclick="goDetail('project5.html')">
-    <div class="img-box"><img src="29.jpg" alt=""></div>
+    <div class="img-box"><img src="29.jpg" alt="농소마을"></div>
     <div class="text">
       <div class="title">농소마을 주택</div>
       <div class="sub">JEONJU · 400㎡ · RESIDENTIAL</div>
@@ -204,7 +233,7 @@ body {
   </div>
 
   <div class="item" onclick="goDetail('project6.html')">
-    <div class="img-box"><img src="6-1.jpg" alt=""></div>
+    <div class="img-box"><img src="6-1.jpg" alt="송정써미트"></div>
     <div class="text">
       <div class="title">송정써미트아파트</div>
       <div class="sub">JEONJU · 112㎡ · APARTMENT</div>
@@ -218,14 +247,16 @@ window.onload = () => {
   items.forEach((item, i) => {
     setTimeout(() => {
       item.classList.add('show');
-    }, 200 * i);
+    }, 200 * i); // 등장 속도 살짝 느리게
   });
 };
 
 function goDetail(page) {
+  // 페이드 아웃 효과 강화
   document.body.style.opacity = "0";
-  document.body.style.transition = "0.6s";
-  setTimeout(() => { window.location.href = page; }, 600);
+  document.body.style.transform = "scale(0.98)";
+  document.body.style.transition = "1s cubic-bezier(0.16, 1, 0.3, 1)";
+  setTimeout(() => { window.location.href = page; }, 1000);
 }
 
 function goBack() {
