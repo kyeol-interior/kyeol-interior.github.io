@@ -16,6 +16,8 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   letter-spacing: 0.02em;
+  /* 초기 투명도 설정 (스크립트에서 제어) */
+  opacity: 1;
 }
 
 /* 🔙 상단 네비게이션 */
@@ -56,7 +58,7 @@ body {
   text-transform: uppercase;
 }
 
-/* 타이틀 섹션 (와이드 레이아웃에 맞춰 좌우 여백 확대) */
+/* 타이틀 섹션 */
 .header-section {
   padding: 180px 15% 60px;
 }
@@ -70,12 +72,12 @@ body {
   text-transform: uppercase;
 }
 
-/* 그리드 시스템 (1열 와이드 배치) */
+/* 그리드 시스템 (가로 1줄 와이드) */
 .grid {
   display: grid;
-  grid-template-columns: 1fr; /* 가로 1개씩 */
-  row-gap: 120px; /* 작품 간의 수직 여백 확대 */
-  padding: 0 15% 150px; /* 좌우 여백을 넓혀서 중앙 집중도 향상 */
+  grid-template-columns: 1fr;
+  row-gap: 120px;
+  padding: 0 15% 150px;
 }
 
 /* 카드 아이템 */
@@ -84,6 +86,7 @@ body {
   opacity: 0;
   transform: translateY(30px);
   transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.5s ease;
+  cursor: pointer;
 }
 
 .item.show {
@@ -91,10 +94,10 @@ body {
   transform: translateY(0);
 }
 
-/* 이미지 박스 (가로로 길고 세로로 짧은 비율) */
+/* 이미지 박스 (시네마틱 와이드 비율) */
 .img-box {
   width: 100%;
-  aspect-ratio: 2.5 / 1; /* 가로 2.5 : 세로 1의 황금 와이드 비율 */
+  aspect-ratio: 2.5 / 1;
   overflow: hidden;
   background: #1a1a1a;
   position: relative;
@@ -104,22 +107,23 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* 중후한 통일감을 위한 흑백 필터 */
   filter: grayscale(100%) brightness(0.5) contrast(1.1);
   transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .item:hover img {
   filter: grayscale(0%) brightness(0.8) contrast(1);
-  transform: scale(1.02); /* 와이드 화면이므로 미세한 확대가 더 고급스러움 */
+  transform: scale(1.02);
 }
 
 /* 텍스트 정보 */
 .item .text {
   margin-top: 30px;
   display: flex;
-  justify-content: space-between; /* 제목은 왼쪽, 설명은 오른쪽 배치로 고급화 */
+  justify-content: space-between;
   align-items: baseline;
-  border-bottom: 1px solid rgba(255,255,255,0.05); /* 하단 가느다란 구분선 */
+  border-bottom: 1px solid rgba(255,255,255,0.05);
   padding-bottom: 15px;
 }
 
@@ -144,7 +148,7 @@ body {
 
 @media (max-width: 768px) {
   .nav-header { top: 30px; left: 30px; }
-  .header-section { padding-top: 140px; }
+  .header-section { padding-top: 140px; padding-bottom: 40px; }
   .header-section h1 { font-size: 20px; letter-spacing: 6px; }
 
   .grid {
@@ -152,10 +156,10 @@ body {
     padding: 0 30px 100px;
   }
 
-  .img-box { aspect-ratio: 1.8 / 1; } /* 모바일에서는 너무 얇으면 안 보이므로 조절 */
+  .img-box { aspect-ratio: 1.8 / 1; }
   
   .item .text {
-    flex-direction: column; /* 모바일에서는 위아래로 */
+    flex-direction: column;
     gap: 8px;
   }
 }
@@ -224,24 +228,52 @@ body {
 </main>
 
 <script>
-window.onload = () => {
+/**
+ * 핵심 해결책: 페이지가 다시 나타날 때(뒤로가기 포함) 
+ * 강제로 투명도를 복구하고 아이템 애니메이션을 실행합니다.
+ */
+window.onpageshow = function(event) {
+  // 1. 투명도 즉시 복구 (상세페이지 이동 시 0으로 만들었던 것 취소)
+  document.body.style.opacity = "1";
+  document.body.style.transition = "none"; 
+
+  // 2. 포트폴리오 아이템 순차적 등장
   const items = document.querySelectorAll('.item');
   items.forEach((item, i) => {
+    // 이미 'show' 클래스가 있다면 제거 후 다시 추가(애니메이션 재실행)
+    item.classList.remove('show');
     setTimeout(() => {
       item.classList.add('show');
-    }, 300 * i); // 와이드형은 천천히 하나씩 등장하는 게 더 묵직함
+    }, 200 * i);
   });
 };
 
+/**
+ * 상세 페이지 이동 함수
+ */
 function goDetail(page) {
+  // 부드럽게 사라지는 효과
   document.body.style.opacity = "0";
-  document.body.style.transform = "translateY(-10px)"; /* 위로 살짝 떠오르며 사라지는 효과 */
-  document.body.style.transition = "1s cubic-bezier(0.16, 1, 0.3, 1)";
-  setTimeout(() => { window.location.href = page; }, 1000);
+  document.body.style.transform = "translateY(-10px)";
+  document.body.style.transition = "0.8s cubic-bezier(0.16, 1, 0.3, 1)";
+  
+  // 애니메이션이 끝난 후 이동
+  setTimeout(() => { 
+    window.location.href = page; 
+  }, 800);
 }
 
+/**
+ * 메인 화면(index.html)으로 돌아가는 함수
+ */
 function goBack() {
-  window.location.href = 'index.html'; 
+  document.body.style.opacity = "0";
+  document.body.style.transition = "0.5s";
+  
+  setTimeout(() => {
+    // 브라우저 히스토리 대신 명확하게 메인 파일로 이동하여 꼬임을 방지합니다.
+    window.location.href = 'index.html'; 
+  }, 500);
 }
 </script>
 
