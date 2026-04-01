@@ -4,105 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KYEOL | SONGJEONG SUMMIT APARTMENT</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-
 <style>
-/* 초기 로딩 시 화면이 안 나오는 문제를 방지하기 위해 기본 투명도 제거 */
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  background: #0a0a0a;
-  color: white;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* 🔙 상단 네비게이션 */
-.nav-header {
-  position: fixed;
-  top: 50px;
-  left: 50px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-
-.back-btn {
-  color: white;
-  text-decoration: none;
-  font-size: 10px;
-  letter-spacing: 4px;
-  opacity: 0.5;
-  cursor: pointer;
-  transition: 0.4s;
-  background: none;
-  border: none;
-  padding: 0;
-  text-transform: uppercase;
-}
-
+body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; color: white; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+.nav-header { position: fixed; top: 50px; left: 50px; z-index: 1000; display: flex; align-items: center; gap: 25px; }
+.back-btn { color: white; text-decoration: none; font-size: 10px; letter-spacing: 4px; opacity: 0.5; cursor: pointer; transition: 0.4s; background: none; border: none; padding: 0; text-transform: uppercase; }
 .back-btn:hover { opacity: 1; transform: translateX(-3px); }
-
-/* 전체 컨테이너 */
 .container { display: flex; min-height: 100vh; }
-
-/* 왼쪽 설명 섹션 */
-.left {
-  width: 40%;
-  height: 100vh;
-  position: fixed;
-  left: 0; top: 0;
-  padding: 180px 80px 80px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-
+.left { width: 40%; height: 100vh; position: fixed; left: 0; top: 0; padding: 180px 80px 80px; box-sizing: border-box; display: flex; flex-direction: column; }
 .title { font-size: 26px; letter-spacing: 5px; margin-bottom: 50px; font-weight: 500; text-transform: uppercase; line-height: 1.4; }
-
 .meta { display: flex; flex-direction: column; gap: 25px; margin-bottom: 50px; }
 .meta-item span { display: block; font-size: 9px; letter-spacing: 3px; opacity: 0.3; text-transform: uppercase; margin-bottom: 8px; }
 .meta-item p { margin: 0; font-size: 13px; letter-spacing: 1px; font-weight: 400; opacity: 0.8; }
-
 .desc { line-height: 2.2; font-size: 13px; font-weight: 300; opacity: 0.6; max-width: 400px; }
-
-/* 오른쪽 이미지 섹션 */
 .right { width: 60%; margin-left: 40%; background: #0d0d0d; }
-
-/* 이미지가 안 나오는 현상을 막기 위해 초기 opacity를 1로 설정하거나 애니메이션 단순화 */
-.image-box {
-  padding: 100px 60px;
-  opacity: 1; /* 초기값 1로 변경 */
-  transition: 1s ease;
-}
-
-.image-box img {
-  width: 100%;
-  display: block;
-  filter: brightness(0.9);
-  transition: 0.8s;
-}
-
-/* 모바일 대응 */
+.image-box { padding: 60px; display: flex; justify-content: center; align-items: center; }
+.image-box img { width: auto; max-width: 100%; max-height: 80vh; display: block; object-fit: contain; filter: brightness(0.9); transition: 0.8s; border-radius: 4px; }
 @media (max-width: 768px) {
   .container { flex-direction: column; }
   .nav-header { top: 30px; left: 30px; }
   .left { position: relative; width: 100%; height: auto; padding: 140px 30px 60px; }
   .right { width: 100%; margin-left: 0; }
-  .title { font-size: 22px; margin-bottom: 30px; }
-  .image-box { padding: 30px 20px; }
+  .image-box { padding: 20px 10px; }
+  .image-box img { width: 100%; max-height: none; }
 }
 </style>
 </head>
-
 <body>
-
-<nav class="nav-header">
-  <button class="back-btn" onclick="goBack()">← BACK TO LIST</button>
-</nav>
-
+<nav class="nav-header"><button class="back-btn" onclick="location.href='portfolio.html'">← BACK TO LIST</button></nav>
 <div class="container">
   <aside class="left">
     <div class="title">송정써미트아파트</div>
@@ -111,12 +40,8 @@ body {
       <div class="meta-item"><span>Interior Surface</span><p>112㎡</p></div>
       <div class="meta-item"><span>Location</span><p>JEONJU, KOREA</p></div>
     </div>
-    <div class="desc">
-      단순한 '주거'를 넘어 삶을 채우는 안식처를 지향합니다. 그레이 타일 위로 떨어지는 은은한 매립 조명의 온기와 커튼박스 사이로 스며드는 평온한 빛의 레이어링이 공간을 감쌉니다.<br><br>
-      유행을 좇기보다 사는 사람의 호흡을 배려하여, 비워진 여백 속에 채워질 가족의 웃음소리를 먼저 생각했습니다.
-    </div>
+    <div class="desc">주거 공간을 넘어 삶을 채우는 안식처입니다. 그레이 타일과 은은한 간접 조명의 레이어링으로 삶이 예술이 되는 공간을 제안합니다.</div>
   </aside>
-
   <main class="right">
     <div class="image-box"><img src="6-1.jpg"></div>
     <div class="image-box"><img src="6-2.jpg"></div>
@@ -129,12 +54,5 @@ body {
     <div class="image-box"><img src="6-9.jpg"></div>
   </main>
 </div>
-
-<script>
-function goBack() {
-  window.location.href = 'portfolio.html';
-}
-</script>
-
 </body>
 </html>
