@@ -35,22 +35,23 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; co
   width: 60%; 
   margin-left: 40%; 
   background: #0d0d0d; 
-  padding: 80px 0; /* 상하 여백으로 시작과 끝을 여유있게 */
+  padding: 100px 0; /* 상하 여백을 늘려 더 여유 있게 */
 }
 
-/* 🔥 핵심: 가로폭을 90%로 살짝 줄여서 세로 길이를 압축 */
+/* 🔥 과감한 조정: 가로폭 80% + 최대 850px 제한 */
 .image-box { 
-  width: 90%;       /* 오른쪽 영역의 90%만 사용 (좌우 여백 생성) */
-  max-width: 1000px; /* 너무 큰 모니터에서 무한정 커지는 것 방지 */
-  margin: 0 auto 60px; /* 중앙 정렬 + 사진 간 간격 */
+  width: 80%;         /* 좌우 여백을 더 넓게 확보 */
+  max-width: 850px;   /* 세로가 길어지는 걸 원천 봉쇄 */
+  margin: 0 auto 80px; /* 사진 사이 간격을 넓혀 시선 분산 방지 */
 }
 
 .image-box img { 
   width: 100%;      
-  height: auto;     /* 비율 유지 (절대 안 잘림) */
+  height: auto;       /* 절대 자르지 않음 */
   display: block;   
   filter: brightness(0.9); 
-  border-radius: 2px; /* 미세한 곡선으로 고급스러움 추가 */
+  border-radius: 3px; 
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* 입체감 살짝 추가 */
 }
 
 /* 모바일 대응 */
@@ -58,7 +59,7 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; co
   .container { flex-direction: column; }
   .left { position: relative; width: 100%; height: auto; padding: 120px 30px 40px; }
   .right { width: 100%; margin-left: 0; padding: 40px 0; }
-  .image-box { width: 92%; margin-bottom: 30px; }
+  .image-box { width: 90%; margin-bottom: 40px; }
 }
 </style>
 </head>
