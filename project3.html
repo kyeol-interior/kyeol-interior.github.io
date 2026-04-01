@@ -30,32 +30,35 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; co
 .meta-item p { margin: 0; font-size: 13px; opacity: 0.8; }
 .desc { line-height: 2.2; font-size: 13px; font-weight: 300; opacity: 0.6; }
 
-/* 오른쪽 사진창: 여백 없이 꽉 채움 */
+/* 오른쪽 사진창 */
 .right { 
   width: 60%; 
   margin-left: 40%; 
-  background: #000; 
+  background: #0d0d0d; 
+  padding: 80px 0; /* 상하 여백으로 시작과 끝을 여유있게 */
 }
 
-/* 🔥 핵심: 가로 100% 사용 + 세로는 사진 비율에 따라 자동 조절 */
+/* 🔥 핵심: 가로폭을 90%로 살짝 줄여서 세로 길이를 압축 */
 .image-box { 
-  width: 100%; 
-  margin-bottom: 0; /* 사진 사이 틈을 없애거나 최소화 */
-  line-height: 0;   /* 이미지 사이 미세한 틈 제거 */
+  width: 90%;       /* 오른쪽 영역의 90%만 사용 (좌우 여백 생성) */
+  max-width: 1000px; /* 너무 큰 모니터에서 무한정 커지는 것 방지 */
+  margin: 0 auto 60px; /* 중앙 정렬 + 사진 간 간격 */
 }
 
 .image-box img { 
-  width: 100%;      /* 가로 무조건 100% */
-  height: auto;     /* 세로는 사진 원본 비율 유지 (절대 안 잘림) */
-  display: block;   /* 하단 여백 제거 */
+  width: 100%;      
+  height: auto;     /* 비율 유지 (절대 안 잘림) */
+  display: block;   
   filter: brightness(0.9); 
+  border-radius: 2px; /* 미세한 곡선으로 고급스러움 추가 */
 }
 
 /* 모바일 대응 */
 @media (max-width: 768px) {
   .container { flex-direction: column; }
   .left { position: relative; width: 100%; height: auto; padding: 120px 30px 40px; }
-  .right { width: 100%; margin-left: 0; }
+  .right { width: 100%; margin-left: 0; padding: 40px 0; }
+  .image-box { width: 92%; margin-bottom: 30px; }
 }
 </style>
 </head>
