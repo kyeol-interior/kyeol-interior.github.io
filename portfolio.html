@@ -10,15 +10,15 @@
 <style>
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif; /* 전체 폰트 통일 */
-  background: #0d0d0d; /* 더 깊은 블랙 */
+  font-family: 'Montserrat', sans-serif;
+  background: #0d0d0d;
   color: white;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  letter-spacing: 0.02em; /* 미세한 자간 조정으로 고급스럽게 */
+  letter-spacing: 0.02em;
 }
 
-/* 🔙 상단 네비게이션 (더 가늘고 미니멀하게, 대문자화) */
+/* 🔙 상단 네비게이션 */
 .nav-header {
   position: fixed;
   top: 50px;
@@ -32,15 +32,15 @@ body {
 .back-btn {
   color: white;
   text-decoration: none;
-  font-size: 10px; /* 더 축소 */
-  letter-spacing: 4px; /* 자간 확대 */
+  font-size: 10px;
+  letter-spacing: 4px;
   opacity: 0.5;
   cursor: pointer;
   transition: 0.4s;
   background: none;
   border: none;
   padding: 0;
-  text-transform: uppercase; /* 대문자화 */
+  text-transform: uppercase;
 }
 
 .back-btn:hover {
@@ -51,41 +51,39 @@ body {
 .nav-title {
   font-size: 10px;
   letter-spacing: 5px;
-  opacity: 0.1; /* 더 흐리게 */
+  opacity: 0.1;
   font-weight: 400;
   text-transform: uppercase;
 }
 
-/* 타이틀 섹션 (여백 대폭 추가, 폰트 통일 및 축소) */
+/* 타이틀 섹션 (와이드 레이아웃에 맞춰 좌우 여백 확대) */
 .header-section {
-  padding: 180px 10% 80px;
-  text-align: left;
+  padding: 180px 15% 60px;
 }
 
 .header-section h1 {
-  font-size: 28px; /* 크기 축소 */
-  letter-spacing: 8px; /* 자간 대폭 확대 */
+  font-size: 24px;
+  letter-spacing: 10px;
   margin: 0;
-  font-weight: 500; /* 너무 굵지 않게 */
+  font-weight: 500;
   opacity: 0.8;
-  text-transform: uppercase; /* 대문자화 */
+  text-transform: uppercase;
 }
 
-/* 그리드 시스템 (간격 및 여백 유지) */
+/* 그리드 시스템 (1열 와이드 배치) */
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 80px;
-  row-gap: 100px;
-  padding: 0 10% 150px;
+  grid-template-columns: 1fr; /* 가로 1개씩 */
+  row-gap: 120px; /* 작품 간의 수직 여백 확대 */
+  padding: 0 15% 150px; /* 좌우 여백을 넓혀서 중앙 집중도 향상 */
 }
 
-/* 카드 아이템 (애니메이션 유지) */
+/* 카드 아이템 */
 .item {
   position: relative;
   opacity: 0;
-  transform: translateY(20px);
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease;
+  transform: translateY(30px);
+  transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.5s ease;
 }
 
 .item.show {
@@ -93,89 +91,73 @@ body {
   transform: translateY(0);
 }
 
+/* 이미지 박스 (가로로 길고 세로로 짧은 비율) */
 .img-box {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 2.5 / 1; /* 가로 2.5 : 세로 1의 황금 와이드 비율 */
   overflow: hidden;
   background: #1a1a1a;
   position: relative;
 }
 
-/* 이미지 스타일 (핵심: 흑백 필터) */
 .item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) brightness(0.6) contrast(1.1); /* 기본: 완전 흑백, 어둡게 */
-  transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: filter, transform;
+  filter: grayscale(100%) brightness(0.5) contrast(1.1);
+  transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 호버 시 컬러 전환 및 확대 */
 .item:hover img {
-  filter: grayscale(0%) brightness(0.9) contrast(1); /* 호버: 컬러, 밝게 */
-  transform: scale(1.03);
+  filter: grayscale(0%) brightness(0.8) contrast(1);
+  transform: scale(1.02); /* 와이드 화면이므로 미세한 확대가 더 고급스러움 */
 }
 
-/* 오버레이 (호버 시 질감 강조용, 선택 사항) */
-.img-box::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.2);
-  opacity: 1;
-  transition: 0.8s;
-  pointer-events: none;
-}
-
-.item:hover .img-box::after {
-  opacity: 0;
-}
-
-
-/* 텍스트 정보 (미니멀화, 폰트 통일) */
+/* 텍스트 정보 */
 .item .text {
-  margin-top: 25px;
-  transition: 0.4s;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between; /* 제목은 왼쪽, 설명은 오른쪽 배치로 고급화 */
+  align-items: baseline;
+  border-bottom: 1px solid rgba(255,255,255,0.05); /* 하단 가느다란 구분선 */
+  padding-bottom: 15px;
 }
 
 .item .title {
-  font-size: 15px; /* 크기 축소 */
-  letter-spacing: 1px;
-  margin-bottom: 6px;
-  font-weight: 500;
-  text-transform: uppercase; /* 대문자화 */
-}
-
-.item .sub {
-  font-size: 9px; /* 더 미니멀하게 */
+  font-size: 14px;
   letter-spacing: 2px;
-  opacity: 0.3; /* 더 흐리게 */
+  font-weight: 400;
   text-transform: uppercase;
 }
 
-/* 호버 시 텍스트 변화 (살짝 움직임 제거, 깔끔하게 여백만) */
-.item:hover .text {
-  /* transform: translateX(5px); */ /* 움직임 제거 */
+.item .sub {
+  font-size: 9px;
+  letter-spacing: 2px;
+  opacity: 0.3;
+  text-transform: uppercase;
 }
 
-/* 모바일 모드 (유지) */
+/* 모바일 최적화 */
 @media (max-width: 1024px) {
-  .grid { column-gap: 40px; padding: 0 5%; }
+  .header-section, .grid { padding-left: 8%; padding-right: 8%; }
 }
 
 @media (max-width: 768px) {
   .nav-header { top: 30px; left: 30px; }
-  .header-section { padding: 140px 30px 50px; }
-  .header-section h1 { font-size: 22px; letter-spacing: 6px; }
+  .header-section { padding-top: 140px; }
+  .header-section h1 { font-size: 20px; letter-spacing: 6px; }
 
   .grid {
-    grid-template-columns: 1fr;
-    padding: 0 30px 80px;
-    row-gap: 60px;
+    row-gap: 80px;
+    padding: 0 30px 100px;
   }
 
-  .img-box { aspect-ratio: 3 / 2; }
+  .img-box { aspect-ratio: 1.8 / 1; } /* 모바일에서는 너무 얇으면 안 보이므로 조절 */
+  
+  .item .text {
+    flex-direction: column; /* 모바일에서는 위아래로 */
+    gap: 8px;
+  }
 }
 </style>
 </head>
@@ -193,7 +175,7 @@ body {
 
 <main class="grid">
   <div class="item" onclick="goDetail('project1.html')">
-    <div class="img-box"><img src="01.jpg" alt="수지초등학교"></div>
+    <div class="img-box"><img src="01.jpg" alt=""></div>
     <div class="text">
       <div class="title">수지초등학교 생각나무 숲 도서관</div>
       <div class="sub">NAMWON · 115㎡ · EDUCATION</div>
@@ -201,7 +183,7 @@ body {
   </div>
 
   <div class="item" onclick="goDetail('project2.html')">
-    <div class="img-box"><img src="10.jpg" alt="덕암정보고"></div>
+    <div class="img-box"><img src="10.jpg" alt=""></div>
     <div class="text">
       <div class="title">덕암정보고등학교 행정실</div>
       <div class="sub">GIMJE · 75㎡ · OFFICE</div>
@@ -209,7 +191,7 @@ body {
   </div>
 
   <div class="item" onclick="goDetail('project3.html')">
-    <div class="img-box"><img src="3-8.jpg" alt="인더메이크업"></div>
+    <div class="img-box"><img src="3-8.jpg" alt=""></div>
     <div class="text">
       <div class="title">IN THE MAKE UP</div>
       <div class="sub">JEONJU · 132㎡ · COMMERCIAL</div>
@@ -217,7 +199,7 @@ body {
   </div>
 
   <div class="item" onclick="goDetail('project4.html')">
-    <div class="img-box"><img src="22.jpg" alt="작은미술관"></div>
+    <div class="img-box"><img src="22.jpg" alt=""></div>
     <div class="text">
       <div class="title">학교 안 작은미술관</div>
       <div class="sub">JEONJU · 24㎡ · GALLERY</div>
@@ -225,7 +207,7 @@ body {
   </div>
 
   <div class="item" onclick="goDetail('project5.html')">
-    <div class="img-box"><img src="29.jpg" alt="농소마을"></div>
+    <div class="img-box"><img src="29.jpg" alt=""></div>
     <div class="text">
       <div class="title">농소마을 주택</div>
       <div class="sub">JEONJU · 400㎡ · RESIDENTIAL</div>
@@ -233,7 +215,7 @@ body {
   </div>
 
   <div class="item" onclick="goDetail('project6.html')">
-    <div class="img-box"><img src="6-1.jpg" alt="송정써미트"></div>
+    <div class="img-box"><img src="6-1.jpg" alt=""></div>
     <div class="text">
       <div class="title">송정써미트아파트</div>
       <div class="sub">JEONJU · 112㎡ · APARTMENT</div>
@@ -247,14 +229,13 @@ window.onload = () => {
   items.forEach((item, i) => {
     setTimeout(() => {
       item.classList.add('show');
-    }, 200 * i); // 등장 속도 살짝 느리게
+    }, 300 * i); // 와이드형은 천천히 하나씩 등장하는 게 더 묵직함
   });
 };
 
 function goDetail(page) {
-  // 페이드 아웃 효과 강화
   document.body.style.opacity = "0";
-  document.body.style.transform = "scale(0.98)";
+  document.body.style.transform = "translateY(-10px)"; /* 위로 살짝 떠오르며 사라지는 효과 */
   document.body.style.transition = "1s cubic-bezier(0.16, 1, 0.3, 1)";
   setTimeout(() => { window.location.href = page; }, 1000);
 }
