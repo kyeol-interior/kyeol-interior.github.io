@@ -10,26 +10,25 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; co
 .nav-header { position: fixed; top: 50px; left: 50px; z-index: 1000; }
 .back-btn { color: white; text-decoration: none; font-size: 10px; letter-spacing: 4px; opacity: 0.5; cursor: pointer; background: none; border: none; text-transform: uppercase; }
 .container { display: flex; min-height: 100vh; }
-.left { width: 40%; height: 100vh; position: fixed; left: 0; top: 0; padding: 180px 80px 80px; box-sizing: border-box; overflow-y: auto; }
+.left { width: 40%; height: 100vh; position: fixed; left: 0; top: 0; padding: 180px 80px 80px; box-sizing: border-box; overflow-y: auto; background: #0a0a0a; }
 .title { font-size: 26px; letter-spacing: 5px; margin-bottom: 50px; font-weight: 500; }
 .meta { display: flex; flex-direction: column; gap: 25px; margin-bottom: 50px; }
 .meta-item span { display: block; font-size: 9px; letter-spacing: 3px; opacity: 0.3; text-transform: uppercase; margin-bottom: 8px; }
 .meta-item p { margin: 0; font-size: 13px; opacity: 0.8; }
 .desc { line-height: 2.2; font-size: 13px; font-weight: 300; opacity: 0.6; }
-.right { width: 60%; margin-left: 40%; background: #0d0d0d; }
-.image-box { padding: 40px 60px; }
-.image-box img { width: 100%; height: 65vh; object-fit: cover; border-radius: 4px; filter: brightness(0.9); }
+.right { width: 60%; margin-left: 40%; background: #0d0d0d; padding: 100px 0; }
+.image-box { width: 75%; max-width: 650px; margin: 0 auto 60px; }
+.image-box img { width: 100%; height: auto; display: block; filter: brightness(0.9); border-radius: 2px; }
 @media (max-width: 768px) {
   .container { flex-direction: column; }
   .left { position: relative; width: 100%; height: auto; padding: 120px 30px 40px; }
-  .right { width: 100%; margin-left: 0; }
-  .image-box { padding: 20px 10px; }
-  .image-box img { height: auto; object-fit: contain; }
+  .right { width: 100%; margin-left: 0; padding: 40px 0; }
+  .image-box { width: 90%; }
 }
 </style>
 </head>
 <body>
-<nav class="nav-header"><button class="back-btn" onclick="location.href='portfolio.html'">← BACK TO LIST</button></nav>
+<nav class="nav-header"><button class="back-btn" onclick="history.back()">← BACK TO LIST</button></nav>
 <div class="container">
   <aside class="left">
     <div class="title">학교 안 작은미술관<br>(서일초등학교)</div>
@@ -39,9 +38,9 @@ body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; co
       <div class="meta-item"><span>Location</span><p>전주</p></div>
     </div>
     <div class="desc">
-      빛으로 완성하는 몰입감<br>트랙 조명(Spotlight)이 각 작품을 수직으로 비추어<br>마치 전문 미술관에 온 듯한 조형미를 완성합니다.<br><br>
-      자연광의 조화<br>복도 끝 창문을 통해 들어오는 은은한 빛이<br>딥 그린 벽면과 만나 공간에 깊이감을 더해줍니다.<br><br>
-      멀리 나가지 않아도 등하굣길, 쉬는 시간에<br>예술을 향유할 수 있는 '일상의 예술화'를 실현한 공간입니다.
+      빛으로 완성하는 몰입감<br>트랙 조명이 각 작품을 수직으로 비추어 마치 전문 미술관에 온 듯한 조형미를 완성합니다.<br><br>
+      자연광의 조화<br>복도 끝 창문을 통해 들어오는 은은한 빛이 딥 그린 벽면과 만나 공간에 깊이감을 더해줍니다.<br><br>
+      등하굣길, 쉬는 시간에 예술을 향유할 수 있는 '일상의 예술화'를 실현한 공간입니다.
     </div>
   </aside>
   <main class="right">
