@@ -3,100 +3,155 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio</title>
+<title>KYEOL | SEOIL ART GALLERY</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  background: #f5f5f5;
-  color: #111;
+  background: #0a0a0a;
+  color: white;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* 🔥 전체 구조 */
+/* 🔙 상단 네비게이션 */
+.nav-header {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.back-btn {
+  color: white;
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 4px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: 0.4s;
+  background: none;
+  border: none;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.back-btn:hover {
+  opacity: 1;
+  transform: translateX(-3px);
+}
+
+/* 전체 컨테이너 */
 .container {
   display: flex;
+  min-height: 100vh;
 }
 
-/* 🔥 왼쪽 (PC) */
+/* 왼쪽 설명 섹션 (PC 고정) */
 .left {
   width: 40%;
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
-  padding: 80px;
-  background: #f5f5f5;
+  padding: 180px 80px 80px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-/* 🔥 오른쪽 */
-.right {
-  width: 60%;
-  margin-left: 40%;
-  overflow: hidden;
-}
-
-/* 텍스트 */
 .title {
-  font-family: 'Playfair Display';
-  font-size: 34px;
-  margin-bottom: 40px;
+  font-size: 26px;
+  letter-spacing: 5px;
+  margin-bottom: 50px;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.4;
 }
 
 .meta {
   display: flex;
-  gap: 30px;
-  font-size: 13px;
-  margin-bottom: 40px;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 50px;
 }
 
-.meta div span {
+.meta-item span {
   display: block;
-  opacity: 0.5;
+  font-size: 9px;
+  letter-spacing: 3px;
+  opacity: 0.3;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.meta-item p {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  opacity: 0.8;
 }
 
 .desc {
-  line-height: 1.9;
-  font-size: 14px;
+  line-height: 2.2;
+  font-size: 13px;
+  font-weight: 300;
+  opacity: 0.6;
+  max-width: 400px;
 }
 
-/* 이미지 */
+/* 오른쪽 이미지 섹션 */
+.right {
+  width: 60%;
+  margin-left: 40%;
+  background: #0d0d0d;
+}
+
 .image-box {
-  padding: 60px 20px;
+  padding: 100px 60px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 1.5s ease;
+}
+
+.image-box.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .image-box img {
   width: 100%;
-  max-width: 900px;
   display: block;
-  margin: 0 auto;
-  border-radius: 12px;
+  filter: brightness(0.9);
+  transition: 0.8s;
+  border-radius: 2px;
 }
 
-/* 🔙 */
-.back {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 10;
+.image-box:hover img {
+  filter: brightness(1.05);
 }
 
-/* 🔥🔥🔥 모바일 완전 수정 */
+/* 모바일 최적화 */
+@media (max-width: 1024px) {
+  .left { padding: 150px 40px 40px; }
+}
+
 @media (max-width: 768px) {
-
-  .container {
-    flex-direction: column;
-  }
-
+  .container { flex-direction: column; }
+  .nav-header { top: 30px; left: 30px; }
+  
   .left {
-    position: relative;   /* 🔥 핵심 */
+    position: relative;
     width: 100%;
     height: auto;
-    padding: 40px 20px;
+    padding: 140px 30px 60px;
   }
 
   .right {
@@ -104,25 +159,10 @@ body {
     margin-left: 0;
   }
 
-  .title {
-    font-size: 24px;
-  }
-
-  .meta {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .desc {
-    font-size: 13px;
-  }
+  .title { font-size: 22px; margin-bottom: 30px; }
 
   .image-box {
-    padding: 40px 10px;
-  }
-
-  .image-box img {
-    width: 95%;
+    padding: 30px 20px;
   }
 }
 </style>
@@ -130,61 +170,73 @@ body {
 
 <body>
 
+<nav class="nav-header">
+  <button class="back-btn" onclick="goBack()">← BACK TO LIST</button>
+</nav>
+
 <div class="container">
 
-  <!-- 왼쪽 -->
-  <div class="left">
-    <div class="title">학교 안 작은미술관(서일초)</div>
+  <aside class="left">
+    <div class="title">학교 안 작은미술관<br>(서일초등학교)</div>
 
     <div class="meta">
-      <div>
-        <span>Project</span>
-        🏛️ 공간 컨셉: "Deep Green Canvas"
+      <div class="meta-item">
+        <span>Concept</span>
+        <p>🏛️ Deep Green Canvas</p>
       </div>
-      <div>
+      <div class="meta-item">
         <span>Interior Surface</span>
-        24㎡
+        <p>24㎡</p>
       </div>
-      <div>
+      <div class="meta-item">
         <span>Location</span>
-        전주
+        <p>JEONJU, KOREA</p>
       </div>
     </div>
 
     <div class="desc">
-       빛으로 완성하는 몰입감<br>
-       트랙 조명(Spotlight)<br>
-       천장에 설치된 화이트 트랙 조명이<br>
-       각 작품을 수직으로 비추어<br>
-       마치 전문 미술관에 온 듯한 조형미를 완성합니다.<br><br>
-       자연광의 조화<br>
-       복도 끝 창문을 통해 들어오는 은은한 빛이<br>
-       딥 그린 벽면과 만나 공간에 깊이감을 더해줍니다.<br><br>
-       학교 안 작은 미술관<br> 
-       멀리 나가지 않아도 등하굣길, 쉬는 시간에<br>
-       예술을 향유할 수 있는 '일상의 예술화'를 실현한 공간입니다.
-     
-  </div>
+      빛으로 완성하는 몰입감을 지향합니다. 화이트 트랙 조명(Spotlight)이 각 작품을 정교하게 비추어, 학교 복도를 전문 미술관과 같은 조형미 넘치는 공간으로 탈바꿈시켰습니다.<br><br>
+      창문을 통해 들어오는 은은한 자연광은 딥 그린 벽면과 조우하며 공간에 깊이감을 더합니다. <br><br>
+      이곳은 멀리 나가지 않아도 등하굣길과 쉬는 시간에 예술을 향유할 수 있는 '일상의 예술화'를 실현한 아이들의 창의적 쉼터입니다.
     </div>
+  </aside>
 
-  <!-- 오른쪽 -->
-  <div class="right">
-    <div class="image-box"><img src="22.jpg"></div>
-    <div class="image-box"><img src="23.jpg"></div>
-    <div class="image-box"><img src="24.jpg"></div>
-    <div class="image-box"><img src="25.jpg"></div>
-    <div class="image-box"><img src="26.jpg"></div>
-    <div class="image-box"><img src="26.jpg"></div>
-    <div class="image-box"><img src="28.jpg"></div>
-  </div>
+  <main class="right">
+    <div class="image-box"><img src="22.jpg" alt="Seoil Art Gallery 01"></div>
+    <div class="image-box"><img src="23.jpg" alt="Seoil Art Gallery 02"></div>
+    <div class="image-box"><img src="24.jpg" alt="Seoil Art Gallery 03"></div>
+    <div class="image-box"><img src="25.jpg" alt="Seoil Art Gallery 04"></div>
+    <div class="image-box"><img src="26.jpg" alt="Seoil Art Gallery 05"></div>
+    <div class="image-box"><img src="28.jpg" alt="Seoil Art Gallery 06"></div>
+  </main>
 
 </div>
 
-<div class="back" onclick="goBack()">← BACK</div>
-
 <script>
+window.addEventListener('scroll', revealImages);
+
+function revealImages() {
+  const boxes = document.querySelectorAll('.image-box');
+  boxes.forEach(box => {
+    const boxTop = box.getBoundingClientRect().top;
+    const triggerPoint = window.innerHeight * 0.85;
+    if(boxTop < triggerPoint) {
+      box.classList.add('show');
+    }
+  });
+}
+
+window.onload = () => {
+  document.body.style.opacity = "1";
+  revealImages();
+};
+
 function goBack() {
-  window.history.back();
+  document.body.style.opacity = "0";
+  document.body.style.transition = "0.5s";
+  setTimeout(() => {
+    window.location.href = 'portfolio.html';
+  }, 500);
 }
 </script>
 
