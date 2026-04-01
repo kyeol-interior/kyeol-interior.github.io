@@ -16,7 +16,6 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   letter-spacing: 0.02em;
-  /* 초기 투명도 설정 (스크립트에서 제어) */
   opacity: 1;
 }
 
@@ -72,7 +71,7 @@ body {
   text-transform: uppercase;
 }
 
-/* 그리드 시스템 (가로 1줄 와이드) */
+/* 그리드 시스템 */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -94,7 +93,7 @@ body {
   transform: translateY(0);
 }
 
-/* 이미지 박스 (시네마틱 와이드 비율) */
+/* 이미지 박스 */
 .img-box {
   width: 100%;
   aspect-ratio: 2.5 / 1;
@@ -107,14 +106,22 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* 중후한 통일감을 위한 흑백 필터 */
+  /* 기본 상태: 흑백 */
   filter: grayscale(100%) brightness(0.5) contrast(1.1);
-  transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: filter 1s ease, transform 2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.item:hover img {
+/* PC: 마우스 호버 시 컬러 */
+@media (min-width: 1025px) {
+  .item:hover img {
+    filter: grayscale(0%) brightness(0.8) contrast(1);
+    transform: scale(1.02);
+  }
+}
+
+/* 모바일/태블릿: 특정 클래스가 붙었을 때 컬러 (스크롤 감지용) */
+.item.in-view img {
   filter: grayscale(0%) brightness(0.8) contrast(1);
-  transform: scale(1.02);
 }
 
 /* 텍스트 정보 */
@@ -180,100 +187,81 @@ body {
 <main class="grid">
   <div class="item" onclick="goDetail('project1.html')">
     <div class="img-box"><img src="01.jpg" alt=""></div>
-    <div class="text">
-      <div class="title">수지초등학교 생각나무 숲 도서관</div>
-      <div class="sub">NAMWON · 115㎡ · EDUCATION</div>
-    </div>
+    <div class="text"><div class="title">수지초등학교 생각나무 숲 도서관</div><div class="sub">NAMWON · 115㎡ · EDUCATION</div></div>
   </div>
 
   <div class="item" onclick="goDetail('project2.html')">
     <div class="img-box"><img src="10.jpg" alt=""></div>
-    <div class="text">
-      <div class="title">덕암정보고등학교 행정실</div>
-      <div class="sub">GIMJE · 75㎡ · OFFICE</div>
-    </div>
+    <div class="text"><div class="title">덕암정보고등학교 행정실</div><div class="sub">GIMJE · 75㎡ · OFFICE</div></div>
   </div>
 
   <div class="item" onclick="goDetail('project3.html')">
     <div class="img-box"><img src="3-8.jpg" alt=""></div>
-    <div class="text">
-      <div class="title">IN THE MAKE UP</div>
-      <div class="sub">JEONJU · 132㎡ · COMMERCIAL</div>
-    </div>
+    <div class="text"><div class="title">IN THE MAKE UP</div><div class="sub">JEONJU · 132㎡ · COMMERCIAL</div></div>
   </div>
 
   <div class="item" onclick="goDetail('project4.html')">
     <div class="img-box"><img src="22.jpg" alt=""></div>
-    <div class="text">
-      <div class="title">학교 안 작은미술관</div>
-      <div class="sub">JEONJU · 24㎡ · GALLERY</div>
-    </div>
+    <div class="text"><div class="title">학교 안 작은미술관</div><div class="sub">JEONJU · 24㎡ · GALLERY</div></div>
   </div>
 
   <div class="item" onclick="goDetail('project5.html')">
     <div class="img-box"><img src="29.jpg" alt=""></div>
-    <div class="text">
-      <div class="title">농소마을 주택</div>
-      <div class="sub">JEONJU · 400㎡ · RESIDENTIAL</div>
-    </div>
+    <div class="text"><div class="title">농소마을 주택</div><div class="sub">JEONJU · 400㎡ · RESIDENTIAL</div></div>
   </div>
 
   <div class="item" onclick="goDetail('project6.html')">
     <div class="img-box"><img src="6-1.jpg" alt=""></div>
-    <div class="text">
-      <div class="title">송정써미트아파트</div>
-      <div class="sub">JEONJU · 112㎡ · APARTMENT</div>
-    </div>
+    <div class="text"><div class="title">송정써미트아파트</div><div class="sub">JEONJU · 112㎡ · APARTMENT</div></div>
   </div>
 </main>
 
 <script>
-/**
- * 핵심 해결책: 페이지가 다시 나타날 때(뒤로가기 포함) 
- * 강제로 투명도를 복구하고 아이템 애니메이션을 실행합니다.
- */
 window.onpageshow = function(event) {
-  // 1. 투명도 즉시 복구 (상세페이지 이동 시 0으로 만들었던 것 취소)
   document.body.style.opacity = "1";
   document.body.style.transition = "none"; 
 
-  // 2. 포트폴리오 아이템 순차적 등장
   const items = document.querySelectorAll('.item');
+  
+  // 1. 순차 등장 애니메이션
   items.forEach((item, i) => {
-    // 이미 'show' 클래스가 있다면 제거 후 다시 추가(애니메이션 재실행)
     item.classList.remove('show');
     setTimeout(() => {
       item.classList.add('show');
     }, 200 * i);
   });
+
+  // 2. 모바일 스크롤 감지 (중앙에 오면 컬러로 변경)
+  const options = {
+    root: null,
+    rootMargin: '-20% 0px -20% 0px', // 화면 중앙 60% 영역에 들어올 때 반응
+    threshold: 0.5 // 이미지의 50%가 보일 때
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      } else {
+        entry.target.classList.remove('in-view');
+      }
+    });
+  }, options);
+
+  items.forEach(item => observer.observe(item));
 };
 
-/**
- * 상세 페이지 이동 함수
- */
 function goDetail(page) {
-  // 부드럽게 사라지는 효과
   document.body.style.opacity = "0";
   document.body.style.transform = "translateY(-10px)";
   document.body.style.transition = "0.8s cubic-bezier(0.16, 1, 0.3, 1)";
-  
-  // 애니메이션이 끝난 후 이동
-  setTimeout(() => { 
-    window.location.href = page; 
-  }, 800);
+  setTimeout(() => { window.location.href = page; }, 800);
 }
 
-/**
- * 메인 화면(index.html)으로 돌아가는 함수
- */
 function goBack() {
   document.body.style.opacity = "0";
   document.body.style.transition = "0.5s";
-  
-  setTimeout(() => {
-    // 브라우저 히스토리 대신 명확하게 메인 파일로 이동하여 꼬임을 방지합니다.
-    window.location.href = 'index.html'; 
-  }, 500);
+  setTimeout(() => { window.location.href = 'index.html'; }, 500);
 }
 </script>
 
