@@ -3,100 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio</title>
+<title>KYEOL | PROJECT DETAIL</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  background: #f5f5f5;
-  color: #111;
-  overflow-x: hidden; /* 🔥 추가 */
+  background: #0a0a0a; /* 메인/리스트와 통일된 블랙 */
+  color: white;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* 🔥 전체 구조 */
+/* 🔙 상단 네비게이션 (통일된 디자인) */
+.nav-header {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.back-btn {
+  color: white;
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 4px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: 0.4s;
+  background: none;
+  border: none;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.back-btn:hover {
+  opacity: 1;
+  transform: translateX(-3px);
+}
+
+/* 전체 컨테이너 */
 .container {
   display: flex;
+  min-height: 100vh;
 }
 
-/* 🔥 왼쪽 (PC) */
+/* 왼쪽 설명 섹션 (PC 고정) */
 .left {
   width: 40%;
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
-  padding: 80px;
-  background: #f5f5f5;
+  padding: 180px 80px 80px; /* 상단 여백 확대 */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-/* 🔥 오른쪽 */
-.right {
-  width: 60%;
-  margin-left: 40%;
-  overflow: hidden; /* 🔥 추가 */
-}
-
-/* 텍스트 */
 .title {
-  font-family: 'Playfair Display';
-  font-size: 34px;
-  margin-bottom: 40px;
+  font-size: 26px;
+  letter-spacing: 5px;
+  margin-bottom: 50px;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.4;
 }
 
 .meta {
   display: flex;
-  gap: 30px;
-  font-size: 13px;
-  margin-bottom: 40px;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 50px;
 }
 
-.meta div span {
+.meta-item span {
   display: block;
-  opacity: 0.5;
+  font-size: 9px;
+  letter-spacing: 3px;
+  opacity: 0.3;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.meta-item p {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  opacity: 0.8;
 }
 
 .desc {
-  line-height: 1.9;
-  font-size: 14px;
+  line-height: 2.2;
+  font-size: 13px;
+  font-weight: 300;
+  opacity: 0.6;
+  max-width: 400px;
 }
 
-/* 이미지 */
+/* 오른쪽 이미지 섹션 */
+.right {
+  width: 60%;
+  margin-left: 40%;
+  background: #0d0d0d;
+}
+
 .image-box {
-  padding: 60px 20px;
+  padding: 100px 60px; /* 이미지 사이의 여백 넉넉히 */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 1.5s ease;
+}
+
+.image-box.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .image-box img {
   width: 100%;
-  max-width: 900px;
   display: block;
-  margin: 0 auto;
-  border-radius: 12px;
+  filter: brightness(0.9);
+  transition: 0.8s;
 }
 
-/* 🔙 */
-.back {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 10;
+.image-box:hover img {
+  filter: brightness(1.1);
 }
 
-/* 🔥🔥🔥 모바일 완전 수정 */
+/* 모바일 최적화 */
+@media (max-width: 1024px) {
+  .left { padding: 150px 40px 40px; }
+  .right { padding-right: 20px; }
+}
+
 @media (max-width: 768px) {
-
-  .container {
-    flex-direction: column;
-  }
-
+  .container { flex-direction: column; }
+  
+  .nav-header { top: 30px; left: 30px; }
+  
   .left {
-    position: relative;   /* 🔥 핵심 */
+    position: relative;
     width: 100%;
     height: auto;
-    padding: 40px 20px;
+    padding: 140px 30px 60px;
   }
 
   .right {
@@ -104,25 +160,10 @@ body {
     margin-left: 0;
   }
 
-  .title {
-    font-size: 24px;
-  }
-
-  .meta {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .desc {
-    font-size: 13px;
-  }
+  .title { font-size: 22px; margin-bottom: 30px; }
 
   .image-box {
-    padding: 40px 10px;
-  }
-
-  .image-box img {
-    width: 95%;
+    padding: 40px 20px;
   }
 }
 </style>
@@ -130,58 +171,79 @@ body {
 
 <body>
 
+<nav class="nav-header">
+  <button class="back-btn" onclick="goBack()">← BACK TO LIST</button>
+</nav>
+
 <div class="container">
 
-  <!-- 왼쪽 -->
-  <div class="left">
-    <div class="title">수지초등학교 도서관</div>
+  <aside class="left">
+    <div class="title">수지초등학교<br>생각나무 숲 도서관</div>
 
     <div class="meta">
-      <div>
-        <span>Project</span>
-        🌿 상상력이 뿌리 내리는, 책 읽는 놀이터
+      <div class="meta-item">
+        <span>Concept</span>
+        <p>🌿 상상력이 뿌리 내리는, 책 읽는 놀이터</p>
       </div>
-      <div>
+      <div class="meta-item">
         <span>Interior Surface</span>
-        115㎡
+        <p>115㎡</p>
       </div>
-      <div>
+      <div class="meta-item">
         <span>Location</span>
-        남원
+        <p>NAMWON, KOREA</p>
       </div>
     </div>
 
     <div class="desc">
       숲의 품을 담은 공간입니다.<br><br>
-      천장에는 초록빛 생명력을 머금은 둥근 빛들이 떠 있고<br>
+      천장에는 초록빛 생명력을 머금은 둥근 빛들이 떠 있고
       공간 한가운데는 든든한 나무 한 그루가 서 있습니다.<br><br>
-      나무 아래 둥글게 둘러앉아 책을 읽다 보면<br>
+      나무 아래 둥글게 둘러앉아 책을 읽다 보면
       숲속 비밀 기지에 들어온 듯한 아늑함을 느낄 수 있습니다.<br><br>
-      ✨ 공간이 주는 메시지<br><br>
-      전체적으로 내추럴한 우드 톤과 부드러운 간접 조명이 어우러져,<br>
-      눈과 마음을 편안하게 감싸줍니다.<br>
-      이곳은 단순히 정보를 습득하는 장소가 아니라,<br>
-      아이들이 스스로 이야기의 주인공이 되어 <br>
-      꿈을 설계하는 '마음의 쉼터'이자 '창의력의 요람'입니다.
+      전체적으로 내추럴한 우드 톤과 부드러운 간접 조명이 어우러져,
+      눈과 마음을 편안하게 감싸줍니다.
     </div>
-  </div>
+  </aside>
 
-  <!-- 오른쪽 -->
-  <div class="right">
-    <div class="image-box"><img src="01.jpg"></div>
-    <div class="image-box"><img src="02.jpg"></div>
-    <div class="image-box"><img src="03.jpg"></div>
-    <div class="image-box"><img src="04.jpg"></div>
-    <div class="image-box"><img src="05.jpg"></div>
-  </div>
+  <main class="right">
+    <div class="image-box"><img src="01.jpg" alt="수지초 도서관 01"></div>
+    <div class="image-box"><img src="02.jpg" alt="수지초 도서관 02"></div>
+    <div class="image-box"><img src="03.jpg" alt="수지초 도서관 03"></div>
+    <div class="image-box"><img src="04.jpg" alt="수지초 도서관 04"></div>
+    <div class="image-box"><img src="05.jpg" alt="수지초 도서관 05"></div>
+  </main>
 
 </div>
 
-<div class="back" onclick="goBack()">← BACK</div>
-
 <script>
+// 스크롤 시 이미지 부드럽게 등장하는 효과
+window.addEventListener('scroll', revealImages);
+
+function revealImages() {
+  const boxes = document.querySelectorAll('.image-box');
+  boxes.forEach(box => {
+    const boxTop = box.getBoundingClientRect().top;
+    const triggerPoint = window.innerHeight * 0.8;
+    if(boxTop < triggerPoint) {
+      box.classList.add('show');
+    }
+  });
+}
+
+// 초기 로드 시 실행
+window.onload = () => {
+  document.body.style.opacity = "1";
+  revealImages();
+};
+
 function goBack() {
-  window.history.back();
+  // 페이드 아웃 효과 후 리스트 페이지로 이동
+  document.body.style.opacity = "0";
+  document.body.style.transition = "0.5s";
+  setTimeout(() => {
+    window.location.href = 'portfolio.html'; // 실제 포트폴리오 리스트 파일명으로 확인하세요
+  }, 500);
 }
 </script>
 
