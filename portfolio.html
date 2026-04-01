@@ -8,15 +8,12 @@
 <style>
   body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; color: white; }
   
-  /* 헤더 영역 */
   header { padding: 80px 50px 40px; text-align: center; }
-  .logo { font-size: 32px; letter-spacing: 12px; font-weight: 500; margin-bottom: 10px; cursor: pointer; }
+  .logo { font-size: 32px; letter-spacing: 12px; font-weight: 500; margin-bottom: 10px; cursor: pointer; text-decoration: none; color: white; display: block; }
   .sub-title { font-size: 10px; letter-spacing: 5px; opacity: 0.4; text-transform: uppercase; }
 
-  /* 필터/카테고리 (필요시 추가 가능) */
   .filter-nav { margin: 40px 0; text-align: center; font-size: 11px; letter-spacing: 2px; opacity: 0.6; }
 
-  /* 포트폴리오 그리드 */
   .grid-container { 
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
@@ -32,32 +29,37 @@
     aspect-ratio: 4 / 3; 
     background: #1a1a1a;
     cursor: pointer;
+    text-decoration: none; /* 링크 밑줄 방지 */
+    display: block;
   }
 
+  /* 🔥 핵심: 기본은 흑백(Grayscale), 마우스 올리면 컬러 */
   .grid-item img { 
     width: 100%; 
     height: 100%; 
     object-fit: cover; 
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    filter: brightness(0.8);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    filter: grayscale(100%) brightness(0.6); /* 기본 흑백 + 약간 어둡게 */
   }
 
-  /* 마우스 올렸을 때 효과 */
-  .grid-item:hover img { transform: scale(1.05); filter: brightness(1); }
+  /* 마우스 오버 시 컬러로 변경 */
+  .grid-item:hover img { 
+    transform: scale(1.08); 
+    filter: grayscale(0%) brightness(1); /* 컬러 부활 */
+  }
 
   .item-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.2);
     display: flex; flex-direction: column; justify-content: center; align-items: center;
-    opacity: 0; transition: opacity 0.4s;
+    opacity: 0; transition: opacity 0.5s;
   }
 
   .grid-item:hover .item-overlay { opacity: 1; }
 
-  .item-title { font-size: 16px; letter-spacing: 3px; margin-bottom: 10px; font-weight: 400; }
-  .item-category { font-size: 9px; letter-spacing: 2px; opacity: 0.7; text-transform: uppercase; }
+  .item-title { font-size: 16px; letter-spacing: 3px; margin-bottom: 10px; font-weight: 400; color: white; }
+  .item-category { font-size: 9px; letter-spacing: 2px; opacity: 0.7; text-transform: uppercase; color: white; }
 
-  /* 모바일 대응 */
   @media (max-width: 1024px) { .grid-container { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 768px) { 
     header { padding: 60px 20px 30px; }
@@ -68,60 +70,60 @@
 <body>
 
 <header>
-  <div class="logo" onclick="location.href='index.html'">KYEOL</div>
+  <a href="index.html" class="logo">KYEOL</a>
   <div class="sub-title">Interior Design & Construction</div>
 </header>
 
 <div class="filter-nav">SELECTED PROJECTS</div>
 
 <section class="grid-container">
-  <div class="grid-item" onclick="location.href='Project_Suji.html'">
+  <a href="Project_Suji.html" class="grid-item">
     <img src="01.jpg" alt="수지초등학교">
     <div class="item-overlay">
       <div class="item-title">남원 수지초 도서관</div>
       <div class="item-category">Educational Space</div>
     </div>
-  </div>
+  </a>
 
-  <div class="grid-item" onclick="location.href='Project_Deokam.html'">
+  <a href="Project_Deokam.html" class="grid-item">
     <img src="07.jpg" alt="덕암정보고">
     <div class="item-overlay">
       <div class="item-title">덕암정보고 행정실</div>
       <div class="item-category">Office Space</div>
     </div>
-  </div>
+  </a>
 
-  <div class="grid-item" onclick="location.href='Project_InTheMakeup.html'">
+  <a href="Project_InTheMakeup.html" class="grid-item">
     <img src="3-1.jpg" alt="인더메이크업">
     <div class="item-overlay">
       <div class="item-title">IN THE MAKE UP</div>
       <div class="item-category">Beauty Salon</div>
     </div>
-  </div>
+  </a>
 
-  <div class="grid-item" onclick="location.href='Project_SeoilGallery.html'">
+  <a href="Project_SeoilGallery.html" class="grid-item">
     <img src="22.jpg" alt="서일초등학교">
     <div class="item-overlay">
       <div class="item-title">서일초 작은미술관</div>
       <div class="item-category">Gallery Space</div>
     </div>
-  </div>
+  </a>
 
-  <div class="grid-item" onclick="location.href='Project_StoneWork.html'">
+  <a href="Project_StoneWork.html" class="grid-item">
     <img src="29.jpg" alt="파벽돌시공">
     <div class="item-overlay">
       <div class="item-title">파벽돌 조적 시공</div>
       <div class="item-category">Exterior Work</div>
     </div>
-  </div>
+  </a>
 
-  <div class="grid-item" onclick="location.href='Project_Summit.html'">
+  <a href="Project_Summit.html" class="grid-item">
     <img src="6-1.jpg" alt="송정써미트">
     <div class="item-overlay">
       <div class="item-title">송정써미트 아파트</div>
       <div class="item-category">Residential</div>
     </div>
-  </div>
+  </a>
 </section>
 
 </body>
