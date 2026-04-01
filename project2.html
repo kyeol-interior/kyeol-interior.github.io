@@ -3,100 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio</title>
+<title>KYEOL | DEOKAM HIGH SCHOOL</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  background: #f5f5f5;
-  color: #111;
+  background: #0a0a0a;
+  color: white;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* 🔥 전체 구조 */
+/* 🔙 상단 네비게이션 */
+.nav-header {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.back-btn {
+  color: white;
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 4px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: 0.4s;
+  background: none;
+  border: none;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.back-btn:hover {
+  opacity: 1;
+  transform: translateX(-3px);
+}
+
+/* 전체 컨테이너 */
 .container {
   display: flex;
+  min-height: 100vh;
 }
 
-/* 🔥 왼쪽 (PC) */
+/* 왼쪽 설명 섹션 (PC 고정) */
 .left {
   width: 40%;
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
-  padding: 80px;
-  background: #f5f5f5;
+  padding: 180px 80px 80px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-/* 🔥 오른쪽 */
-.right {
-  width: 60%;
-  margin-left: 40%;
-  overflow: hidden;
-}
-
-/* 텍스트 */
 .title {
-  font-family: 'Playfair Display';
-  font-size: 34px;
-  margin-bottom: 40px;
+  font-size: 26px;
+  letter-spacing: 5px;
+  margin-bottom: 50px;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.4;
 }
 
 .meta {
   display: flex;
-  gap: 30px;
-  font-size: 13px;
-  margin-bottom: 40px;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 50px;
 }
 
-.meta div span {
+.meta-item span {
   display: block;
-  opacity: 0.5;
+  font-size: 9px;
+  letter-spacing: 3px;
+  opacity: 0.3;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.meta-item p {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  opacity: 0.8;
 }
 
 .desc {
-  line-height: 1.9;
-  font-size: 14px;
+  line-height: 2.2;
+  font-size: 13px;
+  font-weight: 300;
+  opacity: 0.6;
+  max-width: 400px;
 }
 
-/* 이미지 */
+/* 오른쪽 이미지 섹션 */
+.right {
+  width: 60%;
+  margin-left: 40%;
+  background: #0d0d0d;
+}
+
 .image-box {
-  padding: 60px 20px;
+  padding: 100px 60px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 1.5s ease;
+}
+
+.image-box.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .image-box img {
   width: 100%;
-  max-width: 900px;
   display: block;
-  margin: 0 auto;
-  border-radius: 12px;
+  filter: brightness(0.9);
+  transition: 0.8s;
 }
 
-/* 🔙 */
-.back {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 10;
+.image-box:hover img {
+  filter: brightness(1.1);
 }
 
-/* 🔥🔥🔥 모바일 완전 수정 */
+/* 모바일 최적화 */
+@media (max-width: 1024px) {
+  .left { padding: 150px 40px 40px; }
+}
+
 @media (max-width: 768px) {
-
-  .container {
-    flex-direction: column;
-  }
-
+  .container { flex-direction: column; }
+  .nav-header { top: 30px; left: 30px; }
+  
   .left {
-    position: relative;   /* 🔥 핵심 */
+    position: relative;
     width: 100%;
     height: auto;
-    padding: 40px 20px;
+    padding: 140px 30px 60px;
   }
 
   .right {
@@ -104,25 +158,10 @@ body {
     margin-left: 0;
   }
 
-  .title {
-    font-size: 24px;
-  }
-
-  .meta {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .desc {
-    font-size: 13px;
-  }
+  .title { font-size: 22px; margin-bottom: 30px; }
 
   .image-box {
-    padding: 40px 10px;
-  }
-
-  .image-box img {
-    width: 95%;
+    padding: 40px 20px;
   }
 }
 </style>
@@ -130,69 +169,79 @@ body {
 
 <body>
 
+<nav class="nav-header">
+  <button class="back-btn" onclick="goBack()">← BACK TO LIST</button>
+</nav>
+
 <div class="container">
 
-  <!-- 왼쪽 -->
-  <div class="left">
-    <div class="title">덕암정보고등학교 행정실</div>
+  <aside class="left">
+    <div class="title">덕암정보고등학교<br>행정실</div>
 
     <div class="meta">
-      <div>
-        <span>Project</span>
-        🏛️ 소통과 배려가 흐르는, 행정실의 새 얼굴
+      <div class="meta-item">
+        <span>Concept</span>
+        <p>🏛️ 소통과 배려가 흐르는, 행정실의 새 얼굴</p>
       </div>
-      <div>
+      <div class="meta-item">
         <span>Interior Surface</span>
-        77㎡
+        <p>77㎡</p>
       </div>
-      <div>
+      <div class="meta-item">
         <span>Location</span>
-        김제
+        <p>GIMJE, KOREA</p>
       </div>
     </div>
 
     <div class="desc">
-      단차와 소재가 주는 리듬<br>
-      사무 공간 한쪽에 마련된 내추럴 우드 단상은<br>
-      공간의 단조로움을 깨뜨리는 매력적인 포인트입니다.<br><br>
-
-      딥그린의 안정감과 신뢰<br>
-      정면의 딥그린 포인트 월은<br>
-      학교의 정체성을 단단하게 잡아줍니다.<br>
-      숲을 닮은 깊은 초록색은 공간에 깊이감을 주며,<br>
-      방문하는 이들에게는 신뢰감을,<br> 
-      일하는 이들에게는 정서적 안정감을 선물합니다.<br><br>
-      세련된 블랙 프레임 파티션은<br>
-      개방감과 독립성을 동시에 확보해 줍니다.<br><br>
-      ✨ 변화가 주는 가치<br>
-      행정실은 학교의 살림을 맡는 중요한 곳이죠.<br>
-      이곳의 변화는 단순히 인테리어를 바꾼 것이 아니라,<br>
-      '함께 일하는 동료에 대한 예우'와 '방문객을 향한 환대'를<br>
-      공간으로 표현한 것입니다.
+      단차와 소재가 주는 리듬을 통해 공간의 활력을 불어넣었습니다. 사무 공간 한쪽에 마련된 내추럴 우드 단상은 단조로움을 깨뜨리는 매력적인 포인트입니다.<br><br>
+      정면의 딥그린 포인트 월은 학교의 정체성을 단단하게 잡아줍니다. 숲을 닮은 깊은 초록색은 공간에 깊이감을 주며, 일하는 이들에게는 정서적 안정감을 선물합니다.<br><br>
+      세련된 블랙 프레임 파티션은 개방감과 독립성을 동시에 확보해 주어 현대적인 행정 시스템을 공간으로 시각화했습니다.
     </div>
-  </div>
+  </aside>
 
-  <!-- 오른쪽 -->
-  <div class="right">
-    <div class="image-box"><img src="07.jpg"></div>
-    <div class="image-box"><img src="08.jpg"></div>
-    <div class="image-box"><img src="09.jpg"></div>
-    <div class="image-box"><img src="10.jpg"></div>
-    <div class="image-box"><img src="11.jpg"></div>
-    <div class="image-box"><img src="12.jpg"></div>
-    <div class="image-box"><img src="13.jpg"></div>
-    <div class="image-box"><img src="14.jpg"></div>
-  </div>
+  <main class="right">
+    <div class="image-box"><img src="07.jpg" alt="덕암정보고 01"></div>
+    <div class="image-box"><img src="08.jpg" alt="덕암정보고 02"></div>
+    <div class="image-box"><img src="09.jpg" alt="덕암정보고 03"></div>
+    <div class="image-box"><img src="10.jpg" alt="덕암정보고 04"></div>
+    <div class="image-box"><img src="11.jpg" alt="덕암정보고 05"></div>
+    <div class="image-box"><img src="12.jpg" alt="덕암정보고 06"></div>
+    <div class="image-box"><img src="13.jpg" alt="덕암정보고 07"></div>
+    <div class="image-box"><img src="14.jpg" alt="덕암정보고 08"></div>
+  </main>
 
 </div>
 
-<div class="back" onclick="goBack()">← BACK</div>
-
 <script>
+window.addEventListener('scroll', revealImages);
+
+function revealImages() {
+  const boxes = document.querySelectorAll('.image-box');
+  boxes.forEach(box => {
+    const boxTop = box.getBoundingClientRect().top;
+    const triggerPoint = window.innerHeight * 0.8;
+    if(boxTop < triggerPoint) {
+      box.classList.add('show');
+    }
+  });
+}
+
+window.onload = () => {
+  document.body.style.opacity = "1";
+  revealImages();
+};
+
 function goBack() {
-  window.history.back();
+  document.body.style.opacity = "0";
+  document.body.style.transition = "0.5s";
+  setTimeout(() => {
+    window.location.href = 'portfolio.html';
+  }, 500);
 }
 </script>
 
 </body>
 </html>
+
+
