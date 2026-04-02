@@ -6,64 +6,108 @@
 <title>KYEOL | SONGJEONG SUMMIT APARTMENT</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+/* 기본 설정 */
 body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; color: white; overflow-x: hidden; }
-.nav-header { position: fixed; top: 50px; left: 50px; z-index: 1000; }
-.back-btn { color: white; text-decoration: none; font-size: 10px; letter-spacing: 4px; opacity: 0.5; cursor: pointer; background: none; border: none; text-transform: uppercase; }
+
+/* 1. 뒤로가기 버튼 위치 및 스타일 */
+.nav-header { position: fixed; top: 40px; left: 40px; z-index: 1001; }
+.back-btn { color: white; text-decoration: none; font-size: 10px; letter-spacing: 4px; opacity: 0.5; cursor: pointer; background: none; border: none; text-transform: uppercase; transition: 0.3s; }
+.back-btn:hover { opacity: 1; }
+
 .container { display: flex; min-height: 100vh; }
-.left { width: 40%; height: 100vh; position: fixed; left: 0; top: 0; padding: 180px 80px 80px; box-sizing: border-box; overflow-y: auto; background: #0a0a0a; }
-.title { font-size: 26px; letter-spacing: 5px; margin-bottom: 50px; font-weight: 500; }
-.meta { display: flex; flex-direction: column; gap: 25px; margin-bottom: 50px; }
-.meta-item span { display: block; font-size: 9px; letter-spacing: 3px; opacity: 0.3; text-transform: uppercase; margin-bottom: 8px; }
-.meta-item p { margin: 0; font-size: 13px; opacity: 0.8; }
-.desc { line-height: 2.2; font-size: 13px; font-weight: 300; opacity: 0.6; }
-.right { width: 60%; margin-left: 40%; background: #0d0d0d; padding: 100px 0; }
-.image-box { width: 75%; max-width: 650px; margin: 0 auto 60px; }
-.image-box img { width: 100%; height: auto; display: block; filter: brightness(0.9); border-radius: 2px; }
-@media (max-width: 768px) {
-  .container { flex-direction: column; }
-  .left { position: relative; width: 100%; height: auto; padding: 120px 30px 40px; }
-  .right { width: 100%; margin-left: 0; padding: 40px 0; }
-  .image-box { width: 90%; }
+
+/* 2. 왼쪽 설명창: 가운데 스크롤바 숨기기 처리 */
+.left { 
+    width: 40%; 
+    height: 100vh; 
+    position: fixed; 
+    left: 0; 
+    top: 0; 
+    padding: 150px 60px 80px; 
+    box-sizing: border-box; 
+    overflow-y: auto; 
+    background: #0a0a0a; 
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.left::-webkit-scrollbar { display: none; } /* Chrome, Safari, Whale */
+
+.title-area h2 { font-size: 24px; letter-spacing: 6px; margin-bottom: 10px; font-weight: 500; }
+.project-subtitle { font-size: 12px; color: #666; margin-bottom: 50px; letter-spacing: 2px; }
+
+.desc-section { margin-bottom: 40px; }
+.desc-section h3 { font-size: 11px; letter-spacing: 3px; color: #444; margin-bottom: 15px; }
+.desc-section p { line-height: 2.2; font-size: 13px; font-weight: 300; opacity: 0.7; margin: 5px 0; }
+.desc-section p b { color: white; font-weight: 400; }
+
+.desc-footer { font-size: 11px; line-height: 2; opacity: 0.4; margin-top: 60px; border-top: 1px solid #222; padding-top: 30px; }
+
+/* 3. 오른쪽 사진창 */
+.right { 
+    width: 60%; 
+    margin-left: 40%; 
+    background: #0d0d0d; 
+    padding: 100px 0; 
+}
+
+.image-box { 
+    width: 80%; 
+    max-width: 700px; 
+    margin: 0 auto 80px; 
+}
+
+.image-box img { 
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    filter: brightness(0.9); 
+    transition: 0.5s;
+    border-radius: 2px;
+}
+.image-box img:hover { filter: brightness(1); }
+
+/* 모바일 대응 */
+@media (max-width: 1024px) {
+    .container { flex-direction: column; }
+    .left { position: relative; width: 100%; height: auto; padding: 100px 30px 40px; overflow-y: visible; }
+    .right { width: 100%; margin-left: 0; padding: 20px 0; }
+    .image-box { width: 90%; margin-bottom: 40px; }
 }
 </style>
 </head>
 <body>
-<nav class="nav-header"><button class="back-btn" onclick="history.back()">← BACK TO LIST</button></nav>
+
+<nav class="nav-header">
+    <button class="back-btn" onclick="location.href='../portfolio.html'">← BACK TO LIST</button>
+</nav>
+
 <div class="container">
-  <aside class="left">
-   <div class="project-info">
-  <h2>Home Interior</h2>
-  <p class="project-subtitle">"송정써미트 아파트 리모델링"</p>
-  
-  <div class="desc-section">
-    <h3>CONCEPT</h3>
-    <p><b>"Refined Home"</b><br>(복잡한 일상을 덜어낸 정제된 휴식)</p>
-  </div>
+    <aside class="left">
+        <div class="title-area">
+            <h2>Home Interior</h2>
+            <p class="project-subtitle">"송정써미트 아파트 리모델링"</p>
+        </div>
+        
+        <div class="desc-section">
+            <h3>CONCEPT</h3>
+            <p><b>"Refined Home"</b><br>(복잡한 일상을 덜어낸 정제된 휴식)</p>
+        </div>
 
-  <div class="desc-section">
-    <h3>DETAIL</h3>
-    <p>• Tone-on-Tone: 유사한 톤의 자재 매칭으로 공간이 넓어 보이는 시각적 확장성 확보.</p>
-    <p>• Hidden Storage: 군더더기 없는 수납 설계를 통해 미니멀한 라이프스타일 지원.</p>
-    <p>• Mood Lighting: 상황에 따라 분위기를 바꿀 수 있는 간접 조명 레이어링으로 아늑함 배가.</p>
-  </div>
+        <div class="desc-section">
+            <h3>DETAIL</h3>
+            <p>• Tone-on-Tone: 유사한 톤의 자재 매칭으로 공간이 넓어 보이는 시각적 확장성 확보.</p>
+            <p>• Hidden Storage: 군더더기 없는 수납 설계를 통해 미니멀한 라이프스타일 지원.</p>
+            <p>• Mood Lighting: 상황에 따라 분위기를 바꿀 수 있는 간접 조명 레이어링으로 아늑함 배가.</p>
+        </div>
 
-  <div class="desc-footer">
-    "결(KYEOL)은 머무는 것만으로도 위로가 되는, 온전한 나만의 안식처<br>
-     당신의 품격과 삶이 예술이 되는 공간을 짓습니다.."
-    </div>
-  
-  </aside>
-  <main class="right">
-    <div class="image-box"><img src="../image/6-1.jpg"></div>
-    <div class="image-box"><img src="../image/6-2.jpg"></div>
-    <div class="image-box"><img src="../image/6-3.jpg"></div>
-    <div class="image-box"><img src="../image/6-4.jpg"></div>
-    <div class="image-box"><img src="../image/6-5.jpg"></div>
-    <div class="image-box"><img src="../image/6-6.jpg"></div>
-    <div class="image-box"><img src="../image/6-7.jpg"></div>
-    <div class="image-box"><img src="../image/6-8.jpg"></div>
-    <div class="image-box"><img src="../image/6-9.jpg"></div>
-  </main>
-</div>
-</body>
-</html>
+        <div class="desc-footer">
+            "결(KYEOL)은 머무는 것만으로도 위로가 되는, 온전한 나만의 안식처<br>
+            당신의 품격과 삶이 예술이 되는 공간을 짓습니다."
+        </div>
+    </aside>
+
+    <main class="right">
+        <div class="image-box"><img src="../image/6-1.jpg"></div>
+        <div class="image-box"><img src="../image/6-2.jpg"></div>
+        <div class="image-box"><img src="../image/6-3.jpg"></div>
+        <div class="image-box"><img src="../image/6-4.jpg">
