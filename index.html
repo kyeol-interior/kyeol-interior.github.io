@@ -55,8 +55,11 @@
             <div class="click-text">CLICK TO ENTER</div>
         </div>
     </div>
-    <div class="screen second-screen" id="second">
-        <div class="back-area" onclick="goBack()"></div>
+   <div class="screen second-screen" id="second">
+        <video class="video-bg" autoplay muted loop playsinline>
+            <source src="image/kyeol_video_optimized.mp4" type="video/mp4">
+        </video>
+        <div class="overlay" style="background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);"></div> <div class="back-area" onclick="goBack()"></div>
         <div class="inner-menu">
             <a href="about.html">ABOUT</a>
             <a href="portfolio.html">PORTFOLIO</a>
