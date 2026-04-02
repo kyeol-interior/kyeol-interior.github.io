@@ -1,6 +1,4 @@
-/* ===============================
-   BASE
-   =============================== */
+/* 전체 선택 후 붙여넣기 */
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -9,7 +7,6 @@ body {
     overflow-x: hidden;
 }
 
-/* BACK */
 .back {
     position: fixed;
     top: 30px;
@@ -21,12 +18,7 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
-.back:hover {
-    opacity: 1;
-    transform: translateX(-5px);
-}
 
-/* HEADER */
 header {
     padding: 80px 20px 40px;
     text-align: center;
@@ -46,7 +38,6 @@ header {
     opacity: 0.5;
 }
 
-/* FILTER */
 .filter-nav {
     margin: 40px 0 60px;
     text-align: center;
@@ -55,9 +46,7 @@ header {
     opacity: 0.6;
 }
 
-/* ===============================
-   GRID
-   =============================== */
+/* 그리드 레이아웃 */
 .grid-container {
     display: flex;
     flex-direction: column;
@@ -106,9 +95,7 @@ header {
     transition: 0.5s ease;
 }
 
-/* ===============================
-   PC (HOVER)
-   =============================== */
+/* PC 버전 호버 효과 */
 @media (min-width: 1025px) {
     .grid-item:hover img {
         filter: grayscale(0%) brightness(1);
@@ -123,47 +110,25 @@ header {
     }
 }
 
-/* ===============================
-   MOBILE
-   =============================== */
-/* ===============================
-   MOBILE (수정본)
-   =============================== */
-
+/* 모바일 버전 (높이 대폭 축소) */
 @media (max-width: 1024px) {
-
     .grid-container {
-        gap: 30px;        /* 💡 항목 간 간격을 50px -> 30px로 줄여서 더 촘촘하게 */
+        gap: 30px;
         padding: 0 0 60px;
     }
-
     .grid-item {
-        height: 35vh;     /* 💡 48vh -> 35vh로 축소 (화면의 약 1/3 크기) */
+        height: 35vh; /* 💡 사진 크기를 35% 수준으로 줄임 */
     }
-
-    /* 만약 사진을 더 작게 하고 싶다면 25vh ~ 30vh 사이로 조절하세요 */
-
     .item-title {
-        font-size: 18px;  /* 글자 크기도 살짝 줄여서 세련되게 */
+        font-size: 18px;
         letter-spacing: 3px;
-        padding: 0 10px;
     }
-
-    .back {
-        top: 20px;
-        left: 20px;
-        font-size: 12px;
-    }
-
-    /* 활성 카드 효과 유지 */
     .grid-item.active img {
         filter: grayscale(0%) brightness(1);
     }
-
     .grid-item.active .item-overlay {
         opacity: 1;
     }
-
     .grid-item.active .item-title {
         opacity: 1;
         transform: translateY(0);
