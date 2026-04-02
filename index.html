@@ -78,36 +78,68 @@
         </div>
     </div>
 
-    <script>
-        function enterSite() {
-            document.getElementById('main-page').style.opacity = '0';
-            document.getElementById('main-page').style.pointerEvents = 'none';
-            document.getElementById('sns-menu').style.opacity = '0';
-            document.getElementById('main-overlay').style.backdropFilter = 'blur(10px)';
-            
-            const second = document.getElementById('second-page');
-            second.style.opacity = '1';
-            second.style.pointerEvents = 'auto';
-            second.style.transform = 'scale(1)';
-            
-            document.querySelectorAll('.inner-menu a').forEach((el, i) => {
-                setTimeout(() => el.classList.add('show'), i * 150);
-            });
+   <script>
+    // 1페이지(메인) -> 2페이지(메뉴) 들어갈 때
+    function enterSite() {
+        // 1페이지 요소들 숨기기
+        const mainPage = document.getElementById('main-page');
+        const snsMenu = document.getElementById('sns-menu');
+        const secondPage = document.getElementById('second-page');
+        const overlay = document.getElementById('main-overlay');
+
+        if(mainPage) mainPage.style.display = 'none'; // 아예 안보이게 차단
+        if(snsMenu) snsMenu.style.display = 'none';
+        
+        // 2페이지 요소들 나타내기
+        if(secondPage) {
+            secondPage.style.opacity = '1';
+            secondPage.style.pointerEvents = 'auto';
+            secondPage.style.transform = 'scale(1)';
+            secondPage.style.display = 'flex'; // 화면에 표시
+        }
+        
+        // 배경 흐리게(블러) 처리
+        if(overlay) overlay.style.backdropFilter = 'blur(10px)';
+
+        // 중앙 메뉴들 하나씩 나타나게 하기
+        document.querySelectorAll('.inner-menu a').forEach((el, i) => {
+            setTimeout(() => el.classList.add('show'), i * 150);
+        });
+    }
+
+    // 2페이지(메뉴) -> 1페이지(메인) 뒤로 나갈 때 (여기가 핵심!)
+    function goBack() {
+        const mainPage = document.getElementById('main-page');
+        const snsMenu = document.getElementById('sns-menu');
+        const secondPage = document.getElementById('second-page');
+        const overlay = document.getElementById('main-overlay');
+
+        // 2페이지 다시 숨기기
+        if(secondPage) {
+            secondPage.style.opacity = '0';
+            secondPage.style.pointerEvents = 'none';
+            secondPage.style.transform = 'scale(1.1)';
+            setTimeout(() => { secondPage.style.display = 'none'; }, 500); // 0.5초 뒤 완전히 제거
         }
 
-        function goBack() {
-            document.getElementById('main-page').style.opacity = '1';
-            document.getElementById('main-page').style.pointerEvents = 'auto';
-            document.getElementById('sns-menu').style.opacity = '1';
-            document.getElementById('main-overlay').style.backdropFilter = 'blur(0px)';
-            
-            const second = document.getElementById('second-page');
-            second.style.opacity = '0';
-            second.style.pointerEvents = 'none';
-            second.style.transform = 'scale(1.1)';
-            
-            document.querySelectorAll('.inner-menu a').forEach(el => el.classList.remove('show'));
+        // 1페이지 다시 나타내기
+        if(mainPage) {
+            mainPage.style.display = 'flex'; 
+            setTimeout(() => { mainPage.style.opacity = '1'; }, 10);
         }
-    </script>
+        if(snsMenu) {
+            snsMenu.style.display = 'block';
+            setTimeout(() => { snsMenu.style.opacity = '1'; }, 10);
+        }
+        
+        // 배경 흐림 제거
+        if(overlay) overlay.style.backdropFilter = 'blur(0px)';
+
+        // 메뉴 애니메이션 초기화
+        document.querySelectorAll('.inner-menu a').forEach(el => {
+            el.classList.remove('show');
+        });
+    }
+</script>
 </body>
 </html>
