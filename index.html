@@ -8,8 +8,8 @@
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
-    <!-- CSS 분리 -->
-    <link rel="stylesheet" href="project-style.css">
+    <!-- 외부 CSS (중요) -->
+    <link rel="stylesheet" href="index-style.css">
 </head>
 
 <body>
@@ -19,6 +19,7 @@
         <source src="image/kyeol_video_optimized1.mp4" type="video/mp4">
     </video>
 
+    <!-- 오버레이 -->
     <div class="overlay"></div>
 
     <!-- SNS 메뉴 -->
@@ -28,7 +29,7 @@
         <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO</a>
     </div>
 
-    <!-- 메인 페이지 -->
+    <!-- 메인 화면 -->
     <div id="main-page">
         <button class="center-text" onclick="enterSite()">
             <h1>KYEOL</h1>
@@ -37,7 +38,7 @@
         </button>
     </div>
 
-    <!-- 두 번째 페이지 -->
+    <!-- 메뉴 화면 -->
     <div id="second-page">
         <div class="back" onclick="goBack()">← BACK</div>
 
@@ -49,7 +50,7 @@
         </div>
     </div>
 
-    <!-- 스크립트 -->
+    <!-- JS -->
     <script>
         function enterSite() {
             document.getElementById('main-page').style.display = 'none';
@@ -84,7 +85,7 @@
             });
         }
 
-        // URL 파라미터 처리
+        // URL 파라미터 유지 UX
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
 
