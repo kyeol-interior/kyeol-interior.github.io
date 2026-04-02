@@ -64,7 +64,6 @@ function goBack() {
     location.href = "index.html?menu";
 }
 
-// 모바일: 무조건 하나만 활성화
 if (window.innerWidth <= 1024) {
 
     const items = document.querySelectorAll('.grid-item');
@@ -73,15 +72,13 @@ if (window.innerWidth <= 1024) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
 
-                // 전부 비활성화
                 items.forEach(el => el.classList.remove('active'));
-
-                // 현재 것만 활성화
                 entry.target.classList.add('active');
+
             }
         });
     }, {
-        threshold: 0.6 // 중앙 기준
+        threshold: 0.6
     });
 
     items.forEach(item => observer.observe(item));
