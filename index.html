@@ -37,19 +37,34 @@
         .inner-menu a.show { opacity: 1; transform: translateY(0); }
 
         /* [2페이지] BACK 버튼 */
-        ./* 🔙 BACK 버튼 (ABOUT, PROPOSAL 페이지와 디자인 통일) */
-        .back {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            z-index: 1000;
-            cursor: pointer;
-            opacity: 0.6;
-            font-size: 13px;
-            letter-spacing: 2px;
-            transition: 0.3s;
-        }
-        .back:hover { opacity: 1; transform: translateX(-5px); }
+
+      /* 🔙 BACK 버튼 규격 통일 (ABOUT, PORTFOLIO와 동일) */
+.back {
+    position: absolute; /* 2페이지 컨테이너 안에서 고정 */
+    top: 30px;
+    left: 30px;
+    z-index: 1000;
+    cursor: pointer;
+    opacity: 0.6;
+    color: white;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+.back:hover {
+    opacity: 1;
+    transform: translateX(-5px);
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    .back {
+        top: 20px;
+        left: 20px;
+        font-size: 12px;
+    }
+}
     </style>
 </head>
 <body>
@@ -72,15 +87,16 @@
         </div>
     </div>
 
-    <div id="second-page">
-        <button class="back-btn" onclick="goBack()">← BACK</button>
-        <div class="inner-menu">
-            <a href="about.html">ABOUT</a>
-            <a href="portfolio.html">PORTFOLIO</a>
-            <a href="proposal.html">PROPOSAL</a>
-            <a href="contact.html">CONTACT</a>
-        </div>
+   <div id="second-page">
+    <div class="back" onclick="goBack()">← BACK</div>
+    
+    <div class="inner-menu">
+        <a href="about.html">ABOUT</a>
+        <a href="portfolio.html">PORTFOLIO</a>
+        <a href="proposal.html">PROPOSAL</a>
+        <a href="contact.html">CONTACT</a>
     </div>
+</div>
 
     <script>
         function enterSite() {
