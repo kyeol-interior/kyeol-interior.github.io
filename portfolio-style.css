@@ -66,9 +66,9 @@ header {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 0 20px 80px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 0 50px 100px;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -76,7 +76,7 @@ header {
 .grid-item {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 3;
     background: #111;
     margin-bottom: 20px;
 }
@@ -120,7 +120,7 @@ header {
 /* TITLE */
 .item-title {
     color: white;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 500;
     letter-spacing: 4px;
     text-align: center;
