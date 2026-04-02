@@ -152,3 +152,16 @@ body {
         margin-bottom: 30px;
     }
 }
+/* FOOTER */
+.desc-footer {
+    margin-top: 60px;
+    font-size: 13px;
+    line-height: 1.8;
+    opacity: 0.6;
+    font-style: italic;
+}
+
+/* 텍스트 가독성 보정 */
+.desc-section p {
+    line-height: 2;
+}
