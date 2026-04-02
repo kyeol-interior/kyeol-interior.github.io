@@ -1,95 +1,19 @@
 /* ===============================
-   PORTFOLIO PAGE CSS
+   GRID ITEM INTERACTION
    =============================== */
 
-body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    background: #0a0a0a;
-    color: white;
-    overflow-x: hidden;
-}
-
-/* BACK */
-.back {
-    position: fixed;
-    top: 30px;
-    left: 30px;
-    z-index: 1000;
-    cursor: pointer;
-    opacity: 0.6;
-    font-size: 13px;
-    letter-spacing: 2px;
-    transition: 0.3s;
-}
-.back:hover {
-    opacity: 1;
-    transform: translateX(-5px);
-}
-
-/* HEADER */
-header {
-    padding: 80px 50px 40px;
-    text-align: center;
-}
-
-.logo {
-    font-size: 32px;
-    letter-spacing: 12px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    text-decoration: none;
-    color: white;
-    display: block;
-}
-
-.sub-title {
-    font-size: 10px;
-    letter-spacing: 5px;
-    opacity: 0.4;
-    text-transform: uppercase;
-}
-
-/* FILTER */
-.filter-nav {
-    margin: 40px 0;
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: 2px;
-    opacity: 0.6;
-}
-
-/* GRID */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    padding: 0 50px 100px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.grid-item {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 4 / 3;
-    background: #1a1a1a;
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
-}
-
-/* 이미지 */
+/* 이미지 기본 상태 (흑백) */
 .grid-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(40%) brightness(0.8);
-    transition: 0.6s;
-    transform: scale(1.05);
+
+    filter: grayscale(100%) brightness(0.5);
+    transform: scale(1);
+    transition: 0.6s ease;
 }
 
-/* overlay 항상 보이게 */
+/* 오버레이 */
 .item-overlay {
     position: absolute;
     top: 0;
@@ -97,57 +21,59 @@ header {
     width: 100%;
     height: 100%;
 
-    background: rgba(0,0,0,0.3);
-
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    opacity: 1;
-    transition: 0.4s;
+    opacity: 0;
+    transition: 0.5s;
 }
 
-/* 텍스트 */
+/* 제목 */
 .item-title {
-    font-size: 16px;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
+    color: white;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 4px;
     text-align: center;
-}
 
-.item-category {
-    font-size: 9px;
-    letter-spacing: 2px;
-    opacity: 0.7;
-    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s;
 }
 
 /* PC hover */
 @media (min-width: 1025px) {
+
     .grid-item:hover img {
         filter: grayscale(0%) brightness(1);
-        transform: scale(1);
+        transform: scale(1.05);
+    }
+
+    .grid-item:hover .item-overlay {
+        opacity: 1;
+    }
+
+    .grid-item:hover .item-title {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
 /* 모바일 */
 @media (max-width: 1024px) {
 
-    .grid-container {
-        grid-template-columns: 1fr;
-        padding: 0 20px 60px;
-        gap: 40px;
-    }
-
-    .back {
-        top: 20px;
-        left: 20px;
-        font-size: 12px;
-    }
-
     .grid-item.is-active img {
         filter: grayscale(0%) brightness(1);
-        transform: scale(1);
+        transform: scale(1.05);
+    }
+
+    .grid-item.is-active .item-overlay {
+        opacity: 1;
+    }
+
+    .grid-item.is-active .item-title {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
