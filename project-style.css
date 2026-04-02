@@ -37,24 +37,24 @@ body {
     min-height: 100vh; 
 }
 
-/* 2. 왼쪽 설명창 (가운데 스크롤바 숨김 처리) */
+/* 2. 왼쪽 설명창 */
 .left { 
     width: 30%; 
     height: 100vh; 
     position: fixed; 
     left: 0; 
     top: 0; 
-    padding: 200px 80px 80px; 
+    padding: 200px 60px 80px; /* 여백을 조금 조정하여 균형을 맞췄습니다 */
     box-sizing: border-box; 
     overflow-y: auto; 
     background: #0a0a0a; 
-    -ms-overflow-style: none; /* IE, Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 .left::-webkit-scrollbar { 
-    display: none; /* Chrome, Safari, Whale */
+    display: none; 
 }
-/* 제목 크기 */
+
 .title-area h2 { 
     font-size: 32px; 
     letter-spacing: 8px; 
@@ -71,20 +71,22 @@ body {
 .desc-section { 
     margin-bottom: 40px; 
 }
+
+/* ✅ 여기서 닫는 괄호( } ) 오타를 수정했습니다 */
 .desc-section h3 { 
-    font-size: 11px; 
+    font-size: 13px; 
     letter-spacing: 3px; 
-    color: #444; 
+    color: #888; 
     margin-bottom: 15px; 
 }
-/* 본문 내용 크기 */
+
 .desc-section p { 
     line-height: 2; 
-    font-size: 15px;  /* 13px -> 15px로 확대 */
+    font-size: 15px; 
     font-weight: 300; 
-    opacity: 0.8;   /* 조금 더 진하게 */
+    opacity: 0.8; 
     margin: 5px 0; 
-    word-break: keep-all;  /* 단어가 끊기지 않게 */
+    word-break: keep-all; 
 }
 .desc-section p b { 
     color: white; 
@@ -100,34 +102,30 @@ body {
     padding-top: 30px; 
 }
 
-/* CONCEPT, DETAIL 같은 소제목 */
-.desc-section h3 { 
-    font-size: 13px;       /* 11px -> 13px로 확대 */
-    color: #888;           /* 가독성을 위해 조금 더 밝게 */
-
-/* 3. 오른쪽 사진창 */
+/* 3. 오른쪽 사진창 (사진 찌그러짐 방지 보강) */
 .right { 
     width: 70%; 
     margin-left: 30%; 
     background: #0d0d0d; 
     padding: 100px 0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 사진 중앙 정렬 */
 }
 
-.image-box { 
-    width: 90%; 
-    max-width: 1200px; 
-    margin: 0 auto 100px; 
-}
-
-.image-box img { 
-    width: 100%; 
-    height: auto; 
+/* 💡 모든 상세페이지의 이미지를 일괄 제어합니다 */
+.right img { 
+    width: 85% !important;   /* 가로폭 강제 고정 */
+    max-width: 1200px !important; 
+    height: auto !important; /* 비율 유지 */
     display: block; 
+    margin: 0 auto 80px; 
     filter: brightness(0.9); 
     transition: 0.5s;
     border-radius: 2px;
 }
-.image-box img:hover { 
+
+.right img:hover { 
     filter: brightness(1); 
 }
 
@@ -136,5 +134,5 @@ body {
     .container { flex-direction: column; }
     .left { position: relative; width: 100%; height: auto; padding: 100px 30px 40px; overflow-y: visible; }
     .right { width: 100%; margin-left: 0; padding: 20px 0; }
-    .image-box { width: 90%; margin-bottom: 40px; }
+    .right img { width: 90% !important; margin-bottom: 40px; }
 }
