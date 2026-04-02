@@ -73,6 +73,8 @@ header {
     height: 80vh; /* 💡 PC 핵심 */
     position: relative;
     overflow: hidden;
+    color: white;
+    text-decoration: none;
 }
 
 /* 이미지 */
