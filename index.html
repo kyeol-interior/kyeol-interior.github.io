@@ -122,12 +122,19 @@
             
             document.querySelectorAll('.inner-menu a').forEach(el => el.classList.remove('show'));
         }
-window.onload = function() {
+window.addEventListener('DOMContentLoaded', (event) => {
     const urlParams = new URLSearchParams(window.location.search);
+    
     if (urlParams.has('menu')) {
-        enterSite(); // ?menu 신호를 받으면 자동으로 메뉴 화면을 보여줌
+        // 1. 일단 메뉴 화면(2페이지)을 띄웁니다.
+        enterSite(); 
+
+        // 2. [중요] 주소창에서 '?menu'를 몰래 지워버립니다. (화면은 그대로!)
+        // 이렇게 하면 새로고침을 눌러도 다시 2페이지로 고정되지 않고 첫 화면으로 갑니다.
+        const newUrl = window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
     }
-};
+});
     </script>
 </body>
 </html>
