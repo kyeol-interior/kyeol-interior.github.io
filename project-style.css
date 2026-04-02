@@ -108,3 +108,17 @@ body {
     object-fit: cover !important;
     z-index: -1;
 }
+.title-area h2 { 
+        font-size: 20px !important;    /* 32px에서 20px로 과감히 축소 */
+        letter-spacing: 2px !important; /* 자간도 살짝 좁혀서 공간 확보 */
+        white-space: nowrap !important; /* 💡 절대 줄바꿈 하지 마라! (한 줄 고정) */
+        word-break: normal !important;
+        margin-bottom: 10px !important;
+    }
+
+    .project-subtitle {
+        font-size: 11px !important;
+        letter-spacing: 1px !important;
+        margin-bottom: 30px !important;
+    }
+}
