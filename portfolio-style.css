@@ -126,25 +126,44 @@ header {
 /* ===============================
    MOBILE
    =============================== */
+/* ===============================
+   MOBILE (수정본)
+   =============================== */
+
 @media (max-width: 1024px) {
+
     .grid-container {
-        gap: 50px;
-        padding: 0 0 80px;
+        gap: 30px;        /* 💡 항목 간 간격을 50px -> 30px로 줄여서 더 촘촘하게 */
+        padding: 0 0 60px;
     }
+
     .grid-item {
-        height: 48vh;
+        height: 35vh;     /* 💡 48vh -> 35vh로 축소 (화면의 약 1/3 크기) */
     }
+
+    /* 만약 사진을 더 작게 하고 싶다면 25vh ~ 30vh 사이로 조절하세요 */
+
     .item-title {
-        font-size: 20px;
-        letter-spacing: 4px;
+        font-size: 18px;  /* 글자 크기도 살짝 줄여서 세련되게 */
+        letter-spacing: 3px;
         padding: 0 10px;
     }
+
+    .back {
+        top: 20px;
+        left: 20px;
+        font-size: 12px;
+    }
+
+    /* 활성 카드 효과 유지 */
     .grid-item.active img {
         filter: grayscale(0%) brightness(1);
     }
+
     .grid-item.active .item-overlay {
         opacity: 1;
     }
+
     .grid-item.active .item-title {
         opacity: 1;
         transform: translateY(0);
