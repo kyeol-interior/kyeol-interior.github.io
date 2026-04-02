@@ -114,7 +114,7 @@ header {
 @media (max-width: 1024px) {
 
     .grid-container {
-        gap: 0;                /* 간격은 0으로 하고, 각 아이템 내부에서 여백 조절 */
+        gap: 20px;                /* 간격은 0으로 하고, 각 아이템 내부에서 여백 조절 */
         padding: 0;
     }
 
@@ -123,15 +123,16 @@ header {
         align-items: center;    /* 수직 가운데 정렬 */
         justify-content: center; /* 수평 가운데 정렬 */
         width: 100%;
-        height: 100vh;          /* 💡 한 화면에 하나만 보이도록 전체 높이 설정 */
+        height: 90vh;         /* 💡 100vh에서 90vh로 변경 (화면 높이의 90%만 차지) */
         position: relative;
         overflow: hidden;
+        border-bottom: 1px solid rgba(255,255,255,0.05); /* 경계선 살짝 (선택사항) */
         background: #0a0a0a;    /* 배경색 유지 */
     }
 
     .grid-item img {
         width: 85%;             /* 💡 좌우 여백을 위해 85%만 차지 (원하시면 더 줄이세요) */
-        height: 50vh;           /* 💡 사진 높이를 화면의 절반 정도로 제한 (위아래 여백 생성) */
+        height: 45vh;           /* 💡 사진 높이를 화면의 절반 정도로 제한 (위아래 여백 생성) */
         object-fit: cover;
         filter: grayscale(0%) brightness(0.8); /* 모바일은 처음부터 어느 정도 보이게 */
         transition: 0.5s;
