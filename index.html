@@ -94,6 +94,12 @@
             
             document.querySelectorAll('.inner-menu a').forEach(el => el.classList.remove('show'));
         }
+window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('menu')) {
+        enterSite(); // ?menu 신호를 받으면 자동으로 메뉴 화면을 보여줌
+    }
+};
     </script>
 </body>
 </html>
