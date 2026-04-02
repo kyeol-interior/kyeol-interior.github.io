@@ -64,35 +64,24 @@ function goBack() {
     location.href = "index.html?menu";
 }
 
-/* ===============================
-   모바일 인터랙션 (최종 안정화)
-   =============================== */
-
+// 모바일: 무조건 하나만 활성화
 if (window.innerWidth <= 1024) {
 
     const items = document.querySelectorAll('.grid-item');
 
     const observer = new IntersectionObserver((entries) => {
-
-        let maxRatio = 0;
-        let activeItem = null;
-
         entries.forEach(entry => {
-            if (entry.intersectionRatio > maxRatio) {
-                maxRatio = entry.intersectionRatio;
-                activeItem = entry.target;
+            if (entry.isIntersecting) {
+
+                // 전부 비활성화
+                items.forEach(el => el.classList.remove('active'));
+
+                // 현재 것만 활성화
+                entry.target.classList.add('active');
             }
         });
-
-        items.forEach(item => item.classList.remove('is-active'));
-
-        if (activeItem) {
-            activeItem.classList.add('is-active');
-        }
-
     }, {
-        threshold: [0.3, 0.5, 0.7],
-        rootMargin: "-20% 0px -20% 0px"
+        threshold: 0.6 // 중앙 기준
     });
 
     items.forEach(item => observer.observe(item));
