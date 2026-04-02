@@ -39,12 +39,12 @@ body {
 
 /* 2. 왼쪽 설명창 (가운데 스크롤바 숨김 처리) */
 .left { 
-    width: 35%; 
+    width: 30%; 
     height: 100vh; 
     position: fixed; 
     left: 0; 
     top: 0; 
-    padding: 150px 60px 80px; 
+    padding: 200px 80px 80px; 
     box-sizing: border-box; 
     overflow-y: auto; 
     background: #0a0a0a; 
@@ -54,11 +54,11 @@ body {
 .left::-webkit-scrollbar { 
     display: none; /* Chrome, Safari, Whale */
 }
-
+/* 제목 크기 */
 .title-area h2 { 
-    font-size: 24px; 
-    letter-spacing: 6px; 
-    margin-bottom: 10px; 
+    font-size: 32px; 
+    letter-spacing: 8px; 
+    margin-bottom: 15px; 
     font-weight: 500; 
 }
 .project-subtitle { 
@@ -77,12 +77,14 @@ body {
     color: #444; 
     margin-bottom: 15px; 
 }
+/* 본문 내용 크기 */
 .desc-section p { 
-    line-height: 2.2; 
-    font-size: 13px; 
+    line-height: 2; 
+    font-size: 15px;  /* 13px -> 15px로 확대 */
     font-weight: 300; 
-    opacity: 0.7; 
+    opacity: 0.8;   /* 조금 더 진하게 */
     margin: 5px 0; 
+    word-break: keep-all;  /* 단어가 끊기지 않게 */
 }
 .desc-section p b { 
     color: white; 
@@ -98,17 +100,22 @@ body {
     padding-top: 30px; 
 }
 
+/* CONCEPT, DETAIL 같은 소제목 */
+.desc-section h3 { 
+    font-size: 13px;       /* 11px -> 13px로 확대 */
+    color: #888;           /* 가독성을 위해 조금 더 밝게 */
+
 /* 3. 오른쪽 사진창 */
 .right { 
-    width: 65%; 
-    margin-left: 35%; 
+    width: 70%; 
+    margin-left: 30%; 
     background: #0d0d0d; 
     padding: 100px 0; 
 }
 
 .image-box { 
     width: 90%; 
-    max-width: 1000px; 
+    max-width: 1200px; 
     margin: 0 auto 100px; 
 }
 
