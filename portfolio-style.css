@@ -66,17 +66,25 @@ header {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr; /* 💡 항상 한 줄 */
+    grid-template-columns: 1fr;
     gap: 30px;
-    padding: 0 0 80px;
-    width: 100%;
+    padding: 0 15px 80px;
     margin: 0 auto;
+}
+
+/* 💡 PC에서만 가로 꽉 채우기 */
+@media (min-width: 1025px) {
+    .grid-container {
+        max-width: none;
+        width: 100%;
+        padding: 0 40px 100px;
+    }
 }
 
 .grid-item {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 24 / 9; /* 💡 얇고 길게 */
+    aspect-ratio: 24 / 9; /* 💡 핵심: 얇고 길게 */
     background: #111;
 }
 
