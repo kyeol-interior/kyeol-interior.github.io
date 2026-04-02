@@ -29,35 +29,8 @@ body {
 
 /* HEADER */
 header {
-    position: relative;
-    z-index: 10;
     padding: 80px 20px 40px;
     text-align: center;
-}
-
-.logo {
-    font-size: 28px;
-    letter-spacing: 10px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    text-decoration: none;
-    color: white;
-    display: block;
-}
-
-.sub-title {
-    font-size: 10px;
-    letter-spacing: 4px;
-    opacity: 0.4;
-}
-
-/* FILTER */
-.filter-nav {
-    margin: 30px 0;
-    text-align: center;
-    font-size: 10px;
-    letter-spacing: 2px;
-    opacity: 0.6;
 }
 
 /* ===============================
@@ -67,31 +40,50 @@ header {
 .grid-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 0 15px 80px;
-    margin: 0 auto;
+    gap: 80px; /* 💡 여백 핵심 */
+    padding: 0 40px 120px;
 }
 
-/* 💡 PC에서만 가로 꽉 채우기 */
+/* ===============================
+   PC (핵심)
+   =============================== */
+
 @media (min-width: 1025px) {
-    .grid-container {
-        max-width: none;
-        width: 100%;
-        padding: 0 40px 100px;
+
+    .grid-item {
+        aspect-ratio: 24 / 10; /* 💡 한 화면 + 여백 */
     }
+
 }
+
+/* ===============================
+   MOBILE
+   =============================== */
+
+@media (max-width: 1024px) {
+
+    .grid-container {
+        gap: 40px;
+        padding: 0 20px 80px;
+    }
+
+    .grid-item {
+        aspect-ratio: 24 / 12; /* 💡 두 개 보이게 */
+    }
+
+}
+
+/* ===============================
+   ITEM
+   =============================== */
 
 .grid-item {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 24 / 9; /* 💡 핵심: 얇고 길게 */
     background: #111;
 }
 
-/* ===============================
-   IMAGE
-   =============================== */
-
+/* IMAGE */
 .grid-item img {
     width: 100%;
     height: 100%;
@@ -102,10 +94,7 @@ header {
     transition: 0.6s ease;
 }
 
-/* ===============================
-   OVERLAY
-   =============================== */
-
+/* OVERLAY */
 .item-overlay {
     position: absolute;
     top: 0;
@@ -118,28 +107,20 @@ header {
     align-items: center;
 
     background: rgba(0,0,0,0.25);
-
     opacity: 0;
     transition: 0.4s ease;
 }
 
 /* TITLE */
 .item-title {
-    color: white;
     font-size: 24px;
-    font-weight: 500;
     letter-spacing: 6px;
-    text-align: center;
-
     opacity: 0;
     transform: translateY(20px);
-    transition: 0.4s ease;
+    transition: 0.4s;
 }
 
-/* ===============================
-   PC HOVER
-   =============================== */
-
+/* PC hover */
 @media (min-width: 1025px) {
 
     .grid-item:hover img {
@@ -147,44 +128,21 @@ header {
         transform: scale(1.05);
     }
 
-    .grid-item:hover .item-overlay {
-        opacity: 1;
-    }
-
+    .grid-item:hover .item-overlay,
     .grid-item:hover .item-title {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-/* ===============================
-   MOBILE
-   =============================== */
+/* MOBILE active */
+.grid-item.is-active img {
+    filter: grayscale(0%) brightness(0.9);
+    transform: scale(1.03);
+}
 
-@media (max-width: 1024px) {
-
-    .back {
-        top: 20px;
-        left: 20px;
-        font-size: 12px;
-    }
-
-    .item-title {
-        font-size: 18px;
-        letter-spacing: 3px;
-    }
-
-    .grid-item.is-active img {
-        filter: grayscale(0%) brightness(0.9);
-        transform: scale(1.03);
-    }
-
-    .grid-item.is-active .item-overlay {
-        opacity: 1;
-    }
-
-    .grid-item.is-active .item-title {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.grid-item.is-active .item-overlay,
+.grid-item.is-active .item-title {
+    opacity: 1;
+    transform: translateY(0);
 }
