@@ -6,95 +6,116 @@
 <title>KYEOL | IN THE MAKE UP</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+/* 기본 설정 */
 body { margin: 0; font-family: 'Montserrat', sans-serif; background: #0a0a0a; color: white; overflow-x: hidden; }
-.nav-header { position: fixed; top: 50px; left: 50px; z-index: 1000; }
-.back-btn { color: white; text-decoration: none; font-size: 10px; letter-spacing: 4px; opacity: 0.5; cursor: pointer; background: none; border: none; text-transform: uppercase; }
+
+/* 1. 뒤로가기 버튼 위치 및 스타일 */
+.nav-header { position: fixed; top: 40px; left: 40px; z-index: 1001; }
+.back-btn { color: white; text-decoration: none; font-size: 10px; letter-spacing: 4px; opacity: 0.5; cursor: pointer; background: none; border: none; text-transform: uppercase; transition: 0.3s; }
+.back-btn:hover { opacity: 1; }
 
 .container { display: flex; min-height: 100vh; }
 
-/* 왼쪽 설명창 */
+/* 2. 왼쪽 설명창: 스크롤바 숨기기 처리 */
 .left { 
-  width: 40%; 
-  height: 100vh; 
-  position: fixed; 
-  left: 0; 
-  top: 0; 
-  padding: 180px 80px 80px; 
-  box-sizing: border-box; 
-  overflow-y: auto; 
-  background: #0a0a0a; 
+    width: 40%; 
+    height: 100vh; 
+    position: fixed; 
+    left: 0; 
+    top: 0; 
+    padding: 150px 60px 80px; 
+    box-sizing: border-box; 
+    overflow-y: auto; /* 내용 길면 스크롤은 되게 하되 */
+    background: #0a0a0a; 
+    -ms-overflow-style: none; /* IE, Edge에서 스크롤바 숨기기 */
+    scrollbar-width: none;  /* Firefox에서 스크롤바 숨기기 */
 }
-.title { font-size: 26px; letter-spacing: 5px; margin-bottom: 50px; font-weight: 500; }
-.meta { display: flex; flex-direction: column; gap: 25px; margin-bottom: 50px; }
-.meta-item span { display: block; font-size: 9px; letter-spacing: 3px; opacity: 0.3; text-transform: uppercase; margin-bottom: 8px; }
-.meta-item p { margin: 0; font-size: 13px; opacity: 0.8; }
-.desc { line-height: 2.2; font-size: 13px; font-weight: 300; opacity: 0.6; }
+.left::-webkit-scrollbar { display: none; } /* Chrome, Safari에서 스크롤바 숨기기 */
 
-/* 오른쪽 사진창 */
+.title-area h2 { font-size: 24px; letter-spacing: 6px; margin-bottom: 10px; font-weight: 500; }
+.project-subtitle { font-size: 12px; color: #666; margin-bottom: 50px; letter-spacing: 2px; }
+
+.desc-section { margin-bottom: 40px; }
+.desc-section h3 { font-size: 11px; letter-spacing: 3px; color: #444; margin-bottom: 15px; }
+.desc-section p { line-height: 2.2; font-size: 13px; font-weight: 300; opacity: 0.7; margin: 5px 0; }
+
+.desc-footer { font-size: 11px; line-height: 2; opacity: 0.4; margin-top: 60px; border-top: 1px solid #222; padding-top: 30px; }
+
+/* 3. 오른쪽 사진창 */
 .right { 
-  width: 60%; 
-  margin-left: 40%; 
-  background: #0d0d0d; 
-  padding: 60px 0; 
+    width: 60%; 
+    margin-left: 40%; 
+    background: #0d0d0d; 
+    padding: 100px 0; 
 }
 
-/* 🔥 핵심 수정: 사진이 잘리지 않게 가로폭을 더 제한하고 높이를 자유롭게 둠 */
 .image-box { 
-  width: 75%;         /* 캡처6보다 가로를 조금 더 줄여서 세로 길이를 압축 */
-  max-width: 650px;   /* 세로로 긴 사진들이 예쁘게 보이는 마지노선 너비 */
-  margin: 0 auto 50px; 
+    width: 80%; 
+    max-width: 700px; 
+    margin: 0 auto 80px; 
 }
 
 .image-box img { 
-  width: 100%;      
-  height: auto;       /* 🔥 원본 비율 그대로 유지 (잘림 방지 핵심) */
-  display: block;   
-  filter: brightness(0.9); 
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    filter: brightness(0.9); 
+    transition: 0.5s;
 }
+.image-box img:hover { filter: brightness(1); }
 
-@media (max-width: 768px) {
-  .container { flex-direction: column; }
-  .left { position: relative; width: 100%; height: auto; padding: 120px 30px 40px; }
-  .right { width: 100%; margin-left: 0; padding: 40px 0; }
-  .image-box { width: 90%; }
+/* 모바일 대응 */
+@media (max-width: 1024px) {
+    .container { flex-direction: column; }
+    .left { position: relative; width: 100%; height: auto; padding: 100px 30px 40px; overflow-y: visible; }
+    .right { width: 100%; margin-left: 0; padding: 20px 0; }
+    .image-box { width: 90%; margin-bottom: 40px; }
 }
 </style>
 </head>
 <body>
-<nav class="nav-header"><button class="back-btn" onclick="location.href='portfolio.html'">← BACK TO LIST</button></nav>
+
+<nav class="nav-header">
+    <button class="back-btn" onclick="location.href='../portfolio.html'">← BACK TO LIST</button>
+</nav>
+
 <div class="container">
-  <aside class="left">
-    <div class="project-info">
-  <h2>IN TH MAKE UP</h2>
-  <p class="project-subtitle">"The Moment of Bloom"</p>
-  
-  <div class="desc-section">
-    <h3>CONCEPT</h3>
-    <p>가장 아름다운 나를<br>마주하는 시간</p>
-  </div>
+    <aside class="left">
+        <div class="title-area">
+            <h2>IN THE MAKE UP</h2>
+            <p class="project-subtitle">"The Moment of Bloom"</p>
+        </div>
+        
+        <div class="desc-section">
+            <h3>CONCEPT</h3>
+            <p>가장 아름다운 나를 마주하는 시간</p>
+        </div>
 
-  <div class="desc-section">
-    <h3>DETAIL</h3>
-    <p>• Warm Serenity: 차분한 그레이와 따뜻한 베이지의 조화로 프라이빗한 휴식 선사.</p>
-    <p>• Minimalist Line: 간결한 선과 절제된 매립 조명으로 고객에 집중하는 조도 설계.</p>
-    <p>• Gold Point: 가구와 소품에 적용된 골드 디테일로 고급스러운 브랜드 아이덴티티 완성.</p>
-  </div>
+        <div class="desc-section">
+            <h3>DETAIL</h3>
+            <p>• Warm Serenity: 차분한 그레이와 따뜻한 베이지의 조화로 프라이빗한 휴식 선사.</p>
+            <p>• Minimalist Line: 간결한 선과 절제된 매립 조명으로 고객에 집중하는 조도 설계.</p>
+            <p>• Gold Point: 가구와 소품에 적용된 골드 디테일로 고급스러운 브랜드 아이덴티티 완성.</p>
+        </div>
 
-  <div class="desc-footer">
-    "결(KYEOL)은 머무는 순간이 특별한 기억이 되도록<br>공간의 온도까지 세심하게 배려했습니다."
-  </div>
-  </aside>
-  <main class="right">
-    <div class="image-box"><img src="../image/3-1.jpg"></div>
-    <div class="image-box"><img src="../image/3-2.jpg"></div>
-    <div class="image-box"><img src="../image/3-3.jpg"></div>
-    <div class="image-box"><img src="../image/3-4.jpg"></div>
-    <div class="image-box"><img src="../image/3-5.jpg"></div>
-    <div class="image-box"><img src="../image/3-6.jpg"></div>
-    <div class="image-box"><img src="../image/3-7.jpg"></div>
-    <div class="image-box"><img src="../image/3-8.jpg"></div>
-    <div class="image-box"><img src="../image/3-9.jpg"></div>
-  </main>
+        <div class="desc-footer">
+            결(KYEOL)은 머무는 순간이 특별한 기억이 되도록<br>
+            공간의 온도까지 세심하게 배려했습니다.
+        </div>
+    </aside>
+
+    <main class="right">
+        <div class="image-box"><img src="../image/3-1.jpg"></div>
+        <div class="image-box"><img src="../image/3-2.jpg"></div>
+        <div class="image-box"><img src="../image/3-3.jpg"></div>
+        <div class="image-box"><img src="../image/3-4.jpg"></div>
+        <div class="image-box"><img src="../image/3-5.jpg"></div>
+        <div class="image-box"><img src="../image/3-6.jpg"></div>
+        <div class="image-box"><img src="../image/3-7.jpg"></div>
+        <div class="image-box"><img src="../image/3-8.jpg"></div>
+        <div class="image-box"><img src="../image/3-9.jpg"></div>
+    </main>
 </div>
+
 </body>
 </html>
