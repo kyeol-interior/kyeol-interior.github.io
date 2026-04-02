@@ -39,7 +39,7 @@ body {
 
 /* 2. 왼쪽 설명창 (가운데 스크롤바 숨김 처리) */
 .left { 
-    width: 40%; 
+    width: 35%; 
     height: 100vh; 
     position: fixed; 
     left: 0; 
@@ -100,8 +100,8 @@ body {
 
 /* 3. 오른쪽 사진창 */
 .right { 
-    width: 60%; 
-    margin-left: 40%; 
+    width: 65%; 
+    margin-left: 35%; 
     background: #0d0d0d; 
     padding: 100px 0; 
 }
