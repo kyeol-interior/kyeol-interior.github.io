@@ -68,8 +68,8 @@ header {
     display: grid;
     grid-template-columns: 1fr; /* 💡 항상 한 줄 */
     gap: 30px;
-    padding: 0 15px 80px;
-    max-width: 1200px;
+    padding: 0 0 80px;
+    width: 100%;
     margin: 0 auto;
 }
 
