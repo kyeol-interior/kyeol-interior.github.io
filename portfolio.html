@@ -65,33 +65,37 @@ function goBack() {
 }
 
 /* ===============================
-   모바일 인터랙션 (최종 완성)
+   모바일 인터랙션 (최종 안정화)
    =============================== */
 
 if (window.innerWidth <= 1024) {
 
+    const items = document.querySelectorAll('.grid-item');
+
     const observer = new IntersectionObserver((entries) => {
+
+        let maxRatio = 0;
+        let activeItem = null;
+
         entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-                // 전체 비활성화
-                document.querySelectorAll('.grid-item')
-                    .forEach(el => el.classList.remove('is-active'));
-
-                // 현재만 활성화
-                entry.target.classList.add('is-active');
+            if (entry.intersectionRatio > maxRatio) {
+                maxRatio = entry.intersectionRatio;
+                activeItem = entry.target;
             }
-
         });
+
+        items.forEach(item => item.classList.remove('is-active'));
+
+        if (activeItem) {
+            activeItem.classList.add('is-active');
+        }
+
     }, {
-        threshold: 0.6
+        threshold: [0.3, 0.5, 0.7],
+        rootMargin: "-20% 0px -20% 0px"
     });
 
-    document.querySelectorAll('.grid-item').forEach(item => {
-        observer.observe(item);
-    });
-
+    items.forEach(item => observer.observe(item));
 }
 </script>
 
