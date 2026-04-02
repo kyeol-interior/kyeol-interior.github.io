@@ -69,16 +69,26 @@ if (window.innerWidth <= 1024) {
     const items = document.querySelectorAll('.grid-item');
 
     const observer = new IntersectionObserver((entries) => {
+
+        let maxRatio = 0;
+        let activeItem = null;
+
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-
-                items.forEach(el => el.classList.remove('active'));
-                entry.target.classList.add('active');
-
+            if (entry.intersectionRatio > maxRatio) {
+                maxRatio = entry.intersectionRatio;
+                activeItem = entry.target;
             }
         });
+
+        items.forEach(el => el.classList.remove('active'));
+
+        if (activeItem) {
+            activeItem.classList.add('active');
+        }
+
     }, {
-        threshold: 0.6
+        threshold: [0.3, 0.5, 0.7],
+        rootMargin: "-20% 0px -20% 0px"
     });
 
     items.forEach(item => observer.observe(item));
