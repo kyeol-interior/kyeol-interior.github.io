@@ -110,27 +110,44 @@ header {
     }
 }
 
-/* 모바일 버전 (높이 대폭 축소) */
+/* 모바일 버전 (1024px 이하) - 이 부분으로 덮어쓰기 */
 @media (max-width: 1024px) {
+
     .grid-container {
-        gap: 30px;
-        padding: 0 0 60px;
+        gap: 25px;           /* 사진 사이 간격 좁힘 */
+        padding: 0 15px 60px; /* 좌우 15px 여백을 주어 사진이 너무 붙지 않게 함 */
     }
+
     .grid-item {
-        height: 35vh; /* 💡 사진 크기를 35% 수준으로 줄임 */
+        height: 280px !important; /* 💡 높이를 px로 고정 (너무 크면 250px로 줄이세요) */
+        border-radius: 4px;       /* 모서리를 살짝 굴려 세련되게 */
+        margin-bottom: 10px;
     }
+
+    .grid-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 사진이 비율에 맞게 꽉 차도록 함 */
+    }
+
     .item-title {
-        font-size: 18px;
+        font-size: 16px;   /* 제목 크기 조정 */
         letter-spacing: 3px;
+        opacity: 1 !important;    /* 모바일에서는 제목이 항상 보이게 할 수도 있습니다 */
+        transform: translateY(0) !important;
     }
-    .grid-item.active img {
-        filter: grayscale(0%) brightness(1);
+
+    .item-overlay {
+        background: rgba(0, 0, 0, 0.4); /* 글자가 잘 보이도록 배경 살짝 어둡게 */
+        opacity: 1 !important;          /* 터치 전에도 제목이 보이게 설정 */
     }
-    .grid-item.active .item-overlay {
-        opacity: 1;
-    }
-    .grid-item.active .item-title {
-        opacity: 1;
-        transform: translateY(0);
+
+    .back {
+        top: 20px;
+        left: 20px;
+        font-size: 12px;
+        background: rgba(0,0,0,0.5); /* 뒤로가기 버튼이 사진에 묻히지 않게 배경 추가 */
+        padding: 5px 10px;
+        border-radius: 20px;
     }
 }
