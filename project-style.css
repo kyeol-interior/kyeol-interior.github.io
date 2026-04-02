@@ -93,3 +93,12 @@ body {
     .right { width: 100%; margin-left: 0; padding: 20px 0; }
     .right img { width: 92% !important; margin-bottom: 40px; }
 }
+/* 최후의 수단: 모든 상세페이지 사진 강제 확장 */
+main.right img, .right img {
+    min-width: 800px !important; 
+    width: 90% !important;
+    max-width: 1200px !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto 100px !important;
+}
