@@ -1,4 +1,6 @@
-/* project-style.css - FINAL CLEAN VERSION */
+/* ===============================
+   PROJECT DETAIL PAGE CSS
+   =============================== */
 
 body { 
     margin: 0; 
@@ -8,13 +10,14 @@ body {
     overflow-x: hidden; 
 }
 
-/* 1. 뒤로가기 버튼 */
+/* BACK */
 .nav-header { 
     position: fixed; 
     top: 40px; 
     left: 40px; 
     z-index: 1001; 
 }
+
 .back-btn { 
     color: white; 
     text-decoration: none; 
@@ -27,14 +30,18 @@ body {
     text-transform: uppercase; 
     transition: 0.3s; 
 }
-.back-btn:hover { opacity: 1; }
 
+.back-btn:hover { 
+    opacity: 1; 
+}
+
+/* 레이아웃 */
 .container { 
     display: flex; 
     min-height: 100vh; 
 }
 
-/* 2. 왼쪽 설명창 */
+/* 왼쪽 */
 .left { 
     width: 30%; 
     height: 100vh; 
@@ -44,81 +51,104 @@ body {
     padding: 180px 50px 80px; 
     box-sizing: border-box; 
     overflow-y: auto; 
-    background: #0a0a0a; 
 }
 
-.title-area h2 { font-size: 32px; letter-spacing: 8px; margin-bottom: 15px; font-weight: 500; }
-.project-subtitle { font-size: 12px; color: #666; margin-bottom: 50px; letter-spacing: 2px; }
+/* 제목 */
+.title-area h2 { 
+    font-size: 32px; 
+    letter-spacing: 8px; 
+    margin-bottom: 15px; 
+    font-weight: 500;
+}
 
-.desc-section { margin-bottom: 40px; }
-.desc-section h3 { font-size: 13px; letter-spacing: 3px; color: #888; margin-bottom: 15px; }
-.desc-section p { line-height: 2.2; font-size: 15px; font-weight: 300; opacity: 0.8; margin: 8px 0; word-break: keep-all; }
+.project-subtitle { 
+    font-size: 12px; 
+    color: #666; 
+    margin-bottom: 50px; 
+    letter-spacing: 2px; 
+}
 
-/* 3. 오른쪽 사진창 */
+/* 설명 */
+.desc-section { 
+    margin-bottom: 40px; 
+}
+
+.desc-section h3 { 
+    font-size: 13px; 
+    letter-spacing: 3px; 
+    color: #888; 
+    margin-bottom: 15px; 
+}
+
+.desc-section p { 
+    line-height: 2.2; 
+    font-size: 15px; 
+    font-weight: 300; 
+    opacity: 0.8; 
+    margin: 8px 0; 
+    word-break: keep-all; 
+}
+
+/* 오른쪽 */
 .right { 
     width: 70%; 
     margin-left: 30%; 
-    background: #0d0d0d; 
     padding: 100px 0; 
-    display: block; 
     text-align: center; 
 }
 
-.right img, .right video { 
-    width: 85% !important; 
-    max-width: 1100px !important; 
-    height: auto !important; 
+.right img,
+.right video { 
+    width: 85%; 
+    max-width: 1100px; 
+    height: auto; 
     display: block; 
-    margin: 0 auto 80px !important; 
+    margin: 0 auto 80px; 
     filter: brightness(0.9); 
     transition: 0.5s;
 }
 
-/* 📱 4. 모바일 대응 (이 부분이 안 먹혔던 이유: 괄호 꼬임 해결) */
+/* ================= 모바일 ================= */
 @media (max-width: 1024px) {
-    .container { 
-        display: block !important; 
-    }
-    .left { 
-        position: relative !important; 
-        width: 100% !important; 
-        height: auto !important; 
-        padding: 100px 30px 40px !important; 
-    }
-    .right { 
-        width: 100% !important; 
-        margin-left: 0 !important; 
-        padding: 20px 0 !important; 
-    }
-    /* 사진 가로 폭 강제 고정 */
-    .right img, .right video {
-        width: 92% !important;
-        min-width: 0 !important; /* 중요: 이 수치가 없으면 사진이 안 줄어듭니다 */
-        max-width: 100% !important;
-        margin: 0 auto 30px !important;
-    }
-    .nav-header { top: 25px; left: 25px; }
-}
 
-/* 메인 영상 간섭 차단 */
-.video-bg {
-    position: fixed !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    object-fit: cover !important;
-    z-index: -1;
-}
-.title-area h2 { 
-        font-size: 20px !important;    /* 32px에서 20px로 과감히 축소 */
-        letter-spacing: 2px !important; /* 자간도 살짝 좁혀서 공간 확보 */
-        white-space: nowrap !important; /* 💡 절대 줄바꿈 하지 마라! (한 줄 고정) */
-        word-break: normal !important;
-        margin-bottom: 10px !important;
+    .container { 
+        display: block; 
+    }
+
+    .left { 
+        position: relative; 
+        width: 100%; 
+        height: auto; 
+        padding: 100px 30px 40px; 
+    }
+
+    .right { 
+        width: 100%; 
+        margin-left: 0; 
+        padding: 20px 0; 
+    }
+
+    .right img,
+    .right video {
+        width: 92%;
+        max-width: 100%;
+        margin: 0 auto 30px;
+    }
+
+    .nav-header { 
+        top: 25px; 
+        left: 25px; 
+    }
+
+    .title-area h2 { 
+        font-size: 20px;
+        letter-spacing: 2px;
+        white-space: nowrap;
     }
 
     .project-subtitle {
-        font-size: 11px !important;
-        letter-spacing: 1px !important;
-        margin-bottom: 30px !important;
+        font-size: 11px;
+        letter-spacing: 1px;
+        margin-bottom: 30px;
     }
 }
