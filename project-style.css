@@ -93,12 +93,22 @@ body {
     .right { width: 100%; margin-left: 0; padding: 20px 0; }
     .right img { width: 92% !important; margin-bottom: 40px; }
 }
-/* 최후의 수단: 모든 상세페이지 사진 강제 확장 */
-main.right img, .right img {
+/* 포트폴리오 상세 페이지(.container가 있는 곳) 내부의 사진/영상만 강제 확장 */
+.container .right img, 
+.container .right video {
     min-width: 800px !important; 
     width: 90% !important;
     max-width: 1200px !important;
     height: auto !important;
     display: block !important;
     margin: 0 auto 100px !important;
+    position: relative !important; /* 배경 영상처럼 고정되지 않게 함 */
+    z-index: 1 !important;
+}
+
+/* 메인 메뉴 페이지의 요소들이 커지는 것을 방지 */
+body:not(.project-detail) .right img {
+    width: auto;
+    max-width: none;
+}
 }
