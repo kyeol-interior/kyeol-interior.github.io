@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KYEOL | PORTFOLIO</title>
 
-    <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-
-    <!-- CSS 분리 -->
     <link rel="stylesheet" href="portfolio-style.css">
 </head>
 
 <body>
 
-<!-- BACK -->
 <div class="back" onclick="goBack()">← BACK</div>
 
 <header>
@@ -27,59 +23,38 @@
 <section class="grid-container">
 
     <a href="projects/1suji.html" class="grid-item">
-        <img src="image/1-1.jpg" alt="남원 수지초 도서관">
-        <div class="item-overlay">
-            <div class="item-title">남원 수지초 도서관</div>
-
-        </div>
+        <img src="image/1-1.jpg">
+        <div class="item-overlay"><div class="item-title">남원 수지초 도서관</div></div>
     </a>
 
     <a href="projects/2dukam.html" class="grid-item">
-        <img src="image/2-1.jpg" alt="덕암정보고 행정실">
-        <div class="item-overlay">
-            <div class="item-title">덕암정보고 행정실</div>
-
-        </div>
+        <img src="image/2-1.jpg">
+        <div class="item-overlay"><div class="item-title">덕암정보고 행정실</div></div>
     </a>
 
     <a href="projects/3makeup.html" class="grid-item">
-        <img src="image/3-1.jpg" alt="IN THE MAKE UP">
-        <div class="item-overlay">
-            <div class="item-title">IN THE MAKE UP</div>
-
-        </div>
+        <img src="image/3-1.jpg">
+        <div class="item-overlay"><div class="item-title">IN THE MAKE UP</div></div>
     </a>
 
     <a href="projects/4seoil.html" class="grid-item">
-        <img src="image/4-1.jpg" alt="서일초 작은미술관">
-        <div class="item-overlay">
-            <div class="item-title">서일초 작은미술관</div>
-
-        </div>
+        <img src="image/4-1.jpg">
+        <div class="item-overlay"><div class="item-title">서일초 작은미술관</div></div>
     </a>
 
     <a href="projects/5nongso.html" class="grid-item">
-        <img src="image/5-6.jpg" alt="농소마을 주택">
-        <div class="item-overlay">
-            <div class="item-title">농소마을 주택</div>
-
-        </div>
+        <img src="image/5-6.jpg">
+        <div class="item-overlay"><div class="item-title">농소마을 주택</div></div>
     </a>
 
     <a href="projects/6summit.html" class="grid-item">
-        <img src="image/6-8.jpg" alt="송정써미트 아파트">
-        <div class="item-overlay">
-            <div class="item-title">송정써미트 아파트</div>
-
-        </div>
+        <img src="image/6-8.jpg">
+        <div class="item-overlay"><div class="item-title">송정써미트 아파트</div></div>
     </a>
 
     <a href="projects/7eco.html" class="grid-item">
-        <img src="image/7-9.jpg" alt="전주 에코체육센터">
-        <div class="item-overlay">
-            <div class="item-title">전주 에코체육센터</div>
-
-        </div>
+        <img src="image/7-9.jpg">
+        <div class="item-overlay"><div class="item-title">전주 에코체육센터</div></div>
     </a>
 
 </section>
@@ -89,24 +64,34 @@ function goBack() {
     location.href = "index.html?menu";
 }
 
-// 모바일 인터랙션
+/* ===============================
+   모바일 인터랙션 (최종 완성)
+   =============================== */
+
 if (window.innerWidth <= 1024) {
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
+
             if (entry.isIntersecting) {
+
+                // 전체 비활성화
+                document.querySelectorAll('.grid-item')
+                    .forEach(el => el.classList.remove('is-active'));
+
+                // 현재만 활성화
                 entry.target.classList.add('is-active');
-            } else {
-                entry.target.classList.remove('is-active');
             }
+
         });
     }, {
-        rootMargin: '-30% 0px -30% 0px',
-        threshold: 0.1
+        threshold: 0.6
     });
 
     document.querySelectorAll('.grid-item').forEach(item => {
         observer.observe(item);
     });
+
 }
 </script>
 
