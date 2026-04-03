@@ -9,32 +9,36 @@
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
         body { background:#fff; font-family: 'Noto Sans KR', sans-serif; color:#111; line-height:1.8; overflow-x:hidden; }
 
-        /* [1] 네비게이션 스타일 */
+        /* [1] 네비게이션: 상단 고정 및 확장형 설계 */
         nav { 
             position:fixed; top:0; width:100%; height:80px; 
             display:flex; justify-content:space-between; align-items:center; 
-            padding:0 50px; background:rgba(255,255,255,0.98); z-index:1000; 
-            border-bottom:1px solid #f2f2f2; 
+            padding:0 50px; background:rgba(255,255,255,1); z-index:1000; 
+            border-bottom:1px solid #f2f2f2; transition: 0.4s ease;
         }
         .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#000; letter-spacing:4px; }
         
-        /* PC 메뉴 (가로형) */
+        /* PC 가로 메뉴 */
         .nav-links { display:flex; gap:35px; }
         .nav-links a { text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; font-weight:400; transition: 0.3s; }
         .nav-links a.active { color:#000; font-weight:700; }
 
-        /* 모바일 햄버거 버튼 (기본 숨김) */
-        .menu-trigger { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1001; }
-        .menu-trigger span { width: 25px; height: 2px; background: #000; transition: 0.3s; }
+        /* 모바일용 햄버거 버튼 */
+        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; }
+        .menu-btn span { width: 22px; height: 2px; background: #000; transition: 0.3s; }
 
-        /* 모바일 풀스크린 메뉴 (기본 숨김) */
-        .mobile-overlay {
-            position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-            background: #fff; z-index: 1000; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; transition: 0.5s; gap: 30px;
+        /* 모바일 드롭다운 메뉴 (페이지를 덮지 않고 상단에서 내려옴) */
+        .mobile-nav {
+            position: fixed; top: 70px; left: 0; width: 100%; 
+            background: #fff; border-bottom: 1px solid #eee;
+            display: none; flex-direction: column; padding: 20px 0;
+            z-index: 999; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
-        .mobile-overlay.active { right: 0; }
-        .mobile-overlay a { text-decoration: none; color: #111; font-size: 24px; font-weight: 700; letter-spacing: 5px; }
+        .mobile-nav a { 
+            padding: 15px 30px; text-decoration: none; color: #111; 
+            font-size: 14px; font-weight: 500; letter-spacing: 2px;
+            border-bottom: 1px solid #f9f9f9;
+        }
 
         /* [2] 메인 레이아웃 */
         .wrapper { display:flex; width:100%; height:100vh; padding-top:80px; }
@@ -48,18 +52,17 @@
         
         .highlight-section { margin-top:40px; padding-top:30px; border-top:1px solid #ddd; }
         .cert-badge { display:inline-block; padding:6px 15px; background:#111; color:#fff; font-size:11px; letter-spacing:1px; margin-right:8px; margin-bottom:10px; }
-        .cert-sub { font-size:14px; color:#888; margin-top:5px; }
 
-        /* 📱 [모바일 대응 시공] */
+        /* 📱 모바일 버전 디테일 */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 70px; }
             .logo { font-size: 20px; }
-            .nav-links { display: none; } /* 기존 가로 메뉴 숨김 */
-            .menu-trigger { display: flex; } /* 햄버거 버튼 노출 */
+            .nav-links { display: none; } 
+            .menu-btn { display: flex; } 
 
             .wrapper { flex-direction:column; height:auto; padding-top:70px; }
             .img-side { height:350px; order:1; }
-            .text-side { padding:60px 25px 100px; order:2; background:#fff; }
+            .text-side { padding:50px 25px 100px; order:2; background:#fff; }
             .title-main { font-size:32px; }
             .desc-text { font-size:16px; }
         }
@@ -76,14 +79,14 @@
             <a href="contact.html">CONTACT</a>
         </div>
 
-        <div class="menu-trigger" id="menuBtn">
+        <div class="menu-btn" id="menuToggle">
             <span></span>
             <span></span>
             <span></span>
         </div>
     </nav>
 
-    <div class="mobile-overlay" id="mobileMenu">
+    <div class="mobile-nav" id="dropdown">
         <a href="about.html">ABOUT</a>
         <a href="portfolio.html">PORTFOLIO</a>
         <a href="proposal.html">PROPOSAL</a>
@@ -107,7 +110,7 @@
                     <span class="cert-badge">장애인기업 인증 법인</span>
                     <span class="cert-badge">실내건축공사업 면허 보유</span>
                 </div>
-                <p class="cert-sub">
+                <p style="font-size:14px; color:#888; margin-top:5px;">
                     (주)결은 사회적 가치를 실현하며,<br>공공의 신뢰를 바탕으로 공간의 새로운 기준을 제시합니다.
                 </p>
             </div>
@@ -118,21 +121,27 @@
     </div>
 
     <script>
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const spans = menuBtn.getElementsByTagName('span');
+        const menuToggle = document.getElementById('menuToggle');
+        const dropdown = document.getElementById('dropdown');
+        const nav = document.querySelector('nav');
 
-        menuBtn.onclick = function() {
-            mobileMenu.classList.toggle('active');
-            // 버튼을 X자로 바꾸는 효과
-            if(mobileMenu.classList.contains('active')) {
-                spans[0].style.transform = "rotate(45deg) translate(5px, 6px)";
-                spans[1].style.opacity = "0";
-                spans[2].style.transform = "rotate(-45deg) translate(5px, -7px)";
+        menuToggle.onclick = function() {
+            // 드롭다운 메뉴 토글
+            if (dropdown.style.display === 'flex') {
+                dropdown.style.display = 'none';
+                nav.style.borderBottom = '1px solid #f2f2f2';
             } else {
-                spans[0].style.transform = "none";
-                spans[1].style.opacity = "1";
-                spans[2].style.transform = "none";
+                dropdown.style.display = 'flex';
+                nav.style.borderBottom = 'none'; // 메뉴 열릴 때 경계선 제거로 일체감 부여
+            }
+        };
+
+        // 메뉴 외부 클릭 시 닫기 (사용자 배려)
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-btn') && !event.target.matches('.menu-btn span')) {
+                if (dropdown.style.display === 'flex') {
+                    dropdown.style.display = 'none';
+                }
             }
         }
     </script>
