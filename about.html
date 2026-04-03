@@ -4,53 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABOUT | (주)결</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { background:#fff; font-family: 'Apple SD Gothic Neo', sans-serif; color:#111; }
+        body { background:#fff; font-family: 'Apple SD Gothic Neo', sans-serif; color:#111; overflow-x:hidden; }
 
         /* 네비게이션 */
-        nav { position:fixed; top:0; width:100%; height:70px; display:flex; justify-content:space-between; align-items:center; padding:0 40px; background:#fff; z-index:100; border-bottom:1px solid #eee; }
-        .logo { font-family: 'Playfair Display', serif; font-size:22px; font-weight:700; letter-spacing:3px; text-decoration:none; color:#000; }
+        nav { position:fixed; top:0; width:100%; height:60px; display:flex; justify-content:space-between; align-items:center; padding:0 30px; background:#fff; z-index:100; border-bottom:1px solid #eee; }
+        .logo { font-size:18px; font-weight:800; letter-spacing:2px; text-decoration:none; color:#000; }
 
-        /* [PC 버전] 좌우 분할 */
-        .wrapper { display:flex; width:100%; height:100vh; padding-top:70px; overflow:hidden; }
-        .text-part { flex:1; padding:0 80px; display:flex; flex-direction:column; justify-content:center; background:#fbfbfb; }
-        .img-part { flex:1.2; }
+        /* 레이아웃 */
+        .wrapper { display:flex; width:100%; height:100vh; padding-top:60px; }
+        .text-part { flex:1; padding:60px; display:flex; flex-direction:column; justify-content:center; background:#fcfcfc; }
+        .img-part { flex:1.2; background:#eee; }
         .img-part img { width:100%; height:100%; object-fit:cover; }
 
-        .title-big { font-family: 'Playfair Display', serif; font-size:80px; letter-spacing:10px; margin-bottom:10px; }
-        .sub-title { font-size:32px; font-weight:700; line-height:1.4; margin-bottom:30px; word-break:keep-all; }
-        .desc { font-size:16px; color:#666; line-height:1.8; margin-bottom:40px; word-break:keep-all; }
-        .btn { display:inline-block; width:fit-content; padding:18px 50px; background:#111; color:#fff; text-decoration:none; font-size:13px; letter-spacing:3px; }
+        /* 주인공은 (주)결 입니다 */
+        .category { font-size:12px; letter-spacing:3px; color:#999; margin-bottom:10px; }
+        .company-name { font-size:64px; font-weight:900; letter-spacing:-1px; margin-bottom:20px; line-height:1.1; color:#000; }
+        .sub-title { font-size:24px; font-weight:600; line-height:1.5; margin-bottom:30px; color:#444; word-break:keep-all; }
+        .desc { font-size:16px; color:#777; line-height:1.8; margin-bottom:50px; word-break:keep-all; }
+        .btn { display:inline-block; padding:20px 60px; background:#111; color:#fff; text-decoration:none; font-size:14px; letter-spacing:3px; transition:0.3s; }
 
-        /* [모바일 버전] 획기적인 전환 */
+        /* 📱 모바일 버전: 완전히 새로 짰습니다 */
         @media (max-width: 1024px) {
-            .wrapper { flex-direction:column; height:auto; overflow:visible; }
-            .img-part { order:1; height:350px; } /* 사진을 위로 */
-            .text-part { order:2; padding:50px 25px; } /* 글을 아래로 */
-            .title-big { font-size:50px; margin-bottom:5px; }
-            .sub-title { font-size:24px; margin-bottom:20px; }
-            .desc { font-size:15px; margin-bottom:30px; }
-            .btn { width:100%; text-align:center; }
+            .wrapper { flex-direction:column; height:auto; }
+            .img-part { height:300px; order:1; } 
+            .text-part { padding:40px 25px 100px; order:2; } 
+            .company-name { font-size:42px; }
+            .sub-title { font-size:20px; }
+            .desc { font-size:15px; }
+            .btn { width:100%; text-align:center; padding:22px 0; font-weight:700; }
         }
     </style>
 </head>
 <body>
-    <nav><a href="index.html" class="logo">KYEOL</a></nav>
+    <nav><a href="index.html" class="logo">(주)결 KYEOL</a></nav>
+    
     <div class="wrapper">
         <div class="text-part">
-            <h1 class="title-big">ABOUT</h1>
-            <h2 class="sub-title">공간의 본질과<br>사용자의 결을 잇습니다.</h2>
+            <p class="category">ABOUT US</p> <h1 class="company-name">(주)결<br>KYEOL</h1> <h2 class="sub-title">공간의 본질과 사용자의 결을<br>전문적으로 잇는 파트너</h2>
             <p class="desc">
-                (주)결은 실내건축공사업 면허를 보유한 전문 인테리어 법인입니다.<br>
-                교육 시설 및 공공기관 행정 공간의 풍부한 경험을 바탕으로<br>
+                우리는 실내건축공사업 면허를 보유한 전문 인테리어 법인입니다.<br>
+                교육 시설 및 공공기관 행정 공간에서의 풍부한 경험을 바탕으로<br>
                 단순한 시공을 넘어 공간의 새로운 기준을 제시합니다.
             </p>
-            <a href="portfolio.html" class="btn">VIEW PORTFOLIO</a>
+            <a href="portfolio.html" class="btn">포트폴리오 보러가기</a>
         </div>
         <div class="img-part">
-            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2000" alt="KYEOL">
+            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2000" alt="KYEOL INTERIOR">
         </div>
     </div>
 </body>
