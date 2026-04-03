@@ -6,57 +6,87 @@
     <title>ABOUT | (주)결</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* [1] 공통 네비게이션 스타일 */
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
-        body { background:#fff; font-family: 'Noto Sans KR', sans-serif; color:#111; line-height:1.8; overflow-x:hidden; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background:#fff; font-family: 'Noto Sans KR', sans-serif; color:#111; overflow-x:hidden; }
 
+        /* 네비게이션: 흰색 배경 */
         nav { 
             position:fixed; top:0; width:100%; height:80px; 
             display:flex; justify-content:space-between; align-items:center; 
-            padding:0 50px; background:#fff; z-index:1100; 
-            border-bottom:1px solid #f2f2f2;
+            padding:0 50px; background:#fff; z-index:1000; border-bottom:1px solid #eee;
         }
         .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#000; letter-spacing:4px; }
-        
-        .nav-links { display:flex; gap:35px; }
-        .nav-links a { text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; font-weight:400; transition: 0.3s; }
+        .nav-links a { text-decoration:none; color:#999; font-size:13px; margin-left:35px; letter-spacing:2px; }
         .nav-links a.active { color:#000; font-weight:700; }
 
-        /* 📱 모바일 햄버거 버튼 스타일 */
-        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1200; }
+        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1002; }
         .menu-btn span { width: 22px; height: 2px; background: #000; transition: 0.3s; }
 
-        /* 📱 모바일 드롭다운 메뉴 */
         .mobile-nav {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background: #fff; display: none; flex-direction: column; 
-            justify-content: center; align-items: center; z-index: 1150;
+            justify-content: center; align-items: center; z-index: 1100;
         }
-        .mobile-nav a { padding: 20px; text-decoration: none; color: #111; font-size: 24px; font-weight: 700; font-family: 'Playfair Display', serif; }
+        .mobile-nav a { padding: 20px; text-decoration: none; color: #111; font-size: 24px; font-weight: 700; }
 
-        /* [2] 좌우 분할 레이아웃 */
+        /* 레이아웃 분할 */
         .wrapper { display:flex; width:100%; height:100vh; padding-top:80px; }
-        .text-side { flex:1; padding:0 8% 0 60px; display:flex; flex-direction:column; justify-content:center; background:#fbfbfb; }
+        .text-side { flex:1; padding:0 8%; display:flex; flex-direction:column; justify-content:center; background:#fbfbfb; }
         .img-side { flex:1.3; overflow:hidden; }
         .img-side img { width:100%; height:100%; object-fit:cover; }
 
-        /* 타이틀: '결'자 포인트 강조 */
-        .title-main { font-size:42px; font-weight:300; line-height:1.4; margin-bottom:35px; letter-spacing:-1.5px; color:#111; word-break:keep-all; }
-        .point-text { font-weight: 900; color:#000; }
+        .title-main { font-size:42px; font-weight:300; line-height:1.4; margin-bottom:30px; word-break:keep-all; }
+        .point-text { font-weight: 900; color:#000; } /* '결' 강조 */
 
-        .desc-text { font-size:18px; color:#444; font-weight:300; word-break:keep-all; line-height:2.1; }
-        .desc-text b { font-weight: 700; color:#000; }
-        
-        .highlight-section { margin-top:45px; padding-top:35px; border-top:1px solid #ddd; }
-        .cert-badge { display:inline-block; padding:7px 15px; background:#000; color:#fff; font-size:11px; letter-spacing:1px; margin-right:8px; margin-bottom:12px; }
+        .desc-text { font-size:18px; color:#444; font-weight:300; line-height:2.1; }
+        .highlight-section { margin-top:40px; padding-top:30px; border-top:1px solid #ddd; }
+        .cert-badge { display:inline-block; padding:7px 15px; background:#000; color:#fff; font-size:11px; margin-right:8px; margin-bottom:10px; }
 
-        /* 📱 모바일 대응 스타일 수정 */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 70px; }
-            .nav-links { display: none; }
-            .menu-btn { display: flex; } /* 햄버거 버튼 보이기 */
-            .wrapper { flex-direction:column; height:auto; padding-top:70px; }
-            .img-side { height:350px; order:1; }
-            .text-side { padding:60px 25px 100px; order:2; background:#fff; }
-            .title-main { font-size:30px; }
+            .nav-links { display: none; } .menu-btn { display: flex; }
+            .wrapper { flex-direction:column; height:auto; }
+            .img-side { height:350px; }
+            .text-side { padding:60px 25px 100px; }
         }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">KYEOL</a>
+        <div class="nav-links">
+            <a href="about.html" class="active">ABOUT</a>
+            <a href="portfolio.html">PORTFOLIO</a>
+            <a href="proposal.html">PROPOSAL</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+        <div class="menu-btn" id="menuToggle"><span></span><span></span><span></span></div>
+    </nav>
+    <div class="mobile-nav" id="dropdown">
+        <a href="about.html">ABOUT</a>
+        <a href="portfolio.html">PORTFOLIO</a>
+        <a href="proposal.html">PROPOSAL</a>
+        <a href="contact.html">CONTACT</a>
+    </div>
+    <div class="wrapper">
+        <div class="text-side">
+            <h1 class="title-main">당신이 머무는 곳마다,<br>기분 좋은 <span class="point-text">결</span>이 흐르도록.</h1>
+            <p class="desc-text">실내건축 전문 법인 <b>(주)결</b>은 사용자의 시선과 동선을 먼저 읽습니다. 사람과 공간 사이의 모든 가능성을 가장 따스하게 연결합니다.</p>
+            <div class="highlight-section">
+                <span class="cert-badge">실내건축공사업 면허 보유</span>
+                <span class="cert-badge">인증 장애인기업</span>
+            </div>
+        </div>
+        <div class="img-side"><img src="image/about1.jpg"></div>
+    </div>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const dropdown = document.getElementById('dropdown');
+        menuToggle.onclick = function(e) {
+            e.stopPropagation();
+            dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
+        };
+        window.onclick = function() { dropdown.style.display = 'none'; }
+    </script>
+</body>
+</html>
