@@ -3,61 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>(주)결 | KYEOL Interior Design</title>
+    <title>(주)결 | 메인</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* [1] 공통 네비게이션 스타일 (투명 버전) */
+        /* 1. 기본 세팅 */
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
         body { background:#000; font-family: 'Noto Sans KR', sans-serif; overflow: hidden; height: 100vh; }
 
+        /* 2. 상단 메뉴 (투명하게 영상 위에 띄움) */
         nav { 
             position:fixed; top:0; width:100%; height:80px; 
             display:flex; justify-content:space-between; align-items:center; 
             padding:0 50px; background:transparent; z-index:1000; 
         }
         .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#fff; letter-spacing:4px; }
-        
         .nav-links { display:flex; gap:35px; }
-        .nav-links a { text-decoration:none; color:rgba(255,255,255,0.7); font-size:13px; letter-spacing:2px; font-weight:400; transition: 0.3s; }
+        .nav-links a { text-decoration:none; color:rgba(255,255,255,0.7); font-size:13px; letter-spacing:2px; transition: 0.3s; }
         .nav-links a:hover { color:#fff; }
 
-        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1002; }
-        .menu-btn span { width: 22px; height: 2px; background: #fff; transition: 0.3s; }
-
-        .mobile-nav {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: #fff; display: none; flex-direction: column; 
-            justify-content: center; align-items: center; z-index: 1100;
-        }
-        .mobile-nav a { padding: 20px; text-decoration: none; color: #111; font-size: 24px; font-weight: 700; font-family: 'Playfair Display', serif; }
-
-        /* [2] 비디오 배경 섹션 */
-        .video-background {
+        /* 3. 배경 영상 (꽉 차게 + 어둡게 필터) */
+        .video-container {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; overflow: hidden;
+            z-index: -1; overflow: hidden; background: #000;
         }
-        .video-background video {
+        .video-container video {
             width: 100%; height: 100%; object-fit: cover;
-            filter: brightness(0.6); /* 문구가 잘 보이도록 영상 명도 조절 */
+            filter: brightness(0.5); /* 💡 영상이 너무 밝으면 글자가 안 보여서 어둡게 조절했습니다 */
         }
 
-        /* [3] 메인 카피 영역 */
+        /* 4. 중앙 문구와 버튼 */
         .main-content {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
-            color: #fff; padding: 0 20px; position: relative; z-index: 1;
+            color: #fff; position: relative; z-index: 1; padding: 0 20px;
         }
         .main-title { 
-            font-size: 56px; font-weight: 800; line-height: 1.2; 
-            margin-bottom: 25px; letter-spacing: -2px; 
+            font-size: 56px; font-weight: 800; line-height: 1.3; 
+            margin-bottom: 25px; letter-spacing: -2px; word-break: keep-all;
             opacity: 0; transform: translateY(30px); animation: fadeInUp 1.2s forwards;
-            word-break: keep-all;
         }
         .main-sub { 
             font-size: 18px; font-weight: 300; letter-spacing: 5px; color: rgba(255,255,255,0.8);
             margin-bottom: 50px; opacity: 0; transform: translateY(20px); animation: fadeInUp 1.2s 0.3s forwards;
         }
-
         .enter-btn {
             padding: 15px 45px; border: 1px solid #fff; text-decoration: none;
             color: #fff; font-size: 13px; letter-spacing: 4px; transition: 0.4s;
@@ -65,18 +53,14 @@
         }
         .enter-btn:hover { background: #fff; color: #000; }
 
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
+        /* 등장 애니메이션 */
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { to { opacity: 1; } }
 
-        /* 📱 모바일 대응 */
+        /* 모바일 대응 */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 70px; }
-            .nav-links { display: none; } 
-            .menu-btn { display: flex; } 
+            .nav-links { display: none; } /* 모바일은 나중에 햄버거 메뉴로 */
             .main-title { font-size: 32px; }
             .main-sub { font-size: 14px; letter-spacing: 3px; }
         }
@@ -92,21 +76,11 @@
             <a href="proposal.html">PROPOSAL</a>
             <a href="contact.html">CONTACT</a>
         </div>
-        <div class="menu-btn" id="menuToggle">
-            <span></span><span></span><span></span>
-        </div>
     </nav>
 
-    <div class="mobile-nav" id="dropdown">
-        <a href="about.html">ABOUT</a>
-        <a href="portfolio.html">PORTFOLIO</a>
-        <a href="proposal.html">PROPOSAL</a>
-        <a href="contact.html">CONTACT</a>
-    </div>
-
-    <div class="video-background">
-        <video autoplay muted loop playsinline poster="image/about1.jpg">
-            <source src="image/main_video.mp4" type="video/mp4">
+    <div class="video-container">
+        <video autoplay muted loop playsinline>
+            <source src="./image/main_video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -117,18 +91,5 @@
         <a href="about.html" class="enter-btn">ENTER VIEW</a>
     </div>
 
-    <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const dropdown = document.getElementById('dropdown');
-
-        menuToggle.onclick = function(e) {
-            e.stopPropagation();
-            dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
-        };
-
-        window.onclick = function() {
-            dropdown.style.display = 'none';
-        }
-    </script>
 </body>
 </html>
