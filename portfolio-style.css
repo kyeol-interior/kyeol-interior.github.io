@@ -110,77 +110,89 @@ header {
     }
 }
 
+/* 모바일 최적화 재구성 (1024px 이하) */
 @media (max-width: 1024px) {
 
+    /* 1. 최상단 제목과 첫 프로젝트 사이 간격 극소화 */
     header {
-        padding: 30px 20px 10px !important;
+        padding: 20px 20px 0 !important; /* 위 20px, 아래 0 */
     }
 
+    .logo {
+        font-size: 24px;
+        letter-spacing: 8px;
+    }
+
+    .filter-nav {
+        margin: 5px 0 15px !important; /* SELECTED PROJECTS 문구 간격 축소 */
+        font-size: 10px;
+    }
+
+    /* 2. 프로젝트 리스트 레이아웃 */
     .grid-container {
         gap: 0; 
-        padding: 0 0 100px;
+        padding: 0;
     }
 
     .grid-item {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         width: 100%;
-        height: 80vh !important; /* 💡 한 화면의 80%를 아이템 영역으로 고정 */
+        height: 80vh !important; /* 한 화면에 하나씩 걸치는 높이 */
         position: relative;
         background: #0a0a0a;
     }
 
-    /* 1. 사진 규격 강제 통일 */
+    /* 3. 사진 규격 완전 통일 (가장 중요) */
     .grid-item img {
-        width: 90% !important;   /* 좌우 여백 5%씩 유지 */
-        height: 55vh !important;  /* 💡 모든 사진의 높이를 화면의 55%로 강제 통일 */
-        object-fit: cover;       /* 💡 규격에 맞게 사진을 채움 (약간의 잘림 발생하나 규격은 완벽해짐) */
+        width: 90% !important;   /* 좌우 여백 유지 */
+        height: 50vh !important;  /* 💡 모든 사진 높이를 화면의 50%로 강제 고정 */
+        object-fit: cover;       /* 💡 비율이 달라도 규격에 맞춰 채움 (잘림 발생해도 통일감 우선) */
         
-        filter: grayscale(100%) brightness(0.4); /* 기본: 흑백 + 어둡게 */
-        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        border-radius: 2px;
+        filter: grayscale(100%) brightness(0.4); /* 기본 흑백 */
+        transition: all 0.7s ease;
     }
 
-    /* 2. 제목 레이아웃 (평소 투명) */
+    /* 4. 제목 레이아웃 (평소 숨김) */
     .item-overlay {
         position: absolute;
         width: 90%;
-        height: 55vh;
+        height: 50vh;
         display: flex;
         justify-content: center;
         align-items: center;
+        opacity: 0 !important; /* 평소 투명 */
+        transition: opacity 0.6s ease;
+        pointer-events: none;
         z-index: 10;
-        opacity: 0;
-        transition: all 0.6s ease;
     }
 
     .item-title {
-        font-size: 17px;
-        letter-spacing: 5px;
-        color: #ffffff;
-        font-weight: 500;
-        text-shadow: 0 0 15px rgba(0,0,0,0.9);
+        font-size: 16px;
+        letter-spacing: 4px;
+        color: #ffffff !important;
+        text-shadow: 0 0 15px rgba(0,0,0,1);
         transform: translateY(15px);
         transition: transform 0.6s ease;
     }
 
-    /* =========================================
-       3. ACTIVE 상태 (중앙 정렬 시)
-       ========================================= */
-
-    /* 규격은 유지하되 컬러로 변경 */
+    /* 5. 활성화 상태 (스크롤 중앙 위치 시) */
     .grid-item.active img {
-        filter: grayscale(0%) brightness(1) !important;
-        /* object-fit: cover 상태에서 사진이 너무 잘린다면 위 height 수치를 조절하세요 */
+        filter: grayscale(0%) brightness(1) !important; /* 컬러로 변경 */
     }
 
-    /* 제목 등장 */
     .grid-item.active .item-overlay {
-        opacity: 1 !important;
+        opacity: 1 !important; /* 제목 나타남 */
     }
 
     .grid-item.active .item-title {
         transform: translateY(0) !important;
+    }
+
+    .back {
+        top: 15px;
+        left: 15px;
     }
 }
