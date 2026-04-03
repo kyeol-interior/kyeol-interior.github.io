@@ -3,115 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYEOL | ARCHITECTURE & INTERIOR</title>
-
+    <title>KYEOL | (주)결</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="index-style.css">
-    
     <style>
-        /* [1] 중앙 정렬 레이아웃 */
-        .center-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            width: 100%;
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Montserrat', sans-serif; }
+        
+        /* 배경 영상 및 오버레이 */
+        .video-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: -1; }
+
+        /* 메인 컨텐츠 영역 */
+        .center-content { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
+        .center-text { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-decoration: none; outline: none; }
+
+        /* 💡 회사 로고: 화이트 반전 및 광채 효과 (가독성 핵심) */
+        .main-logo-img { 
+            width: 320px; 
+            height: auto; 
+            filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(255,255,255,0.4)); 
+            margin-bottom: 0px; 
+            transition: 0.5s;
         }
 
-        /* [2] 메인 로고 이미지 스타일 */
-        .main-logo-img {
-            width: 480px; /* PC에서 웅장한 크기 */
-            height: auto;
-            margin-bottom: 20px;
-            filter: brightness(1.1); /* 영상 위에서 선명도 확보 */
-            transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
-            pointer-events: none; /* 클릭 간섭 방지 */
+        /* 💡 KYEOL 텍스트: 로고와 공존하는 웅장한 타이포 */
+        .brand-name { 
+            font-size: 80px; 
+            font-weight: 300; 
+            color: #ffffff; 
+            letter-spacing: 35px; 
+            margin-right: -35px; 
+            margin-bottom: 15px; 
+            text-shadow: 0 0 20px rgba(0,0,0,0.6);
+            line-height: 1.2;
         }
 
-        /* [3] 서브 타이틀 */
-        .sub-title {
-            font-size: 15px;
-            letter-spacing: 14px;
-            opacity: 0.4;
-            margin-bottom: 120px; /* 💡 추후 인증 로고가 들어갈 넉넉한 공간 */
-            text-transform: uppercase;
-            font-weight: 300;
-            color: #fff;
-            margin-right: -14px; /* 자간 쏠림 방지 */
-        }
+        .sub-title { font-size: 14px; letter-spacing: 12px; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-bottom: 80px; }
+        .enter-text { font-size: 11px; letter-spacing: 6px; color: #fff; opacity: 0.4; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; transition: 0.4s; }
 
-        /* [4] 입장 텍스트 버튼 */
-        .enter-text {
-            font-size: 11px;
-            letter-spacing: 7px;
-            opacity: 0.4;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding-bottom: 8px;
-            transition: 0.4s ease;
-            color: #fff;
-        }
+        /* 호버 효과 */
+        .center-text:hover .main-logo-img { transform: scale(1.02); filter: brightness(0) invert(1) drop-shadow(0 0 25px rgba(255,255,255,0.7)); }
+        .center-text:hover .enter-text { opacity: 1; letter-spacing: 8px; }
 
-        /* 호버 애니메이션 */
-        .center-text:hover .main-logo-img {
-            transform: scale(1.03);
-            filter: brightness(1.3);
-        }
-
-        .center-text:hover .enter-text {
-            opacity: 1;
-            letter-spacing: 9px;
-            border-bottom: 1px solid rgba(255,255,255,0.7);
-        }
-
-        /* [5] 모바일 가독성 해결 (금색 로고 -> 화이트 변환) */
+        /* 📱 모바일 가독성 집중 케어 */
         @media (max-width: 768px) {
-            .main-logo-img {
-                width: 240px; /* 모바일 적정 크기 */
-                /* 💡 금색 로고를 강제로 화이트로 반전시켜 배경과 분리 */
-                filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(0,0,0,0.5));
-                margin-bottom: 15px;
-            }
-            
-            .sub-title {
-                font-size: 10px;
-                letter-spacing: 6px;
-                margin-bottom: 80px;
-                margin-right: -6px;
-            }
-
-            .enter-text {
-                font-size: 10px;
-                letter-spacing: 5px;
-            }
+            .main-logo-img { width: 170px; margin-bottom: -5px; }
+            .brand-name { font-size: 36px; letter-spacing: 14px; margin-right: -14px; margin-top: 0px; }
+            .sub-title { font-size: 9px; letter-spacing: 6px; margin-bottom: 60px; }
         }
+
+        /* 메뉴 레이아웃 (2페이지) */
+        #second-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: 0.5s; z-index: 100; }
+        .inner-menu a { display: block; color: white; text-decoration: none; font-size: 40px; margin: 20px 0; letter-spacing: 10px; opacity: 0; transform: translateY(20px); transition: 0.5s; }
+        .inner-menu a.show { opacity: 1; transform: translateY(0); }
+        .back { position: absolute; top: 50px; left: 50px; color: white; cursor: pointer; letter-spacing: 5px; font-size: 12px; }
     </style>
 </head>
-
 <body>
 
-    <video class="video-bg" autoplay muted loop playsinline preload="none">
+    <video class="video-bg" autoplay muted loop playsinline>
         <source src="image/kyeol_video_optimized1.mp4" type="video/mp4">
     </video>
-
-    <div class="overlay" style="background: rgba(0,0,0,0.3);"></div>
-
-    <div id="sns-menu" class="left-menu">
-        <h2>MY STUDIO</h2>
-        <a href="https://blog.naver.com/rotte123" target="_blank">BLOG</a>
-        <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO</a>
-    </div>
+    <div class="overlay"></div>
 
     <div id="main-page">
         <div class="center-content">
-            <button class="center-text" onclick="enterSite()" style="background:none; border:none; cursor:pointer;">
-                <img src="image/logo.png" alt="KYEOL" class="main-logo-img">
-                
+            <div class="center-text" onclick="enterSite()">
+                <img src="image/logo.png" alt="(주)결" class="main-logo-img">
+                <div class="brand-name">KYEOL</div>
                 <div class="sub-title">ARCHITECTURE & INTERIOR</div>
-                
                 <div class="enter-text">CLICK TO ENTER</div>
-            </button>
+            </div>
         </div>
     </div>
 
@@ -128,27 +89,23 @@
     <script>
         function enterSite() {
             document.getElementById('main-page').style.display = 'none';
-            document.getElementById('sns-menu').style.display = 'none';
             const second = document.getElementById('second-page');
             second.style.display = 'flex';
             setTimeout(() => {
                 second.style.opacity = '1';
                 document.querySelectorAll('.inner-menu a').forEach((el, i) => {
-                    setTimeout(() => el.classList.add('show'), i * 100);
+                    setTimeout(() => el.classList.add('show'), i * 150);
                 });
             }, 10);
         }
-
         function goBack() {
             const second = document.getElementById('second-page');
             second.style.opacity = '0';
             setTimeout(() => {
                 second.style.display = 'none';
                 document.getElementById('main-page').style.display = 'flex';
-                document.getElementById('sns-menu').style.display = 'block';
-            }, 300);
+            }, 500);
         }
     </script>
-
 </body>
 </html>
