@@ -111,7 +111,8 @@ header {
 }
 
 @media (max-width: 1024px) {
-    /* 1. 상단 여백 최소화 */
+
+    /* 상단 간격 최적화 */
     header { padding: 25px 20px 0 !important; }
     .filter-nav { margin: 5px 0 10px !important; }
 
@@ -124,57 +125,58 @@ header {
         width: 100%;
         height: 75vh !important;
         position: relative;
-        background: #000; /* 배경을 완전히 검게 */
+        background: #000;
     }
 
-    /* 2. 사진 규격 통일 및 검은 필터 설정 */
+    /* 1. 사진 설정 */
     .grid-item img {
         width: 90% !important;
         height: 50vh !important;
         object-fit: cover;
-        /* 기본: 흑백 + 어둡게 */
         filter: grayscale(100%) brightness(0.4) !important; 
-        transition: all 0.7s ease-in-out;
-        z-index: 1; 
+        transition: all 0.6s ease;
+        z-index: 1; /* 💡 사진은 낮은 층 */
     }
 
-    /* 3. 제목 레이어 (강제 노출 설정) */
+    /* 2. 제목 레이어 (무조건 사진 위로!) */
     .item-overlay {
         position: absolute;
-        width: 90%;
-        height: 50vh;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%); /* 💡 사진 정중앙 배치 */
+        width: 90%;
+        height: 50vh;
         display: flex !important; 
         justify-content: center;
         align-items: center;
-        z-index: 10 !important; /* 💡 사진보다 무조건 앞으로 */
-        opacity: 0 !important;   /* 기본은 숨김 */
-        transition: opacity 0.5s ease;
+        z-index: 999 !important; /* 💡 사진보다 훨씬 높은 층으로 설정 */
+        opacity: 0 !important; 
         pointer-events: none;
+        visibility: hidden;
+        transition: all 0.5s ease;
     }
 
     .item-title {
-        font-size: 18px;
+        font-size: 20px; /* 💡 글자 크기 살짝 키움 */
         letter-spacing: 4px;
-        color: #ffffff !important;
-        font-weight: 500;
-        text-shadow: 0 0 15px rgba(0,0,0,1);
-        display: block !important;
+        color: #ffffff !important; /* 💡 흰색 강제 */
+        font-weight: 700; /* 💡 두껍게 */
         text-align: center;
+        /* 💡 글자가 잘 보이도록 강력한 그림자 추가 */
+        text-shadow: 0 0 10px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,1); 
+        display: block !important;
     }
 
     /* =========================================
-       4. 중앙 정렬 시 (Active) 효과 강제 적용
+       3. 활성화(Active) 시 - 컬러 전환 및 제목 노출
        ========================================= */
 
-    /* 검은 필터 걷어내고 컬러로! */
+    /* 중앙에 오면 밝은 컬러로! */
     .grid-item.active img {
         filter: grayscale(0%) brightness(1) !important; 
     }
 
-    /* 제목 강제로 나타내기 */
+    /* 중앙에 오면 제목이 나타남! */
     .grid-item.active .item-overlay {
         opacity: 1 !important; 
         visibility: visible !important;

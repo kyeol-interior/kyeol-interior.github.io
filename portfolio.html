@@ -60,39 +60,42 @@
 </section>
 
 <script>
+// 뒤로가기 함수
 function goBack() {
     location.href = "index.html?menu";
 }
 
-if (window.innerWidth <= 1024) {
+// 모바일 및 PC 공통 활성화 로직
+const items = document.querySelectorAll('.grid-item');
 
-    const items = document.querySelectorAll('.grid-item');
-
-    const observer = new IntersectionObserver((entries) => {
-
-        let maxRatio = 0;
-        let activeItem = null;
-
-        entries.forEach(entry => {
-            if (entry.intersectionRatio > maxRatio) {
-                maxRatio = entry.intersectionRatio;
-                activeItem = entry.target;
-            }
-        });
-
-        items.forEach(el => el.classList.remove('active'));
-
-        if (activeItem) {
-            activeItem.classList.add('active');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        // 💡 판별 기준 완화: 사진이 화면에 20% 이상만 들어오면 바로 활성화
+        if (entry.isIntersecting || entry.intersectionRatio > 0.2) {
+            entry.target.classList.add('active');
+        } else {
+            // 화면에서 완전히 벗어나면 다시 흑백으로 (선택 사항)
+            entry.target.classList.remove('active');
         }
-
-    }, {
-        threshold: [0.3, 0.5, 0.7],
-        rootMargin: "-20% 0px -20% 0px"
     });
+}, {
+    // 0.1(10%)부터 1.0(100%)까지 세밀하게 감시
+    threshold: [0.1, 0.2, 0.5, 0.8],
+    rootMargin: "0px" 
+});
 
-    items.forEach(item => observer.observe(item));
-}
+// 모든 프로젝트 아이템에 감시 적용
+items.forEach(item => {
+    observer.observe(item);
+});
+
+// 💡 모바일 터치 대응 (터치 시에도 즉시 활성화)
+items.forEach(item => {
+    item.addEventListener('touchstart', function() {
+        items.forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+    }, {passive: true});
+});
 </script>
 
 </body>
