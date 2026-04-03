@@ -4,50 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABOUT | (주)결</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
     <style>
-        /* [1] 기초 설정 */
+        /* [1] 기본 공사 */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #fff; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; overflow-x: hidden; }
 
-        /* [2] 상단 고정 메뉴 (GNB) */
-        nav { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 50px; background: rgba(255,255,255,0.95); z-index: 1000; border-bottom: 1px solid #eee; }
-        .nav-logo { font-family: 'Playfair Display', serif; font-size: 24px; letter-spacing: 4px; font-weight: 600; color: #000; text-decoration: none; }
-        .nav-links a { text-decoration: none; color: #666; font-size: 13px; letter-spacing: 2px; margin-left: 40px; transition: 0.3s; }
-        .nav-links a:hover { color: #000; font-weight: 500; }
+        /* [2] 상단 메뉴 (GNB) */
+        nav { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 50px; background: rgba(255,255,255,0.98); z-index: 1000; border-bottom: 1px solid #f0f0f0; }
+        .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; letter-spacing: 4px; font-weight: 600; color: #000; text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #888; font-size: 13px; letter-spacing: 2px; margin-left: 35px; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #000; font-weight: 500; }
 
-        /* [3] 히어로 섹션 (첫인상) */
-        .hero { height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f9f9f9; text-align: center; padding: 0 20px; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 50px; letter-spacing: 10px; margin-bottom: 20px; color: #111; }
-        .hero p { font-size: 18px; color: #888; letter-spacing: 2px; font-weight: 300; }
+        /* [3] 히어로 섹션 */
+        .hero { height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fbfbfb; text-align: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; letter-spacing: 8px; margin-bottom: 15px; color: #111; }
+        .hero p { font-size: 16px; color: #999; letter-spacing: 3px; font-weight: 300; }
 
-        /* [4] 콘텐츠 섹션 */
-        .section { max-width: 1100px; margin: 100px auto; padding: 0 30px; display: flex; align-items: center; gap: 80px; }
-        .section-text { flex: 1; }
-        .section-text h2 { font-size: 28px; margin-bottom: 30px; letter-spacing: -1px; line-height: 1.4; }
-        .section-text p { color: #666; font-size: 16px; margin-bottom: 20px; text-align: justify; }
-        .section-img { flex: 1; background: #eee; height: 400px; border-radius: 2px; overflow: hidden; }
-        .section-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .section-img img:hover { transform: scale(1.05); }
+        /* [4] 브랜드 스토리 */
+        .story { max-width: 1100px; margin: 100px auto; padding: 0 30px; display: flex; align-items: center; gap: 60px; }
+        .story-text { flex: 1; }
+        .story-text h2 { font-size: 32px; margin-bottom: 25px; line-height: 1.4; font-weight: 500; }
+        .story-text p { color: #666; font-size: 16px; margin-bottom: 20px; word-break: keep-all; }
+        .story-img { flex: 1; height: 450px; background: #eee; overflow: hidden; }
+        .story-img img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* [5] 전문 분야 (그리드) */
-        .expertise { background: #111; color: #fff; padding: 100px 0; text-align: center; }
-        .expertise-grid { display: grid; grid-template-columns: repeat(3, 1fr); max-width: 1100px; margin: 60px auto 0; gap: 40px; padding: 0 30px; }
-        .exp-item h3 { font-size: 20px; margin-bottom: 15px; letter-spacing: 2px; color: #d4af37; /* 금빛 포인트 */ }
-        .exp-item p { font-size: 14px; opacity: 0.7; font-weight: 300; }
+        /* [5] ★신뢰성 & 인증 섹션 (핵심)★ */
+        .trust { background: #111; color: #fff; padding: 120px 0; }
+        .trust-container { max-width: 1100px; margin: 0 auto; padding: 0 30px; }
+        .trust-header { text-align: center; margin-bottom: 70px; }
+        .trust-header h2 { font-family: 'Playfair Display', serif; font-size: 32px; letter-spacing: 4px; margin-bottom: 15px; }
+        .trust-header p { font-size: 14px; opacity: 0.5; letter-spacing: 1px; }
 
-        /* [6] 푸터 / 다음 단계 유도 */
-        .next-step { text-align: center; margin: 150px 0 100px; }
-        .btn-portfolio { display: inline-block; padding: 20px 60px; border: 1px solid #111; color: #111; text-decoration: none; letter-spacing: 4px; font-size: 14px; transition: 0.4s; }
+        .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .trust-item { background: rgba(255,255,255,0.05); padding: 50px 35px; border: 1px solid rgba(255,255,255,0.1); transition: 0.4s; text-align: center; }
+        .trust-item:hover { background: rgba(255,255,255,0.1); border-color: #d4af37; transform: translateY(-10px); }
+        .trust-item .icon { font-size: 35px; margin-bottom: 25px; display: block; }
+        .trust-item h3 { font-size: 20px; margin-bottom: 15px; color: #d4af37; font-weight: 500; }
+        .trust-item p { font-size: 14px; line-height: 1.7; opacity: 0.7; font-weight: 300; word-break: keep-all; }
+
+        /* [6] 푸터 유도 버튼 */
+        .next { text-align: center; padding: 150px 0; background: #fff; }
+        .btn-portfolio { display: inline-block; padding: 18px 50px; border: 1px solid #111; color: #111; text-decoration: none; font-size: 13px; letter-spacing: 3px; transition: 0.4s; }
         .btn-portfolio:hover { background: #111; color: #fff; }
 
-        /* 모바일 대응 */
+        /* 모바일 최적화 */
         @media (max-width: 768px) {
             nav { padding: 0 20px; }
-            .nav-links { display: none; } /* 모바일은 나중에 햄버거 메뉴로 대체 가능 */
+            .nav-links { display: none; }
+            .story { flex-direction: column; text-align: center; margin: 60px auto; }
+            .trust-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 32px; }
-            .section { flex-direction: column; gap: 40px; margin: 60px auto; }
-            .expertise-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -56,7 +63,7 @@
     <nav>
         <a href="index.html" class="nav-logo">KYEOL</a>
         <div class="nav-links">
-            <a href="about.html" style="color:#000; font-weight:500;">ABOUT</a>
+            <a href="about.html" class="active">ABOUT</a>
             <a href="portfolio.html">PORTFOLIO</a>
             <a href="proposal.html">PROPOSAL</a>
             <a href="contact.html">CONTACT</a>
@@ -65,44 +72,53 @@
 
     <section class="hero">
         <h1>ABOUT KYEOL</h1>
-        <p>공간의 본질, 그 결을 찾아갑니다.</p>
+        <p>건축과 인테리어, 그 이상의 가치를 짓다</p>
     </section>
 
-    <section class="section">
-        <div class="section-text">
-            <h2>(주)결은 공간에 담긴<br>사용자의 숨결을 생각합니다.</h2>
-            <p>우리는 단순히 인테리어를 넘어, 그 공간이 가진 목적과 가치를 깊이 있게 분석합니다. 특히 교육 시설과 행정 공간에서의 풍부한 경험은 (주)결만의 정교한 설계 철학을 완성하는 밑거름이 되었습니다.</p>
-            <p>보여지는 화려함보다 오래 머물러도 편안한 공간, 사용자의 동선이 배려된 최적의 환경을 제안합니다.</p>
+    <section class="story">
+        <div class="story-text">
+            <h2>공간의 결을 이해하는<br>전문 건설 법인, (주)결</h2>
+            <p>(주)결은 실내건축공사업 면허를 보유한 전문 인테리어 법인 기업입니다. 우리는 공간이 가진 본연의 목적에 집중하며, 사용자의 동선과 심리까지 고려한 정교한 설계를 추구합니다.</p>
+            <p>특히 교육 환경 개선 사업과 공공기관 행정 공간 프로젝트에서 쌓아온 풍부한 경험은 (주)결만의 독보적인 자산입니다. 단순한 시공을 넘어, 신뢰를 바탕으로 공간의 새로운 기준을 제시합니다.</p>
         </div>
-        <div class="section-img">
+        <div class="story-img">
             <img src="./image/8-4.jpg" alt="시공사례">
         </div>
     </section>
 
-    <section class="expertise">
-        <div style="max-width:1100px; margin:0 auto; padding:0 30px;">
-            <h2 style="font-size:32px; letter-spacing:5px;">OUR EXPERTISE</h2>
-            <div class="expertise-grid">
-                <div class="exp-item">
-                    <h3>EDUCATION</h3>
-                    <p>학교 도서관, 행정실 등 학습과 업무에 최적화된 교육 환경 개선 솔루션을 제공합니다.</p>
+    <section class="trust">
+        <div class="trust-container">
+            <div class="trust-header">
+                <h2>TRUST & CERTIFIED</h2>
+                <p>법적 기준과 사회적 가치를 준수하는 신뢰의 지표</p>
+            </div>
+            
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <span class="icon">🏛️</span>
+                    <h3>실내건축공사업 면허</h3>
+                    <p>국가 공인 전문건설업 면허를 보유한 법인 기업으로서, 법적 기준에 부합하는 안전하고 투명한 책임 시공을 약속합니다.</p>
                 </div>
-                <div class="exp-item">
-                    <h3>PUBLIC</h3>
-                    <p>공공기관 및 행정 시설의 신뢰도와 효율성을 높이는 공간 브랜딩을 실현합니다.</p>
+
+                <div class="trust-item">
+                    <span class="icon">🤝</span>
+                    <h3>장애인기업 인증</h3>
+                    <p>사회적 가치 창출에 동참하는 장애인기업으로서, 공공기관 우선구매 제도 등 비즈니스 파트너십에 최적화된 조건을 갖추고 있습니다.</p>
                 </div>
-                <div class="exp-item">
-                    <h3>DESIGN</h3>
-                    <p>AI 3D 렌더링을 통한 정교한 시각화 제안으로 시공 전 완벽한 결과물을 약속합니다.</p>
+
+                <div class="trust-item">
+                    <span class="icon">🏫</span>
+                    <h3>교육·공공시설 전문</h3>
+                    <p>초·중·고교 및 행정기관의 까다로운 요구사항과 예산 집행 프로세스를 깊이 이해하며 최상의 만족도를 제공합니다.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="next-step">
-        <p style="margin-bottom:30px; color:#888; letter-spacing:2px;">결의 더 많은 프로젝트가 궁금하신가요?</p>
+    <section class="next">
+        <p style="color: #999; margin-bottom: 30px; letter-spacing: 2px;">결이 완성한 실제 공간들을 확인해보세요.</p>
         <a href="portfolio.html" class="btn-portfolio">VIEW PORTFOLIO</a>
-    </div>
+    </section>
 
 </body>
 </html>
