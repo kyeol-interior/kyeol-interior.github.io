@@ -4,43 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>(주)결 | KYEOL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
         body, html { width:100%; height:100%; background:#000; overflow:hidden; font-family: 'Noto Sans KR', sans-serif; }
         
-        .v-bg { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
-        video { width:100%; height:100%; object-fit:cover; display:block; opacity: 0.65; }
+        /* [1] 영상 배경 영역 */
+        .video-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; background: #000;
+        }
+        video {
+            width: 100%; height: 100%; object-fit: cover;
+            display: block; opacity: 0.65;
+        }
 
-        .main-frame { 
-            width:100%; height:100vh; display:flex; flex-direction:column; 
-            align-items:center; justify-content:center; text-decoration:none;
+        /* [2] 중앙 메인 콘텐츠 (스크린샷 문제 해결 구간) */
+        .main-link { 
+            width: 100%; height: 100vh; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; text-decoration: none;
+            text-align: center; padding: 0 20px;
         }
-        .brand-name { 
-            font-family: 'Playfair Display', serif; font-size: clamp(55px, 16vw, 100px); 
-            color:#fff; letter-spacing: 25px; font-weight:600; margin-right: -25px;
+
+        /* 💡 수정: 모바일에서 KYEOL 크기를 85px -> 42px 수준으로 하향 조절 */
+        .brand-logo { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(38px, 10vw, 85px); 
+            color: #fff; letter-spacing: 12px; font-weight: 600; 
+            margin-right: -12px;
+            transition: 0.3s;
         }
-        /* 서브 타이틀 사이즈 상향 */
+
+        /* 💡 수정: 문구가 절대 겹치거나 줄바꿈 되지 않게 고정 (white-space) */
         .brand-meaning { 
-            font-size: clamp(16px, 3vw, 22px); color: #fff; letter-spacing: 15px; 
-            margin-top: 25px; font-weight: 300; text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            font-size: clamp(11px, 2vw, 16px); 
+            color: #fff; letter-spacing: clamp(4px, 1vw, 8px); 
+            margin-top: 20px; /* 로고와의 여백 확보 */
+            opacity: 0.8; font-weight: 300; 
+            white-space: nowrap; /* 핸드폰에서 한 줄로 강제 정렬 */
         }
-        .enter-hint { 
-            margin-top:80px; color:#fff; font-size:11px; letter-spacing:5px; 
-            border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:5px; opacity: 0.6;
+
+        .click-btn { 
+            margin-top: 60px; color:#fff; font-size:10px; 
+            letter-spacing:4px; border-bottom:1px solid rgba(255,255,255,0.4); 
+            padding-bottom:6px; opacity: 0.6;
+        }
+
+        /* 모바일 전용 미세조정 */
+        @media (max-width: 480px) {
+            .brand-logo { letter-spacing: 8px; margin-right: -8px; }
+            .brand-meaning { letter-spacing: 4px; font-size: 11px; }
         }
     </style>
 </head>
-<body onclick="document.getElementById('main-v').play()">
-    <div class="v-bg">
-        <video id="main-v" autoplay muted loop playsinline poster="./image/8-4.jpg">
+<body onclick="document.getElementById('bg-v').play()">
+
+    <div class="video-bg">
+        <video id="bg-v" autoplay muted loop playsinline preload="auto" poster="./image/8-4.jpg">
             <source src="./image/kyeol_video_optimized1.mp4" type="video/mp4">
         </video>
     </div>
-    <a href="about.html" class="main-frame">
-        <div class="brand-name">KYEOL</div>
+
+    <a href="about.html" class="main-link">
+        <div class="brand-logo">KYEOL</div>
         <div class="brand-meaning">공간과 사람의 인연을 맺다 : 結</div>
-        <div class="enter-hint">CLICK TO ENTER</div>
+        <div class="click-btn">CLICK TO ENTER</div>
     </a>
+
+    <script>
+        const v = document.getElementById('bg-v');
+        window.addEventListener('load', () => { v.play().catch(() => {}); });
+        // 터치나 클릭 시 영상 강제 재생 안전장치
+        document.body.addEventListener('touchstart', () => { if(v.paused) v.play(); }, {once: true});
+    </script>
 </body>
 </html>
