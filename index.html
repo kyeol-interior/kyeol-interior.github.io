@@ -4,95 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KYEOL | (주)결</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* 기본 초기화 */
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        body, html { width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Noto Sans KR', sans-serif; }
-
-        /* [1] 영상 배경 영역 */
-        #video-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; background: #000; overflow: hidden;
-        }
-        #bg-video {
-            position: absolute; top: 50%; left: 50%;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transform: translate(-50%, -50%);
-            display: block;
-        }
-
-        /* [2] 텍스트 레이어 (클릭 시 진입) */
-        .main-link {
-            width: 100%; height: 100vh; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; text-align: center;
-            background: rgba(0, 0, 0, 0.3); /* 영상 대비를 위한 암막 */
-            text-decoration: none; cursor: pointer;
-        }
-
-        .brand-name { 
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(40px, 10vw, 85px); /* 화면 크기에 맞게 자동 조절 */
-            letter-spacing: clamp(10px, 2vw, 20px); 
-            color: #fff; 
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body, html { width:100%; height:100%; background:#000; overflow:hidden; font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; }
         
-        .sub-text {
-            font-size: clamp(10px, 1.5vw, 14px);
-            color: #fff;
-            letter-spacing: clamp(5px, 1vw, 10px);
-            opacity: 0.8;
-            font-weight: 300;
-            text-transform: uppercase;
-        }
+        #v-container { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+        video { width:100%; height:100%; object-fit:cover; display:block; }
 
-        .enter-btn { 
-            margin-top: 50px;
-            font-size: 12px; 
-            letter-spacing: 5px; 
-            color: #fff; 
-            border-bottom: 1px solid rgba(255,255,255,0.6); 
-            padding-bottom: 8px;
-            transition: 0.3s;
+        .main-link { 
+            width:100%; height:100vh; display:flex; flex-direction:column; 
+            align-items:center; justify-content:center; text-decoration:none;
+            background: rgba(0,0,0,0.25);
         }
+        .brand { font-family: 'Playfair Display', serif; font-size: clamp(40px, 12vw, 90px); color:#fff; letter-spacing: 20px; font-weight:700; margin-right:-20px; }
+        .enter { margin-top:50px; color:#fff; font-size:12px; letter-spacing:5px; border-bottom:1px solid #fff; padding-bottom:5px; opacity:0.8; }
     </style>
 </head>
-<body onclick="playVideoManual()">
-
-    <div id="video-container">
-        <video id="bg-video" autoplay muted loop playsinline preload="auto" poster="./image/8-4.jpg">
+<body>
+    <div id="v-container">
+        <video id="kyeol-video" autoplay muted loop playsinline poster="./image/8-4.jpg">
             <source src="./image/kyeol_video_optimized1.mp4" type="video/mp4">
         </video>
     </div>
-
     <a href="about.html" class="main-link">
-        <div class="brand-name">KYEOL</div>
-        <div class="sub-text">Architecture & Interior Design</div>
-        <div class="enter-btn">CLICK TO ENTER</div>
+        <div class="brand">KYEOL</div>
+        <div class="enter">CLICK TO ENTER</div>
     </a>
-
     <script>
-        const v = document.getElementById('bg-video');
-
-        // 1. 페이지 로드 시 자동재생 시도
-        window.addEventListener('load', () => {
-            const playPromise = v.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                    console.log("자동재생 대기 중...");
-                });
-            }
-        });
-
-        // 2. 브라우저 차단 시 사용자가 화면 아무 데나 누르면 재생 시작 (강제 트리거)
-        function playVideoManual() {
-            if (v.paused) {
-                v.play();
-            }
-        }
+        // 브라우저가 막아도 사용자가 화면을 누르는 순간 무조건 재생
+        window.onclick = function() { document.getElementById('kyeol-video').play(); }
+        window.ontouchstart = function() { document.getElementById('kyeol-video').play(); }
     </script>
 </body>
 </html>
