@@ -5,53 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KYEOL | ARCHITECTURE & INTERIOR</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="index-style.css">
     
     <style>
-        /* 메인 화면 인증 로고 스타일 */
-        .main-cert-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 25px;
-            margin-top: 30px;
-            opacity: 0.8;
-        }
-        .main-cert-item {
+        /* 로고 중심 레이아웃 스타일 */
+        .center-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            height: 100vh;
         }
-        .main-cert-item img {
-            height: 28px; /* 메인에 어울리는 적당한 크기 */
-            width: auto;
-            filter: grayscale(100%) brightness(1.5); /* 흑백으로 고급스럽게 */
-            transition: 0.3s;
+
+        /* 💡 메인 로고 이미지 스타일 */
+        .main-logo-img {
+            width: 450px; /* PC에서 압도적인 크기 (필요시 조절 가능) */
+            height: auto;
+            margin-bottom: 25px;
+            filter: brightness(1.2); /* 영상 배경에서 더 선명하게 */
+            transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
         }
-        .main-cert-item span {
-            font-size: 8px;
-            letter-spacing: 1px;
-            color: #fff;
+
+        .center-text:hover .main-logo-img {
+            transform: scale(1.05); /* 마우스 올리면 슬며시 커지는 효과 */
+        }
+
+        .sub-title {
+            font-size: 15px;
+            letter-spacing: 12px;
             opacity: 0.5;
+            margin-bottom: 100px; /* 💡 이 넉넉한 공간에 나중에 인증 로고가 들어갑니다 */
+            text-transform: uppercase;
             font-weight: 300;
         }
-        /* 호버 시 선명하게 */
-        .main-cert-item:hover img {
-            filter: grayscale(0%) brightness(1);
-            transform: translateY(-3px);
+
+        .enter-text {
+            font-size: 11px;
+            letter-spacing: 6px;
+            opacity: 0.3;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 8px;
+            transition: 0.4s;
         }
-        
+
+        .center-text:hover .enter-text {
+            opacity: 1;
+            letter-spacing: 9px;
+            border-bottom: 1px solid rgba(255,255,255,0.6);
+        }
+
+        /* 모바일 대응 */
         @media (max-width: 768px) {
-            .main-cert-container {
-                gap: 15px;
-                flex-wrap: wrap;
-                max-width: 280px;
-                margin: 25px auto 0;
+            .main-logo-img {
+                width: 220px; /* 모바일에서 적당한 크기 */
             }
-            .main-cert-item img { height: 20px; }
+            .sub-title {
+                font-size: 9px;
+                letter-spacing: 6px;
+                margin-bottom: 60px;
+            }
         }
     </style>
 </head>
@@ -73,28 +87,10 @@
     <div id="main-page">
         <div class="center-content">
             <button class="center-text" onclick="enterSite()">
-                <h1>KYEOL</h1>
+                <img src="image/logo.png" alt="KYEOL" class="main-logo-img">
+                
                 <div class="sub-title">ARCHITECTURE & INTERIOR</div>
                 
-                <div class="main-cert-container">
-                    <div class="main-cert-item">
-                        <img src="image/cert_disability.png" alt="장애인기업">
-                        <span>장애인기업</span>
-                    </div>
-                    <div class="main-cert-item">
-                        <img src="image/cert_license.png" alt="실내건축면허">
-                        <span>실내건축면허</span>
-                    </div>
-                    <div class="main-cert-item">
-                        <img src="image/cert_koneps.png" alt="나라장터">
-                        <span>나라장터</span>
-                    </div>
-                    <div class="main-cert-item">
-                        <img src="image/cert_s2b.png" alt="학교장터">
-                        <span>학교장터</span>
-                    </div>
-                </div>
-
                 <div class="enter-text">CLICK TO ENTER</div>
             </button>
         </div>
@@ -102,7 +98,6 @@
 
     <div id="second-page">
         <div class="back" onclick="goBack()">← BACK</div>
-
         <div class="inner-menu">
             <a href="about.html">ABOUT</a>
             <a href="portfolio.html">PORTFOLIO</a>
@@ -115,13 +110,10 @@
         function enterSite() {
             document.getElementById('main-page').style.display = 'none';
             document.getElementById('sns-menu').style.display = 'none';
-
             const second = document.getElementById('second-page');
             second.style.display = 'flex';
-
             setTimeout(() => {
                 second.style.opacity = '1';
-
                 document.querySelectorAll('.inner-menu a').forEach((el, i) => {
                     setTimeout(() => el.classList.add('show'), i * 100);
                 });
@@ -131,25 +123,12 @@
         function goBack() {
             const second = document.getElementById('second-page');
             second.style.opacity = '0';
-
             setTimeout(() => {
                 second.style.display = 'none';
                 document.getElementById('main-page').style.display = 'flex';
                 document.getElementById('sns-menu').style.display = 'block';
             }, 300);
-
-            document.querySelectorAll('.inner-menu a').forEach(el => {
-                el.classList.remove('show');
-            });
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('menu')) {
-                enterSite();
-                window.history.replaceState({}, document.title, window.location.pathname);
-            }
-        });
     </script>
 
 </body>
