@@ -9,65 +9,44 @@
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
         body, html { width:100%; height:100%; background:#000; overflow:hidden; font-family: 'Noto Sans KR', sans-serif; }
         
-        .video-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000; }
-        video { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.65; }
+        /* 영상이 안 나올 때를 대비해 8-4.jpg를 배경으로 대기시킵니다 */
+        .video-bg { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
+            background: url('./image/8-4.jpg') no-repeat center center; 
+            background-size: cover; 
+        }
+        video { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.6; }
 
         .main-link { 
             width: 100%; height: 100vh; display: flex; flex-direction: column; 
             align-items: center; justify-content: center; text-decoration: none; text-align: center;
         }
 
-        /* ------------------------------------------------------ */
-        /* [PC 버전 기본값] - 시원하고 웅장한 사이즈 */
-        /* ------------------------------------------------------ */
+        /* PC 버전: 시원하고 압도적인 스케일 */
         .brand-logo { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 110px; /* PC에서 압도적인 크기 */
-            color: #fff; letter-spacing: 30px; font-weight: 600; 
-            margin-right: -30px;
-            transition: 0.4s;
+            font-family: 'Playfair Display', serif; font-size: 110px; 
+            color: #fff; letter-spacing: 30px; font-weight: 600; margin-right: -30px;
         }
-
         .brand-meaning { 
-            font-size: 22px; /* PC에서 잘 읽히는 크기 */
-            color: #fff; letter-spacing: 18px; 
-            margin-top: 35px;
-            opacity: 0.8; font-weight: 300; 
-            white-space: nowrap;
+            font-size: 22px; color: #fff; letter-spacing: 18px; 
+            margin-top: 35px; opacity: 0.9; font-weight: 300; white-space: nowrap;
         }
-
         .click-btn { 
-            margin-top: 80px; color:#fff; font-size: 12px; 
-            letter-spacing: 6px; border-bottom: 1px solid rgba(255,255,255,0.4); 
-            padding-bottom: 8px; opacity: 0.6;
+            margin-top: 80px; color:#fff; font-size: 12px; letter-spacing: 6px; 
+            border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 8px; opacity: 0.6;
         }
 
-        /* ------------------------------------------------------ */
-        /* [모바일 버전 전용] - 콤팩트하고 정갈한 사이즈 (768px 이하) */
-        /* ------------------------------------------------------ */
+        /* 모바일 버전: 한 줄 정렬 및 최적화 */
         @media (max-width: 768px) {
-            .brand-logo { 
-                font-size: 42px; /* 모바일에서 딱 예쁜 크기 */
-                letter-spacing: 12px; 
-                margin-right: -12px; 
-            }
-            .brand-meaning { 
-                font-size: 11px; /* 모바일에서 한 줄로 들어가는 크기 */
-                letter-spacing: 5px; 
-                margin-top: 18px;
-            }
-            .click-btn { 
-                margin-top: 55px; 
-                font-size: 10px; 
-                letter-spacing: 4px;
-            }
+            .brand-logo { font-size: 42px; letter-spacing: 12px; margin-right: -12px; }
+            .brand-meaning { font-size: 11px; letter-spacing: 5px; margin-top: 18px; }
+            .click-btn { margin-top: 55px; font-size: 10px; letter-spacing: 4px; }
         }
     </style>
 </head>
-<body onclick="document.getElementById('bg-v').play()">
-
+<body onclick="forcePlay()">
     <div class="video-bg">
-        <video id="bg-v" autoplay muted loop playsinline preload="auto" poster="./image/8-4.jpg">
+        <video id="main-v" autoplay muted loop playsinline preload="auto" poster="./image/8-4.jpg">
             <source src="./image/kyeol_video_optimized1.mp4" type="video/mp4">
         </video>
     </div>
@@ -79,9 +58,10 @@
     </a>
 
     <script>
-        const v = document.getElementById('bg-v');
-        window.addEventListener('load', () => { v.play().catch(() => {}); });
-        document.body.addEventListener('touchstart', () => { if(v.paused) v.play(); }, {once: true});
+        const v = document.getElementById('main-v');
+        function forcePlay() { if(v.paused) v.play(); }
+        window.addEventListener('load', () => { v.play().catch(() => { console.log("Play blocked"); }); });
+        document.body.addEventListener('touchstart', forcePlay, {once: true});
     </script>
 </body>
 </html>
