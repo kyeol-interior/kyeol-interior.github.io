@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>(주)결 | 메인</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>(주)결 | KYEOL Interior Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 1. 기본 세팅 */
+        /* [1] 기본 초기화 */
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
         body { background:#000; font-family: 'Noto Sans KR', sans-serif; overflow: hidden; height: 100vh; }
 
-        /* 2. 상단 메뉴 (투명하게 영상 위에 띄움) */
+        /* [2] 상단 네비게이션 (투명) */
         nav { 
             position:fixed; top:0; width:100%; height:80px; 
             display:flex; justify-content:space-between; align-items:center; 
@@ -18,50 +18,60 @@
         }
         .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#fff; letter-spacing:4px; }
         .nav-links { display:flex; gap:35px; }
-        .nav-links a { text-decoration:none; color:rgba(255,255,255,0.7); font-size:13px; letter-spacing:2px; transition: 0.3s; }
+        .nav-links a { text-decoration:none; color:rgba(255,255,255,0.7); font-size:13px; letter-spacing:2px; font-weight:400; transition: 0.3s; }
         .nav-links a:hover { color:#fff; }
 
-        /* 3. 배경 영상 (꽉 차게 + 어둡게 필터) */
-        .video-container {
+        /* [3] 비디오 배경 (모바일 강제 실행 옵션 포함) */
+        .video-background {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; overflow: hidden; background: #000;
         }
-        .video-container video {
+        .video-background video {
             width: 100%; height: 100%; object-fit: cover;
-            filter: brightness(0.5); /* 💡 영상이 너무 밝으면 글자가 안 보여서 어둡게 조절했습니다 */
+            filter: brightness(0.5); /* 💡 영상 명도를 낮춰 글자 가독성 확보 */
         }
 
-        /* 4. 중앙 문구와 버튼 */
+        /* [4] 메인 카피 영역 */
         .main-content {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
-            color: #fff; position: relative; z-index: 1; padding: 0 20px;
+            color: #fff; padding: 0 20px; position: relative; z-index: 1;
         }
         .main-title { 
-            font-size: 56px; font-weight: 800; line-height: 1.3; 
+            font-size: 56px; font-weight: 300; line-height: 1.3; 
             margin-bottom: 25px; letter-spacing: -2px; word-break: keep-all;
             opacity: 0; transform: translateY(30px); animation: fadeInUp 1.2s forwards;
         }
+        
+        /* 💡 '결'자만 가장 두껍게(900) 강조 */
+        .point-text { 
+            font-weight: 900; 
+            color: #fff;
+            display: inline-block;
+            margin: 0 2px;
+        }
+
         .main-sub { 
             font-size: 18px; font-weight: 300; letter-spacing: 5px; color: rgba(255,255,255,0.8);
             margin-bottom: 50px; opacity: 0; transform: translateY(20px); animation: fadeInUp 1.2s 0.3s forwards;
         }
+
         .enter-btn {
-            padding: 15px 45px; border: 1px solid #fff; text-decoration: none;
+            padding: 16px 50px; border: 1px solid #fff; text-decoration: none;
             color: #fff; font-size: 13px; letter-spacing: 4px; transition: 0.4s;
             opacity: 0; animation: fadeIn 1.5s 0.8s forwards;
         }
         .enter-btn:hover { background: #fff; color: #000; }
 
-        /* 등장 애니메이션 */
+        /* 애니메이션 효과 */
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { to { opacity: 1; } }
 
-        /* 모바일 대응 */
+        /* 📱 모바일 최적화 */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 70px; }
-            .nav-links { display: none; } /* 모바일은 나중에 햄버거 메뉴로 */
-            .main-title { font-size: 32px; }
+            .nav-links { display: none; } 
+            .main-title { font-size: 34px; }
             .main-sub { font-size: 14px; letter-spacing: 3px; }
         }
     </style>
@@ -78,15 +88,18 @@
         </div>
     </nav>
 
-    <div class="video-container">
-        <video autoplay muted loop playsinline>
+    <div class="video-background">
+        <video autoplay muted loop playsinline webkit-playsinline preload="auto">
             <source src="./image/main_video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
     <div class="main-content">
-        <h1 class="main-title">당신이 머무는 곳마다,<br>기분 좋은 결이 흐르도록.</h1>
+        <h1 class="main-title">
+            당신이 머무는 곳마다,<br>
+            기분 좋은 <span class="point-text">결</span>이 흐르도록.
+        </h1>
         <p class="main-sub">INTERIOR DESIGN & ARCHITECTURE</p>
         <a href="about.html" class="enter-btn">ENTER VIEW</a>
     </div>
