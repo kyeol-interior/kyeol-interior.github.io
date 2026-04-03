@@ -6,64 +6,49 @@
     <title>ABOUT | (주)결</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
     <style>
+        /* [1] 기본 초기화 */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #fff; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; overflow-x: hidden; }
+        body { background: #fff; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
 
-        /* [1] 상단 메뉴 */
-        nav { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 50px; background: rgba(255,255,255,0.98); z-index: 1000; border-bottom: 1px solid #f0f0f0; }
+        /* [2] 상단 메뉴 */
+        nav { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 50px; background: #fff; z-index: 1000; border-bottom: 1px solid #eee; }
         .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; letter-spacing: 4px; font-weight: 600; color: #000; text-decoration: none; }
-        .nav-links a { text-decoration: none; color: #888; font-size: 13px; letter-spacing: 2px; margin-left: 35px; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: #000; font-weight: 500; }
+        .nav-links a { text-decoration: none; color: #888; font-size: 13px; letter-spacing: 2px; margin-left: 35px; }
+        .nav-links a.active { color: #000; font-weight: 500; }
 
-        /* [2] 히어로 섹션 (수정된 부분: 높이 조절 및 간격 축소) */
+        /* [3] 히어로 섹션 (높이 상향 및 구분선 밀착) */
         .hero { 
-            padding-top: 150px; /* 메뉴 아래 여백 */
-            padding-bottom: 60px; /* 아래 섹션과의 간격을 좁힘 */
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
+            padding: 160px 0 50px; 
             background: #fbfbfb; 
             text-align: center; 
-            border-bottom: 1px solid #eee; /* 아래쪽 구분선 강조 */
+            border-bottom: 1.5px solid #eee; 
         }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; letter-spacing: 8px; margin-bottom: 15px; color: #111; }
-        .hero p { font-size: 16px; color: #999; letter-spacing: 3px; font-weight: 300; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 50px; letter-spacing: 10px; margin-bottom: 10px; }
+        .hero p { font-size: 16px; color: #aaa; letter-spacing: 4px; }
 
-        /* [3] 브랜드 스토리 (헤더와 더 밀착되도록 상단 마진 조절) */
-        .story { max-width: 1100px; margin: 80px auto 100px; padding: 0 30px; display: flex; align-items: center; gap: 60px; }
+        /* [4] 스토리 섹션 */
+        .story { max-width: 1100px; margin: 80px auto; padding: 0 30px; display: flex; align-items: center; gap: 60px; }
         .story-text { flex: 1; }
-        .story-text h2 { font-size: 32px; margin-bottom: 25px; line-height: 1.4; font-weight: 500; }
+        .story-text h2 { font-size: 30px; margin-bottom: 25px; font-weight: 500; word-break: keep-all; }
         .story-text p { color: #666; font-size: 16px; margin-bottom: 20px; word-break: keep-all; }
-        .story-img { flex: 1; height: 450px; background: #eee; overflow: hidden; }
+        
+        .story-img { flex: 1.2; height: 450px; background: #eee; border-radius: 4px; overflow: hidden; }
         .story-img img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* [4] 신뢰성 & 인증 섹션 */
-        .trust { background: #111; color: #fff; padding: 120px 0; }
-        .trust-container { max-width: 1100px; margin: 0 auto; padding: 0 30px; }
-        .trust-header { text-align: center; margin-bottom: 70px; }
-        .trust-header h2 { font-family: 'Playfair Display', serif; font-size: 32px; letter-spacing: 4px; margin-bottom: 15px; }
-        .trust-header p { font-size: 14px; opacity: 0.5; letter-spacing: 1px; }
+        /* [5] 신뢰성 섹션 */
+        .trust { background: #111; color: #fff; padding: 100px 0; text-align: center; }
+        .trust-grid { max-width: 1100px; margin: 50px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 0 30px; }
+        .trust-item { padding: 40px 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .trust-item h3 { color: #d4af37; font-size: 18px; margin-bottom: 15px; }
+        .trust-item p { font-size: 14px; opacity: 0.7; word-break: keep-all; }
 
-        .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .trust-item { background: rgba(255,255,255,0.05); padding: 50px 35px; border: 1px solid rgba(255,255,255,0.1); transition: 0.4s; text-align: center; }
-        .trust-item:hover { background: rgba(255,255,255,0.1); border-color: #d4af37; transform: translateY(-10px); }
-        .trust-item .icon { font-size: 35px; margin-bottom: 25px; display: block; }
-        .trust-item h3 { font-size: 20px; margin-bottom: 15px; color: #d4af37; font-weight: 500; }
-        .trust-item p { font-size: 14px; line-height: 1.7; opacity: 0.7; font-weight: 300; word-break: keep-all; }
-
-        /* [5] 푸터 유도 버튼 */
-        .next { text-align: center; padding: 150px 0; background: #fff; }
-        .btn-portfolio { display: inline-block; padding: 18px 50px; border: 1px solid #111; color: #111; text-decoration: none; font-size: 13px; letter-spacing: 3px; transition: 0.4s; }
-        .btn-portfolio:hover { background: #111; color: #fff; }
-
+        /* 모바일 대응 */
         @media (max-width: 768px) {
             nav { padding: 0 20px; }
             .nav-links { display: none; }
-            .hero { padding-top: 120px; padding-bottom: 40px; }
-            .hero h1 { font-size: 32px; }
-            .story { flex-direction: column; text-align: center; margin: 40px auto; }
+            .story { flex-direction: column; text-align: center; }
             .trust-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 32px; }
         }
     </style>
 </head>
@@ -81,51 +66,41 @@
 
     <section class="hero">
         <h1>ABOUT KYEOL</h1>
-        <p>건축과 인테리어, 그 이상의 가치를 짓다</p>
+        <p>공간의 본질, 그 결을 짓다</p>
     </section>
 
     <section class="story">
         <div class="story-text">
             <h2>공간의 결을 이해하는<br>전문 건설 법인, (주)결</h2>
-            <p>(주)결은 실내건축공사업 면허를 보유한 전문 인테리어 법인 기업입니다. 우리는 공간이 가진 본연의 목적에 집중하며, 사용자의 동선과 심리까지 고려한 정교한 설계를 추구합니다.</p>
-            <p>특히 교육 환경 개선 사업과 공공기관 행정 공간 프로젝트에서 쌓아온 풍부한 경험은 (주)결만의 독보적인 자산입니다. 단순한 시공을 넘어, 신뢰를 바탕으로 공간의 새로운 기준을 제시합니다.</p>
+            <p>(주)결은 실내건축공사업 면허를 보유한 전문 인테리어 법인 기업입니다. 특히 교육 환경 개선 사업과 공공기관 행정 공간 프로젝트에서 쌓아온 풍부한 경험은 (주)결만의 독보적인 자산입니다.</p>
+            <p>단순한 시공을 넘어, 신뢰를 바탕으로 공간의 새로운 기준을 제시합니다.</p>
         </div>
         <div class="story-img">
-            <img src="./image/8-4.jpg" alt="시공사례">
+            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2000" alt="KYEOL Interior">
         </div>
     </section>
 
     <section class="trust">
-        <div class="trust-container">
-            <div class="trust-header">
-                <h2>TRUST & CERTIFIED</h2>
-                <p>법적 기준과 사회적 가치를 준수하는 신뢰의 지표</p>
+        <h2 style="font-family: 'Playfair Display', serif; letter-spacing: 5px;">TRUST & CERTIFIED</h2>
+        <div class="trust-grid">
+            <div class="trust-item">
+                <h3>실내건축공사업 면허</h3>
+                <p>법인 기업으로서 안전하고 투명한 책임 시공을 약속합니다.</p>
             </div>
-            
-            <div class="trust-grid">
-                <div class="trust-item">
-                    <span class="icon">🏛️</span>
-                    <h3>실내건축공사업 면허</h3>
-                    <p>국가 공인 전문건설업 면허를 보유한 법인 기업으로서, 법적 기준에 부합하는 안전하고 투명한 책임 시공을 약속합니다.</p>
-                </div>
-                <div class="trust-item">
-                    <span class="icon">🤝</span>
-                    <h3>장애인기업 인증</h3>
-                    <p>사회적 가치 창출에 동참하는 장애인기업으로서, 공공기관 우선구매 제도 등 비즈니스 파트너십에 최적화된 조건을 갖추고 있습니다.</p>
-                </div>
-                <div class="trust-item">
-                    <span class="icon">🏫</span>
-                    <h3>교육·공공시설 전문</h3>
-                    <p>초·중·고교 및 행정기관의 까다로운 요구사항과 예산 집행 프로세스를 깊이 이해하며 최상의 만족도를 제공합니다.</p>
-                </div>
+            <div class="trust-item">
+                <h3>장애인기업 인증</h3>
+                <p>사회적 가치를 창출하며 공공기관 우선구매 파트너십을 제공합니다.</p>
+            </div>
+            <div class="trust-item">
+                <h3>교육·공공시설 전문</h3>
+                <p>학교 및 행정기관의 기준을 충족하는 특화된 솔루션을 보유하고 있습니다.</p>
             </div>
         </div>
     </section>
 
-    <section class="next">
-        <p style="color: #999; margin-bottom: 30px; letter-spacing: 2px;">결이 완성한 실제 공간들을 확인해보세요.</p>
-        <a href="portfolio.html" class="btn-portfolio">VIEW PORTFOLIO</a>
-    </section>
+    <div style="text-align: center; padding: 100px 0;">
+        <a href="portfolio.html" style="display: inline-block; padding: 18px 50px; border: 1px solid #111; color: #111; text-decoration: none; font-size: 13px; letter-spacing: 3px;">VIEW PORTFOLIO</a>
+    </div>
 
 </body>
 </html>
