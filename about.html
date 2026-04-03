@@ -9,36 +9,23 @@
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
         body { background:#fff; font-family: 'Noto Sans KR', sans-serif; color:#111; line-height:1.8; overflow-x:hidden; }
 
-        /* [1] 네비게이션: 상단 고정 및 확장형 설계 */
+        /* [1] 네비게이션 */
         nav { 
             position:fixed; top:0; width:100%; height:80px; 
             display:flex; justify-content:space-between; align-items:center; 
-            padding:0 50px; background:rgba(255,255,255,1); z-index:1000; 
-            border-bottom:1px solid #f2f2f2; transition: 0.4s ease;
+            padding:0 50px; background:#fff; z-index:1000; 
+            border-bottom:1px solid #f2f2f2;
         }
         .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#000; letter-spacing:4px; }
         
         /* PC 가로 메뉴 */
         .nav-links { display:flex; gap:35px; }
-        .nav-links a { text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; font-weight:400; transition: 0.3s; }
+        .nav-links a { text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; font-weight:400; }
         .nav-links a.active { color:#000; font-weight:700; }
 
-        /* 모바일용 햄버거 버튼 */
+        /* 모바일 햄버거 버튼 */
         .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; }
-        .menu-btn span { width: 22px; height: 2px; background: #000; transition: 0.3s; }
-
-        /* 모바일 드롭다운 메뉴 (페이지를 덮지 않고 상단에서 내려옴) */
-        .mobile-nav {
-            position: fixed; top: 70px; left: 0; width: 100%; 
-            background: #fff; border-bottom: 1px solid #eee;
-            display: none; flex-direction: column; padding: 20px 0;
-            z-index: 999; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-        .mobile-nav a { 
-            padding: 15px 30px; text-decoration: none; color: #111; 
-            font-size: 14px; font-weight: 500; letter-spacing: 2px;
-            border-bottom: 1px solid #f9f9f9;
-        }
+        .menu-btn span { width: 22px; height: 2px; background: #000; }
 
         /* [2] 메인 레이아웃 */
         .wrapper { display:flex; width:100%; height:100vh; padding-top:80px; }
@@ -46,23 +33,24 @@
         .img-side { flex:1.3; overflow:hidden; }
         .img-side img { width:100%; height:100%; object-fit:cover; }
 
-        .title-main { font-size:48px; font-weight:800; line-height:1.3; margin-bottom:30px; letter-spacing:-1.5px; }
-        .desc-text { font-size:18px; color:#444; font-weight:300; word-break:keep-all; }
+        /* 💡 문구 디자인 수정 */
+        .title-main { font-size:46px; font-weight:800; line-height:1.3; margin-bottom:35px; letter-spacing:-1.5px; color:#111; }
+        .desc-text { font-size:17.5px; color:#444; font-weight:300; word-break:keep-all; }
         .desc-text b { font-weight: 700; color:#000; }
         
-        .highlight-section { margin-top:40px; padding-top:30px; border-top:1px solid #ddd; }
-        .cert-badge { display:inline-block; padding:6px 15px; background:#111; color:#fff; font-size:11px; letter-spacing:1px; margin-right:8px; margin-bottom:10px; }
+        .highlight-section { margin-top:45px; padding-top:35px; border-top:1px solid #ddd; }
+        .cert-badge { display:inline-block; padding:7px 15px; background:#000; color:#fff; font-size:11px; letter-spacing:1px; margin-right:8px; margin-bottom:12px; }
+        .cert-sub { font-size:14.5px; color:#777; line-height:1.6; font-weight:400; }
 
-        /* 📱 모바일 버전 디테일 */
+        /* 📱 모바일 버전 */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 70px; }
             .logo { font-size: 20px; }
             .nav-links { display: none; } 
             .menu-btn { display: flex; } 
-
             .wrapper { flex-direction:column; height:auto; padding-top:70px; }
             .img-side { height:350px; order:1; }
-            .text-side { padding:50px 25px 100px; order:2; background:#fff; }
+            .text-side { padding:60px 25px 100px; order:2; background:#fff; }
             .title-main { font-size:32px; }
             .desc-text { font-size:16px; }
         }
@@ -71,47 +59,38 @@
 <body>
     <nav>
         <a href="index.html" class="logo">KYEOL</a>
-        
         <div class="nav-links">
             <a href="about.html" class="active">ABOUT</a>
             <a href="portfolio.html">PORTFOLIO</a>
             <a href="proposal.html">PROPOSAL</a>
             <a href="contact.html">CONTACT</a>
         </div>
-
         <div class="menu-btn" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
     </nav>
-
-    <div class="mobile-nav" id="dropdown">
-        <a href="about.html">ABOUT</a>
-        <a href="portfolio.html">PORTFOLIO</a>
-        <a href="proposal.html">PROPOSAL</a>
-        <a href="contact.html">CONTACT</a>
-    </div>
     
     <div class="wrapper">
         <div class="text-side">
-            <h1 class="title-main">단순히 짓는 것이 아니라,<br>인연의 마침표를 맺습니다.</h1>
+            <h1 class="title-main">공간의 본질을 세우고<br>교육의 가치를 잇습니다.</h1>
             <p class="desc-text">
-                우리는 공간이 가진 본질의 힘을 믿습니다.<br>
-                <b>(주)결</b>은 사람과 공간이 만나는 지점에<br>
-                가장 단단하고 아름다운 <b>결속(結)</b>을 채워 넣습니다.<br><br>
+                우리는 단순한 건축을 넘어, 공간이 지닌 고유한 <b>결</b>을 찾습니다.<br>
+                <b>(주)결</b>은 사람과 공간, 그리고 그 사이의 수많은 가능성을<br>
+                가장 단단하고 아름답게 <b>연결(結)</b>하는 실내건축 전문 기업입니다.<br><br>
                 
-                수많은 교육 시설과 공공기관 프로젝트를 수행하며 쌓아온 정밀함은<br>
-                우리의 자부심이자, 대표님께 드리는 가장 큰 약속입니다.
+                특히 학교와 공공기관의 행정 공간 프로젝트에서 축적한 풍부한 경험은<br>
+                사용자의 편의와 심미적 가치를 모두 충족시키는<br>
+                우리만의 독보적인 자산입니다.
             </p>
 
             <div class="highlight-section">
                 <div>
-                    <span class="cert-badge">장애인기업 인증 법인</span>
-                    <span class="cert-badge">실내건축공사업 면허 보유</span>
+                    <span class="cert-badge">실내건축공사업 면허 보유 법인</span>
+                    <span class="cert-badge">인증 장애인기업</span>
                 </div>
-                <p style="font-size:14px; color:#888; margin-top:5px;">
-                    (주)결은 사회적 가치를 실현하며,<br>공공의 신뢰를 바탕으로 공간의 새로운 기준을 제시합니다.
+                <p class="cert-sub">
+                    (주)결은 사회적 책임을 다하는 <b>장애인기업</b>으로서<br>
+                    공공의 신뢰를 바탕으로 공간의 새로운 기준을 제시합니다.
                 </p>
             </div>
         </div>
@@ -119,31 +98,5 @@
             <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000" alt="KYEOL Interior">
         </div>
     </div>
-
-    <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const dropdown = document.getElementById('dropdown');
-        const nav = document.querySelector('nav');
-
-        menuToggle.onclick = function() {
-            // 드롭다운 메뉴 토글
-            if (dropdown.style.display === 'flex') {
-                dropdown.style.display = 'none';
-                nav.style.borderBottom = '1px solid #f2f2f2';
-            } else {
-                dropdown.style.display = 'flex';
-                nav.style.borderBottom = 'none'; // 메뉴 열릴 때 경계선 제거로 일체감 부여
-            }
-        };
-
-        // 메뉴 외부 클릭 시 닫기 (사용자 배려)
-        window.onclick = function(event) {
-            if (!event.target.matches('.menu-btn') && !event.target.matches('.menu-btn span')) {
-                if (dropdown.style.display === 'flex') {
-                    dropdown.style.display = 'none';
-                }
-            }
-        }
-    </script>
 </body>
 </html>
