@@ -3,65 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>(주)결 | KYEOL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    <title>(주)결 | KYEOL Interior Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        /* [1] 공통 네비게이션 스타일 (투명 버전) */
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
-        body, html { width:100%; height:100%; background:#000; overflow:hidden; font-family: 'Noto Sans KR', sans-serif; }
+        body { background:#000; font-family: 'Noto Sans KR', sans-serif; overflow: hidden; height: 100vh; }
+
+        nav { 
+            position:fixed; top:0; width:100%; height:80px; 
+            display:flex; justify-content:space-between; align-items:center; 
+            padding:0 50px; background:transparent; z-index:1000; 
+        }
+        .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#fff; letter-spacing:4px; }
         
-        /* 영상이 안 나올 때를 대비해 8-4.jpg를 배경으로 대기시킵니다 */
-        .video-bg { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
-            background: url('./image/8-4.jpg') no-repeat center center; 
-            background-size: cover; 
-        }
-        video { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.6; }
+        .nav-links { display:flex; gap:35px; }
+        .nav-links a { text-decoration:none; color:rgba(255,255,255,0.7); font-size:13px; letter-spacing:2px; font-weight:400; transition: 0.3s; }
+        .nav-links a:hover { color:#fff; }
 
-        .main-link { 
-            width: 100%; height: 100vh; display: flex; flex-direction: column; 
-            align-items: center; justify-content: center; text-decoration: none; text-align: center;
-        }
+        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1002; }
+        .menu-btn span { width: 22px; height: 2px; background: #fff; transition: 0.3s; }
 
-        /* PC 버전: 시원하고 압도적인 스케일 */
-        .brand-logo { 
-            font-family: 'Playfair Display', serif; font-size: 110px; 
-            color: #fff; letter-spacing: 30px; font-weight: 600; margin-right: -30px;
+        .mobile-nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: #fff; display: none; flex-direction: column; 
+            justify-content: center; align-items: center; z-index: 1100;
         }
-        .brand-meaning { 
-            font-size: 22px; color: #fff; letter-spacing: 18px; 
-            margin-top: 35px; opacity: 0.9; font-weight: 300; white-space: nowrap;
+        .mobile-nav a { padding: 20px; text-decoration: none; color: #111; font-size: 24px; font-weight: 700; font-family: 'Playfair Display', serif; }
+
+        /* [2] 비디오 배경 섹션 */
+        .video-background {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; overflow: hidden;
         }
-        .click-btn { 
-            margin-top: 80px; color:#fff; font-size: 12px; letter-spacing: 6px; 
-            border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 8px; opacity: 0.6;
+        .video-background video {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: brightness(0.6); /* 문구가 잘 보이도록 영상 명도 조절 */
         }
 
-        /* 모바일 버전: 한 줄 정렬 및 최적화 */
-        @media (max-width: 768px) {
-            .brand-logo { font-size: 42px; letter-spacing: 12px; margin-right: -12px; }
-            .brand-meaning { font-size: 11px; letter-spacing: 5px; margin-top: 18px; }
-            .click-btn { margin-top: 55px; font-size: 10px; letter-spacing: 4px; }
+        /* [3] 메인 카피 영역 */
+        .main-content {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            color: #fff; padding: 0 20px; position: relative; z-index: 1;
+        }
+        .main-title { 
+            font-size: 56px; font-weight: 800; line-height: 1.2; 
+            margin-bottom: 25px; letter-spacing: -2px; 
+            opacity: 0; transform: translateY(30px); animation: fadeInUp 1.2s forwards;
+            word-break: keep-all;
+        }
+        .main-sub { 
+            font-size: 18px; font-weight: 300; letter-spacing: 5px; color: rgba(255,255,255,0.8);
+            margin-bottom: 50px; opacity: 0; transform: translateY(20px); animation: fadeInUp 1.2s 0.3s forwards;
+        }
+
+        .enter-btn {
+            padding: 15px 45px; border: 1px solid #fff; text-decoration: none;
+            color: #fff; font-size: 13px; letter-spacing: 4px; transition: 0.4s;
+            opacity: 0; animation: fadeIn 1.5s 0.8s forwards;
+        }
+        .enter-btn:hover { background: #fff; color: #000; }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* 📱 모바일 대응 */
+        @media (max-width: 1024px) {
+            nav { padding: 0 25px; height: 70px; }
+            .nav-links { display: none; } 
+            .menu-btn { display: flex; } 
+            .main-title { font-size: 32px; }
+            .main-sub { font-size: 14px; letter-spacing: 3px; }
         }
     </style>
 </head>
-<body onclick="forcePlay()">
-    <div class="video-bg">
-        <video id="main-v" autoplay muted loop playsinline preload="auto" poster="./image/8-4.jpg">
-            <source src="./image/kyeol_video_optimized1.mp4" type="video/mp4">
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">KYEOL</a>
+        <div class="nav-links">
+            <a href="about.html">ABOUT</a>
+            <a href="portfolio.html">PORTFOLIO</a>
+            <a href="proposal.html">PROPOSAL</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+        <div class="menu-btn" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <div class="mobile-nav" id="dropdown">
+        <a href="about.html">ABOUT</a>
+        <a href="portfolio.html">PORTFOLIO</a>
+        <a href="proposal.html">PROPOSAL</a>
+        <a href="contact.html">CONTACT</a>
+    </div>
+
+    <div class="video-background">
+        <video autoplay muted loop playsinline poster="image/about1.jpg">
+            <source src="image/main_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
     </div>
 
-    <a href="about.html" class="main-link">
-        <div class="brand-logo">KYEOL</div>
-        <div class="brand-meaning">공간과 사람의 인연을 맺다 : 結</div>
-        <div class="click-btn">CLICK TO ENTER</div>
-    </a>
+    <div class="main-content">
+        <h1 class="main-title">당신이 머무는 곳마다,<br>기분 좋은 결이 흐르도록.</h1>
+        <p class="main-sub">INTERIOR DESIGN & ARCHITECTURE</p>
+        <a href="about.html" class="enter-btn">ENTER VIEW</a>
+    </div>
 
     <script>
-        const v = document.getElementById('main-v');
-        function forcePlay() { if(v.paused) v.play(); }
-        window.addEventListener('load', () => { v.play().catch(() => { console.log("Play blocked"); }); });
-        document.body.addEventListener('touchstart', forcePlay, {once: true});
+        const menuToggle = document.getElementById('menuToggle');
+        const dropdown = document.getElementById('dropdown');
+
+        menuToggle.onclick = function(e) {
+            e.stopPropagation();
+            dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
+        };
+
+        window.onclick = function() {
+            dropdown.style.display = 'none';
+        }
     </script>
 </body>
 </html>
