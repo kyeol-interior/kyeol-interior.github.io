@@ -6,94 +6,93 @@
     <title>KYEOL | (주)결</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* 기본 초기화 */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body, html { width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Noto Sans KR', sans-serif; }
 
-        /* [1] 영상 배경: 화면 전체 꽉 차게 */
+        /* [1] 영상 배경 영역 */
         #video-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; background: #000;
+            z-index: -1; background: #000; overflow: hidden;
         }
         #bg-video {
-            width: 100%; height: 100%; object-fit: cover; display: block;
+            position: absolute; top: 50%; left: 50%;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            display: block;
         }
 
-        /* [2] 중앙 콘텐츠 레이어 */
-        .overlay-content {
+        /* [2] 텍스트 레이어 (클릭 시 진입) */
+        .main-link {
             width: 100%; height: 100vh; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center;
-            background: rgba(0, 0, 0, 0.2); /* 영상이 잘 보이도록 연한 덮개 */
-            text-decoration: none;
+            background: rgba(0, 0, 0, 0.3); /* 영상 대비를 위한 암막 */
+            text-decoration: none; cursor: pointer;
         }
 
         .brand-name { 
             font-family: 'Playfair Display', serif;
-            font-size: 85px; 
-            letter-spacing: 20px; 
+            font-size: clamp(40px, 10vw, 85px); /* 화면 크기에 맞게 자동 조절 */
+            letter-spacing: clamp(10px, 2vw, 20px); 
             color: #fff; 
-            margin-right: -20px;
             font-weight: 700;
+            margin-bottom: 10px;
         }
         
         .sub-text {
-            font-size: 14px;
+            font-size: clamp(10px, 1.5vw, 14px);
             color: #fff;
-            letter-spacing: 10px;
-            margin-top: 10px;
+            letter-spacing: clamp(5px, 1vw, 10px);
             opacity: 0.8;
             font-weight: 300;
+            text-transform: uppercase;
         }
 
         .enter-btn { 
-            margin-top: 60px;
+            margin-top: 50px;
             font-size: 12px; 
             letter-spacing: 5px; 
             color: #fff; 
-            border-bottom: 1.5px solid #fff; 
-            padding-bottom: 5px;
-            font-weight: 400;
-        }
-
-        /* 모바일 최적화 */
-        @media (max-width: 768px) {
-            .brand-name { font-size: 45px; letter-spacing: 10px; margin-right: -10px; }
-            .sub-text { font-size: 10px; letter-spacing: 5px; }
+            border-bottom: 1px solid rgba(255,255,255,0.6); 
+            padding-bottom: 8px;
+            transition: 0.3s;
         }
     </style>
 </head>
-<body>
+<body onclick="playVideoManual()">
 
     <div id="video-container">
-        <video id="bg-video" autoplay muted loop playsinline preload="auto">
+        <video id="bg-video" autoplay muted loop playsinline preload="auto" poster="./image/8-4.jpg">
             <source src="./image/kyeol_video_optimized1.mp4" type="video/mp4">
-            </video>
+        </video>
     </div>
 
-    <a href="about.html" class="overlay-content">
+    <a href="about.html" class="main-link">
         <div class="brand-name">KYEOL</div>
-        <div class="sub-text">ARCHITECTURE & INTERIOR</div>
+        <div class="sub-text">Architecture & Interior Design</div>
         <div class="enter-btn">CLICK TO ENTER</div>
     </a>
 
     <script>
-        // 🛠 영상 강제 재생 트리거 (브라우저 차단 우회)
-        window.addEventListener('DOMContentLoaded', function() {
-            var v = document.getElementById('bg-video');
-            
-            // 1. 페이지 로드 시 즉시 재생 시도
-            v.play().catch(function(err) {
-                console.log("자동재생 차단됨 - 사용자 상호작용 대기");
-                
-                // 2. 만약 차단되면, 사용자가 화면 어디든 '터치/클릭'하는 순간 바로 재생
-                var playVideo = function() {
-                    v.play();
-                    window.removeEventListener('click', playVideo);
-                    window.removeEventListener('touchstart', playVideo);
-                };
-                window.addEventListener('click', playVideo);
-                window.addEventListener('touchstart', playVideo);
-            });
+        const v = document.getElementById('bg-video');
+
+        // 1. 페이지 로드 시 자동재생 시도
+        window.addEventListener('load', () => {
+            const playPromise = v.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    console.log("자동재생 대기 중...");
+                });
+            }
         });
+
+        // 2. 브라우저 차단 시 사용자가 화면 아무 데나 누르면 재생 시작 (강제 트리거)
+        function playVideoManual() {
+            if (v.paused) {
+                v.play();
+            }
+        }
     </script>
 </body>
 </html>
