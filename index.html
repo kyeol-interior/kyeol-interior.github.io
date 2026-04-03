@@ -2,99 +2,85 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KYEOL | (주)결</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <style>
-        /* 1. 바닥 공사: 모든 여백 제거 및 배경 검정 */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Montserrat', sans-serif; }
+        body, html { width: 100%; height: 100%; background: #000; font-family: 'Montserrat', sans-serif; color: #fff; }
 
-        /* 2. 영상 레이어: 최하단(-10)에 고정 */
-        .video-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -10; }
-        video { width: 100%; height: 100%; object-fit: cover; }
-        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: -9; }
+        /* [1] 영상 배경: 바닥에 깔기 */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
 
-        /* 3. SNS 메뉴 레이어: 좌측 상단 고정 */
-        .sns-nav { position: absolute; top: 40px; left: 40px; z-index: 50; }
-        .sns-nav h2 { color: #fff; font-size: 13px; letter-spacing: 4px; margin-bottom: 20px; opacity: 0.8; }
-        .sns-nav a { display: block; color: #fff; text-decoration: none; font-size: 10px; letter-spacing: 3px; margin-bottom: 12px; opacity: 0.5; }
+        /* [2] 메인 콘텐츠: 영상 위에 띄우기 */
+        .main-content {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 10; /* 영상보다 높은 숫자 */
+            cursor: pointer;
+        }
 
-        /* 4. 메인 콘텐츠 레이어: 중앙 정렬 */
-        .main-frame { width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; position: relative; z-index: 10; }
-        .enter-button { background: none; border: none; cursor: pointer; outline: none; display: block; width: 100%; }
-        
-        .logo-box img { width: 300px; height: auto; filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(255,255,255,0.4)); margin-bottom: 10px; }
-        .title-kyeol { font-family: 'Playfair Display', serif; font-size: 80px; letter-spacing: 25px; margin-right: -25px; line-height: 1.1; margin-bottom: 15px; }
-        .title-sub { font-size: 12px; letter-spacing: 10px; opacity: 0.5; text-transform: uppercase; margin-bottom: 70px; }
-        .title-click { font-size: 10px; letter-spacing: 5px; opacity: 0.3; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; display: inline-block; }
+        /* 로고 및 텍스트 스타일 */
+        .logo-img { width: 300px; filter: brightness(0) invert(1); margin-bottom: 10px; }
+        .brand-name { font-family: 'Playfair Display', serif; font-size: 80px; letter-spacing: 25px; margin-right: -25px; margin-bottom: 15px; }
+        .sub-name { font-size: 12px; letter-spacing: 10px; opacity: 0.6; margin-bottom: 60px; }
+        .enter-btn { font-size: 11px; letter-spacing: 5px; opacity: 0.4; border-bottom: 1px solid #fff; padding-bottom: 5px; }
 
-        /* 5. 메뉴 오버레이 (클릭 시 등장) */
-        #menu-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 100; }
-        #menu-screen a { color: #fff; text-decoration: none; font-size: 35px; margin: 20px 0; letter-spacing: 10px; opacity: 0.7; }
-        .btn-back { position: absolute; top: 40px; left: 40px; color: #fff; font-size: 11px; letter-spacing: 4px; cursor: pointer; opacity: 0.5; }
+        /* 좌측 SNS 메뉴 */
+        .sns-menu { position: fixed; top: 40px; left: 40px; z-index: 20; }
+        .sns-menu h2 { font-size: 13px; letter-spacing: 4px; margin-bottom: 20px; }
+        .sns-menu a { display: block; color: #fff; text-decoration: none; font-size: 10px; letter-spacing: 3px; margin-bottom: 12px; opacity: 0.5; }
 
         /* 모바일 대응 */
         @media (max-width: 768px) {
-            .sns-nav, .btn-back { top: 30px; left: 30px; }
-            .logo-box img { width: 160px; }
-            .title-kyeol { font-size: 40px; letter-spacing: 12px; margin-right: -12px; }
-            .title-sub { font-size: 9px; letter-spacing: 6px; }
-            #menu-screen a { font-size: 24px; letter-spacing: 8px; }
+            .logo-img { width: 160px; }
+            .brand-name { font-size: 40px; letter-spacing: 12px; margin-right: -12px; }
+            .sub-name { font-size: 9px; letter-spacing: 6px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="video-background">
-        <video id="main-video" autoplay muted loop playsinline>
-            <source src="./image/kyeol_video_optimized1.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-    </div>
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="./image/kyeol_video_optimized1.mp4" type="video/mp4">
+    </video>
+    <div class="bg-overlay"></div>
 
-    <div class="sns-nav" id="ui-sns">
+    <div class="sns-menu">
         <h2>MY STUDIO</h2>
         <a href="https://blog.naver.com/rotte123" target="_blank">BLOG</a>
         <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO</a>
     </div>
 
-    <div class="main-frame" id="ui-main">
-        <button class="enter-button" onclick="openNav()">
-            <div class="logo-box"><img src="./image/logo.png" alt="(주)결"></div>
-            <div class="title-kyeol">KYEOL</div>
-            <div class="title-sub">ARCHITECTURE & INTERIOR</div>
-            <div class="title-click">CLICK TO ENTER</div>
-        </button>
+    <div class="main-content" onclick="location.href='about.html'">
+        <img src="./image/logo.png" alt="KYEOL" class="logo-img">
+        <div class="brand-name">KYEOL</div>
+        <div class="sub-name">ARCHITECTURE & INTERIOR</div>
+        <div class="enter-btn">CLICK TO ENTER</div>
     </div>
 
-    <div id="menu-screen">
-        <div class="btn-back" onclick="closeNav()">← BACK</div>
-        <a href="about.html">ABOUT</a>
-        <a href="portfolio.html">PORTFOLIO</a>
-        <a href="proposal.html">PROPOSAL</a>
-        <a href="contact.html">CONTACT</a>
-    </div>
-
-    <script>
-        // 영상 강제 실행 로직
-        const video = document.getElementById('main-video');
-        window.addEventListener('load', () => {
-            video.play().catch(() => {
-                document.body.addEventListener('click', () => { video.play(); }, {once: true});
-            });
-        });
-
-        function openNav() {
-            document.getElementById('ui-main').style.display = 'none';
-            document.getElementById('ui-sns').style.display = 'none';
-            document.getElementById('menu-screen').style.display = 'flex';
-        }
-        function closeNav() {
-            document.getElementById('menu-screen').style.display = 'none';
-            document.getElementById('ui-main').style.display = 'flex';
-            document.getElementById('ui-sns').style.display = 'block';
-        }
-    </script>
 </body>
 </html>
