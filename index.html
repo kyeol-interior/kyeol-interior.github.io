@@ -4,36 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>(주)결 | KYEOL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        body, html { width:100%; height:100%; background:#000; overflow:hidden; font-family: 'Noto Serif KR', serif; }
+        body, html { width:100%; height:100%; background:#000; overflow:hidden; font-family: 'Noto Sans KR', sans-serif; }
         
-        /* 영상 배경 */
-        .v-bg { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background:#000; }
-        video { width:100%; height:100%; object-fit:cover; display:block; opacity: 0.6; }
+        .v-bg { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+        video { width:100%; height:100%; object-fit:cover; display:block; opacity: 0.65; }
 
-        /* 중앙 콘텐츠 */
         .main-frame { 
             width:100%; height:100vh; display:flex; flex-direction:column; 
             align-items:center; justify-content:center; text-decoration:none;
         }
         .brand-name { 
-            font-family: 'Playfair Display', serif; font-size: clamp(50px, 15vw, 90px); 
+            font-family: 'Playfair Display', serif; font-size: clamp(55px, 16vw, 100px); 
             color:#fff; letter-spacing: 25px; font-weight:600; margin-right: -25px;
         }
+        /* 서브 타이틀 사이즈 상향 */
         .brand-meaning { 
-            font-size: 13px; color: #fff; letter-spacing: 12px; margin-top: 15px; 
-            opacity: 0.8; font-weight: 300; 
+            font-size: clamp(16px, 3vw, 22px); color: #fff; letter-spacing: 15px; 
+            margin-top: 25px; font-weight: 300; text-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
         .enter-hint { 
-            margin-top:70px; color:#fff; font-size:10px; letter-spacing:5px; 
-            border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:5px; opacity: 0.5;
-        }
-
-        @media (max-width:768px) { 
-            .brand-name { font-size: 42px; letter-spacing: 12px; margin-right: -12px; }
-            .brand-meaning { font-size: 10px; letter-spacing: 6px; }
+            margin-top:80px; color:#fff; font-size:11px; letter-spacing:5px; 
+            border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:5px; opacity: 0.6;
         }
     </style>
 </head>
@@ -45,7 +39,7 @@
     </div>
     <a href="about.html" class="main-frame">
         <div class="brand-name">KYEOL</div>
-        <div class="brand-meaning">공간과 사람을 맺다 : 結</div>
+        <div class="brand-meaning">공간과 사람의 인연을 맺다 : 結</div>
         <div class="enter-hint">CLICK TO ENTER</div>
     </a>
 </body>
