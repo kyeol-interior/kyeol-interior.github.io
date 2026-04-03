@@ -111,71 +111,87 @@ header {
 }
 
 @media (max-width: 1024px) {
-    /* 1. 상단 여백 및 로고 정돈 */
-    header { padding: 30px 20px 0 !important; }
-    .logo { font-size: 22px; letter-spacing: 6px; }
-    .filter-nav { margin: 10px 0 20px !important; opacity: 0.3; }
+    /* 1. 상단 헤더 및 네비게이션 정돈 (AETHER 스타일) */
+    header {
+        padding: 20px 15px 10px !important;
+        text-align: left !important; /* 로고 왼쪽 정렬 */
+    }
 
-    .grid-container { gap: 0; padding: 0; }
+    .logo {
+        font-size: 20px;
+        letter-spacing: 2px;
+        font-weight: 500;
+    }
+
+    .sub-title { display: none; } /* 서브타이틀은 생략하여 깔끔하게 */
+
+    .filter-nav {
+        text-align: left;
+        padding: 0 15px;
+        margin: 10px 0 20px !important;
+        font-size: 10px;
+        letter-spacing: 1px;
+        opacity: 0.8;
+    }
+
+    /* 2. 촘촘한 그리드 레이아웃 */
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5px; /* 사진 사이의 아주 미세한 간격 */
+        padding: 0 10px 50px; /* 좌우 여백 살짝 부여 */
+    }
 
     .grid-item {
-        height: 80vh !important; /* 💡 화면의 80%를 차지하게 하여 아래 프로젝트가 20% 살짝 보임 */
-        background: #0a0a0a;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 100%;
+        height: 200px !important; /* 💡 사진 높이를 고정하여 한 화면에 여러 개 보이게 함 */
+        position: relative;
+        overflow: hidden;
+        background: #111;
     }
 
-    /* 2. 사진 규격 및 부드러운 전환 */
+    /* 3. 사진 규격 및 흑백/컬러 효과 */
     .grid-item img {
-        width: 100% !important; /* 💡 좌우를 꽉 채워 시원하게 */
-        height: 55vh !important; /* 💡 모든 사진 높이 동일 고정 */
+        width: 100% !important;
+        height: 100% !important;
         object-fit: cover;
-        filter: grayscale(100%) brightness(0.3); /* 기본: 아주 차분하게 */
-        transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1); /* 💡 더 고급스러운 가속도 */
+        /* 기본: 약간 어두운 상태 (글자가 잘 보이게) */
+        filter: grayscale(0%) brightness(0.6) !important; 
+        transition: filter 0.5s ease;
     }
 
-    /* 3. 제목 레이어 - 은은한 그라데이션 추가 */
+    /* 4. 활성화 시 밝아짐 (스크롤 시) */
+    .grid-item.active img {
+        filter: grayscale(0%) brightness(0.8) !important;
+    }
+
+    /* 5. 제목 레이아웃 (정중앙 고정) */
     .item-overlay {
         position: absolute;
         inset: 0;
-        display: flex;
+        display: flex !important;
         justify-content: center;
         align-items: center;
-        /* 💡 글자가 보일 때 사진 하단을 살짝 어둡게 하여 고급스러움 강조 */
-        background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 50%);
-        opacity: 0 !important;
-        transition: opacity 0.8s ease;
-        z-index: 10;
+        opacity: 1 !important; /* 💡 항상 보이게 설정 */
+        background: rgba(0, 0, 0, 0.2); /* 은은한 어둠 */
     }
 
     .item-title {
-        font-size: 17px;
-        letter-spacing: 6px;
-        color: #fff !important;
-        font-weight: 400;
-        /* 💡 글자가 아래에서 위로 스르륵 올라오는 효과 */
-        transform: translateY(20px);
-        transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-
-    /* =========================================
-       4. 활성화 시 (Active) - 완성도 높은 피드백
-       ========================================= */
-
-    /* 컬러 전환 시 밝기를 너무 높이지 않아 고급스러움 유지 */
-    .grid-item.active img {
-        filter: grayscale(0%) brightness(0.9) !important;
-        transform: scale(1.03); /* 💡 아주 미세하게 확대되어 살아나는 느낌 */
-    }
-
-    .grid-item.active .item-overlay {
+        font-size: 15px; /* 💡 레퍼런스처럼 세련된 작은 글씨 */
+        letter-spacing: 3px;
+        color: #ffffff !important;
+        font-weight: 300;
+        text-transform: uppercase; /* 영문일 경우 대문자 */
         opacity: 1 !important;
+        transform: none !important;
+        text-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
 
-    .grid-item.active .item-title {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
+    /* 하단 버튼 및 기타 요소 */
+    .back {
+        top: 22px;
+        right: 15px; /* 오른쪽 위로 배치 */
+        left: auto;
+        font-size: 10px;
     }
 }
