@@ -1,4 +1,4 @@
-/* 1. 기본 설정 */
+/* [1] 기본 베이스 설정 */
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -7,59 +7,74 @@ body {
     overflow-x: hidden;
 }
 
+/* 뒤로가기 버튼 */
 .back {
     position: fixed;
     top: 30px;
     left: 30px;
     z-index: 1000;
-    opacity: 0.6;
-    font-size: 13px;
+    opacity: 0.4;
+    font-size: 11px;
     letter-spacing: 2px;
     cursor: pointer;
     transition: 0.3s;
 }
+.back:hover { opacity: 1; }
 
+/* [2] 상단 헤더 디자인 (PC 기준) */
 header {
-    padding: 60px 20px 20px; /* 여백 축소 */
+    padding: 120px 20px 60px;
     text-align: center;
 }
 
 .logo {
-    font-size: 28px;
-    letter-spacing: 10px;
+    font-size: 26px;
+    letter-spacing: 18px; /* 자간을 넓혀 고급스러운 스튜디오 느낌 강조 */
+    font-weight: 300;
     color: white;
     text-decoration: none;
     display: block;
+    margin-bottom: 20px;
+    margin-right: -18px; /* 자간 때문에 생기는 오른쪽 쏠림 방지 */
 }
 
 .sub-title {
-    font-size: 10px;
-    letter-spacing: 4px;
-    opacity: 0.5;
-    margin-top: 10px;
+    font-size: 9px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    opacity: 0.3;
+    margin-bottom: 80px;
 }
 
 .filter-nav {
-    margin: 30px 0 40px; /* 여백 축소 */
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: 3px;
-    opacity: 0.6;
+    font-size: 10px;
+    letter-spacing: 4px;
+    opacity: 0.5;
+    margin-bottom: 40px;
 }
 
-/* 2. PC 그리드 레이아웃 (스크롤 압박 해소) */
+/* 타이틀 밑 포인트 선 */
+.filter-nav::after {
+    content: '';
+    display: block;
+    width: 15px;
+    height: 1px;
+    background: white;
+    margin: 15px auto 0;
+    opacity: 0.2;
+}
+
+/* [3] PC 그리드 레이아웃 (스크롤 압박 해소형) */
 .grid-container {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* 프로젝트 사이 간격을 촘촘하게 */
-    padding: 0 100px 100px; /* 좌우 여백으로 고급스러움 유지 */
+    gap: 12px;
+    padding: 0 100px 120px;
 }
 
 .grid-item {
-    color: white;
-    text-decoration: none;
     width: 100%;
-    height: 400px; /* 💡 80vh -> 400px 고정: 한 화면에 2~3개가 걸치도록 수정 */
+    height: 380px; /* PC에서 한 화면에 2~3개 걸치도록 최적화 */
     position: relative;
     overflow: hidden;
     display: block;
@@ -70,9 +85,8 @@ header {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    filter: grayscale(100%) brightness(0.4); /* 기본: 차분한 흑백 */
-    transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    filter: grayscale(100%) brightness(0.4);
+    transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .item-overlay {
@@ -83,92 +97,92 @@ header {
     align-items: center;
     background: rgba(0,0,0,0.2);
     opacity: 0;
-    transition: 0.5s ease;
+    transition: 0.6s ease;
 }
 
 .item-title {
-    font-size: 24px; /* 글자 크기 최적화 */
-    letter-spacing: 6px;
+    font-size: 22px;
+    letter-spacing: 8px;
     font-weight: 400;
-    text-align: center;
     color: white !important;
     opacity: 0;
-    transform: translateY(20px);
-    transition: 0.5s ease;
+    transform: translateY(15px);
+    transition: 0.6s ease;
 }
 
-/* 3. PC 버전 호버 효과 (마우스 올릴 때만 컬러) */
+/* PC 호버 효과 */
 @media (min-width: 1025px) {
     .grid-item:hover img {
-        filter: grayscale(0%) brightness(0.8);
-        transform: scale(1.03);
+        filter: grayscale(0%) brightness(0.85);
+        transform: scale(1.02);
     }
-    .grid-item:hover .item-overlay {
-        opacity: 1;
-    }
+    .grid-item:hover .item-overlay { opacity: 1; }
     .grid-item:hover .item-title {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-/* 4. 모바일 버전 (AETHER 스타일 유지) */
+/* [4] 모바일 버전 디자인 (AETHER 스타일 완전 이식) */
 @media (max-width: 1024px) {
     header {
-        padding: 20px 15px 10px !important;
+        padding: 50px 25px 20px !important;
         text-align: left !important;
     }
 
     .logo {
-        font-size: 20px;
-        letter-spacing: 2px;
-        font-weight: 500;
+        font-size: 18px;
+        letter-spacing: 6px;
+        margin-bottom: 10px;
     }
 
-    .sub-title { display: none; }
+    .sub-title {
+        display: block !important;
+        font-size: 8px;
+        letter-spacing: 3px;
+        margin-bottom: 40px;
+        text-align: left;
+    }
 
     .filter-nav {
         text-align: left;
-        padding: 0 15px;
-        margin: 10px 0 20px !important;
-        font-size: 10px;
-        letter-spacing: 1px;
-        opacity: 0.8;
+        font-size: 9px;
+        margin-bottom: 30px !important;
     }
 
+    .filter-nav::after { margin: 12px 0 0; }
+
     .grid-container {
-        gap: 5px;
-        padding: 0 10px 50px;
+        gap: 6px;
+        padding: 0 15px 60px;
     }
 
     .grid-item {
-        height: 220px !important; /* 모바일 높이 소폭 조정 */
+        height: 220px !important;
     }
 
     .grid-item img {
         filter: grayscale(0%) brightness(0.6) !important; 
     }
 
-    .grid-item.active img {
-        filter: grayscale(0%) brightness(0.8) !important;
-    }
-
+    /* 모바일은 항상 제목 노출 */
     .item-overlay {
         opacity: 1 !important;
         background: rgba(0, 0, 0, 0.3);
     }
 
     .item-title {
-        font-size: 15px;
-        letter-spacing: 3px;
+        font-size: 14px;
+        letter-spacing: 4px;
         opacity: 1 !important;
         transform: none !important;
     }
 
     .back {
-        top: 22px;
-        right: 15px;
+        top: 25px;
+        right: 20px;
         left: auto;
         font-size: 10px;
+        opacity: 0.6;
     }
 }
