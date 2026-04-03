@@ -4,129 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KYEOL | (주)결</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        body, html { width:100%; height:100%; background:#000; overflow:hidden; font-family:'Montserrat', sans-serif; }
-
-        /* [1] 영상 레이어: 무조건 맨 뒤로, 화면에 꽉 차게 */
-        #video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: #000; /* 영상 로딩 전 검정 배경 */
-        }
-        #bg-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+        body, html { width:100%; height:100%; background:#000; overflow:hidden; font-family: sans-serif; }
+        
+        /* 영상 레이어 */
+        #video-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1;
         }
 
-        /* [2] 오버레이: 영상 밝기를 너무 죽이지 않으면서 글자만 살림 */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2); 
-            z-index: 0;
+        /* 중앙 콘텐츠 */
+        .main-frame {
+            width: 100%; height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center;
+            text-decoration: none; color: #fff;
         }
 
-        /* [3] 중앙 텍스트 영역 */
-        .viewport {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 10;
-        }
-        .main-link {
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #ffffff;
-            cursor: pointer;
-        }
-
-        .brand-name { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 90px; 
-            letter-spacing: 25px; 
-            margin-right: -25px; 
-            margin-bottom: 10px;
-            text-shadow: 0 0 30px rgba(0,0,0,0.8);
-        }
-        .sub-title { 
-            font-size: 13px; 
-            letter-spacing: 12px; 
-            opacity: 0.9; 
-            margin-bottom: 70px;
-            color: #fff;
-        }
+        .brand-name { font-size: 80px; letter-spacing: 20px; font-weight: 700; margin-bottom: 10px; }
         .click-text { 
-            font-size: 11px; 
-            letter-spacing: 5px; 
-            color: #ffffff !important; /* 무조건 흰색 */
-            font-weight: 500;
-            border-bottom: 1.5px solid #fff; 
-            padding-bottom: 5px;
-            opacity: 1; /* 어둡지 않게 1로 고정 */
+            font-size: 12px; letter-spacing: 5px; color: #fff !important; 
+            border-bottom: 1px solid #fff; padding-bottom: 5px; margin-top: 50px;
         }
 
         @media (max-width:768px) {
-            .brand-name { font-size: 42px; letter-spacing: 12px; margin-right: -12px; }
-            .sub-title { font-size: 9px; letter-spacing: 6px; }
+            .brand-name { font-size: 40px; letter-spacing: 10px; }
         }
     </style>
 </head>
 <body>
+    <video id="video-bg" autoplay muted loop playsinline>
+        <source src="./image/kyeol_video_optimized1.mp4" type="video/mp4">
+    </video>
 
-    <div id="video-container">
-        <video id="bg-video" autoplay muted loop playsinline preload="auto">
-            <source src="./image/kyeol_video_optimized1.mp4?v=1" type="video/mp4">
-        </video>
-    </div>
-
-    <div class="overlay"></div>
-
-    <div class="viewport">
-        <a href="about.html" class="main-link">
-            <div class="brand-name">KYEOL</div>
-            <div class="sub-title">ARCHITECTURE & INTERIOR</div>
-            <div class="click-text">CLICK TO ENTER</div>
-        </a>
-    </div>
+    <a href="about.html" class="main-frame">
+        <div class="brand-name">KYEOL</div>
+        <div class="click-text">CLICK TO ENTER</div>
+    </a>
 
     <script>
-        // 🛠️ 영상 강제 재생 절대 해결 로직
-        window.onload = function() {
-            var v = document.getElementById('bg-video');
-            
-            // 1. 즉시 재생 시도
-            var promise = v.play();
-
-            if (promise !== undefined) {
-                promise.catch(function(error) {
-                    // 2. 자동재생 막힐 경우 사용자가 화면 어디든 '터치'하면 바로 재생
-                    console.log("Autoplay prevented, waiting for user interaction.");
-                    var startVideo = function() {
-                        v.play();
-                        document.body.removeEventListener('click', startVideo);
-                        document.body.removeEventListener('touchstart', startVideo);
-                    };
-                    document.body.addEventListener('click', startVideo);
-                    document.body.addEventListener('touchstart', startVideo);
-                });
-            }
-        };
+        // 브라우저 차단 강제 돌파 스크립트
+        window.addEventListener('load', function() {
+            var video = document.getElementById('video-bg');
+            video.play().catch(function() {
+                // 자동재생 막히면 화면 클릭 시 바로 재생
+                document.body.addEventListener('click', function() {
+                    video.play();
+                }, {once: true});
+            });
+        });
     </script>
 </body>
 </html>
