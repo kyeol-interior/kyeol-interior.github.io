@@ -4,53 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KYEOL | (주)결</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body, html { width:100%; height:100%; background:#000; overflow:hidden; font-family: sans-serif; }
-        
-        /* 영상 레이어 */
-        #video-bg {
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Noto Sans KR', sans-serif; }
+
+        /* [1] 영상 배경: 화면 전체 꽉 차게 */
+        #video-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -1;
+            z-index: -1; background: #000;
+        }
+        #bg-video {
+            width: 100%; height: 100%; object-fit: cover; display: block;
         }
 
-        /* 중앙 콘텐츠 */
-        .main-frame {
+        /* [2] 중앙 콘텐츠 레이어 */
+        .overlay-content {
             width: 100%; height: 100vh; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center;
-            text-decoration: none; color: #fff;
+            background: rgba(0, 0, 0, 0.2); /* 영상이 잘 보이도록 연한 덮개 */
+            text-decoration: none;
         }
 
-        .brand-name { font-size: 80px; letter-spacing: 20px; font-weight: 700; margin-bottom: 10px; }
-        .click-text { 
-            font-size: 12px; letter-spacing: 5px; color: #fff !important; 
-            border-bottom: 1px solid #fff; padding-bottom: 5px; margin-top: 50px;
+        .brand-name { 
+            font-family: 'Playfair Display', serif;
+            font-size: 85px; 
+            letter-spacing: 20px; 
+            color: #fff; 
+            margin-right: -20px;
+            font-weight: 700;
+        }
+        
+        .sub-text {
+            font-size: 14px;
+            color: #fff;
+            letter-spacing: 10px;
+            margin-top: 10px;
+            opacity: 0.8;
+            font-weight: 300;
         }
 
-        @media (max-width:768px) {
-            .brand-name { font-size: 40px; letter-spacing: 10px; }
+        .enter-btn { 
+            margin-top: 60px;
+            font-size: 12px; 
+            letter-spacing: 5px; 
+            color: #fff; 
+            border-bottom: 1.5px solid #fff; 
+            padding-bottom: 5px;
+            font-weight: 400;
+        }
+
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .brand-name { font-size: 45px; letter-spacing: 10px; margin-right: -10px; }
+            .sub-text { font-size: 10px; letter-spacing: 5px; }
         }
     </style>
 </head>
 <body>
-    <video id="video-bg" autoplay muted loop playsinline>
-        <source src="./image/kyeol_video_optimized1.mp4" type="video/mp4">
-    </video>
 
-    <a href="about.html" class="main-frame">
+    <div id="video-container">
+        <video id="bg-video" autoplay muted loop playsinline preload="auto">
+            <source src="./image/kyeol_video_optimized1.mp4" type="video/mp4">
+            </video>
+    </div>
+
+    <a href="about.html" class="overlay-content">
         <div class="brand-name">KYEOL</div>
-        <div class="click-text">CLICK TO ENTER</div>
+        <div class="sub-text">ARCHITECTURE & INTERIOR</div>
+        <div class="enter-btn">CLICK TO ENTER</div>
     </a>
 
     <script>
-        // 브라우저 차단 강제 돌파 스크립트
-        window.addEventListener('load', function() {
-            var video = document.getElementById('video-bg');
-            video.play().catch(function() {
-                // 자동재생 막히면 화면 클릭 시 바로 재생
-                document.body.addEventListener('click', function() {
-                    video.play();
-                }, {once: true});
+        // 🛠 영상 강제 재생 트리거 (브라우저 차단 우회)
+        window.addEventListener('DOMContentLoaded', function() {
+            var v = document.getElementById('bg-video');
+            
+            // 1. 페이지 로드 시 즉시 재생 시도
+            v.play().catch(function(err) {
+                console.log("자동재생 차단됨 - 사용자 상호작용 대기");
+                
+                // 2. 만약 차단되면, 사용자가 화면 어디든 '터치/클릭'하는 순간 바로 재생
+                var playVideo = function() {
+                    v.play();
+                    window.removeEventListener('click', playVideo);
+                    window.removeEventListener('touchstart', playVideo);
+                };
+                window.addEventListener('click', playVideo);
+                window.addEventListener('touchstart', playVideo);
             });
         });
     </script>
