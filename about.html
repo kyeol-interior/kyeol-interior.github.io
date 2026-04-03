@@ -6,7 +6,7 @@
     <title>ABOUT | (주)결</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* [1] 공통 네비게이션 스타일 (전체 페이지 통일) */
+        /* [1] 공통 네비게이션 스타일 */
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
         body { background:#fff; font-family: 'Noto Sans KR', sans-serif; color:#111; line-height:1.8; overflow-x:hidden; }
 
@@ -18,16 +18,13 @@
         }
         .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#000; letter-spacing:4px; }
         
-        /* PC 메뉴 */
         .nav-links { display:flex; gap:35px; }
         .nav-links a { text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; font-weight:400; transition: 0.3s; }
         .nav-links a.active { color:#000; font-weight:700; }
 
-        /* 모바일 햄버거 버튼 */
         .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1002; }
         .menu-btn span { width: 22px; height: 2px; background: #000; transition: 0.3s; }
 
-        /* 모바일 드롭다운 메뉴 */
         .mobile-nav {
             position: fixed; top: 70px; left: 0; width: 100%; 
             background: #fff; border-bottom: 1px solid #eee;
@@ -111,7 +108,7 @@
             </div>
         </div>
         <div class="img-side">
-            <img src="image/about.jpg" alt="KYEOL Interior Design">
+            <img src="image/about1.jpg" alt="KYEOL Interior Design">
         </div>
     </div>
 
@@ -119,13 +116,11 @@
         const menuToggle = document.getElementById('menuToggle');
         const dropdown = document.getElementById('dropdown');
 
-        // 햄버거 메뉴 토글
         menuToggle.onclick = function(e) {
             e.stopPropagation();
             dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
         };
 
-        // 외부 클릭 시 메뉴 닫기
         window.onclick = function(event) {
             dropdown.style.display = 'none';
         }
