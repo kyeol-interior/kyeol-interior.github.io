@@ -111,7 +111,6 @@ header {
 }
 
 @media (max-width: 1024px) {
-
     /* 상단 간격 최적화 */
     header { padding: 25px 20px 0 !important; }
     .filter-nav { margin: 5px 0 10px !important; }
@@ -135,50 +134,59 @@ header {
         object-fit: cover;
         filter: grayscale(100%) brightness(0.4) !important; 
         transition: all 0.6s ease;
-        z-index: 1; /* 💡 사진은 낮은 층 */
+        z-index: 1;
     }
 
-    /* 2. 제목 레이어 (무조건 사진 위로!) */
+    /* 2. 제목 레이어 */
     .item-overlay {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%); /* 💡 사진 정중앙 배치 */
+        transform: translate(-50%, -50%);
         width: 90%;
         height: 50vh;
         display: flex !important; 
         justify-content: center;
         align-items: center;
-        z-index: 999 !important; /* 💡 사진보다 훨씬 높은 층으로 설정 */
+        z-index: 999 !important;
         opacity: 0 !important; 
-        pointer-events: none;
         visibility: hidden;
         transition: all 0.5s ease;
     }
 
     .item-title {
-        font-size: 20px; /* 💡 글자 크기 살짝 키움 */
+        font-size: 20px;
         letter-spacing: 4px;
-        color: #ffffff !important; /* 💡 흰색 강제 */
-        font-weight: 700; /* 💡 두껍게 */
+        color: #ffffff !important;
+        font-weight: 700;
         text-align: center;
-        /* 💡 글자가 잘 보이도록 강력한 그림자 추가 */
-        text-shadow: 0 0 10px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,1); 
+        text-shadow: 0 0 10px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,1);
+        
+        /* 💡 핵심 수정: 기본 PC 스타일에서 먹힌 효과 초기화 */
+        opacity: 0; 
+        transform: translateY(20px);
+        transition: all 0.5s ease;
         display: block !important;
     }
 
     /* =========================================
-       3. 활성화(Active) 시 - 컬러 전환 및 제목 노출
+       3. 활성화(Active) 시 - 컬러 전환 및 제목/글자 노출
        ========================================= */
 
-    /* 중앙에 오면 밝은 컬러로! */
+    /* 컬러 활성화 */
     .grid-item.active img {
         filter: grayscale(0%) brightness(1) !important; 
     }
 
-    /* 중앙에 오면 제목이 나타남! */
+    /* 레이어 활성화 */
     .grid-item.active .item-overlay {
         opacity: 1 !important; 
         visibility: visible !important;
+    }
+
+    /* 💡 핵심 수정: 글자 자체를 보이게 하고 위로 올림 */
+    .grid-item.active .item-title {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
     }
 }
