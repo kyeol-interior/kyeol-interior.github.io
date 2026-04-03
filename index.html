@@ -5,40 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KYEOL | ARCHITECTURE & INTERIOR</title>
 
-    <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
-    <!-- 외부 CSS (중요) -->
     <link rel="stylesheet" href="index-style.css">
+    
+    <style>
+        /* 메인 화면 인증 로고 스타일 */
+        .main-cert-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+        .main-cert-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .main-cert-item img {
+            height: 28px; /* 메인에 어울리는 적당한 크기 */
+            width: auto;
+            filter: grayscale(100%) brightness(1.5); /* 흑백으로 고급스럽게 */
+            transition: 0.3s;
+        }
+        .main-cert-item span {
+            font-size: 8px;
+            letter-spacing: 1px;
+            color: #fff;
+            opacity: 0.5;
+            font-weight: 300;
+        }
+        /* 호버 시 선명하게 */
+        .main-cert-item:hover img {
+            filter: grayscale(0%) brightness(1);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .main-cert-container {
+                gap: 15px;
+                flex-wrap: wrap;
+                max-width: 280px;
+                margin: 25px auto 0;
+            }
+            .main-cert-item img { height: 20px; }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- 배경 영상 -->
     <video class="video-bg" autoplay muted loop playsinline preload="none">
         <source src="image/kyeol_video_optimized1.mp4" type="video/mp4">
     </video>
 
-    <!-- 오버레이 -->
     <div class="overlay"></div>
 
-    <!-- SNS 메뉴 -->
     <div id="sns-menu" class="left-menu">
         <h2>MY STUDIO</h2>
         <a href="https://blog.naver.com/rotte123" target="_blank">BLOG</a>
         <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO</a>
     </div>
 
-    <!-- 메인 화면 -->
     <div id="main-page">
-        <button class="center-text" onclick="enterSite()">
-            <h1>KYEOL</h1>
-            <div class="sub-title">ARCHITECTURE & INTERIOR</div>
-            <div class="enter-text">CLICK TO ENTER</div>
-        </button>
+        <div class="center-content">
+            <button class="center-text" onclick="enterSite()">
+                <h1>KYEOL</h1>
+                <div class="sub-title">ARCHITECTURE & INTERIOR</div>
+                
+                <div class="main-cert-container">
+                    <div class="main-cert-item">
+                        <img src="image/cert_disability.png" alt="장애인기업">
+                        <span>장애인기업</span>
+                    </div>
+                    <div class="main-cert-item">
+                        <img src="image/cert_license.png" alt="실내건축면허">
+                        <span>실내건축면허</span>
+                    </div>
+                    <div class="main-cert-item">
+                        <img src="image/cert_koneps.png" alt="나라장터">
+                        <span>나라장터</span>
+                    </div>
+                    <div class="main-cert-item">
+                        <img src="image/cert_s2b.png" alt="학교장터">
+                        <span>학교장터</span>
+                    </div>
+                </div>
+
+                <div class="enter-text">CLICK TO ENTER</div>
+            </button>
+        </div>
     </div>
 
-    <!-- 메뉴 화면 -->
     <div id="second-page">
         <div class="back" onclick="goBack()">← BACK</div>
 
@@ -50,7 +111,6 @@
         </div>
     </div>
 
-    <!-- JS -->
     <script>
         function enterSite() {
             document.getElementById('main-page').style.display = 'none';
@@ -70,30 +130,24 @@
 
         function goBack() {
             const second = document.getElementById('second-page');
-
             second.style.opacity = '0';
 
             setTimeout(() => {
                 second.style.display = 'none';
+                document.getElementById('main-page').style.display = 'flex';
+                document.getElementById('sns-menu').style.display = 'block';
             }, 300);
-
-            document.getElementById('main-page').style.display = 'flex';
-            document.getElementById('sns-menu').style.display = 'block';
 
             document.querySelectorAll('.inner-menu a').forEach(el => {
                 el.classList.remove('show');
             });
         }
 
-        // URL 파라미터 유지 UX
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-
             if (urlParams.has('menu')) {
                 enterSite();
-
-                const newUrl = window.location.pathname;
-                window.history.replaceState({}, document.title, newUrl);
+                window.history.replaceState({}, document.title, window.location.pathname);
             }
         });
     </script>
