@@ -1,140 +1,78 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYEOL | (주)결</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
-    
-    <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Montserrat', sans-serif; }
-        
-        /* 1. 배경 영상 및 오버레이 */
-        .video-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.45); z-index: -1; }
-
-        /* 2. 좌측 SNS 메뉴 (복구 완료) */
-        .left-menu { position: fixed; top: 50px; left: 50px; z-index: 10; color: white; text-align: left; }
-        .left-menu h2 { font-size: 14px; letter-spacing: 5px; margin-bottom: 25px; opacity: 0.8; font-weight: 500; }
-        .left-menu a { display: block; color: white; text-decoration: none; font-size: 11px; letter-spacing: 4px; margin-bottom: 15px; opacity: 0.5; transition: 0.3s; }
-        .left-menu a:hover { opacity: 1; color: #fff; }
-
-        /* 3. 중앙 정렬 및 메인 컨텐츠 */
-        .center-content { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
-        .center-text { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; outline: none; padding: 0; }
-
-        /* 회사 로고 (모바일 가독성 강제 부여) */
-        .main-logo-img { 
-            width: 320px; 
-            height: auto; 
-            filter: brightness(0) invert(1) drop-shadow(0 0 15px rgba(255,255,255,0.4)) !important; 
-            margin-bottom: 0px; 
-            transition: 0.5s ease;
-        }
-
-        /* KYEOL 브랜드 타이포 (Playfair Display 적용) */
-        .brand-name { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 90px; 
-            color: #ffffff; 
-            letter-spacing: 32px; 
-            margin-right: -32px; 
-            margin-bottom: 15px; 
-            text-shadow: 0 0 20px rgba(0,0,0,0.8);
-            line-height: 1.1;
-        }
-
-        .sub-title { font-size: 13px; letter-spacing: 12px; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-bottom: 80px; }
-
-        /* 💡 2단계 진행 예정: 인증 로고가 들어올 자리 (미리 확보) */
-        .cert-placeholder { height: 0px; margin-bottom: 0px; }
-
-        .enter-text { font-size: 11px; letter-spacing: 6px; color: #fff; opacity: 0.3; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; transition: 0.4s ease; }
-
-        /* 📱 모바일 최적화 (강력 조절) */
-        @media (max-width: 768px) {
-            .left-menu { top: 35px; left: 35px; }
-            .left-menu h2 { font-size: 11px; margin-bottom: 15px; }
-            .left-menu a { font-size: 9px; margin-bottom: 10px; }
-            
-            .main-logo-img { 
-                width: 180px !important; 
-                filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255,255,255,0.5)) !important; 
-            }
-            .brand-name { font-size: 42px; letter-spacing: 12px; margin-right: -12px; margin-top: 0px; }
-            .sub-title { font-size: 9px; letter-spacing: 6px; margin-bottom: 60px; }
-        }
-
-        /* 2페이지 메뉴 (전환 후) */
-        #second-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); display: none; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: 0.6s; z-index: 100; }
-        .inner-menu a { display: block; color: white; text-decoration: none; font-size: 40px; margin: 22px 0; letter-spacing: 12px; opacity: 0; transform: translateY(30px); transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1); }
-        .inner-menu a.show { opacity: 1; transform: translateY(0); }
-        .back { position: absolute; top: 50px; left: 50px; color: white; cursor: pointer; letter-spacing: 6px; font-size: 12px; opacity: 0.6; }
-        .back:hover { opacity: 1; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KYEOL | (주)결</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+<style>
+    body, html { margin:0; padding:0; width:100%; height:100%; overflow:hidden; background:#000; font-family:'Montserrat', sans-serif; }
+    .video-bg { position:fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-5; }
+    .overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.45); z-index:-4; }
+    .left-menu { position:fixed; top:50px; left:50px; z-index:100; color:white; }
+    .left-menu h2 { font-size:14px; letter-spacing:5px; margin-bottom:25px; opacity:0.8; }
+    .left-menu a { display:block; color:white; text-decoration:none; font-size:11px; letter-spacing:4px; margin-bottom:15px; opacity:0.5; }
+    #main-page { width:100%; height:100%; display:flex !important; align-items:center; justify-content:center; position:relative; z-index:10; }
+    .center-text { background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; outline:none; }
+    .main-logo-img { width:320px; height:auto; filter:brightness(0) invert(1) drop-shadow(0 0 15px rgba(255,255,255,0.4)) !important; margin-bottom:5px; transition:0.5s; }
+    .brand-name { font-family:'Playfair Display', serif; font-size:85px; color:#fff; letter-spacing:32px; margin-right:-32px; margin-bottom:15px; text-shadow:0 0 20px rgba(0,0,0,0.8); line-height:1.1; }
+    .sub-title { font-size:13px; letter-spacing:12px; color:rgba(255,255,255,0.5); text-transform:uppercase; margin-bottom:80px; }
+    .enter-text { font-size:11px; letter-spacing:6px; color:#fff; opacity:0.3; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:5px; }
+    #second-page { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); display:none; flex-direction:column; align-items:center; justify-content:center; opacity:0; transition:0.6s; z-index:200; }
+    .inner-menu a { display:block; color:white; text-decoration:none; font-size:40px; margin:20px 0; letter-spacing:12px; opacity:0; transform:translateY(30px); transition:0.6s; }
+    .inner-menu a.show { opacity:1; transform:translateY(0); }
+    .back { position:absolute; top:50px; left:50px; color:white; cursor:pointer; letter-spacing:6px; font-size:12px; z-index:210; }
+    @media (max-width:768px) {
+        .left-menu { top:35px; left:35px; }
+        .main-logo-img { width:170px !important; }
+        .brand-name { font-size:40px; letter-spacing:12px; margin-right:-12px; }
+        .sub-title { font-size:9px; letter-spacing:6px; margin-bottom:60px; }
+        .inner-menu a { font-size:24px; margin:15px 0; letter-spacing:8px; }
+        .back { top:35px; left:35px; }
+    }
+</style>
 </head>
 <body>
-
-    <video class="video-bg" autoplay muted loop playsinline>
-        <source src="image/kyeol_video_optimized1.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
-
-    <div id="sns-menu" class="left-menu">
-        <h2>MY STUDIO</h2>
-        <a href="https://blog.naver.com/rotte123" target="_blank">BLOG</a>
-        <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO</a>
+<video class="video-bg" autoplay muted loop playsinline>
+    <source src="./image/kyeol_video_optimized1.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+<div id="sns-menu" class="left-menu">
+    <h2>MY STUDIO</h2>
+    <a href="https://blog.naver.com/rotte123" target="_blank">BLOG</a>
+    <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO</a>
+</div>
+<div id="main-page">
+    <button class="center-text" onclick="enterSite()">
+        <img src="./image/logo.png" alt="(주)결" class="main-logo-img">
+        <div class="brand-name">KYEOL</div>
+        <div class="sub-title">ARCHITECTURE & INTERIOR</div>
+        <div class="enter-text">CLICK TO ENTER</div>
+    </button>
+</div>
+<div id="second-page">
+    <div class="back" onclick="goBack()">← BACK</div>
+    <div class="inner-menu">
+        <a href="about.html">ABOUT</a>
+        <a href="portfolio.html">PORTFOLIO</a>
+        <a href="proposal.html">PROPOSAL</a>
+        <a href="contact.html">CONTACT</a>
     </div>
-
-    <div id="main-page">
-        <div class="center-content">
-            <div class="center-text" onclick="enterSite()">
-                <img src="image/logo.png" alt="(주)결" class="main-logo-img">
-                
-                <div class="brand-name">KYEOL</div>
-                
-                <div class="sub-title">ARCHITECTURE & INTERIOR</div>
-                
-                <div class="cert-placeholder"></div> <div class="enter-text">CLICK TO ENTER</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="second-page">
-        <div class="back" onclick="goBack()">← BACK</div>
-        <div class="inner-menu">
-            <a href="about.html">ABOUT</a>
-            <a href="portfolio.html">PORTFOLIO</a>
-            <a href="proposal.html">PROPOSAL</a>
-            <a href="contact.html">CONTACT</a>
-        </div>
-    </div>
-
-    <script>
-        function enterSite() {
-            document.getElementById('main-page').style.display = 'none';
-            document.getElementById('sns-menu').style.display = 'none';
-            const second = document.getElementById('second-page');
-            second.style.display = 'flex';
-            setTimeout(() => {
-                second.style.opacity = '1';
-                document.querySelectorAll('.inner-menu a').forEach((el, i) => {
-                    setTimeout(() => el.classList.add('show'), i * 150);
-                });
-            }, 10);
-        }
-        function goBack() {
-            const second = document.getElementById('second-page');
-            second.style.opacity = '0';
-            setTimeout(() => {
-                second.style.display = 'none';
-                document.getElementById('main-page').style.display = 'flex';
-                document.getElementById('sns-menu').style.display = 'block';
-            }, 500);
-            document.querySelectorAll('.inner-menu a').forEach(el => {
-                el.classList.remove('show');
-            });
-        }
-    </script>
+</div>
+<script>
+    function enterSite() {
+        document.getElementById('main-page').style.display = 'none';
+        document.getElementById('sns-menu').style.display = 'none';
+        const s = document.getElementById('second-page');
+        s.style.display = 'flex';
+        setTimeout(() => { s.style.opacity = '1'; document.querySelectorAll('.inner-menu a').forEach((el, i) => { setTimeout(() => el.classList.add('show'), i * 150); }); }, 50);
+    }
+    function goBack() {
+        const s = document.getElementById('second-page');
+        s.style.opacity = '0';
+        setTimeout(() => { s.style.display = 'none'; document.getElementById('main-page').style.display = 'flex'; document.getElementById('sns-menu').style.display = 'block'; }, 500);
+        document.querySelectorAll('.inner-menu a').forEach(el => el.classList.remove('show'));
+    }
+</script>
 </body>
 </html>
