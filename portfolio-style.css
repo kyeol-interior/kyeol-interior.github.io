@@ -111,10 +111,19 @@ header {
 }
 
 @media (max-width: 1024px) {
+
+    /* 1. 상단 로고와 제목 사이의 불필요한 여백 제거 */
+    header {
+        padding: 40px 20px 20px !important; /* 80px에서 40px로 반값 축소 */
+    }
+
+    .filter-nav {
+        margin: 10px 0 30px !important; /* SELECTED PROJECTS 문구 위아래 여백 축소 */
+    }
+
     .grid-container {
-        /* 프로젝트 사이의 순수 간격을 줍니다 */
-        gap: 20px; 
-        padding: 20px 0 100px;
+        gap: 40px; /* 프로젝트 간의 간격 */
+        padding: 0 0 100px;
     }
 
     .grid-item {
@@ -123,26 +132,26 @@ header {
         justify-content: center;
         width: 100%;
         
-        /* 💡 전체 높이를 75vh로 줄여서 다음 사진이 더 빨리 올라오게 함 */
-        height: 75vh !important; 
-        
+        /* 💡 아이템 전체 높이를 85vh로 설정 (다음 프로젝트가 15% 정도 보임) */
+        height: 85vh !important; 
         position: relative;
         overflow: hidden;
     }
 
     .grid-item img {
-        width: 90%;             /* 좌우 여백을 조금 더 줄여 사진을 크게 */
+        width: 90%;             
         
-        /* 💡 이미지 높이를 60vh로 키워서 화면에 꽉 차는 느낌을 줌 */
-        height: 60vh; 
+        /* 💡 사진을 위아래로 길게! 화면 높이의 75% 차지 */
+        height: 75vh !important; 
         
         object-fit: cover;
         filter: grayscale(0%) brightness(0.7);
     }
 
+    /* 이미지와 동일한 크기의 오버레이 */
     .item-overlay {
         width: 90%;
-        height: 60vh;
+        height: 75vh !important;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -151,17 +160,14 @@ header {
     }
 
     .item-title {
-        font-size: 17px;
-        letter-spacing: 4px;
-        opacity: 1 !important;
-        transform: translateY(0) !important;
+        font-size: 18px;
+        letter-spacing: 5px;
+        text-shadow: 0px 2px 10px rgba(0,0,0,0.8);
     }
-}
 
-    /* 뒤로가기 버튼 위치 조정 */
+    /* 뒤로가기 버튼 위치 수정 */
     .back {
-        top: 30px;
-        left: 20px;
-        z-index: 1001;
+        top: 20px;
+        left: 15px;
     }
 }
