@@ -6,30 +6,39 @@
     <title>ABOUT | (주)결</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
     <style>
-        /* [1] 기본 공사 */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #fff; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; overflow-x: hidden; }
 
-        /* [2] 상단 메뉴 (GNB) */
+        /* [1] 상단 메뉴 */
         nav { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 50px; background: rgba(255,255,255,0.98); z-index: 1000; border-bottom: 1px solid #f0f0f0; }
         .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; letter-spacing: 4px; font-weight: 600; color: #000; text-decoration: none; }
         .nav-links a { text-decoration: none; color: #888; font-size: 13px; letter-spacing: 2px; margin-left: 35px; transition: 0.3s; }
         .nav-links a:hover, .nav-links a.active { color: #000; font-weight: 500; }
 
-        /* [3] 히어로 섹션 */
-        .hero { height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fbfbfb; text-align: center; }
+        /* [2] 히어로 섹션 (수정된 부분: 높이 조절 및 간격 축소) */
+        .hero { 
+            padding-top: 150px; /* 메뉴 아래 여백 */
+            padding-bottom: 60px; /* 아래 섹션과의 간격을 좁힘 */
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            background: #fbfbfb; 
+            text-align: center; 
+            border-bottom: 1px solid #eee; /* 아래쪽 구분선 강조 */
+        }
         .hero h1 { font-family: 'Playfair Display', serif; font-size: 48px; letter-spacing: 8px; margin-bottom: 15px; color: #111; }
         .hero p { font-size: 16px; color: #999; letter-spacing: 3px; font-weight: 300; }
 
-        /* [4] 브랜드 스토리 */
-        .story { max-width: 1100px; margin: 100px auto; padding: 0 30px; display: flex; align-items: center; gap: 60px; }
+        /* [3] 브랜드 스토리 (헤더와 더 밀착되도록 상단 마진 조절) */
+        .story { max-width: 1100px; margin: 80px auto 100px; padding: 0 30px; display: flex; align-items: center; gap: 60px; }
         .story-text { flex: 1; }
         .story-text h2 { font-size: 32px; margin-bottom: 25px; line-height: 1.4; font-weight: 500; }
         .story-text p { color: #666; font-size: 16px; margin-bottom: 20px; word-break: keep-all; }
         .story-img { flex: 1; height: 450px; background: #eee; overflow: hidden; }
         .story-img img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* [5] ★신뢰성 & 인증 섹션 (핵심)★ */
+        /* [4] 신뢰성 & 인증 섹션 */
         .trust { background: #111; color: #fff; padding: 120px 0; }
         .trust-container { max-width: 1100px; margin: 0 auto; padding: 0 30px; }
         .trust-header { text-align: center; margin-bottom: 70px; }
@@ -43,18 +52,18 @@
         .trust-item h3 { font-size: 20px; margin-bottom: 15px; color: #d4af37; font-weight: 500; }
         .trust-item p { font-size: 14px; line-height: 1.7; opacity: 0.7; font-weight: 300; word-break: keep-all; }
 
-        /* [6] 푸터 유도 버튼 */
+        /* [5] 푸터 유도 버튼 */
         .next { text-align: center; padding: 150px 0; background: #fff; }
         .btn-portfolio { display: inline-block; padding: 18px 50px; border: 1px solid #111; color: #111; text-decoration: none; font-size: 13px; letter-spacing: 3px; transition: 0.4s; }
         .btn-portfolio:hover { background: #111; color: #fff; }
 
-        /* 모바일 최적화 */
         @media (max-width: 768px) {
             nav { padding: 0 20px; }
             .nav-links { display: none; }
-            .story { flex-direction: column; text-align: center; margin: 60px auto; }
-            .trust-grid { grid-template-columns: 1fr; }
+            .hero { padding-top: 120px; padding-bottom: 40px; }
             .hero h1 { font-size: 32px; }
+            .story { flex-direction: column; text-align: center; margin: 40px auto; }
+            .trust-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -99,13 +108,11 @@
                     <h3>실내건축공사업 면허</h3>
                     <p>국가 공인 전문건설업 면허를 보유한 법인 기업으로서, 법적 기준에 부합하는 안전하고 투명한 책임 시공을 약속합니다.</p>
                 </div>
-
                 <div class="trust-item">
                     <span class="icon">🤝</span>
                     <h3>장애인기업 인증</h3>
                     <p>사회적 가치 창출에 동참하는 장애인기업으로서, 공공기관 우선구매 제도 등 비즈니스 파트너십에 최적화된 조건을 갖추고 있습니다.</p>
                 </div>
-
                 <div class="trust-item">
                     <span class="icon">🏫</span>
                     <h3>교육·공공시설 전문</h3>
