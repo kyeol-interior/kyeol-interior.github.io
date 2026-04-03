@@ -1,150 +1,159 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proposal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PROPOSAL | (주)결</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* [1] 공통 네비게이션 스타일 (투명 배경 버전) */
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
+        body { background:#000; font-family: 'Noto Sans KR', sans-serif; overflow: hidden; }
+        
+        nav { 
+            position:fixed; top:0; width:100%; height:80px; 
+            display:flex; justify-content:space-between; align-items:center; 
+            padding:0 50px; background:rgba(0,0,0,0.3); z-index:1000; 
+            transition: 0.3s;
+        }
+        nav:hover { background:rgba(0,0,0,0.8); } /* 마우스 올리면 선명해짐 */
+        
+        .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#fff; letter-spacing:4px; }
+        
+        /* PC 메뉴 */
+        .nav-links { display:flex; gap:35px; }
+        .nav-links a { text-decoration:none; color:rgba(255,255,255,0.6); font-size:13px; letter-spacing:2px; font-weight:400; transition: 0.3s; }
+        .nav-links a.active { color:#fff; font-weight:700; }
 
-<style>
-body {
-  margin: 0;
-  overflow: hidden;
-  background: black;
-}
+        /* 모바일 햄버거 버튼 */
+        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1002; }
+        .menu-btn span { width: 22px; height: 2px; background: #fff; transition: 0.3s; }
 
-/* 🔙 BACK */
-.back {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  color: white;
-  font-size: 13px;
-  letter-spacing: 2px;
-  cursor: pointer;
-  z-index: 10;
-  opacity: 0.8;
-}
+        /* 모바일 드롭다운 메뉴 */
+        .mobile-nav {
+            position: fixed; top: 70px; left: 0; width: 100%; 
+            background: #fff; border-bottom: 1px solid #eee;
+            display: none; flex-direction: column; padding: 15px 0;
+            z-index: 999; box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .mobile-nav a { padding: 15px 30px; text-decoration: none; color: #111; font-size: 14px; font-weight: 500; border-bottom: 1px solid #f9f9f9; }
 
-/* 슬라이드 */
-.slider {
-  display: flex;
-  width: 1400%;
-  height: 100vh;
-  transition: transform 0.6s ease;
-}
+        /* [2] 슬라이드 핵심 시공 */
+        .slider { display: flex; width: 1400%; height: 100vh; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+        .slide { width: 100vw; height: 100vh; flex-shrink: 0; display: flex; justify-content: center; align-items: center; background: #000; }
+        .slide img { max-width: 90%; max-height: 80%; object-fit: contain; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
 
-.slide {
-  width: 100vw;
-  height: 100vh;
-  flex-shrink: 0;
+        /* 페이지 표시 */
+        .page-indicator {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.5); font-size: 12px; letter-spacing: 3px; z-index: 10;
+        }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background: black; /* 🔥 핵심: 밝기 문제 해결 */
-}
-
-.slide img {
-  max-width: 90%;
-  max-height: 90%;
-  object-fit: contain;
-}
-
-/* 페이지 표시 */
-.page {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  color: white;
-  font-size: 13px;
-}
-
-/* 모바일 */
-@media (max-width: 768px) {
-  .slide img {
-    max-width: 95%;
-    max-height: 85%;
-  }
-}
-</style>
+        /* 📱 모바일 버전 */
+        @media (max-width: 1024px) {
+            nav { padding: 0 25px; height: 70px; background: rgba(0,0,0,0.5); }
+            .logo { font-size: 20px; }
+            .nav-links { display: none; } 
+            .menu-btn { display: flex; } 
+            .slide img { max-width: 95%; max-height: 70%; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="back" onclick="goBack()">← BACK</div>
+    <nav id="topNav">
+        <a href="index.html" class="logo">KYEOL</a>
+        <div class="nav-links">
+            <a href="about.html">ABOUT</a>
+            <a href="portfolio.html">PORTFOLIO</a>
+            <a href="proposal.html" class="active">PROPOSAL</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+        <div class="menu-btn" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
 
-<div class="slider" id="slider">
+    <div class="mobile-nav" id="dropdown">
+        <a href="about.html">ABOUT</a>
+        <a href="portfolio.html">PORTFOLIO</a>
+        <a href="proposal.html">PROPOSAL</a>
+        <a href="contact.html">CONTACT</a>
+    </div>
 
-  <div class="slide"><img src="page/page1.jpg"></div>
-  <div class="slide"><img src="page/page2.jpg"></div>
-  <div class="slide"><img src="page/page3.jpg"></div>
-  <div class="slide"><img src="page/page4.jpg"></div>
-  <div class="slide"><img src="page/page5.jpg"></div>
-  <div class="slide"><img src="page/page6.jpg"></div>
-  <div class="slide"><img src="page/page7.jpg"></div>
-  <div class="slide"><img src="page/page8.jpg"></div>
-  <div class="slide"><img src="page/page9.jpg"></div>
-  <div class="slide"><img src="page/page10.jpg"></div>
-  <div class="slide"><img src="page/page11.jpg"></div>
-  <div class="slide"><img src="page/page12.jpg"></div>
-  <div class="slide"><img src="page/page13.jpg"></div>
-  <div class="slide"><img src="page/page14.jpg"></div>
+    <div class="slider" id="slider">
+        <div class="slide"><img src="page/page1.jpg"></div>
+        <div class="slide"><img src="page/page2.jpg"></div>
+        <div class="slide"><img src="page/page3.jpg"></div>
+        <div class="slide"><img src="page/page4.jpg"></div>
+        <div class="slide"><img src="page/page5.jpg"></div>
+        <div class="slide"><img src="page/page6.jpg"></div>
+        <div class="slide"><img src="page/page7.jpg"></div>
+        <div class="slide"><img src="page/page8.jpg"></div>
+        <div class="slide"><img src="page/page9.jpg"></div>
+        <div class="slide"><img src="page/page10.jpg"></div>
+        <div class="slide"><img src="page/page11.jpg"></div>
+        <div class="slide"><img src="page/page12.jpg"></div>
+        <div class="slide"><img src="page/page13.jpg"></div>
+        <div class="slide"><img src="page/page14.jpg"></div>
+    </div>
 
-</div>
+    <div class="page-indicator" id="pageNum">01 / 14</div>
 
-<div class="page" id="pageNum">1 / 14</div>
+    <script>
+        let current = 0;
+        const total = 14;
+        const slider = document.getElementById("slider");
+        const pageNum = document.getElementById("pageNum");
+        const menuToggle = document.getElementById('menuToggle');
+        const dropdown = document.getElementById('dropdown');
 
-<script>
-let current = 0;
-const total = 14;
-const slider = document.getElementById("slider");
-const pageNum = document.getElementById("pageNum");
+        /* 햄버거 메뉴 로직 */
+        menuToggle.onclick = (e) => { 
+            e.stopPropagation();
+            dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex'; 
+        };
 
-/* 업데이트 */
-function update() {
-  slider.style.transform = `translateX(-${current * 100}vw)`;
-  pageNum.innerText = `${current + 1} / ${total}`;
-}
+        /* 슬라이드 업데이트 */
+        function update() {
+            slider.style.transform = `translateX(-${current * 100}vw)`;
+            let displayNum = (current + 1).toString().padStart(2, '0');
+            pageNum.innerText = `${displayNum} / ${total}`;
+        }
 
-/* 휠 */
-window.addEventListener("wheel", (e) => {
-  if (e.deltaY > 0) current++;
-  else current--;
-  current = Math.max(0, Math.min(current, total - 1));
-  update();
-});
+        /* 휠 제어 (민감도 조절) */
+        let isScrolling = false;
+        window.addEventListener("wheel", (e) => {
+            if (isScrolling) return;
+            isScrolling = true;
+            if (e.deltaY > 0) current++;
+            else current--;
+            current = Math.max(0, Math.min(current, total - 1));
+            update();
+            setTimeout(() => { isScrolling = false; }, 800); // 휠 연타 방지
+        });
 
-/* 키보드 */
-window.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight") current++;
-  if (e.key === "ArrowLeft") current--;
-  current = Math.max(0, Math.min(current, total - 1));
-  update();
-});
+        /* 키보드 제어 */
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight") current++;
+            if (e.key === "ArrowLeft") current--;
+            current = Math.max(0, Math.min(current, total - 1));
+            update();
+        });
 
-/* 🔥 모바일 좌우 스와이프 */
-let startX = 0;
+        /* 모바일 스와이프 */
+        let startX = 0;
+        window.addEventListener("touchstart", e => { startX = e.touches[0].clientX; });
+        window.addEventListener("touchend", e => {
+            let endX = e.changedTouches[0].clientX;
+            if (startX - endX > 50) current++;
+            else if (endX - startX > 50) current--;
+            current = Math.max(0, Math.min(current, total - 1));
+            update();
+        });
 
-window.addEventListener("touchstart", e => {
-  startX = e.touches[0].clientX;
-});
-
-window.addEventListener("touchend", e => {
-  let endX = e.changedTouches[0].clientX;
-
-  if (startX - endX > 50) current++;
-  else if (endX - startX > 50) current--;
-
-  current = Math.max(0, Math.min(current, total - 1));
-  update();
-});
-
-/* 뒤로 */
-function goBack() {
-  window.history.back();
-}
-</script>
-
+        /* 외부 클릭 시 메뉴 닫기 */
+        window.onclick = () => { dropdown.style.display = 'none'; }
+    </script>
 </body>
 </html>
