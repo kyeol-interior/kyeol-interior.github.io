@@ -13,7 +13,7 @@
         nav { 
             position:fixed; top:0; width:100%; height:80px; 
             display:flex; justify-content:space-between; align-items:center; 
-            padding:0 50px; background:#fff; z-index:1000; 
+            padding:0 50px; background:#fff; z-index:1100; 
             border-bottom:1px solid #f2f2f2;
         }
         .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#000; letter-spacing:4px; }
@@ -22,13 +22,25 @@
         .nav-links a { text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; font-weight:400; transition: 0.3s; }
         .nav-links a.active { color:#000; font-weight:700; }
 
-        /* [2] 원래의 좌우 분할 레이아웃 */
+        /* 📱 모바일 햄버거 버튼 스타일 */
+        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1200; }
+        .menu-btn span { width: 22px; height: 2px; background: #000; transition: 0.3s; }
+
+        /* 📱 모바일 드롭다운 메뉴 */
+        .mobile-nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: #fff; display: none; flex-direction: column; 
+            justify-content: center; align-items: center; z-index: 1150;
+        }
+        .mobile-nav a { padding: 20px; text-decoration: none; color: #111; font-size: 24px; font-weight: 700; font-family: 'Playfair Display', serif; }
+
+        /* [2] 좌우 분할 레이아웃 */
         .wrapper { display:flex; width:100%; height:100vh; padding-top:80px; }
         .text-side { flex:1; padding:0 8% 0 60px; display:flex; flex-direction:column; justify-content:center; background:#fbfbfb; }
         .img-side { flex:1.3; overflow:hidden; }
         .img-side img { width:100%; height:100%; object-fit:cover; }
 
-        /* 💡 타이틀: '결'자만 두껍게(900) 포인트 */
+        /* 타이틀: '결'자 포인트 강조 */
         .title-main { font-size:42px; font-weight:300; line-height:1.4; margin-bottom:35px; letter-spacing:-1.5px; color:#111; word-break:keep-all; }
         .point-text { font-weight: 900; color:#000; }
 
@@ -38,59 +50,13 @@
         .highlight-section { margin-top:45px; padding-top:35px; border-top:1px solid #ddd; }
         .cert-badge { display:inline-block; padding:7px 15px; background:#000; color:#fff; font-size:11px; letter-spacing:1px; margin-right:8px; margin-bottom:12px; }
 
-        /* 📱 모바일 대응 */
+        /* 📱 모바일 대응 스타일 수정 */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 70px; }
+            .nav-links { display: none; }
+            .menu-btn { display: flex; } /* 햄버거 버튼 보이기 */
             .wrapper { flex-direction:column; height:auto; padding-top:70px; }
             .img-side { height:350px; order:1; }
             .text-side { padding:60px 25px 100px; order:2; background:#fff; }
             .title-main { font-size:30px; }
         }
-    </style>
-</head>
-<body>
-
-    <nav>
-        <a href="index.html" class="logo">KYEOL</a>
-        <div class="nav-links">
-            <a href="about.html" class="active">ABOUT</a>
-            <a href="portfolio.html">PORTFOLIO</a>
-            <a href="proposal.html">PROPOSAL</a>
-            <a href="contact.html">CONTACT</a>
-        </div>
-    </nav>
-    
-    <div class="wrapper">
-        <div class="text-side">
-            <h1 class="title-main">
-                "당신이 머무는 곳마다,<br>
-                기분 좋은 <span class="point-text">결</span>이 흐르도록."
-            </h1>
-            
-            <p class="desc-text">
-                공간은 사람을 닮아 있기에,<br>
-                우리는 사용자의 <b>시선과 동선</b>을 먼저 읽습니다.<br><br>
-                
-                실내건축 전문 법인 <b>(주)결</b>만의 섬세한 손길로<br>
-                사람과 공간, 그 사이의 모든 가능성을<br>
-                가장 따스하게 <b>연결(結)</b>합니다.
-            </p>
-
-            <div class="highlight-section">
-                <div>
-                    <span class="cert-badge">실내건축공사업 면허 보유 법인</span>
-                    <span class="cert-badge">인증 장애인기업</span>
-                </div>
-                <p style="font-size:14px; color:#888; margin-top:5px; font-weight:300;">
-                    (주)결은 사회적 책임을 다하는 장애인기업으로서<br>
-                    공공의 신뢰를 바탕으로 공간의 새로운 기준을 제시합니다.
-                </p>
-            </div>
-        </div>
-        <div class="img-side">
-            <img src="image/about1.jpg" alt="KYEOL Interior Design">
-        </div>
-    </div>
-
-</body>
-</html>
