@@ -2,36 +2,74 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KYEOL | PROJECT 11 - JB Bank</title>
     <link rel="stylesheet" href="../project-style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        .left { padding: 80px 50px !important; background: #f9f9f9; position: sticky; top: 80px; height: calc(100vh - 80px); }
-        .quote { font-family: 'Playfair Display', serif; font-style: italic; color: #999; font-size: 1.1rem; margin-bottom: 15px; }
-        .right { padding: 80px 50px; }
-        .right-item { margin-bottom: 150px; }
+        /* [1] 가로 흔들림 방지 기본 설정 */
+        html, body { 
+            margin: 0; padding: 0; width: 100%; 
+            overflow-x: hidden; /* 좌우 스크롤 원천 차단 */
+            background: #fff; font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        /* [2] 레이아웃 설정 */
+        .container { display: flex; width: 100%; min-height: 100vh; }
         
-        /* 사진 2장 그리드 배치 */
-        .img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
-        .img-grid img { width: 100%; height: 400px; object-fit: cover; border-radius: 2px; background: #eee; }
+        .left { 
+            flex: 0 0 450px; padding: 80px 50px !important; background: #f9f9f9; 
+            position: sticky; top: 0; height: 100vh; box-sizing: border-box;
+        }
+        .right { flex: 1; padding: 80px 80px; box-sizing: border-box; }
+        
+        /* 타이틀 및 텍스트 스타일 */
+        .quote { font-family: 'Playfair Display', serif; font-style: italic; color: #999; font-size: 1.1rem; margin-bottom: 15px; }
+        .title-area h2 { font-size: 32px; font-weight: 700; margin-bottom: 10px; word-break: keep-all; }
+        .project-subtitle { font-size: 14px; color: #666; letter-spacing: 1px; }
+
+        .right-item { margin-bottom: 150px; width: 100%; }
+        .step-num { font-family: 'Playfair Display', serif; color: #bbb; font-size: 45px; font-weight: 700; line-height: 1; margin-bottom: 20px; }
+        
+        /* [3] 사진 2장 그리드 (핵심 수정) */
+        .img-grid { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; 
+            margin-bottom: 30px; width: 100%; 
+        }
+        .img-grid img { 
+            width: 100%; height: 450px; object-fit: cover; 
+            border-radius: 2px; background: #eee; 
+        }
         
         .img-caption { font-size: 15px; color: #555; line-height: 1.8; border-left: 3px solid #111; padding-left: 20px; }
         .img-caption b { color: #111; display: block; font-size: 19px; margin-bottom: 10px; font-weight: 700; }
-        .step-num { font-family: 'Playfair Display', serif; color: #bbb; font-size: 45px; font-weight: 700; line-height: 1; margin-bottom: 15px; }
         
+        /* [4] 📱 모바일 및 태블릿 대응 (흔들림 보수) */
         @media (max-width: 1024px) {
-            .left { position: relative; height: auto; padding: 50px 25px !important; }
-            .img-grid { grid-template-columns: 1fr; }
-            .img-grid img { height: 300px; }
+            .container { flex-direction: column; }
+            .left { 
+                position: relative; flex: none; width: 100%; height: auto; 
+                padding: 60px 25px !important; top: 0; 
+            }
+            .right { padding: 50px 20px; width: 100%; overflow: hidden; }
+            
+            .img-grid { 
+                grid-template-columns: 1fr; /* 모바일은 1열로 세로 정렬 */
+                gap: 10px; 
+            }
+            .img-grid img { height: 350px; }
+            
+            .right-item { margin-bottom: 80px; }
+            .title-area h2 { font-size: 26px; }
+            .step-num { font-size: 35px; }
         }
     </style>
 </head>
 
 <body>
 
-<nav class="nav-header">
-    <button class="back-btn" onclick="location.href='../portfolio.html'">← BACK TO LIST</button>
+<nav class="nav-header" style="position: fixed; top: 0; width: 100%; z-index: 1000; padding: 20px; pointer-events: none;">
+    <button class="back-btn" onclick="location.href='../portfolio.html'" style="pointer-events: auto; cursor: pointer; background: rgba(255,255,255,0.8); border: 1px solid #ddd; padding: 10px 20px; font-size: 12px; letter-spacing: 1px;">← BACK TO LIST</button>
 </nav>
 
 <div class="container">
@@ -44,7 +82,7 @@
         </div>
 
         <div class="desc-section" style="margin-top:40px;">
-            <p style="font-size:18px; line-height:2; font-weight:300; color:#333; word-break:keep-all;">
+            <p style="font-size:17px; line-height:1.9; font-weight:300; color:#333; word-break:keep-all;">
                 한정된 사각형 안에서 2인의 여유를 4인의 활기찬 일상으로 바꾸는 일. <br><br>
                 단순히 숫자를 늘리는 것이 아니라, 늘어난 비품의 무게만큼 사용자의 시선과 동선이 자유로울 수 있도록 <b>'결이 좋은'</b> 질서를 고민했습니다. <br><br>
                 보이지 않는 벽체 내부부터 채광을 끌어들이는 창틀 하나까지, 우리는 이곳에 머무는 사람들의 내일을 먼저 그려봅니다.
