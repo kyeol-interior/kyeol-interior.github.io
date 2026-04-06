@@ -7,129 +7,44 @@
     <link rel="stylesheet" href="../project-style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* [1] 외부 CSS를 무력화하는 강제 화이트 시공 */
-        html, body { 
-            margin: 0 !important; 
-            padding: 0 !important; 
-            width: 100% !important; 
-            overflow-x: hidden !important; 
-            background: #ffffff !important; /* 무조건 흰색 */
-            font-family: 'Noto Sans KR', sans-serif !important;
-            color: #111 !important;
-        }
-
-        .container { 
-            display: flex !important; 
-            width: 100% !important; 
-            background: #ffffff !important; 
-        }
+        /* 11번 프로젝트 전용 미세 조정 (외부 CSS 강제 덮어쓰기) */
+        html, body { background: #ffffff !important; color: #111 !important; overflow-x: hidden !important; }
+        .container { background: #ffffff !important; display: flex !important; }
         
-        /* [2] 왼쪽 영역 강제 고정 및 배경색 */
+        /* 왼쪽 고정 영역 */
         .left { 
-            flex: 0 0 450px !important; 
-            padding: 120px 60px !important; 
             background: #ffffff !important; 
-            position: sticky !important; 
-            top: 0 !important; 
-            height: 100vh !important; 
-            box-sizing: border-box !important;
             border-right: 1px solid #f2f2f2 !important;
+            padding: 120px 50px !important;
         }
 
-        /* [3] 오른쪽 영역 강제 배경색 */
-        .right { 
-            flex: 1 !important; 
-            padding: 120px 80px !important; 
-            box-sizing: border-box !important; 
-            background: #ffffff !important;
+        /* 오른쪽 콘텐츠 영역 */
+        .right { background: #ffffff !important; padding: 100px 0 !important; }
+        .right-item { margin-bottom: 150px; text-align: left; padding: 0 80px; }
+
+        /* 사진 그리드 레이아웃 */
+        .img-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+            margin-bottom: 30px; 
+            width: 100%;
+        }
+        .img-grid img { 
+            width: 100%; 
+            height: 450px; 
+            object-fit: cover; 
+            filter: brightness(1) !important; /* 사진 어둡게 나오지 않도록 고정 */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        /* [4] 버튼 시인성 강제 확보 (!important 핵심) */
-        .nav-header {
-            position: fixed !important; 
-            top: 0 !important; 
-            width: 100% !important; 
-            z-index: 9999 !important; /* 다른 어떤 것보다 위에 */
-            padding: 30px 50px !important; 
-            pointer-events: none !important;
-        }
-        
-        .back-btn {
-            pointer-events: auto !important; 
-            cursor: pointer !important; 
-            background: #111111 !important; /* 무조건 검정 */
-            color: #ffffff !important; /* 무조건 흰글씨 */
-            border: 1px solid #111111 !important; 
-            padding: 12px 25px !important; 
-            font-size: 11px !important; 
-            font-weight: 700 !important; 
-            display: inline-block !important;
-            visibility: visible !important; /* 혹시 숨겨져 있다면 보이게 */
-            opacity: 1 !important;
-        }
-        
-        .back-btn:hover {
-            background: #ffffff !important; 
-            color: #111111 !important;
-        }
+        /* 캡션 및 숫자 스타일 */
+        .step-num { font-family: 'Playfair Display', serif; color: #eee; font-size: 60px; font-weight: 700; line-height: 1; margin-bottom: 20px; }
+        .img-caption { font-size: 15px; color: #666; line-height: 2; border-left: 3px solid #111; padding-left: 20px; text-align: left; }
+        .img-caption b { color: #111; display: block; font-size: 19px; margin-bottom: 10px; font-weight: 700; }
 
-        /* 기존 스타일 유지 */
-        .quote { font-family: 'Playfair Display', serif; font-style: italic; color: #bbb; margin-bottom: 15px; }
-        .title-area h2 { font-size: 34px; font-weight: 700; margin-bottom: 15px; }
-        .right-item { margin-bottom: 180px; width: 100%; }
-        .step-num { font-family: 'Playfair Display', serif; color: #eee; font-size: 65px; font-weight: 700; line-height: 1; margin-bottom: 25px; }
-        .img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
-        .img-grid img { width: 100%; height: 500px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-        .img-caption { font-size: 15px; color: #666; line-height: 2; border-left: 2px solid #111; padding-left: 25px; }
-
-        /* [5] 모바일 강제 적용 */
+        /* 모바일 대응 (좌우 흔들림 방지 핵심) */
         @media (max-width: 1024px) {
             .container { flex-direction: column !important; }
-            .left { 
-                position: relative !important; width: 100% !important; height: auto !important; 
-                padding: 100px 25px 40px !important; border-right: none !important;
-            }
-            .right { padding: 60px 20px !important; width: 100% !important; }
-            .img-grid { grid-template-columns: 1fr !important; }
-            .img-grid img { height: 380px !important; }
-            .nav-header { padding: 20px !important; }
-        }
-    </style>
-</head>
-<body>
-
-<nav class="nav-header">
-    <button class="back-btn" onclick="location.href='../portfolio.html'">← BACK TO LIST</button>
-</nav>
-
-<div class="container">
-    <aside class="left">
-        <div class="title-area">
-            <p class="quote">Redefining Space Density</p>
-            <h2>공간의 밀도를 다시 쓰다</h2>
-            <p class="project-subtitle">PROJECT 11 : JB Bank Extension</p>
-        </div>
-        <div class="desc-section" style="margin-top:50px;">
-            <p style="font-size:17px; line-height:2.1; font-weight:300; color:#444; word-break:keep-all;">
-                한정된 사각형 안에서 2인의 여유를 4인의 활기찬 일상으로 바꾸는 일. <br><br>
-                단순히 숫자를 늘리는 것이 아니라, 늘어난 비품의 무게만큼 사용자의 시선과 동선이 자유로울 수 있도록 <b>'결이 좋은'</b> 질서를 고민했습니다.
-            </p>
-        </div>
-    </aside>
-
-    <main class="right">
-        <div class="right-item">
-            <p class="step-num">01</p>
-            <div class="img-grid">
-                <img src="../image/11-1.jpg" alt="도면1">
-                <img src="../image/11-2.jpg" alt="도면2">
-            </div>
-            <div class="img-caption">
-                <b>PLANNING : 선의 진화</b>
-                2인 업무 공간을 4인 체제로 확장하며 고밀도 수납 라인을 구축했습니다.
-            </div>
-        </div>
-        </main>
-</div>
-</body>
-</html>
+            .left { position: relative !important; width: 100% !important; height: auto !important; padding: 100px 25px 40px !important; border-right: none !important; border-bottom: 1px solid #eee !important; }
+            .right { width: 100% !important; margin-left: 0
