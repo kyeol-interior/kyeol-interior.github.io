@@ -6,7 +6,7 @@
     <title>PORTFOLIO | (주)결</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* [1] 공통 네비게이션 스타일 (전 페이지 통일) */
+        /* [1] 공통 스타일 및 네비게이션 */
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
         body { background:#fff; font-family: 'Noto Sans KR', sans-serif; color:#111; overflow-x:hidden; }
         
@@ -18,18 +18,21 @@
         }
         .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#000; letter-spacing:4px; }
         
+        /* PC 메뉴 */
         .nav-links { display:flex; gap:35px; }
         .nav-links a { text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; font-weight:400; transition: 0.3s; }
         .nav-links a.active { color:#000; font-weight:700; }
 
         /* 햄버거 버튼 애니메이션 */
-        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1200; }
-        .menu-btn span { width: 22px; height: 2px; background: #000; transition: 0.3s; }
+        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1200; position: relative; }
+        .menu-btn span { width: 22px; height: 2px; background: #000; transition: 0.3s; transform-origin: center; }
+        
+        /* 햄버거 -> X 변환 */
         .menu-btn.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
         .menu-btn.open span:nth-child(2) { opacity: 0; }
         .menu-btn.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-        /* 모바일 드롭다운 (부드러운 슬라이딩) */
+        /* 모바일 슬라이딩 메뉴 */
         .mobile-nav {
             position: fixed; top: -100%; left: 0; width: 100%; height: auto;
             background: #fff; border-bottom: 1px solid #eee;
@@ -46,4 +49,142 @@
         
         .grid-container { 
             display: grid; 
-            grid-template-columns:
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px; 
+        }
+        
+        .grid-item { 
+            position: relative; overflow: hidden; background: #eee; aspect-ratio: 4/3; 
+            display: block; text-decoration: none;
+        }
+        .grid-item img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            filter: grayscale(100%); transition: 0.6s ease; transform: scale(1.0);
+        }
+        .item-overlay { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; 
+            opacity: 0; transition: 0.4s ease;
+        }
+        .item-title { color: #fff; font-size: 15px; letter-spacing: 2px; font-weight: 300; border-bottom: 1px solid #fff; padding-bottom: 5px; }
+
+        /* 호버 효과 */
+        .grid-item:hover img, .grid-item.active img { filter: grayscale(0%); transform: scale(1.05); }
+        .grid-item:hover .item-overlay, .grid-item.active .item-overlay { opacity: 1; }
+
+        /* 모바일 대응 */
+        @media (max-width: 1024px) {
+            nav { padding: 0 25px; height: 70px; }
+            .logo { font-size: 20px; }
+            .nav-links { display: none; } 
+            .menu-btn { display: flex; } 
+
+            .container { padding: 110px 20px 80px; }
+            .grid-container { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .item-title { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">KYEOL</a>
+        <div class="nav-links">
+            <a href="about.html">ABOUT</a>
+            <a href="portfolio.html" class="active">PORTFOLIO</a>
+            <a href="proposal.html">PROPOSAL</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+        <div class="menu-btn" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <div class="mobile-nav" id="dropdown">
+        <a href="about.html">ABOUT</a>
+        <a href="portfolio.html">PORTFOLIO</a>
+        <a href="proposal.html">PROPOSAL</a>
+        <a href="contact.html">CONTACT</a>
+    </div>
+
+    <div class="container">
+        <div class="filter-nav">SELECTED PROJECTS</div>
+
+        <section class="grid-container">
+            <a href="projects/1suji.html" class="grid-item">
+                <img src="image/1-1.jpg" alt="남원 수지초">
+                <div class="item-overlay"><div class="item-title">남원 수지초 도서관</div></div>
+            </a>
+            <a href="projects/2dukam.html" class="grid-item">
+                <img src="image/2-1.jpg" alt="덕암정보고">
+                <div class="item-overlay"><div class="item-title">덕암정보고 행정실</div></div>
+            </a>
+            <a href="projects/3makeup.html" class="grid-item">
+                <img src="image/3-1.jpg" alt="메이크업">
+                <div class="item-overlay"><div class="item-title">IN THE MAKE UP</div></div>
+            </a>
+            <a href="projects/4seoil.html" class="grid-item">
+                <img src="image/4-1.jpg" alt="서일초">
+                <div class="item-overlay"><div class="item-title">서일초 작은미술관</div></div>
+            </a>
+            <a href="projects/5nongso.html" class="grid-item">
+                <img src="image/5-6.jpg" alt="농소마을">
+                <div class="item-overlay"><div class="item-title">농소마을 주택</div></div>
+            </a>
+            <a href="projects/6summit.html" class="grid-item">
+                <img src="image/6-8.jpg" alt="송정써미트">
+                <div class="item-overlay"><div class="item-title">송정써미트 아파트</div></div>
+            </a>
+            <a href="projects/7eco.html" class="grid-item">
+                <img src="image/7-9.jpg" alt="에코체육센터">
+                <div class="item-overlay"><div class="item-title">전주 에코체육센터</div></div>
+            </a>
+            <a href="projects/8raum.html" class="grid-item">
+                <img src="image/8-5.jpg" alt="라움헤어">
+                <div class="item-overlay"><div class="item-title">Raum Hair</div></div>
+            </a>
+            <a href="projects/9furniture.html" class="grid-item">
+                <img src="image/9-1.jpg" alt="가구제작">
+                <div class="item-overlay"><div class="item-title">가구제작 - 어린이 맞춤</div></div>
+            </a>
+            <a href="projects/10ocheon.html" class="grid-item">
+                <img src="image/10-3.jpg" alt="오천초">
+                <div class="item-overlay"><div class="item-title">오천초 교무실</div></div>
+            </a>
+            <a href="projects/11jbbank.html" class="grid-item">
+                <img src="image/11-13.jpg" alt="JB Bank">
+                <div class="item-overlay"><div class="item-title">JB-Bank 본점</div></div>
+            </a>
+        </section>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const dropdown = document.getElementById('dropdown');
+
+        // 메뉴 토글 (X자 변환 + 슬라이딩)
+        menuToggle.onclick = (e) => {
+            e.stopPropagation();
+            menuToggle.classList.toggle('open');
+            dropdown.classList.toggle('active');
+        };
+
+        // 외부 클릭 시 닫기
+        document.onclick = (e) => {
+            if (!dropdown.contains(e.target) && !menuToggle.contains(e.target)) {
+                menuToggle.classList.remove('open');
+                dropdown.classList.remove('active');
+            }
+        };
+
+        // 스크롤 감지 (흑백 -> 컬러 전환)
+        const items = document.querySelectorAll('.grid-item');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('active'); }
+            });
+        }, { threshold: 0.1 });
+        items.forEach(item => observer.observe(item));
+    </script>
+</body>
+</html>
