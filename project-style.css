@@ -1,47 +1,51 @@
 /* ===============================
-   PROJECT DETAIL PAGE CSS
+   PROJECT DETAIL PAGE CSS - WHITE EDITION
    =============================== */
 
 body { 
     margin: 0; 
     font-family: 'Montserrat', 'Noto Sans KR', sans-serif; 
-    background: #0a0a0a; 
-    color: white; 
+    background: #ffffff; /* [변경] 검정에서 흰색으로 */
+    color: #111111;      /* [변경] 흰색에서 검정으로 */
     overflow-x: hidden; 
 }
 
-/* BACK */
+/* [수정] BACK TO LIST 버튼 - 시인성 확보 */
 .nav-header { 
     position: fixed; 
     top: 40px; 
     left: 40px; 
-    z-index: 1001; 
+    z-index: 2000; 
 }
 
 .back-btn { 
-    color: white; 
+    color: #ffffff;          /* 글자 흰색 */
+    background: #111111;     /* 배경 검정 */
     text-decoration: none; 
-    font-size: 10px; 
-    letter-spacing: 4px; 
-    opacity: 0.5; 
+    font-size: 11px; 
+    letter-spacing: 3px; 
+    padding: 12px 25px;      /* 버튼 형태로 여백 추가 */
     cursor: pointer; 
-    background: none; 
-    border: none; 
+    border: 1px solid #111111; 
     text-transform: uppercase; 
     transition: 0.3s; 
+    display: inline-block;
+    opacity: 1 !important;   /* 투명도 제거하여 명확하게 노출 */
 }
 
 .back-btn:hover { 
-    opacity: 1; 
+    background: #ffffff; 
+    color: #111111; 
 }
 
 /* 레이아웃 */
 .container { 
     display: flex; 
     min-height: 100vh; 
+    background: #ffffff;
 }
 
-/* 왼쪽 */
+/* 왼쪽 고정 영역 */
 .left { 
     width: 30%; 
     height: 100vh; 
@@ -51,50 +55,50 @@ body {
     padding: 180px 50px 80px; 
     box-sizing: border-box; 
     overflow-y: auto; 
+    background: #ffffff;
+    border-right: 1px solid #f2f2f2; /* 경계선 추가 */
 }
 
-/* 제목 */
+/* 제목 및 텍스트 */
 .title-area h2 { 
     font-size: 32px; 
-    letter-spacing: 8px; 
+    letter-spacing: 2px; /* 너무 넓은 간격 조정 */
     margin-bottom: 15px; 
-    font-weight: 500;
+    font-weight: 700;
+    color: #000;
 }
 
 .project-subtitle { 
     font-size: 12px; 
-    color: #666; 
+    color: #888; 
     margin-bottom: 50px; 
-    letter-spacing: 2px; 
+    letter-spacing: 1px; 
 }
 
-/* 설명 */
-.desc-section { 
-    margin-bottom: 40px; 
-}
-
+/* 설명 섹션 */
 .desc-section h3 { 
     font-size: 13px; 
-    letter-spacing: 3px; 
-    color: #888; 
+    letter-spacing: 2px; 
+    color: #999; 
     margin-bottom: 15px; 
 }
 
 .desc-section p { 
-    line-height: 2.2; 
-    font-size: 15px; 
+    line-height: 2; 
+    font-size: 16px; 
     font-weight: 300; 
-    opacity: 0.8; 
-    margin: 8px 0; 
+    color: #333; 
+    margin: 10px 0; 
     word-break: keep-all; 
 }
 
-/* 오른쪽 */
+/* 오른쪽 콘텐츠 영역 */
 .right { 
     width: 70%; 
     margin-left: 30%; 
     padding: 100px 0; 
     text-align: center; 
+    background: #ffffff;
 }
 
 .right img,
@@ -104,13 +108,13 @@ body {
     height: auto; 
     display: block; 
     margin: 0 auto 80px; 
-    filter: brightness(0.9); 
+    filter: none; /* [변경] 어둡게 하던 필터 제거 */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05); /* 사진 입체감 추가 */
     transition: 0.5s;
 }
 
-/* ================= 모바일 ================= */
+/* ================= 모바일 최적화 ================= */
 @media (max-width: 1024px) {
-
     .container { 
         display: block; 
     }
@@ -119,49 +123,40 @@ body {
         position: relative; 
         width: 100%; 
         height: auto; 
-        padding: 100px 30px 40px; 
+        padding: 120px 30px 40px; 
+        border-right: none;
+        border-bottom: 1px solid #eee;
     }
 
     .right { 
         width: 100%; 
         margin-left: 0; 
-        padding: 20px 0; 
+        padding: 40px 0; 
     }
 
     .right img,
     .right video {
         width: 92%;
-        max-width: 100%;
         margin: 0 auto 30px;
     }
 
     .nav-header { 
-        top: 25px; 
-        left: 25px; 
+        top: 20px; 
+        left: 20px; 
     }
 
     .title-area h2 { 
-        font-size: 20px;
-        letter-spacing: 2px;
-        white-space: nowrap;
-    }
-
-    .project-subtitle {
-        font-size: 11px;
+        font-size: 24px;
         letter-spacing: 1px;
-        margin-bottom: 30px;
+        white-space: normal;
     }
 }
+
 /* FOOTER */
 .desc-footer {
     margin-top: 60px;
     font-size: 13px;
     line-height: 1.8;
-    opacity: 0.6;
+    color: #999;
     font-style: italic;
-}
-
-/* 텍스트 가독성 보정 */
-.desc-section p {
-    line-height: 2;
 }
