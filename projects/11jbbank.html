@@ -6,123 +6,65 @@
     <title>KYEOL | PROJECT 11 - JB Bank</title>
     <link rel="stylesheet" href="../project-style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-<nav class="nav-header">
-    <button class="back-btn" onclick="location.href='../portfolio.html'">← BACK TO LIST</button>
-</nav>
-
-<div class="container">
-
-    <aside class="left">
-        <div class="title-area">
-            <p class="quote">Redefining Space Density</p>
-            <h2>공간의 밀도를 다시 쓰다</h2>
-            <p class="project-subtitle">PROJECT 11 : JB Bank Extension</p>
-        </div>
-
-        <div class="desc-section" style="margin-top:50px;">
-            <p>
-                한정된 사각형 안에서 2인의 여유를 4인의 활기찬 일상으로 바꾸는 일. <br><br>
-                단순히 숫자를 늘리는 것이 아니라, 늘어난 비품의 무게만큼 사용자의 시선과 동선이 자유로울 수 있도록 <b>'결이 좋은'</b> 질서를 고민했습니다. <br><br>
-                보이지 않는 벽체 내부부터 채광을 끌어들이는 창틀 하나까지, 우리는 이곳에 머무는 사람들의 내일을 먼저 그려봅니다.
-            </p>
-        </div>
-    </aside>
-
-    <main class="right">
-        
-        <div class="right-item">
-            <p class="step-num">01</p>
-            <div class="img-grid">
-                <img src="../image/11-1.jpg" alt="기존 도면">
-                <img src="../image/11-2.jpg" alt="변경 도면">
-            </div>
-            <div class="img-caption">
-                <b>PLANNING : 선의 진화</b>
-                2인 업무 공간을 4인 체제로 확장하며 새로운 라인을 구축했습니다.
-            </div>
-        </div>
-
-        <div class="right-item">
-            <p class="step-num">02</p>
-            <div class="img-grid">
-                <img src="../image/11-3.jpg" alt="보양 작업">
-                <img src="../image/11-4.jpg" alt="보양 작업">
-            </div>
-            <div class="img-caption">
-                <b>PROTECTION : 기본의 시작</b>
-                본격적인 공사에 앞서 기존 시설물을 보호하는 정갈한 보양 작업입니다.
-            </div>
-        </div>
-
-        <div class="right-item">
-            <p class="step-num">03</p>
-            <div class="img-grid">
-                <img src="../image/11-5.jpg" alt="철거">
-                <img src="../image/11-6.jpg" alt="철거">
-            </div>
-            <div class="img-caption">
-                <b>DEMOLITION : 비움의 미학</b>
-                새로운 질서를 세우기 위해 낡은 구조를 걷어냅니다.
-            </div>
-        </div>
-
-        <div class="right-item">
-            <p class="step-num">04</p>
-            <div class="img-grid">
-                <img src="../image/11-7.jpg" alt="벽체">
-                <img src="../image/11-8.jpg" alt="창틀">
-            </div>
-            <div class="img-caption">
-                <b>STRUCTURE : 빛을 담는 틀</b>
-                기존 복도를 벽체로 새로운 공간을 생성 하며 답답한 공간에 채광을 더하며, 새로운 4인 체제에 맞는 전기 및 네트워크 재구성했습니다.
-            </div>
-        </div>
-
-        <div class="right-item">
-            <p class="step-num">05</p>
-            <div class="img-grid">
-                <img src="../image/11-9.jpg" alt="정리">
-                <img src="../image/11-10.jpg" alt="정리">
-            </div>
-            <div class="img-caption">
-                <b>CLEARANCE : 공정의 예의</b>
-                기초 공사를 마치고 평일 업무를 볼수 있도록, 현장을<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KYEOL | PROJECT 11 - JB Bank</title>
-    <link rel="stylesheet" href="../project-style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* [11번 전용 레이아웃 미세 조정] */
-        .right-item { margin-bottom: 200px !important; } /* 섹션 간 간격 확보 */
+        /* [11번 전용 레이아웃 정밀 시공] */
+        .right-item { margin-bottom: 180px !important; text-align: left; }
         
-        .step-header { margin-bottom: 30px; } /* 숫자와 설명 영역 */
-        
-        .img-grid { margin-top: 40px; } /* 설명과 사진 사이 간격 */
-        
-        .img-caption { 
-            border-left: 3px solid #111; 
-            padding-left: 25px; 
-            margin-top: 15px;
+        /* 숫자 스타일 */
+        .step-num { 
+            font-family: 'Playfair Display', serif; 
+            color: #eee; 
+            font-size: 65px; 
+            font-weight: 700; 
+            line-height: 1; 
+            margin-bottom: 15px; 
         }
         
-        .img-caption b { 
-            display: block; 
-            font-size: 22px; 
-            margin-bottom: 12px; 
+        /* 설명 영역 (숫자 바로 아래) */
+        .step-desc {
+            border-left: 3px solid #111;
+            padding-left: 20px;
+            margin-bottom: 40px; /* 설명과 사진 사이 간격 */
+        }
+        
+        .step-desc b {
+            display: block;
+            font-size: 20px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
-
-        .img-caption p {
+        
+        .step-desc p {
             font-size: 16px;
             color: #555;
             line-height: 1.8;
             margin: 0;
+            word-break: keep-all;
+        }
+
+        /* 사진 그리드 (설명 아래) */
+        .img-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .img-grid img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 1024px) {
+            .img-grid { grid-template-columns: 1fr; gap: 15px; }
+            .img-grid img { height: 350px; }
+            .step-num { font-size: 50px; }
+            .right-item { margin-bottom: 100px !important; }
         }
     </style>
 </head>
@@ -153,12 +95,10 @@
     <main class="right">
         
         <div class="right-item">
-            <div class="step-header">
-                <p class="step-num">01</p>
-                <div class="img-caption">
-                    <b>PLANNING : 선의 진화</b>
-                    <p>2인 업무 공간을 4인 체제로 확장하며 새로운 라인을 구축했습니다.</p>
-                </div>
+            <p class="step-num">01</p>
+            <div class="step-desc">
+                <b>PLANNING : 선의 진화</b>
+                <p>2인 업무 공간을 4인 체제로 확장하며 새로운 라인을 구축했습니다.</p>
             </div>
             <div class="img-grid">
                 <img src="../image/11-1.jpg" alt="기존 도면">
@@ -167,12 +107,10 @@
         </div>
 
         <div class="right-item">
-            <div class="step-header">
-                <p class="step-num">02</p>
-                <div class="img-caption">
-                    <b>PROTECTION : 기본의 시작</b>
-                    <p>본격적인 공사에 앞서 기존 시설물을 보호하는 정갈한 보양 작업입니다.</p>
-                </div>
+            <p class="step-num">02</p>
+            <div class="step-desc">
+                <b>PROTECTION : 기본의 시작</b>
+                <p>본격적인 공사에 앞서 기존 시설물을 보호하는 정갈한 보양 작업입니다.</p>
             </div>
             <div class="img-grid">
                 <img src="../image/11-3.jpg" alt="보양 작업">
@@ -181,12 +119,10 @@
         </div>
 
         <div class="right-item">
-            <div class="step-header">
-                <p class="step-num">03</p>
-                <div class="img-caption">
-                    <b>DEMOLITION : 비움의 미학</b>
-                    <p>새로운 질서를 세우기 위해 낡은 구조를 걷어냅니다.</p>
-                </div>
+            <p class="step-num">03</p>
+            <div class="step-desc">
+                <b>DEMOLITION : 비움의 미학</b>
+                <p>새로운 질서를 세우기 위해 낡은 구조를 걷어냅니다.</p>
             </div>
             <div class="img-grid">
                 <img src="../image/11-5.jpg" alt="철거">
@@ -195,12 +131,10 @@
         </div>
 
         <div class="right-item">
-            <div class="step-header">
-                <p class="step-num">04</p>
-                <div class="img-caption">
-                    <b>STRUCTURE : 빛을 담는 틀</b>
-                    <p>기존 복도를 벽체로 활용해 새로운 공간을 생성하며, 답답한 공간에 채광을 더했습니다. 새로운 4인 체제에 맞춘 전기 및 네트워크 재구성 공정입니다.</p>
-                </div>
+            <p class="step-num">04</p>
+            <div class="step-desc">
+                <b>STRUCTURE : 빛을 담는 틀</b>
+                <p>기존 복도를 벽체로 활용해 새로운 공간을 생성하며, 답답한 공간에 채광을 더했습니다. 새로운 4인 체제에 맞춘 전기 및 네트워크 재구성 공정입니다.</p>
             </div>
             <div class="img-grid">
                 <img src="../image/11-7.jpg" alt="벽체">
@@ -209,13 +143,11 @@
         </div>
 
         <div class="right-item">
-            <div class="step-header">
-                <p class="step-num">05</p>
-                <div class="img-caption">
-                    <b>CLEARANCE : 공정의 예의</b>
-                    <p>기초 공사를 마치고 평일 업무를 정상적으로 볼 수 있도록 현장을 정돈합니다.</p>
-                </div>
-            </div>
+            <p class="step-num">05</p>
+            <p class="step-desc">
+                <b>CLEARANCE : 공정의 예의</b>
+                <span>기초 공사를 마치고 평일 업무를 정상적으로 볼 수 있도록 현장을 정돈합니다.</span>
+            </p>
             <div class="img-grid">
                 <img src="../image/11-9.jpg" alt="정리">
                 <img src="../image/11-10.jpg" alt="정리">
@@ -223,36 +155,14 @@
         </div>
 
         <div class="right-item">
-            <div class="step-header">
-                <p class="step-num">06</p>
-                <div class="img-caption">
-                    <b>NEXT STEP : 결이 흐르는 마감</b>
-                    <p>다음 주말 동안 도배, 데코타일, 필름 작업이 시작됩니다. (주)결의 정교한 마감을 기대해 주세요.</p>
-                </div>
-            </div>
-            <div class="img-grid">
-                <img src="../image/11-11.jpg" alt="마감 예고">
-                <img src="../image/11-12.jpg" alt="마감 예고">
-            </div>
-        </div>
-
-    </main>
-</div>
-
-</body>
-</html> 정돈합니다.
-            </div>
-        </div>
-
-        <div class="right-item">
             <p class="step-num">06</p>
+            <div class="step-desc">
+                <b>NEXT STEP : 결이 흐르는 마감</b>
+                <p>다음 주말 동안 도배, 데코타일, 필름 작업이 시작됩니다. (주)결의 정교한 마감을 기대해 주세요.</p>
+            </div>
             <div class="img-grid">
                 <img src="../image/11-11.jpg" alt="마감 예고">
                 <img src="../image/11-12.jpg" alt="마감 예고">
-            </div>
-            <div class="img-caption">
-                <b>NEXT STEP : 결이 흐르는 마감</b>
-                다음 주말동안 도배, 데코타일, 필름 작업이 시작됩니다.
             </div>
         </div>
 
