@@ -6,36 +6,47 @@
     <title>ABOUT | (주)결</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        /* [1] 공통 스타일 및 네비게이션 (PORTFOLIO와 완벽 일치) */
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
         body { background:#fff; font-family: 'Noto Sans KR', sans-serif; color:#111; overflow-x:hidden; }
 
-        /* 상단 네비게이션 (PC 메뉴 노출) */
         nav { 
             position:fixed; top:0; width:100%; height:80px; 
             display:flex; justify-content:space-between; align-items:center; 
             padding:0 50px; background:#fff; z-index:1100; border-bottom:1px solid #f2f2f2;
         }
         .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#000; letter-spacing:4px; }
-        .nav-links a { text-decoration:none; color:#999; font-size:13px; margin-left:35px; letter-spacing:2px; }
+        
+        .nav-links { display:flex; gap:35px; }
+        .nav-links a { text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; transition: 0.3s; }
         .nav-links a.active { color:#000; font-weight:700; }
 
-        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1200; }
-        .menu-btn span { width: 22px; height: 2px; background: #000; }
+        /* 햄버거 버튼 애니메이션 */
+        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1200; position: relative; }
+        .menu-btn span { width: 22px; height: 2px; background: #000; transition: 0.3s; transform-origin: center; }
+        
+        /* 햄버거 -> X 변환 */
+        .menu-btn.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .menu-btn.open span:nth-child(2) { opacity: 0; }
+        .menu-btn.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
+        /* 모바일 슬라이딩 메뉴 */
         .mobile-nav {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: #fff; display: none; flex-direction: column; 
-            justify-content: center; align-items: center; z-index: 1150;
+            position: fixed; top: -100%; left: 0; width: 100%; height: auto;
+            background: #fff; border-bottom: 1px solid #eee;
+            display: flex; flex-direction: column; padding: 100px 0 30px;
+            z-index: 1050; transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
-        .mobile-nav a { padding: 20px; text-decoration: none; color: #111; font-size: 24px; font-weight: 700; }
+        .mobile-nav.active { top: 0; }
+        .mobile-nav a { padding: 15px 50px; text-decoration: none; color: #111; font-size: 16px; font-weight: 500; border-bottom: 1px solid #f9f9f9; }
 
-        /* 레이아웃 설정 */
+        /* [2] 어바웃 페이지 전용 레이아웃 */
         .wrapper { display:flex; width:100%; height:100vh; padding-top:80px; }
         .text-side { flex:1; padding:0 8%; display:flex; flex-direction:column; justify-content:center; background:#fbfbfb; }
         .img-side { flex:1.3; overflow:hidden; }
         .img-side img { width:100%; height:100%; object-fit:cover; }
 
-        /* 타이틀 및 본문 (강조 없이 고른 두께) */
         .title-main { font-size:42px; font-weight:700; line-height:1.4; margin-bottom:35px; color:#111; word-break:keep-all; }
         .desc-text { font-size:18px; color:#444; font-weight:300; line-height:2.1; }
         .desc-text b { font-weight: 700; color:#111; }
@@ -43,67 +54,11 @@
         .highlight-section { margin-top:45px; padding-top:35px; border-top:1px solid #ddd; }
         .cert-badge { display:inline-block; padding:7px 15px; background:#000; color:#fff; font-size:11px; margin-right:8px; margin-bottom:12px; }
 
-        /* 모바일 최적화 (사진 상단 배치) */
+        /* 모바일 최적화 */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 70px; }
-            .nav-links { display: none; } .menu-btn { display: flex; }
-            .wrapper { flex-direction: column; height: auto; padding-top: 70px; }
-            .img-side { order: 1; height: 45vh; width: 100%; }
-            .text-side { order: 2; padding: 50px 25px 80px; background: #fff; }
-            .title-main { font-size: 30px; margin-bottom: 20px; }
-        }
-    </style>
-</head>
-<body>
-    <nav>
-        <a href="index.html" class="logo">KYEOL</a>
-        <div class="nav-links">
-            <a href="about.html" class="active">ABOUT</a>
-            <a href="portfolio.html">PORTFOLIO</a>
-            <a href="proposal.html">PROPOSAL</a>
-            <a href="contact.html">CONTACT</a>
-        </div>
-        <div class="menu-btn" id="menuToggle"><span></span><span></span><span></span></div>
-    </nav>
-    
-    <div class="mobile-nav" id="dropdown">
-        <a href="about.html">ABOUT</a>
-        <a href="portfolio.html">PORTFOLIO</a>
-        <a href="proposal.html">PROPOSAL</a>
-        <a href="contact.html">CONTACT</a>
-    </div>
+            .logo { font-size: 20px; }
+            .nav-links { display: none; } 
+            .menu-btn { display: flex; }
 
-    <div class="wrapper">
-        <div class="text-side">
-            <h1 class="title-main">"The devil is in the detail,<br>악마는 디테일에 있다."</h1>
-            
-            <p class="desc-text">
-                단순해 보이는 공간일지라도, 그 완성도는 눈에 잘 띄지 않는 작은 디테일에서 결정됩니다.<br><br>
-                <b>"머무는 순간의 온기, 눈에 닿는 모든 곳에 결이 좋은 공간을 짓습니다."</b>
-            </p>
-
-            <div class="highlight-section">
-                <span class="cert-badge">실내건축공사업 면허 보유 법인</span>
-                <span class="cert-badge">인증 장애인기업</span>
-                <p style="font-size:14px; color:#888; margin-top:5px; font-weight:300;">
-                    (주)결은 사회적 책임을 다하며, 공공의 신뢰를 바탕으로<br>
-                    공간의 새로운 기준을 제시합니다.
-                </p>
-            </div>
-        </div>
-        <div class="img-side">
-            <img src="image/about1.jpg">
-        </div>
-    </div>
-
-    <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const dropdown = document.getElementById('dropdown');
-        menuToggle.onclick = function(e) {
-            e.stopPropagation();
-            dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
-        };
-        window.onclick = function() { dropdown.style.display = 'none'; }
-    </script>
-</body>
-</html>
+            .wrapper { flex-
