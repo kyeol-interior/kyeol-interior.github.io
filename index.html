@@ -5,37 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>(주)결 | 전주 인테리어 전문 디자인</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@100;300;400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
-        /* [기본 설정] */
         * { margin:0; padding:0; box-sizing:border-box; }
         body, html { 
             height: 100%; 
             background: #000; 
-            font-family: 'Noto Sans KR', 'Montserrat', sans-serif; 
+            font-family: 'Noto Sans KR', sans-serif; 
             overflow: hidden; 
         }
 
-        /* [1] 상단 네비게이션: 로고 영역 */
+        /* [1] 상단 네비게이션: 로고 */
         nav { 
             position: fixed; top: 0; width: 100%; height: 220px; 
             display: flex; justify-content: flex-start; align-items: center; 
             padding: 0 50px; background: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent); 
             z-index: 1000; 
         }
-        .logo-link { display: flex; align-items: center; text-decoration: none; }
         .logo-img {
             height: 150px; 
             width: auto;
             display: block;
-            object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
-            transition: transform 0.5s ease;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15));
+            transition: 0.5s;
         }
-        .logo-img:hover { transform: scale(1.03); }
 
-        /* [2] 배경 영상 및 오버레이 */
+        /* [2] 배경 영상 및 필터 */
         .video-background {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1; overflow: hidden;
@@ -49,7 +45,7 @@
             background: rgba(0,0,0,0.2); z-index: 0;
         }
 
-        /* [3] 메인 콘텐츠: 중앙 문구 및 버튼 */
+        /* [3] 메인 콘텐츠 */
         .main-content {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
@@ -57,64 +53,53 @@
         }
         .main-title { 
             font-size: 54px; font-weight: 700; line-height: 1.4; 
-            margin-bottom: 15px; letter-spacing: -0.02em; word-break: keep-all;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            margin-bottom: 15px; letter-spacing: -2px; word-break: keep-all;
         }
         .main-sub { 
             font-size: 14px; font-weight: 300; letter-spacing: 0.5em; 
             color: rgba(255,255,255,0.7); margin-bottom: 50px;
-            text-transform: uppercase;
         }
-        
-        /* 세련된 버튼 스타일 (기존 index-style.css 감성 반영) */
         .enter-btn { 
             padding: 18px 55px; border: 1px solid rgba(255,255,255,0.5); 
             text-decoration: none; color: #fff; font-size: 11px; 
-            letter-spacing: 4px; transition: all 0.5s ease;
+            letter-spacing: 4px; transition: 0.5s;
             background: rgba(0,0,0,0.1); backdrop-filter: blur(5px);
-            text-transform: uppercase;
         }
-        .enter-btn:hover { 
-            background: #fff; color: #000; border-color: #fff; 
-            letter-spacing: 6px; padding: 18px 65px; 
-        }
+        .enter-btn:hover { background: #fff; color: #000; letter-spacing: 6px; }
 
-        /* [4] SNS/사이드 메뉴 (기존 index-style.css 요소 반영) */
+        /* [4] 하단 메뉴 및 정보 */
         .side-menu {
             position: fixed; left: 50px; bottom: 50px; z-index: 100;
         }
         .side-menu a {
             display: inline-block; margin-right: 25px; font-size: 11px;
-            color: rgba(255,255,255,0.5); text-decoration: none;
+            color: rgba(255,255,255,0.6); text-decoration: none;
             letter-spacing: 2px; transition: 0.3s;
         }
-        .side-menu a:hover { color: #fff; transform: translateY(-3px); }
+        .side-menu a:hover { color: #fff; }
 
-        /* [5] 하단 카피라이트 */
         footer { 
-            position: fixed; bottom: 40px; width: 100%; text-align: center; z-index: 100; 
+            position: fixed; bottom: 40px; width: 100%; text-align: center; z-index: 90; 
         }
         .copyright { 
             font-size: 11px; color: rgba(255, 255, 255, 0.3); 
             letter-spacing: 2px; font-weight: 300; 
         }
 
-        /* [📱 모바일 최적화] */
+        /* 📱 모바일 설정 */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 150px; } 
             .logo-img { height: 110px !important; } 
-            .main-title { font-size: 30px; line-height: 1.5; }
-            .main-sub { font-size: 10px; letter-spacing: 0.3em; margin-bottom: 40px; }
-            .enter-btn { padding: 15px 35px; font-size: 10px; }
-            .side-menu { left: 0; width: 100%; text-align: center; bottom: 80px; }
-            .side-menu a { margin: 0 10px; }
-            footer { bottom: 30px; }
+            .main-title { font-size: 30px; }
+            .side-menu { left: 0; width: 100%; text-align: center; bottom: 85px; }
+            .side-menu a { margin: 0 15px; font-size: 10px; }
+            footer { bottom: 35px; }
         }
     </style>
 </head>
 <body>
     <nav>
-        <a href="index.html" class="logo-link">
+        <a href="index.html">
             <img src="./image/image_1.png" alt="(주)결 로고" class="logo-img">
         </a>
     </nav>
@@ -128,13 +113,13 @@
 
     <div class="main-content">
         <h1 class="main-title">당신이 머무는 곳마다,<br>기분 좋은 결이 흐르도록.</h1>
-        <p class="main-sub">Interior Design & Architecture</p>
-        <a href="about.html" class="enter-btn">Enter View</a>
+        <p class="main-sub">INTERIOR DESIGN & ARCHITECTURE</p>
+        <a href="about.html" class="enter-btn">ENTER VIEW</a>
     </div>
 
     <div class="side-menu">
-        <a href="https://blog.naver.com/kyeol-interior" target="_blank">NAVER BLOG</a>
-        <a href="#">INSTAGRAM</a>
+        <a href="http://blog.naver.com/rotte123" target="_blank">NAVER BLOG</a>
+        <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO TALK</a>
     </div>
 
     <footer>
