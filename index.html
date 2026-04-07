@@ -22,11 +22,42 @@
 
         /* [1] 상단 네비게이션: PC에서는 메뉴가 다 보임 */
         nav { 
-            position:fixed; top:0; width:100%; height:80px; 
+            position:fixed; top:0; width:100%; height:100px; /* 로고 영역 확장을 위해 높이 약간 조정 */
             display:flex; justify-content:space-between; align-items:center; 
             padding:0 50px; background:transparent; z-index:1000; 
         }
-        .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#fff; letter-spacing:4px; }
+
+        /* --- 로고 관련 신규 및 수정 CSS --- */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            gap: 15px; /* 이미지와 텍스트 사이 간격 */
+        }
+        .logo-img {
+            height: 40px; /* 로고 이미지 높이 조정 (적절히 조절하세요) */
+            width: auto;
+            /* darker blue line 로고(image_1.png)를 어두운 배경에 맞게 밝게 조정 (옵션) */
+            filter: brightness(0) invert(1); /* 이미지가 어두우면 켜서 흰색으로 만듭니다. */
+        }
+        .logo-text-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .logo-text-ko {
+            font-size: 18px; /* 국문 로고 크기 */
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .logo-text-en {
+            font-size: 11px; /* 영문 로고 크기 */
+            font-weight: 300;
+            letter-spacing: 1px;
+            opacity: 0.8; /* 영문은 살짝 투명하게 */
+        }
+        /* --- 로고 관련 신규 및 수정 CSS 끝 --- */
         
         .nav-links { display:flex; gap:35px; }
         .nav-links a { text-decoration:none; color:rgba(255,255,255,0.7); font-size:13px; letter-spacing:2px; transition: 0.3s; }
@@ -64,6 +95,9 @@
         /* 📱 모바일 설정 (이때만 햄버거 등장) */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 70px; }
+            .logo-img { height: 30px; } /* 모바일에서 로고 크기 축소 */
+            .logo-text-ko { font-size: 16px; }
+            .logo-text-en { font-size: 10px; }
             .nav-links { display: none; } /* PC 메뉴 숨김 */
             .menu-btn { display: flex; }    /* 햄버거 버튼 등장 */
             .main-title { font-size: 32px; }
@@ -72,7 +106,14 @@
 </head>
 <body>
     <nav>
-        <a href="index.html" class="logo">KYEOL</a>
+        <a href="index.html" class="logo-container">
+            <img src="./image_1.png" alt="(주)결 로고" class="logo-img">
+            <div class="logo-text-group">
+                <span class="logo-text-ko">주식회사 결</span>
+                <span class="logo-text-en">KYEOL Co., Ltd.</span>
+            </div>
+        </a>
+
         <div class="nav-links">
             <a href="about.html">ABOUT</a>
             <a href="portfolio.html">PORTFOLIO</a>
