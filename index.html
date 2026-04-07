@@ -20,29 +20,26 @@
         * { margin:0; padding:0; box-sizing:border-box; }
         body { background:#000; font-family: 'Noto Sans KR', sans-serif; overflow: hidden; height: 100vh; }
 
-        /* [1] 상단 네비게이션 */
+        /* [1] 상단 네비게이션: 로고 크기에 맞춰 높이를 120px로 확장 */
         nav { 
-            position:fixed; top:0; width:100%; height:80px; /* 로고 크기에 맞춰 높이 재조정 */
+            position:fixed; top:0; width:100%; height:120px; 
             display:flex; justify-content:space-between; align-items:center; 
             padding:0 50px; background:transparent; z-index:1000; 
         }
 
-        /* --- 로고 이미지 전용 CSS --- */
+        /* --- 로고 이미지 설정 --- */
         .logo-link {
             display: flex;
             align-items: center;
             text-decoration: none;
-            height: 100%; /* 네비게이션 높이에 맞춤 */
         }
         .logo-img {
-            /* PC 화면 기준 로고 높이. 이미지 비율에 따라 width는 자동 조절됨 */
-            height: 40px; 
+            /* PC 로고 크기를 80px로 대폭 확대 */
+            height: 80px;  
             width: auto;
-            /* 검은색 배경에 로고가 보이도록 흰색으로 반전 (이미지가 어두운 경우) */
-            filter: brightness(0) invert(1); 
+            filter: brightness(0) invert(1); /* 검은색 로고일 경우 흰색으로 반전 */
             transition: 0.3s;
         }
-        /* --- 로고 관련 CSS 끝 --- */
         
         .nav-links { display:flex; gap:35px; }
         .nav-links a { text-decoration:none; color:rgba(255,255,255,0.7); font-size:13px; letter-spacing:2px; transition: 0.3s; }
@@ -79,9 +76,9 @@
 
         /* 📱 모바일 설정 */
         @media (max-width: 1024px) {
-            nav { padding: 0 25px; height: 60px; }
-            /* 모바일 화면에서 로고 크기 축소 */
-            .logo-img { height: 28px; } 
+            nav { padding: 0 25px; height: 90px; } /* 모바일 네비 높이 조정 */
+            /* 모바일 로고 크기를 50px로 확대 */
+            .logo-img { height: 50px; } 
             .nav-links { display: none; }
             .menu-btn { display: flex; }
             .main-title { font-size: 32px; }
