@@ -20,50 +20,35 @@
         * { margin:0; padding:0; box-sizing:border-box; }
         body { background:#000; font-family: 'Noto Sans KR', sans-serif; overflow: hidden; height: 100vh; }
 
-        /* [1] 상단 네비게이션: PC에서는 메뉴가 다 보임 */
+        /* [1] 상단 네비게이션 */
         nav { 
-            position:fixed; top:0; width:100%; height:100px; /* 로고 영역 확장을 위해 높이 약간 조정 */
+            position:fixed; top:0; width:100%; height:80px; /* 로고 크기에 맞춰 높이 재조정 */
             display:flex; justify-content:space-between; align-items:center; 
             padding:0 50px; background:transparent; z-index:1000; 
         }
 
-        /* --- 로고 관련 신규 및 수정 CSS --- */
-        .logo-container {
+        /* --- 로고 이미지 전용 CSS --- */
+        .logo-link {
             display: flex;
             align-items: center;
             text-decoration: none;
-            color: #fff;
-            gap: 15px; /* 이미지와 텍스트 사이 간격 */
+            height: 100%; /* 네비게이션 높이에 맞춤 */
         }
         .logo-img {
-            height: 40px; /* 로고 이미지 높이 조정 (적절히 조절하세요) */
+            /* PC 화면 기준 로고 높이. 이미지 비율에 따라 width는 자동 조절됨 */
+            height: 40px; 
             width: auto;
-            /* darker blue line 로고(image_1.png)를 어두운 배경에 맞게 밝게 조정 (옵션) */
-            filter: brightness(0) invert(1); /* 이미지가 어두우면 켜서 흰색으로 만듭니다. */
+            /* 검은색 배경에 로고가 보이도록 흰색으로 반전 (이미지가 어두운 경우) */
+            filter: brightness(0) invert(1); 
+            transition: 0.3s;
         }
-        .logo-text-group {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .logo-text-ko {
-            font-size: 18px; /* 국문 로고 크기 */
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        .logo-text-en {
-            font-size: 11px; /* 영문 로고 크기 */
-            font-weight: 300;
-            letter-spacing: 1px;
-            opacity: 0.8; /* 영문은 살짝 투명하게 */
-        }
-        /* --- 로고 관련 신규 및 수정 CSS 끝 --- */
+        /* --- 로고 관련 CSS 끝 --- */
         
         .nav-links { display:flex; gap:35px; }
         .nav-links a { text-decoration:none; color:rgba(255,255,255,0.7); font-size:13px; letter-spacing:2px; transition: 0.3s; }
         .nav-links a:hover { color:#fff; }
 
-        /* [2] 모바일용 햄버거 (기본은 숨김) */
+        /* [2] 모바일용 햄버거 */
         .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1002; }
         .menu-btn span { width: 22px; height: 2px; background: #fff; }
 
@@ -92,26 +77,21 @@
         .enter-btn { padding: 15px 45px; border: 1px solid #fff; text-decoration: none; color: #fff; font-size: 13px; letter-spacing: 4px; transition: 0.4s; }
         .enter-btn:hover { background: #fff; color: #000; }
 
-        /* 📱 모바일 설정 (이때만 햄버거 등장) */
+        /* 📱 모바일 설정 */
         @media (max-width: 1024px) {
-            nav { padding: 0 25px; height: 70px; }
-            .logo-img { height: 30px; } /* 모바일에서 로고 크기 축소 */
-            .logo-text-ko { font-size: 16px; }
-            .logo-text-en { font-size: 10px; }
-            .nav-links { display: none; } /* PC 메뉴 숨김 */
-            .menu-btn { display: flex; }    /* 햄버거 버튼 등장 */
+            nav { padding: 0 25px; height: 60px; }
+            /* 모바일 화면에서 로고 크기 축소 */
+            .logo-img { height: 28px; } 
+            .nav-links { display: none; }
+            .menu-btn { display: flex; }
             .main-title { font-size: 32px; }
         }
     </style>
 </head>
 <body>
     <nav>
-        <a href="index.html" class="logo-container">
-            <img src="./image/image_1.png" alt="(주)결 로고" class="logo-img">
-            <div class="logo-text-group">
-                <span class="logo-text-ko">주식회사 결</span>
-                <span class="logo-text-en">KYEOL Co., Ltd.</span>
-            </div>
+        <a href="index.html" class="logo-link">
+            <img src="./image/kyeol_logo_full.png" alt="(주)결 로고" class="logo-img">
         </a>
 
         <div class="nav-links">
