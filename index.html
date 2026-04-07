@@ -1,168 +1,187 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <title>(주)결 | 전주 인테리어·실내건축 전문 디자인</title>
-    <meta name="description" content="전주 실내건축 전문기업 (주)결입니다. 장애인기업, 학교공사, 관공서 시공 전문. 당신이 머무는 곳에 기분 좋은 결을 담습니다.">
-    <meta name="keywords" content="전주인테리어, (주)결, 주식회사 결, 전주리모델링, 학교공사, 관공서인테리어, 실내건축">
-    <meta name="author" content="(주)결">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="(주)결 | KYEOL DESIGN">
-    <meta property="og:description" content="전주 인테리어·실내건축 전문 디자인 기업 (주)결">
-    <meta property="og:image" content="./image/main-thumb.jpg"> 
-    <meta property="og:url" content="https://kyeol-interior.github.io">
+<title>(주)결 | 전주 인테리어·실내건축</title>
 
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { background:#000; font-family:'Noto Sans KR', sans-serif; overflow:hidden; height:100vh; color:#fff; }
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    background:#000;
+    font-family:'Noto Sans KR', sans-serif;
+    overflow:hidden;
+    height:100vh;
+    color:#fff;
+}
 
-        nav {
-            position:fixed; top:0; width:100%; height:180px;
-            display:flex; align-items:center;
-            padding:0 50px; z-index:1000;
-        }
+/* 로고 */
+nav {
+    position:fixed;
+    top:0;
+    width:100%;
+    height:180px;
+    display:flex;
+    align-items:center;
+    padding:0 50px;
+    z-index:1000;
+}
 
-        .logo-img {
-            height:140px;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.15));
-            transition:0.3s;
-        }
-        .logo-img:hover { opacity:0.8; }
+.logo-img {
+    height:140px;
+    filter:drop-shadow(0 0 10px rgba(255,255,255,0.15));
+}
 
-        /* 영상 */
-        .video-background {
-            position:absolute;
-            top:0; left:0;
-            width:100%; height:100%;
-            z-index:-1;
-            overflow:hidden;
-            background:#000;
-        }
+/* 영상 */
+.video-background {
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:-1;
+    overflow:hidden;
+    background:#000;
+}
 
-        .video-background video {
-            width:100%;
-            height:100%;
-            object-fit:cover;
-        }
+/* 기본: 모바일 영상 */
+.video-mobile,
+.video-pc {
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
-        /* 🔥 오버레이 */
-        .video-background::after {
-            content:"";
-            position:absolute;
-            top:0; left:0;
-            width:100%; height:100%;
-            background:rgba(0,0,0,0.35);
-            pointer-events:none;
-        }
+/* PC는 숨김 */
+.video-pc { display:none; }
 
-        main {
-            height:100vh;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-            z-index:1;
-        }
+/* PC에서 교체 */
+@media (min-width:1025px) {
+    .video-mobile { display:none; }
+    .video-pc { display:block; }
+}
 
-        .main-title {
-            font-size:54px;
-            font-weight:800;
-            line-height:1.3;
-            margin-bottom:20px;
-            letter-spacing:-1.5px;
-            text-shadow:0 2px 20px rgba(0,0,0,0.5);
-        }
+/* 오버레이 */
+.video-background::after {
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.35);
+}
 
-        .main-sub {
-            font-size:16px;
-            letter-spacing:0.4em;
-            color:rgba(255,255,255,0.7);
-            margin-bottom:50px;
-        }
+/* 모바일 밝기 */
+@media (max-width:1024px) {
+    .video-background::after {
+        background:rgba(0,0,0,0.2);
+    }
+}
 
-        .enter-btn {
-            padding:16px 50px;
-            border:1px solid rgba(255,255,255,0.8);
-            color:#fff;
-            font-size:12px;
-            letter-spacing:4px;
-            text-decoration:none;
-            transition:0.4s;
-            background:rgba(0,0,0,0.1);
-            backdrop-filter:blur(5px);
-        }
-        .enter-btn:hover {
-            background:#fff;
-            color:#000;
-        }
+/* 메인 */
+main {
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    z-index:1;
+}
 
-        .side-menu {
-            position:fixed;
-            left:50px;
-            bottom:40px;
-        }
+.main-title {
+    font-size:54px;
+    font-weight:800;
+    line-height:1.3;
+    margin-bottom:20px;
+    text-shadow:0 2px 20px rgba(0,0,0,0.5);
+}
 
-        .side-menu a {
-            margin-right:25px;
-            font-size:10px;
-            color:rgba(255,255,255,0.5);
-            text-decoration:none;
-        }
-        .side-menu a:hover { color:#fff; }
+.main-sub {
+    font-size:16px;
+    letter-spacing:0.4em;
+    color:rgba(255,255,255,0.7);
+    margin-bottom:50px;
+}
 
-        footer {
-            position:fixed;
-            bottom:30px;
-            width:100%;
-            text-align:center;
-        }
+.enter-btn {
+    padding:16px 50px;
+    border:1px solid rgba(255,255,255,0.8);
+    color:#fff;
+    text-decoration:none;
+    letter-spacing:4px;
+    transition:0.4s;
+    background:rgba(0,0,0,0.1);
+    backdrop-filter:blur(5px);
+}
+.enter-btn:hover {
+    background:#fff;
+    color:#000;
+}
 
-        .copyright {
-            font-size:10px;
-            color:rgba(255,255,255,0.3);
-        }
+/* 하단 */
+.side-menu {
+    position:fixed;
+    left:50px;
+    bottom:40px;
+}
 
-        /* 📱 모바일 */
-        @media (max-width:1024px) {
+.side-menu a {
+    margin-right:25px;
+    font-size:10px;
+    color:rgba(255,255,255,0.5);
+}
+.side-menu a:hover { color:#fff; }
 
-            nav { padding:0 30px; height:140px; }
-            .logo-img { height:100px; }
+footer {
+    position:fixed;
+    bottom:30px;
+    width:100%;
+    text-align:center;
+}
 
-            .main-title { font-size:32px; }
+.copyright {
+    font-size:10px;
+    color:rgba(255,255,255,0.3);
+}
 
-            .side-menu {
-                left:0;
-                width:100%;
-                text-align:center;
-                bottom:80px;
-            }
+/* 모바일 */
+@media (max-width:1024px) {
 
-            .side-menu a { margin:0 10px; }
+    nav { padding:0 30px; height:140px; }
+    .logo-img { height:100px; }
 
-            /* 🔥 모바일 밝기 */
-            .video-background::after {
-                background:rgba(0,0,0,0.2);
-            }
-        }
-    </style>
+    .main-title { font-size:32px; }
+
+    .side-menu {
+        left:0;
+        width:100%;
+        text-align:center;
+        bottom:80px;
+    }
+
+    .side-menu a { margin:0 10px; }
+}
+</style>
 </head>
 
 <body>
 
 <nav>
-    <a href="index.html">
-        <img src="./image/image_1.png" alt="(주)결 로고" class="logo-img">
-    </a>
+    <img src="./image/image_1.png" class="logo-img">
 </nav>
 
 <div class="video-background">
-    <video autoplay muted loop playsinline preload="auto" poster="./image/main-thumb.jpg">
-        <source src="./image/main_video.mp4" type="video/mp4">
+
+    <!-- 모바일 영상 -->
+    <video class="video-mobile" autoplay muted loop playsinline>
+        <source src="./image/mobile-video.mp4" type="video/mp4">
     </video>
+
+    <!-- PC 영상 -->
+    <video class="video-pc" autoplay muted loop playsinline>
+        <source src="./image/pc-video.mp4" type="video/mp4">
+    </video>
+
 </div>
 
 <main>
