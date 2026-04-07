@@ -11,19 +11,21 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="(주)결  - 당신이 머무는 곳마다 기분 좋은 결이 흐르도록">
     <meta property="og:description" content="공간의 가치를 높이는 인테리어 디자인 & 건축 전문 기업 (주)결입니다.">
-    <meta property="og:image" content="./image/main-thumb.jpg"> <meta property="og:url" content="https://kyeol-interior.github.io">
+    <meta property="og:image" content="./image/main-thumb.jpg"> 
+    <meta property="og:url" content="https://kyeol-interior.github.io">
 
     <meta name="naver-site-verification" content="naver2ed49a1b11963851e656e3963ca055a2">
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght=700&family=Noto+Sans+KR:wght=300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         body { background:#000; font-family: 'Noto Sans KR', sans-serif; overflow: hidden; height: 100vh; }
 
-        /* [1] 상단 네비게이션: PC 높이 200px */
+        /* [1] 상단 네비게이션: 메뉴 삭제 후 로고만 중앙 정렬되도록 구성 가능하지만, 
+           기존 왼쪽 배치를 유지하며 높이를 충분히 주었습니다. */
         nav { 
             position:fixed; top:0; width:100%; height:200px; 
-            display:flex; justify-content:space-between; align-items:center; 
+            display:flex; justify-content: flex-start; align-items:center; 
             padding:0 50px; background:transparent; z-index:1000; 
         }
 
@@ -38,35 +40,22 @@
             /* PC 로고 크기 150px */
             height: 150px; 
             width: auto;
-            /* 기본 설정: 흰색 반전 + 그림자 효과 */
-            filter: brightness(0) invert(1) drop-shadow(0px 0px 5px rgba(255,255,255,0.3)); 
+            /* 흰색 강제 반전 + 시인성 극대화 */
+            filter: brightness(0) invert(1) !important; 
+            -webkit-filter: brightness(0) invert(1) !important; /* 아이폰/사파리용 */
+            drop-shadow: 0px 0px 10px rgba(255,255,255,0.5);
             transition: 0.3s;
             object-fit: contain;
         }
-        
-        .nav-links { display:flex; gap:35px; }
-        .nav-links a { text-decoration:none; color:rgba(255,255,255,0.7); font-size:14px; letter-spacing:2px; transition: 0.3s; }
-        .nav-links a:hover { color:#fff; }
 
-        /* [2] 모바일용 햄버거 */
-        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 8px; z-index: 1002; }
-        .menu-btn span { width: 30px; height: 2px; background: #fff; }
-
-        .mobile-nav {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: #fff; display: none; flex-direction: column; 
-            justify-content: center; align-items: center; z-index: 1100;
-        }
-        .mobile-nav a { padding: 20px; text-decoration: none; color: #111; font-size: 24px; font-weight: 700; }
-
-        /* [3] 배경 영상 */
+        /* [2] 배경 영상 */
         .video-background {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; overflow: hidden;
         }
         .video-background video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }
 
-        /* [4] 메인 문구 */
+        /* [3] 메인 문구 */
         .main-content {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
@@ -79,18 +68,17 @@
 
         /* 📱 모바일 설정 */
         @media (max-width: 1024px) {
-            /* 모바일 헤더 높이 160px */
             nav { padding: 0 25px; height: 160px; } 
             
-            /* 모바일 로고 설정 수정 */
             .logo-img { 
-                height: 120px !important; /* 모바일 로고 크기 120px */
-                /* ★★★★★ 모바일에서도 강제로 흰색 반전 필터 적용 ★★★★★ */
-                filter: brightness(0) invert(1) drop-shadow(0px 0px 8px rgba(255,255,255,0.5)) !important;
+                /* 모바일 로고 크기 120px */
+                height: 120px !important; 
+                /* 모바일에서 절대적으로 흰색으로 보이게 조치 */
+                filter: brightness(0) invert(1) !important;
+                -webkit-filter: brightness(0) invert(1) !important;
+                display: block !important;
             } 
             
-            .nav-links { display: none; }
-            .menu-btn { display: flex; }
             .main-title { font-size: 32px; }
         }
     </style>
@@ -100,22 +88,7 @@
         <a href="index.html" class="logo-link">
             <img src="./image/image_1.png" alt="(주)결 로고" class="logo-img">
         </a>
-
-        <div class="nav-links">
-            <a href="about.html">ABOUT</a>
-            <a href="portfolio.html">PORTFOLIO</a>
-            <a href="proposal.html">PROPOSAL</a>
-            <a href="contact.html">CONTACT</a>
-        </div>
-        <div class="menu-btn" id="menuToggle"><span></span><span></span><span></span></div>
-    </nav>
-
-    <div class="mobile-nav" id="dropdown">
-        <a href="about.html">ABOUT</a>
-        <a href="portfolio.html">PORTFOLIO</a>
-        <a href="proposal.html">PROPOSAL</a>
-        <a href="contact.html">CONTACT</a>
-    </div>
+        </nav>
 
     <div class="video-background">
         <video autoplay muted loop playsinline preload="auto">
@@ -129,14 +102,5 @@
         <a href="about.html" class="enter-btn">ENTER VIEW</a>
     </div>
 
-    <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const dropdown = document.getElementById('dropdown');
-        menuToggle.onclick = function(e) {
-            e.stopPropagation();
-            dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
-        };
-        window.onclick = function() { dropdown.style.display = 'none'; }
-    </script>
 </body>
 </html>
