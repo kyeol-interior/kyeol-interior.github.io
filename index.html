@@ -4,96 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>(주)결 | 전주 인테리어 전문 디자인</title>
-    <meta name="description" content="전주 인테리어, 실내건축 전문기업 (주)결입니다. 장애인기업, 학교공사/관공서 다수시공, 결이좋은 기업.">
-    <meta name="keywords" content="전주인테리어, (주)결, 결, 주식회사 결, 전주리모델링, 학교공사, ">
+    <title>(주)결 | 전주 인테리어·실내건축 전문 디자인</title>
+    <meta name="description" content="전주 실내건축 전문기업 (주)결입니다. 장애인기업, 학교공사, 관공서 시공 전문. 당신이 머무는 곳에 기분 좋은 결을 담습니다.">
+    <meta name="keywords" content="전주인테리어, (주)결, 주식회사 결, 전주리모델링, 학교공사, 관공서인테리어, 실내건축">
+    <meta name="author" content="(주)결">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="(주)결 | KYEOL DESIGN">
-    <meta property="og:description" content="전주 인테리어·건축 전문 디자인 기업 (주)결">
+    <meta property="og:description" content="전주 인테리어·실내건축 전문 디자인 기업 (주)결">
     <meta property="og:image" content="./image/main-thumb.jpg"> 
     <meta property="og:url" content="https://kyeol-interior.github.io">
 
     <style>
+        /* 기본 스타일 초기화 */
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { background:#000; font-family: 'Noto Sans KR', sans-serif; overflow: hidden; height: 100vh; }
+        body { background:#000; font-family: 'Noto Sans KR', sans-serif; overflow: hidden; height: 100vh; color: #fff; }
 
-        /* 상단 로고 영역 */
+        /* 로고 레이아웃 */
         nav { 
             position:fixed; top:0; width:100%; height:180px; 
             display:flex; justify-content: flex-start; align-items:center; 
             padding:0 50px; background:transparent; z-index:1000; 
         }
-        .logo-img { height: 140px; width: auto; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15)); }
+        .logo-img { 
+            height: 140px; width: auto; 
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15)); 
+            transition: opacity 0.3s;
+        }
+        .logo-img:hover { opacity: 0.8; }
 
-        /* 배경 영상 (기존 잘 나오던 구조 유지) */
+        /* 배경 영상 컨테이너 */
         .video-background {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; overflow: hidden;
+            z-index: -1; overflow: hidden; background: #000;
         }
-        .video-background video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }
+        .video-background video { 
+            width: 100%; height: 100%; object-fit: cover; 
+            filter: brightness(0.4); /* 텍스트 가독성을 위한 어둡기 조절 */
+        }
 
-        /* 메인 콘텐츠 */
-        .main-content {
+        /* 메인 콘텐츠 영역 */
+        main {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
-            color: #fff; padding: 0 20px; position: relative; z-index: 1;
+            padding: 0 20px; position: relative; z-index: 1;
         }
-        .main-title { font-size: 54px; font-weight: 800; line-height: 1.3; margin-bottom: 20px; letter-spacing: -1.5px; word-break: keep-all; }
-        .main-sub { font-size: 16px; font-weight: 300; letter-spacing: 0.4em; color: rgba(255,255,255,0.7); margin-bottom: 50px; }
+        .main-title { 
+            font-size: 54px; font-weight: 800; line-height: 1.3; 
+            margin-bottom: 20px; letter-spacing: -1.5px; word-break: keep-all; 
+        }
+        .main-sub { 
+            font-size: 16px; font-weight: 300; letter-spacing: 0.4em; 
+            color: rgba(255,255,255,0.7); margin-bottom: 50px; 
+        }
         
+        /* 버튼 스타일 */
         .enter-btn { 
-            padding: 16px 50px; border: 1px solid rgba(255,255,255,0.8); text-decoration: none; 
-            color: #fff; font-size: 12px; letter-spacing: 4px; transition: 0.4s; 
+            padding: 16px 50px; border: 1px solid rgba(255,255,255,0.8); 
+            text-decoration: none; color: #fff; font-size: 12px; 
+            letter-spacing: 4px; transition: all 0.4s; 
             background: rgba(0,0,0,0.1); backdrop-filter: blur(5px);
         }
-        .enter-btn:hover { background: #fff; color: #000; }
+        .enter-btn:hover { background: #fff; color: #000; font-weight: bold; }
 
-        /* 하단 링크 메뉴 */
+        /* 소셜/블로그 링크 */
         .side-menu { position: fixed; left: 50px; bottom: 40px; z-index: 1000; }
-        .side-menu a { display: inline-block; margin-right: 25px; font-size: 10px; color: rgba(255,255,255,0.5); text-decoration: none; letter-spacing: 1.5px; }
-        .side-menu a:hover { color: #fff; }
+        .side-menu a { 
+            display: inline-block; margin-right: 25px; font-size: 10px; 
+            color: rgba(255,255,255,0.5); text-decoration: none; 
+            letter-spacing: 1.5px; transition: color 0.3s;
+        }
+        .side-menu a:hover { color: #fff; text-decoration: underline; }
 
-        /* 카피라이트 */
+        /* 하단 정보 */
         footer { position: fixed; bottom: 30px; width: 100%; text-align: center; z-index: 900; }
         .copyright { font-size: 10px; color: rgba(255, 255, 255, 0.3); letter-spacing: 1px; }
 
-        /* 모바일 최적화 */
+        /* 모바일 대응 (반응형) */
         @media (max-width: 1024px) {
             nav { padding: 0 30px; height: 140px; } 
             .logo-img { height: 100px !important; } 
             .main-title { font-size: 32px; }
             .side-menu { left: 0; width: 100%; text-align: center; bottom: 80px; }
+            .side-menu a { margin: 0 10px; }
             footer { bottom: 30px; }
         }
     </style>
 </head>
 <body>
     <nav>
-        <a href="index.html">
-            <img src="./image/image_1.png" alt="(주)결 로고" class="logo-img">
+        <a href="index.html" title="홈으로 이동">
+            <img src="./image/image_1.png" alt="(주)결 - 전주 인테리어, 실내건축, 관공서 및 학교 공사 전문 디자인 기업 로고" class="logo-img">
         </a>
     </nav>
 
-    <div class="video-background">
-        <video autoplay muted loop playsinline preload="auto">
+    <div class="video-background" role="presentation">
+        <video autoplay muted loop playsinline preload="auto" poster="./image/main-thumb.jpg">
             <source src="./image/main_video.mp4" type="video/mp4">
+            배경 영상을 지원하지 않는 브라우저입니다.
         </video>
     </div>
 
-    <div class="main-content">
+    <main>
         <h1 class="main-title">당신이 머무는 곳마다,<br>기분 좋은 결이 흐르도록.</h1>
         <p class="main-sub">INTERIOR DESIGN & ARCHITECTURE</p>
         <a href="about.html" class="enter-btn">ENTER VIEW</a>
-    </div>
+    </main>
 
-    <div class="side-menu">
-        <a href="http://blog.naver.com/rotte123" target="_blank">NAVER BLOG</a>
-        <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank">KAKAO TALK</a>
-    </div>
+    <aside class="side-menu">
+        <a href="http://blog.naver.com/rotte123" target="_blank" rel="noopener noreferrer" title="네이버 블로그 새창열기">NAVER BLOG</a>
+        <a href="https://pf.kakao.com/_bTIEX/friend" target="_blank" rel="noopener noreferrer" title="카카오톡 상담 새창열기">KAKAO TALK</a>
+    </aside>
 
     <footer>
-        <p class="copyright">© 2026 KYEOL. All rights reserved.</p>
+        <p class="copyright">© 2026 (주)결 KYEOL Co., Ltd. All rights reserved.</p>
     </footer>
 </body>
 </html>
