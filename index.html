@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>(주)결 | 전주 인테리어 전문 디자인</title>
+    <title>(주)결 | KYEOL DESIGN</title>
     
     <meta property="og:type" content="website">
     <meta property="og:title" content="(주)결 | KYEOL DESIGN">
@@ -17,50 +17,52 @@
         * { margin:0; padding:0; box-sizing:border-box; }
         body, html { height: 100%; background: #000; font-family: 'Noto Sans KR', sans-serif; overflow: hidden; }
 
-        /* [상단 로고] */
+        /* 네비게이션 & 로고 */
         nav { 
-            position: fixed; top: 0; width: 100%; height: 220px; 
+            position: fixed; top: 0; width: 100%; height: 200px; 
             display: flex; justify-content: flex-start; align-items: center; 
             padding: 0 50px; background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent); 
             z-index: 1000; 
         }
-        .logo-img { height: 160px; width: auto; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2)); transition: 0.5s; }
+        .logo-img { height: 150px; width: auto; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2)); }
 
-        /* [배경 영상] */
+        /* 배경 영상: 경로 및 속성 최적화 */
         .video-background { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; }
-        .video-background video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); z-index: 0; }
+        .video-background video { 
+            width: 100%; height: 100%; object-fit: cover; 
+            filter: brightness(0.4); /* 영상 밝기 조절 */
+        }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.1); z-index: 0; }
 
-        /* [메인 문구] */
+        /* 중앙 콘텐츠 */
         .main-content { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #fff; position: relative; z-index: 10; }
-        .main-title { font-size: 56px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; letter-spacing: -2px; word-break: keep-all; }
-        .main-sub { font-size: 16px; font-weight: 300; letter-spacing: 5px; color: rgba(255,255,255,0.8); margin-bottom: 50px; }
-        .enter-btn { padding: 18px 55px; border: 1px solid #fff; text-decoration: none; color: #fff; font-size: 12px; letter-spacing: 4px; transition: 0.5s; background: rgba(0,0,0,0.2); backdrop-filter: blur(5px); }
+        .main-title { font-size: 54px; font-weight: 700; line-height: 1.4; margin-bottom: 20px; letter-spacing: -2px; word-break: keep-all; }
+        .main-sub { font-size: 15px; font-weight: 300; letter-spacing: 0.5em; color: rgba(255,255,255,0.7); margin-bottom: 50px; }
+        .enter-btn { padding: 18px 55px; border: 1px solid #fff; text-decoration: none; color: #fff; font-size: 12px; letter-spacing: 4px; transition: 0.5s; background: rgba(0,0,0,0.1); backdrop-filter: blur(5px); }
         .enter-btn:hover { background: #fff; color: #000; }
 
-        /* [하단 사이드 메뉴] */
+        /* 하단 메뉴 */
         .side-menu { position: fixed; left: 50px; bottom: 50px; z-index: 100; }
-        .side-menu a { display: inline-block; margin-right: 25px; font-size: 11px; color: rgba(255,255,255,0.6); text-decoration: none; letter-spacing: 2px; transition: 0.3s; }
-        .side-menu a:hover { color: #fff; transform: translateY(-3px); }
+        .side-menu a { display: inline-block; margin-right: 25px; font-size: 11px; color: rgba(255,255,255,0.6); text-decoration: none; letter-spacing: 2px; }
+        .side-menu a:hover { color: #fff; }
 
-        /* [카피라이트] */
+        /* 카피라이트 */
         footer { position: fixed; bottom: 40px; width: 100%; text-align: center; z-index: 90; }
-        .copyright { font-size: 11px; color: rgba(255, 255, 255, 0.3); letter-spacing: 2px; }
+        .copyright { font-size: 11px; color: rgba(255, 255, 255, 0.3); letter-spacing: 1.5px; }
 
-        /* 모바일 최적화 */
         @media (max-width: 1024px) {
-            nav { padding: 0 25px; height: 160px; }
-            .logo-img { height: 120px !important; }
-            .main-title { font-size: 32px; }
-            .side-menu { left: 0; width: 100%; text-align: center; bottom: 90px; }
-            footer { bottom: 40px; }
+            nav { padding: 0 25px; height: 140px; }
+            .logo-img { height: 100px !important; }
+            .main-title { font-size: 30px; }
+            .side-menu { left: 0; width: 100%; text-align: center; bottom: 85px; }
+            footer { bottom: 35px; }
         }
     </style>
 </head>
 <body>
     <nav>
         <a href="index.html">
-            <img src="./image/image_1.png" alt="(주)결 로고" class="logo-img">
+            <img src="./image/image_1.png" alt="(주)결" class="logo-img">
         </a>
     </nav>
 
