@@ -6,7 +6,7 @@
     <title>ABOUT | (주)결</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* [1] 공통 스타일 및 네비게이션 (PORTFOLIO와 완벽 일치) */
+        /* [1] 공통 스타일 및 네비게이션 */
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
         body { background:#fff; font-family: 'Noto Sans KR', sans-serif; color:#111; overflow-x:hidden; }
 
@@ -21,11 +21,10 @@
         .nav-links a { text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; transition: 0.3s; }
         .nav-links a.active { color:#000; font-weight:700; }
 
-        /* 햄버거 버튼 애니메이션 */
+        /* 햄버거 버튼 */
         .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1200; position: relative; }
         .menu-btn span { width: 22px; height: 2px; background: #000; transition: 0.3s; transform-origin: center; }
         
-        /* 햄버거 -> X 변환 */
         .menu-btn.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
         .menu-btn.open span:nth-child(2) { opacity: 0; }
         .menu-btn.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
@@ -41,14 +40,23 @@
         .mobile-nav.active { top: 0; }
         .mobile-nav a { padding: 15px 50px; text-decoration: none; color: #111; font-size: 16px; font-weight: 500; border-bottom: 1px solid #f9f9f9; }
 
-        /* [2] 어바웃 페이지 전용 레이아웃 */
+        /* [2] 어바웃 페이지 레이아웃 */
         .wrapper { display:flex; width:100%; height:100vh; padding-top:80px; }
         .text-side { flex:1; padding:0 8%; display:flex; flex-direction:column; justify-content:center; background:#fbfbfb; }
         .img-side { flex:1.3; overflow:hidden; }
         .img-side img { width:100%; height:100%; object-fit:cover; }
 
-        .title-main { font-size:42px; font-weight:700; line-height:1.4; margin-bottom:35px; color:#111; word-break:keep-all; }
-        .desc-text { font-size:18px; color:#444; font-weight:300; line-height:2.1; }
+        /* H1 글자 크기 조정 부분 */
+        .title-main { 
+            font-size:34px; /* 기존 42px에서 축소 */
+            font-weight:700; 
+            line-height:1.4; 
+            margin-bottom:35px; 
+            color:#111; 
+            word-break:keep-all; 
+        }
+
+        .desc-text { font-size:17px; color:#444; font-weight:300; line-height:2.1; }
         .desc-text b { font-weight: 700; color:#111; }
         
         .highlight-section { margin-top:45px; padding-top:35px; border-top:1px solid #ddd; }
@@ -62,9 +70,12 @@
             .menu-btn { display: flex; }
 
             .wrapper { flex-direction: column; height: auto; padding-top: 70px; }
-            .img-side { order: 1; height: 45vh; width: 100%; }
+            .img-side { order: 1; height: 40vh; width: 100%; }
             .text-side { order: 2; padding: 50px 25px 80px; background: #fff; }
-            .title-main { font-size: 30px; margin-bottom: 20px; }
+            
+            /* 모바일 H1 글자 크기 조정 */
+            .title-main { font-size: 24px; margin-bottom: 20px; }
+            .desc-text { font-size: 16px; }
         }
     </style>
 </head>
