@@ -21,7 +21,6 @@
         .nav-links a { text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; transition: 0.3s; }
         .nav-links a.active { color:#000; font-weight:700; }
 
-        /* 햄버거 버튼 */
         .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1200; position: relative; }
         .menu-btn span { width: 22px; height: 2px; background: #000; transition: 0.3s; transform-origin: center; }
         
@@ -29,7 +28,6 @@
         .menu-btn.open span:nth-child(2) { opacity: 0; }
         .menu-btn.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-        /* 모바일 슬라이딩 메뉴 */
         .mobile-nav {
             position: fixed; top: -100%; left: 0; width: 100%; height: auto;
             background: #fff; border-bottom: 1px solid #eee;
@@ -46,19 +44,13 @@
         .img-side { flex:1.3; overflow:hidden; }
         .img-side img { width:100%; height:100%; object-fit:cover; }
 
-        /* H1 글자 크기 조정 부분 */
-        .title-main { 
-            font-size:34px; /* 기존 42px에서 축소 */
-            font-weight:700; 
-            line-height:1.4; 
-            margin-bottom:35px; 
-            color:#111; 
-            word-break:keep-all; 
-        }
-
+        .title-main { font-size:34px; font-weight:700; line-height:1.4; margin-bottom:35px; color:#111; word-break:keep-all; }
         .desc-text { font-size:17px; color:#444; font-weight:300; line-height:2.1; }
         .desc-text b { font-weight: 700; color:#111; }
         
+        /* 줄바꿈 제어 클래스 */
+        .mobile-br { display: none; }
+
         .highlight-section { margin-top:45px; padding-top:35px; border-top:1px solid #ddd; }
         .cert-badge { display:inline-block; padding:7px 15px; background:#000; color:#fff; font-size:11px; margin-right:8px; margin-bottom:12px; }
 
@@ -73,9 +65,11 @@
             .img-side { order: 1; height: 40vh; width: 100%; }
             .text-side { order: 2; padding: 50px 25px 80px; background: #fff; }
             
-            /* 모바일 H1 글자 크기 조정 */
             .title-main { font-size: 24px; margin-bottom: 20px; }
             .desc-text { font-size: 16px; }
+
+            /* 모바일에서만 줄바꿈 적용 */
+            .mobile-br { display: block; }
         }
     </style>
 </head>
@@ -109,7 +103,7 @@
                 단순해 보이는 공간일지라도,<br>
                 그 완성도는 눈에 잘 띄지 않는<br>
                 작은 디테일에서 결정됩니다.<br><br>
-                <b>"머무는 순간의 온기, 눈에 닿는 모든 곳에 결이 좋은 공간을 짓습니다."</b>
+                <b>"머무는 순간의 온기, 눈에 닿는 모든 곳에 <br class="mobile-br">결이 좋은 공간을 짓습니다."</b>
             </p>
 
             <div class="highlight-section">
@@ -130,14 +124,12 @@
         const menuToggle = document.getElementById('menuToggle');
         const dropdown = document.getElementById('dropdown');
 
-        // 메뉴 토글 (X자 변환 + 슬라이딩)
         menuToggle.onclick = (e) => {
             e.stopPropagation();
             menuToggle.classList.toggle('open');
             dropdown.classList.toggle('active');
         };
 
-        // 외부 클릭 시 메뉴 닫기
         document.onclick = (e) => {
             if (!dropdown.contains(e.target) && !menuToggle.contains(e.target)) {
                 menuToggle.classList.remove('open');
