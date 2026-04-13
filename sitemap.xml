@@ -2,19 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kyeol-interior.github.io/</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <priority>1.0</priority>
   </url>
-  
+
   <url>
-    <loc>https://kyeol-interior.github.io/portfolio</loc>
-    <lastmod>2026-04-10</lastmod>
+    <loc>https://kyeol-interior.github.io/portfolio.html</loc>
+    <lastmod>2026-04-06</lastmod>
     <priority>0.8</priority>
   </url>
-  
+
   <url>
-    <loc>https://kyeol-interior.github.io/about</loc>
-    <lastmod>2026-04-10</lastmod>
+    <loc>https://kyeol-interior.github.io/about.html</loc>
+    <lastmod>2026-04-09</lastmod>
     <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://kyeol-interior.github.io/contact.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://kyeol-interior.github.io/proposal.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.7</priority>
   </url>
 </urlset>
