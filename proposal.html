@@ -3,83 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="주식회사 결의 인테리어 제안서 및 포트폴리오를 확인해 보세요. 교육시설 및 공공기관 전문 리모델링 서비스를 제공합니다.">
+    <meta name="description" content="주식회사 결의 인테리어 제안서 및 포트폴리오를 확인해 보세요.">
     <title>PROPOSAL | (주)결</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="manifest" href="/manifest.json">
     <style>
-        /* [1] 네비게이션 스타일 (고정) */
+        /* [1] 기본 레이아웃 및 내비게이션 */
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
-        body { background:#000; font-family: 'Noto Sans KR', sans-serif; }
+        body { background:#000; font-family: 'Noto Sans KR', sans-serif; color: #fff; }
         
         nav { 
             position:fixed; top:0; width:100%; height:80px; 
             display:flex; justify-content:space-between; align-items:center; 
-            padding:0 50px; background:rgba(0,0,0,0.9); z-index:1000; 
+            padding:0 50px; background:rgba(0,0,0,0.95); z-index:1000; 
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#fff; letter-spacing:4px; }
-        
         .nav-links { display:flex; gap:35px; }
-        .nav-links a { text-decoration:none; color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:2px; font-weight:400; }
+        .nav-links a { text-decoration:none; color:rgba(255,255,255,0.5); font-size:13px; letter-spacing:2px; }
         .nav-links a.active { color:#fff; font-weight:700; }
 
-        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1002; }
-        .menu-btn span { width: 22px; height: 2px; background: #fff; }
-
-        .mobile-nav {
-            position: fixed; top: 70px; left: 0; width: 100%; 
-            background: #fff; display: none; flex-direction: column; padding: 15px 0;
-            z-index: 999;
+        /* [2] 카테고리 필터 탭 */
+        .filter-wrap {
+            position: fixed; top: 80px; width: 100%; background: rgba(0,0,0,0.9);
+            display: flex; justify-content: center; gap: 40px; padding: 20px 0;
+            z-index: 999; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .mobile-nav a { padding: 15px 30px; text-decoration: none; color: #111; font-size: 14px; border-bottom: 1px solid #f9f9f9; }
+        .filter-item {
+            cursor: pointer; font-size: 14px; color: rgba(255,255,255,0.4);
+            letter-spacing: 1px; transition: 0.3s; position: relative;
+        }
+        .filter-item.active { color: #fff; font-weight: 700; }
+        .filter-item.active::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 1px; background: #fff;
+        }
 
-        /* [2] 제안서 컨테이너: 여백 시공 */
+        /* [3] 이미지 컨테이너 */
         .proposal-container {
-            padding-top: 120px; /* 상단바와의 첫 간격 */
-            padding-bottom: 150px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 60px; /* 💡 페이지와 페이지 사이의 시원한 간격 */
+            padding-top: 180px; padding-bottom: 150px;
+            display: flex; flex-direction: column; align-items: center; gap: 60px;
         }
         
         .proposal-page {
-            width: 100%;
-            max-width: 1000px; /* 읽기 편한 최적 너비 */
-            display: flex;
-            justify-content: center;
-            padding: 0 20px;
+            width: 100%; max-width: 1000px; padding: 0 20px;
+            display: none; /* 필터 작동 전까지 숨김 */
         }
+        .proposal-page.show { display: flex; justify-content: center; }
 
         .proposal-page img {
-            width: 100%;
-            height: auto;
-            display: block;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); /* 입체감 부여 */
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
+            width: 100%; height: auto; display: block;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            opacity: 0; transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
-        
-        .proposal-page img.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .proposal-page img.visible { opacity: 1; transform: translateY(0); }
 
-        /* 📱 모바일 최적화 */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 70px; }
-            .logo { font-size: 20px; }
-            .nav-links { display: none; } 
-            .menu-btn { display: flex; } 
-            
-            .proposal-container { padding-top: 100px; gap: 40px; } /* 모바일은 간격을 살짝 조절 */
+            .filter-wrap { top: 70px; gap: 20px; padding: 15px 0; }
+            .filter-item { font-size: 12px; }
+            .proposal-container { padding-top: 150px; gap: 40px; }
         }
     </style>
 </head>
@@ -93,44 +75,83 @@
             <a href="proposal.html" class="active">PROPOSAL</a>
             <a href="contact.html">CONTACT</a>
         </div>
-        <div class="menu-btn" id="menuToggle">
-            <span></span><span></span><span></span>
-        </div>
     </nav>
 
-    <div class="mobile-nav" id="dropdown">
-        <a href="about.html">ABOUT</a>
-        <a href="portfolio.html">PORTFOLIO</a>
-        <a href="proposal.html">PROPOSAL</a>
-        <a href="contact.html">CONTACT</a>
+    <div class="filter-wrap">
+        <div class="filter-item active" data-filter="all">전체보기</div>
+        <div class="filter-item" data-filter="school">학교개선공사 제안서</div>
+        <div class="filter-item" data-filter="profile">지명원</div>
+        <div class="filter-item" data-filter="leaflets">홍보물</div>
     </div>
 
     <div class="proposal-container">
-        <div class="proposal-page"><img src="page/page1.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page2.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page3.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page4.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page5.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page6.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page7.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page8.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page9.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page10.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page11.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page12.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page13.jpg" class="lazy"></div>
-        <div class="proposal-page"><img src="page/page14.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page1.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page2.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page3.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page4.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page5.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page6.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page7.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page8.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page9.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page10.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page11.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page12.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page13.jpg" class="lazy"></div>
+        <div class="proposal-page school"><img src="page/page14.jpg" class="lazy"></div>
+
+        <div class="proposal-page leaflets"><img src="page/홍보물.jpg" class="lazy"></div>
+
+        <div class="proposal-page profile"><img src="page/지명원1.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원2.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원3.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원4.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원5.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원6.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원7.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원8.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원9.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원10.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원11.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원12.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원13.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원14.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원15.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원16.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원17.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원18.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원19.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원20.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원21.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원22.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원23.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원24.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원25.jpg" class="lazy"></div>
+        <div class="proposal-page profile"><img src="page/지명원26.jpg" class="lazy"></div>
     </div>
 
     <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const dropdown = document.getElementById('dropdown');
-        menuToggle.onclick = (e) => { 
-            e.stopPropagation();
-            dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex'; 
-        };
+        const filterItems = document.querySelectorAll('.filter-item');
+        const pages = document.querySelectorAll('.proposal-page');
 
-        const images = document.querySelectorAll('.lazy');
+        function filterSelection(category) {
+            pages.forEach(page => {
+                page.classList.remove('show');
+                if (category === 'all' || page.classList.contains(category)) {
+                    page.classList.add('show');
+                }
+            });
+            checkVisibility();
+        }
+
+        filterItems.forEach(item => {
+            item.addEventListener('click', function() {
+                filterItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                filterSelection(this.getAttribute('data-filter'));
+            });
+        });
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -139,8 +160,11 @@
             });
         }, { threshold: 0.1 });
 
-        images.forEach(img => observer.observe(img));
-        window.onclick = () => { dropdown.style.display = 'none'; }
+        function checkVisibility() {
+            document.querySelectorAll('.proposal-page.show img').forEach(img => observer.observe(img));
+        }
+
+        filterSelection('all');
     </script>
 </body>
 </html>
