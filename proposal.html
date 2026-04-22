@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="주식회사 결의 인테리어 제안서 및 포트폴리오를 확인해 보세요.">
+    <meta name="description" content="주식회사 결의 인테리어 제안서, 지명원, 홍보물을 확인해 보세요.">
     <title>PROPOSAL | (주)결</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* [1] 기본 레이아웃 및 내비게이션 */
+        /* [1] 기본 레이아웃 */
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
-        body { background:#000; font-family: 'Noto Sans KR', sans-serif; color: #fff; }
+        body { background:#000; font-family: 'Noto Sans KR', sans-serif; color: #fff; overflow-x: hidden; }
         
         nav { 
             position:fixed; top:0; width:100%; height:80px; 
@@ -39,8 +39,8 @@
 
         /* [3] 이미지 컨테이너 */
         .proposal-container {
-            padding-top: 180px; padding-bottom: 150px;
-            display: flex; flex-direction: column; align-items: center; gap: 60px;
+            padding-top: 200px; padding-bottom: 150px;
+            display: flex; flex-direction: column; align-items: center; gap: 80px;
         }
         
         .proposal-page {
@@ -53,7 +53,7 @@
             width: 100%; height: auto; display: block;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             opacity: 0; transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .proposal-page img.visible { opacity: 1; transform: translateY(0); }
 
@@ -61,7 +61,7 @@
             nav { padding: 0 25px; height: 70px; }
             .filter-wrap { top: 70px; gap: 20px; padding: 15px 0; }
             .filter-item { font-size: 12px; }
-            .proposal-container { padding-top: 150px; gap: 40px; }
+            .proposal-container { padding-top: 160px; gap: 50px; }
         }
     </style>
 </head>
@@ -84,7 +84,7 @@
         <div class="filter-item" data-filter="leaflets">홍보물</div>
     </div>
 
-    <div class="proposal-container">
+    <div class="proposal-container" id="container">
         <div class="proposal-page school"><img src="page/page1.jpg" class="lazy"></div>
         <div class="proposal-page school"><img src="page/page2.jpg" class="lazy"></div>
         <div class="proposal-page school"><img src="page/page3.jpg" class="lazy"></div>
@@ -134,37 +134,61 @@
         const filterItems = document.querySelectorAll('.filter-item');
         const pages = document.querySelectorAll('.proposal-page');
 
+        // 필터링 메인 로직
         function filterSelection(category) {
             pages.forEach(page => {
+                const img = page.querySelector('img');
+                const src = img.getAttribute('src');
+                
                 page.classList.remove('show');
-                if (category === 'all' || page.classList.contains(category)) {
-                    page.classList.add('show');
+                img.classList.remove('visible'); // 전환 시 애니메이션 초기화
+
+                if (category === 'all') {
+                    // 전체보기: 각 카테고리의 첫 장만 노출
+                    if (src === 'page/page1.jpg' || src === 'page/pr1.jpg' || src === 'page/지명원1.jpg') {
+                        page.classList.add('show');
+                    }
+                } else {
+                    // 카테고리 보기: 해당 카테고리 전체 노출
+                    if (page.classList.contains(category)) {
+                        page.classList.add('show');
+                    }
                 }
             });
-            checkVisibility();
+
+            // 화면 갱신 후 가시성 체크
+            setTimeout(checkVisibility, 50);
         }
 
+        // 탭 클릭 이벤트
         filterItems.forEach(item => {
             item.addEventListener('click', function() {
                 filterItems.forEach(i => i.classList.remove('active'));
                 this.classList.add('active');
-                filterSelection(this.getAttribute('data-filter'));
+                
+                const filter = this.getAttribute('data-filter');
+                filterSelection(filter);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
 
+        // 스크롤 애니메이션 (IntersectionObserver)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.05 });
 
         function checkVisibility() {
-            document.querySelectorAll('.proposal-page.show img').forEach(img => observer.observe(img));
+            document.querySelectorAll('.proposal-page.show img').forEach(img => {
+                observer.observe(img);
+            });
         }
 
-        filterSelection('all');
+        // 초기 실행 (전체보기 모드)
+        window.onload = () => filterSelection('all');
     </script>
 </body>
 </html>
