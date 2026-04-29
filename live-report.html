@@ -7,25 +7,25 @@
     <style>
         /* 기본 스타일 */
         body { background: #000; color: #fff; font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 50px 20px; text-align: center; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 50px 20px; text-align: center; }
         
         /* 헤더 영역 */
-        h1 { color: #d4af37; font-size: 28px; margin-bottom: 10px; letter-spacing: -1px; }
-        .sub-txt { color: #888; font-size: 15px; margin-bottom: 40px; }
+        h1 { color: #d4af37; font-size: 26px; margin-bottom: 10px; letter-spacing: -1px; }
+        .sub-txt { color: #888; font-size: 15px; margin-bottom: 40px; word-break: keep-all; }
         
         /* 콘텐츠 영역 (비밀번호 확인 전 숨김) */
         #protected-content { display: none; }
 
-        /* 사진첩 프레임 */
+        /* 사진첩 프레임 - 구글 포토 연동 */
         .photo-frame { 
-            width: 100%; min-height: 600px; background: #111; 
+            width: 100%; min-height: 800px; background: #111; 
             border: 1px solid #222; border-radius: 8px; overflow: hidden;
-            margin-bottom: 40px;
+            margin-bottom: 40px; position: relative;
         }
 
         /* 다운로드 섹션 */
         .download-section {
-            background: #111; padding: 30px; border-radius: 8px; border: 1px solid #d4af3733;
+            background: #111; padding: 30px; border-radius: 8px; border: 1px solid #d4af3733; margin-bottom: 40px;
         }
         .download-section p { font-size: 14px; color: #ccc; margin-bottom: 20px; }
         
@@ -37,29 +37,26 @@
         .download-btn:hover { background: #fff; }
 
         /* 하단 돌아가기 */
-        .back-home { margin-top: 40px; display: block; color: #666; text-decoration: none; font-size: 13px; }
+        .back-home { display: block; color: #666; text-decoration: none; font-size: 13px; margin-bottom: 50px; }
         .back-home:hover { color: #fff; }
 
         @media (max-width: 768px) {
-            h1 { font-size: 22px; }
-            .photo-frame { min-height: 400px; }
+            h1 { font-size: 20px; }
+            .photo-frame { min-height: 500px; }
         }
     </style>
 </head>
 <body>
 
     <script>
-        // 1. 사용할 비밀번호 설정 (원하시는 번호로 수정 가능)
-        var correctPassword = "6452"; 
-        
+        // 비밀번호 설정 (현재 7575)
+        var correctPassword = "7575"; 
         var userInput = prompt("(주)결 현장 관리 보안 시스템입니다.\n부여받은 비밀번호를 입력해주세요.");
 
         if (userInput === correctPassword) {
-            alert("인증에 성공하였습니다.");
-            // 인증 성공 시 콘텐츠 표시
             document.write('<style>#protected-content { display: block !important; }</style>');
         } else {
-            alert("비밀번호가 틀렸습니다. 메인 화면으로 이동합니다.");
+            alert("비밀번호가 올바르지 않습니다.");
             window.location.href = "index.html";
         }
     </script>
@@ -72,13 +69,13 @@
 
         <article>
             <div class="photo-frame">
-                <iframe src="about:blank" style="width:100%; height:600px; border:none;"></iframe>
-                <p style="padding: 50px; color: #444;">구글 포토 앨범 연동 코드를 입력하면 사진이 이곳에 나타납니다.</p>
+                <iframe src="https://www.publicalbum.org/blog/embed-google-photos-albums?album=https%3A%2F%2Fphotos.app.goo.gl%2F6YwVX4go9T8StCHq5&grid=3&background=black" 
+                        style="width:100%; height:800px; border:none;" allowfullscreen></iframe>
             </div>
 
             <section class="download-section">
-                <p>※ 보고서 작성을 위해 고화질 원본 사진이 필요하신 경우 아래 버튼을 이용하세요.</p>
-                <a href="#" target="_blank" class="download-btn">📸 현장 사진 전체 다운로드 (원본)</a>
+                <p>※ 보고서 작성을 위해 고화질 원본 사진이 필요하신 경우 아래 버튼을 클릭하세요.</p>
+                <a href="https://photos.app.goo.gl/6YwVX4go9T8StCHq5" target="_blank" class="download-btn">📸 현장 사진 전체 다운로드 (원본)</a>
             </section>
         </article>
 
