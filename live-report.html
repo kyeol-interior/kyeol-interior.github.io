@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>LIVE 현장 리포트 | (주)결</title>
+    <style>
+        body { background: #000; color: #fff; font-family: 'Noto Sans KR', sans-serif; text-align: center; padding-top: 50px; }
+        .report-box { max-width: 800px; margin: 0 auto; padding: 20px; border: 1px solid #333; }
+        h1 { color: #FFD700; margin-bottom: 30px; }
+        #protected-content { display: none; } /* 비밀번호 입력 전엔 숨김 */
+    </style>
+</head>
+<body>
+
+    <script>
+        var password = "7575"; // 여기에 사용할 비밀번호를 정하세요
+        var input = prompt("(주)결 현장 리포트 보안 페이지입니다.\n비밀번호를 입력해주세요.");
+
+        if (input === password) {
+            alert("확인되었습니다.");
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById('protected-content').style.display = 'block';
+            });
+        } else {
+            alert("비밀번호가 일치하지 않습니다.");
+            window.location.href = "index.html";
+        }
+    </script>
+
+    <div id="protected-content" class="report-box">
+        <h1>[LIVE] 실시간 현장 리포트</h1>
+        <p>현재 진행 중인 공사 현장의 실시간 모습입니다.</p>
+        <hr style="border: 0.5px solid #333; margin: 30px 0;">
+
+        <div id="photo-album">
+            <p style="color: #888;">현장 사진을 불러오는 중이거나 아직 등록된 사진이 없습니다.</p>
+        </div>
+    </div>
+
+</body>
+</html>

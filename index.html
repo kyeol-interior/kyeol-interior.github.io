@@ -14,12 +14,11 @@
     <meta property="og:description" content="전주 인테리어·실내건축 전문 디자인 기업 (주)결">
     <meta property="og:image" content="./image/main-thumb.jpg"> 
     <meta property="og:url" content="https://kyeol-interior.github.io">
+    
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="manifest" href="/manifest.json">
+    
     <style>
         /* 기본 스타일 초기화 */
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -38,23 +37,15 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; overflow: hidden; background: #000;
         }
-
-        /* 영상 공통 속성 */
-        .video-mobile, .video-pc {
-            position: absolute; width: 100%; height: 100%; object-fit: cover;
-        }
-
-        /* PC/모바일 영상 전환 제어 */
+        .video-mobile, .video-pc { position: absolute; width: 100%; height: 100%; object-fit: cover; }
         .video-pc { display: none; }
         @media (min-width: 1025px) {
             .video-mobile { display: none; }
             .video-pc { display: block; }
         }
-
-        /* 오버레이 (텍스트 가독성 확보) */
         .video-background::after {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.35); /* 영상 밝기 조절 */
+            background: rgba(0,0,0,0.35); 
         }
 
         /* 메인 콘텐츠 */
@@ -72,7 +63,6 @@
             font-size: 16px; font-weight: 300; letter-spacing: 0.4em; 
             color: rgba(255,255,255,0.7); margin-bottom: 50px; 
         }
-        
         .enter-btn { 
             padding: 16px 50px; border: 1px solid rgba(255,255,255,0.8); 
             text-decoration: none; color: #fff; font-size: 12px; 
@@ -81,28 +71,37 @@
         }
         .enter-btn:hover { background: #fff; color: #000; font-weight: bold; }
 
-        /* 하단 사이드 메뉴 (블로그, 카톡) */
+        /* 하단 사이드 메뉴 (PC 버전) */
         .side-menu { position: fixed; left: 50px; bottom: 40px; z-index: 1000; }
         .side-menu a { 
             display: inline-block; margin-right: 25px; font-size: 10px; 
             color: rgba(255,255,255,0.5); text-decoration: none; 
-            letter-spacing: 1.5px; transition: color 0.3s;
+            letter-spacing: 1.5px; transition: all 0.3s;
         }
         .side-menu a:hover { color: #fff; }
+        
+        /* LIVE REPORT 골드 포인트 */
+        .live-link { color: #d4af37 !important; font-weight: 700 !important; }
 
-        /* 카피라이트 */
+        /* 하단 카피라이트 */
         footer { position: fixed; bottom: 30px; width: 100%; text-align: center; z-index: 900; }
         .copyright { font-size: 10px; color: rgba(255, 255, 255, 0.3); letter-spacing: 1px; }
 
-        /* 모바일 반응형 최적화 */
+        /* 모바일 반응형 최적화 (핵심!) */
         @media (max-width: 1024px) {
-            nav { padding: 0 30px; height: 140px; } 
-            .logo-img { height: 100px !important; } 
-            .main-title { font-size: 32px; }
-            .video-background::after { background: rgba(0,0,0,0.25); } /* 모바일은 조금 더 밝게 */
-            .side-menu { left: 0; width: 100%; text-align: center; bottom: 80px; }
-            .side-menu a { margin: 0 15px; }
-            footer { bottom: 30px; }
+            nav { padding: 0 20px; height: 120px; justify-content: center; } /* 로고 중앙 정렬 */
+            .logo-img { height: 80px !important; } 
+            .main-title { font-size: 28px; padding: 0 10px; }
+            .main-sub { font-size: 13px; letter-spacing: 0.2em; margin-bottom: 30px; }
+            
+            /* 모바일에서 메뉴를 하단에 가로로 정렬 */
+            .side-menu { 
+                left: 0; width: 100%; text-align: center; bottom: 70px; 
+                display: flex; justify-content: center; gap: 15px; 
+            }
+            .side-menu a { margin-right: 0; font-size: 9px; }
+            
+            footer { bottom: 25px; }
         }
     </style>
 </head>
@@ -110,7 +109,7 @@
 
     <nav>
         <a href="index.html">
-            <img src="./image/image_1.png" alt="(주)결 - 전주 인테리어·실내건축 전문 디자인 기업 로고" class="logo-img">
+            <img src="./image/image_1.png" alt="(주)결 로고" class="logo-img">
         </a>
     </nav>
 
@@ -118,7 +117,6 @@
         <video class="video-mobile" autoplay muted loop playsinline preload="auto" poster="./image/main-thumb.jpg">
             <source src="./image/mobile-video.mp4" type="video/mp4">
         </video>
-
         <video class="video-pc" autoplay muted loop playsinline preload="auto" poster="./image/main-thumb.jpg">
             <source src="./image/pc-video.mp4" type="video/mp4">
         </video>
@@ -131,6 +129,7 @@
     </main>
 
     <aside class="side-menu">
+        <a href="live-report.html" class="live-link">LIVE REPORT</a>
         <a href="http://blog.naver.com/rotte123" target="_blank" rel="noopener noreferrer">NAVER BLOG</a>
         <a href="https://pf.kakao.com/_uxhhjX/chat" target="_blank" rel="noopener noreferrer">KAKAO TALK</a>
     </aside>
