@@ -5,51 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LIVE 현장 리포트 | (주)결</title>
     <style>
-        /* 기본 스타일 */
         body { background: #000; color: #fff; font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; }
         .container { max-width: 1100px; margin: 0 auto; padding: 50px 20px; text-align: center; }
-        
-        /* 헤더 영역 */
-        h1 { color: #d4af37; font-size: 26px; margin-bottom: 10px; letter-spacing: -1px; }
-        .sub-txt { color: #888; font-size: 15px; margin-bottom: 40px; word-break: keep-all; }
-        
-        /* 콘텐츠 영역 (비밀번호 확인 전 숨김) */
+        h1 { color: #d4af37; font-size: 26px; margin-bottom: 10px; }
+        .sub-txt { color: #888; font-size: 15px; margin-bottom: 40px; }
         #protected-content { display: none; }
 
-        /* 사진첩 프레임 - 구글 포토 연동 */
+        /* 사진 영역 수정 */
         .photo-frame { 
-            width: 100%; min-height: 800px; background: #111; 
+            width: 100%; min-height: 700px; background: #111; 
             border: 1px solid #222; border-radius: 8px; overflow: hidden;
-            margin-bottom: 40px; position: relative;
+            margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
 
-        /* 다운로드 섹션 */
         .download-section {
             background: #111; padding: 30px; border-radius: 8px; border: 1px solid #d4af3733; margin-bottom: 40px;
         }
-        .download-section p { font-size: 14px; color: #ccc; margin-bottom: 20px; }
-        
         .download-btn {
             display: inline-block; padding: 15px 40px; background: #d4af37; color: #000;
             text-decoration: none; font-weight: bold; border-radius: 4px; font-size: 15px;
-            transition: 0.3s;
         }
-        .download-btn:hover { background: #fff; }
-
-        /* 하단 돌아가기 */
         .back-home { display: block; color: #666; text-decoration: none; font-size: 13px; margin-bottom: 50px; }
-        .back-home:hover { color: #fff; }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 20px; }
-            .photo-frame { min-height: 500px; }
-        }
     </style>
 </head>
 <body>
 
     <script>
-        // 비밀번호 설정 (현재 7575)
         var correctPassword = "7575"; 
         var userInput = prompt("(주)결 현장 관리 보안 시스템입니다.\n부여받은 비밀번호를 입력해주세요.");
 
@@ -69,8 +50,14 @@
 
         <article>
             <div class="photo-frame">
-                <iframe src="https://www.publicalbum.org/blog/embed-google-photos-albums?album=https%3A%2F%2Fphotos.app.goo.gl%2F6YwVX4go9T8StCHq5&grid=3&background=black" 
-                        style="width:100%; height:800px; border:none;" allowfullscreen></iframe>
+                <p style="margin-bottom: 20px; color: #d4af37;">보안 정책으로 인해 아래 버튼을 누르시면 실시간 현장 사진첩으로 연결됩니다.</p>
+                <a href="https://photos.app.goo.gl/6YwVX4go9T8StCHq5" target="_blank" 
+                   style="background: #222; color: #fff; padding: 20px 40px; border: 1px solid #444; text-decoration: none; border-radius: 8px;">
+                   📸 실시간 현장 사진첩 열기 (클릭)
+                </a>
+                <br>
+                <iframe src="https://www.publicalbum.org/blog/embed-google-photos-albums?album=https%3A%2F%2Fphotos.app.goo.gl%2F6YwVX4go9T8StCHq5" 
+                        style="width:100%; height:600px; border:none;" allowfullscreen></iframe>
             </div>
 
             <section class="download-section">
