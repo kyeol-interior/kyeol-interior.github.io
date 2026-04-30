@@ -5,39 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LIVE 현장 리포트 | (주)결</title>
     <style>
+        /* 기본 스타일 */
         body { background: #000; color: #fff; font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 50px 20px; text-align: center; }
-        h1 { color: #d4af37; font-size: 26px; margin-bottom: 10px; }
-        .sub-txt { color: #888; font-size: 15px; margin-bottom: 40px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 80px 20px; text-align: center; }
+        
+        /* 헤더 영역 */
+        h1 { color: #d4af37; font-size: 28px; margin-bottom: 15px; letter-spacing: -1px; }
+        .sub-txt { color: #888; font-size: 16px; margin-bottom: 60px; line-height: 1.6; word-break: keep-all; }
+        
+        /* 보안상 기본 숨김 */
         #protected-content { display: none; }
 
-        /* 사진 영역 수정 */
-        .photo-frame { 
-            width: 100%; min-height: 700px; background: #111; 
-            border: 1px solid #222; border-radius: 8px; overflow: hidden;
-            margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        /* 사진첩 접속 구역 */
+        .photo-access-box { 
+            background: #111; padding: 60px 20px; border-radius: 12px; 
+            border: 1px solid #222; margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .download-section {
-            background: #111; padding: 30px; border-radius: 8px; border: 1px solid #d4af3733; margin-bottom: 40px;
+        /* 메인 사진첩 열기 버튼 */
+        .open-album-btn {
+            display: inline-block; padding: 22px 50px; background: #d4af37; color: #000;
+            text-decoration: none; font-weight: 800; border-radius: 6px; font-size: 18px;
+            transition: 0.3s; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            margin-bottom: 20px;
         }
-        .download-btn {
-            display: inline-block; padding: 15px 40px; background: #d4af37; color: #000;
-            text-decoration: none; font-weight: bold; border-radius: 4px; font-size: 15px;
+        .open-album-btn:hover { background: #fff; transform: translateY(-3px); }
+
+        .btn-tip { color: #666; font-size: 13px; margin-top: 10px; }
+
+        /* 하단 돌아가기 */
+        .back-home { display: inline-block; color: #444; text-decoration: none; font-size: 14px; margin-top: 40px; transition: 0.3s; }
+        .back-home:hover { color: #888; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 22px; }
+            .sub-txt { font-size: 14px; }
+            .open-album-btn { width: 100%; padding: 20px 0; font-size: 16px; }
         }
-        .back-home { display: block; color: #666; text-decoration: none; font-size: 13px; margin-bottom: 50px; }
     </style>
 </head>
 <body>
 
     <script>
         var correctPassword = "7575"; 
-        var userInput = prompt("(주)결 현장 관리 보안 시스템입니다.\n부여받은 비밀번호를 입력해주세요.");
+        var userInput = prompt("(주)결 보안 시스템\n해당 현장의 비밀번호를 입력해주세요.");
 
         if (userInput === correctPassword) {
             document.write('<style>#protected-content { display: block !important; }</style>');
         } else {
-            alert("비밀번호가 올바르지 않습니다.");
+            alert("비밀번호가 일치하지 않습니다.");
             window.location.href = "index.html";
         }
     </script>
@@ -45,28 +62,24 @@
     <div id="protected-content" class="container">
         <header>
             <h1>[LIVE] 실시간 현장 리포트</h1>
-            <p class="sub-txt">(주)결은 시공의 전 과정을 투명하게 공개하여 최상의 신뢰를 약속합니다.</p>
+            <p class="sub-txt">
+                (주)결은 시공의 전 과정을 투명하게 기록합니다.<br>
+                아래 버튼을 클릭하시면 실시간 업데이트되는 현장 사진첩으로 연결됩니다.
+            </p>
         </header>
 
         <article>
-            <div class="photo-frame">
-                <p style="margin-bottom: 20px; color: #d4af37;">보안 정책으로 인해 아래 버튼을 누르시면 실시간 현장 사진첩으로 연결됩니다.</p>
-                <a href="https://photos.app.goo.gl/6YwVX4go9T8StCHq5" target="_blank" 
-                   style="background: #222; color: #fff; padding: 20px 40px; border: 1px solid #444; text-decoration: none; border-radius: 8px;">
-                   📸 실시간 현장 사진첩 열기 (클릭)
+            <div class="photo-access-box">
+                <a href="https://photos.app.goo.gl/6YwVX4go9T8StCHq5" target="_blank" class="open-album-btn">
+                    📸 실시간 현장 사진첩 열기
                 </a>
-                <br>
-                <iframe src="https://www.publicalbum.org/blog/embed-google-photos-albums?album=https%3A%2F%2Fphotos.app.goo.gl%2F6YwVX4go9T8StCHq5" 
-                        style="width:100%; height:600px; border:none;" allowfullscreen></iframe>
+                <p class="btn-tip">※ 사진 확인 및 개별 사진 다운로드가 가능합니다.</p>
             </div>
-
-            <section class="download-section">
-                <p>※ 보고서 작성을 위해 고화질 원본 사진이 필요하신 경우 아래 버튼을 클릭하세요.</p>
-                <a href="https://photos.app.goo.gl/6YwVX4go9T8StCHq5" target="_blank" class="download-btn">📸 현장 사진 전체 다운로드 (원본)</a>
-            </section>
         </article>
 
-        <a href="index.html" class="back-home">메인 화면으로 돌아가기</a>
+        <footer>
+            <a href="index.html" class="back-home">← 메인 홈페이지로 돌아가기</a>
+        </footer>
     </div>
 
 </body>
