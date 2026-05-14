@@ -3,104 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- 브라우저 상단 탭 제목 -->
     <title>주식회사 결 | 전주 인테리어·리모델링·실내건축 전문 (주)결</title>
+    <meta name="description" content="상업공간의 성공과 주거의 품격, 전주 인테리어 전문 디자인 기업 (주)결입니다.">
+    <meta name="keywords" content="전주인테리어, 전주리모델링, 주식회사결, 실내건축, 상업인테리어, 주거인테리어">
+
+    <!-- [핵심] 카카오톡, 네이버 미리보기(Open Graph) 설정 -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kyeol-interior.github.io/">
+    <meta property="og:title" content="(주)결 | KYEOL DESIGN">
+    <meta property="og:description" content="전주 인테리어·실내건축 전문 디자인 기업 (주)결">
+    <!-- 이미지 유실 방지를 위해 전체 주소를 입력했습니다 -->
+    <meta property="og:image" content="https://kyeol-interior.github.io/image/main-thumb.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- 구글 웹폰트 (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;800&display=swap" rel="stylesheet">
+    
     <style>
         /* 기본 스타일 초기화 */
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { background:#000; font-family: 'Noto Sans KR', sans-serif; overflow: hidden; height: 100vh; color: #fff; }
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
+        
+        body { 
+            background:#000; 
+            font-family: 'Noto Sans KR', sans-serif; 
+            overflow: hidden; 
+            height: 100vh; 
+            height: 100dvh; /* 모바일 하단바 대응 */
+            color: #fff; 
+        }
 
-        /* 배경 영상 컨테이너 */
+        /* 배경 영상 및 이미지 레이어 */
         .video-background {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; overflow: hidden; background: #000;
+            z-index: -1; overflow: hidden; 
+            background: #000 url('./image/main-thumb.jpg') center center / cover no-repeat;
         }
-        .video-mobile, .video-pc { position: absolute; width: 100%; height: 100%; object-fit: cover; }
+        .video-mobile, .video-pc { 
+            position: absolute; width: 100%; height: 100%; object-fit: cover; 
+        }
         .video-pc { display: none; }
         @media (min-width: 1025px) { .video-mobile { display: none; } .video-pc { display: block; } }
-        .video-background::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.35); }
+        
+        /* 텍스트 가독성을 위한 암막 오버레이 */
+        .video-background::after { 
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.45); 
+        }
 
-        /* 로고 영역 (상단 왼쪽 재배치) */
+        /* 네비게이션 (로고) */
         nav { 
-            position:fixed; top:0; width:100%; height:160px; 
+            position:fixed; top:0; width:100%; height:140px; 
             display:flex; justify-content: flex-start; align-items:center; 
             padding:0 60px; background:transparent; z-index:1000; 
         }
-        .logo-img { height: 120px; width: auto; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.15)); }
+        .logo-img { 
+            height: 100px; width: auto; 
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.15)); 
+        }
 
-        /* 메인 콘텐츠 레이아웃 */
+        /* 메인 중앙 콘텐츠 */
         main {
-            height: 100vh; display: flex; flex-direction: column;
+            height: 100%; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
             padding: 0 20px; position: relative; z-index: 1;
         }
 
         .main-title { 
-            font-size: 52px; font-weight: 800; line-height: 1.3; 
-            margin-bottom: 15px; letter-spacing: -1.5px; word-break: keep-all; 
-            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+            font-size: clamp(28px, 5vw, 52px); 
+            font-weight: 800; line-height: 1.35; 
+            margin-bottom: 20px; letter-spacing: -0.03em; word-break: keep-all; 
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
         }
         .main-sub { 
-            font-size: 15px; font-weight: 300; letter-spacing: 0.4em; 
-            color: rgba(255,255,255,0.7); margin-bottom: 55px; 
+            font-size: 14px; font-weight: 300; letter-spacing: 0.4em; 
+            color: rgba(255,255,255,0.7); margin-bottom: 50px; 
         }
 
-        /* 버튼 그룹 */
-        .btn-group { display: flex; flex-direction: column; gap: 15px; align-items: center; }
+        /* 버튼 디자인 및 애니메이션 */
+        .btn-group { display: flex; flex-direction: column; gap: 18px; align-items: center; }
+
+        .btn-base {
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        }
 
         .enter-btn { 
-            padding: 15px 60px; border: 1px solid rgba(255,255,255,0.8); 
-            text-decoration: none; color: #fff; font-size: 13px; 
-            letter-spacing: 4px; transition: 0.4s; 
-            background: rgba(0,0,0,0.2); backdrop-filter: blur(5px);
+            padding: 16px 70px; border: 1px solid rgba(255,255,255,0.8); 
+            color: #fff; font-size: 13px; letter-spacing: 4px; 
+            background: rgba(255,255,255,0.05);
         }
-        .enter-btn:hover { background: #fff; color: #000; font-weight: bold; }
+        .enter-btn:hover { 
+            background: #fff; color: #000; font-weight: bold;
+            transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
 
-        /* LIVE REPORT 버튼 */
         .live-btn { 
-            padding: 13px 40px; border: 1px solid #d4af37; 
-            text-decoration: none; color: #d4af37; font-size: 12px; 
-            letter-spacing: 2px; transition: 0.4s; font-weight: 700;
-            background: rgba(212, 175, 55, 0.1); border-radius: 4px;
-            width: 240px;
+            padding: 14px 45px; border: 1px solid #d4af37; 
+            color: #d4af37; font-size: 12px; letter-spacing: 2px; 
+            font-weight: 700; background: rgba(212, 175, 55, 0.1); 
+            border-radius: 4px; width: 260px;
         }
-        .live-btn:hover { background: #d4af37; color: #000; }
+        .live-btn:hover { 
+            background: #d4af37; color: #000; 
+            transform: translateY(-5px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
 
-        /* 하단 메뉴 */
-        .side-menu { position: fixed; width: 100%; bottom: 55px; text-align: center; z-index: 1000; }
+        /* 하단 링크 메뉴 */
+        .side-menu { position: fixed; width: 100%; bottom: 65px; text-align: center; z-index: 1000; }
         .side-menu a { 
-            display: inline-block; margin: 0 20px; font-size: 14px; 
-            color: rgba(255,255,255,0.6); text-decoration: none; 
-            letter-spacing: 1.5px; transition: 0.3s; font-weight: 500;
+            display: inline-block; margin: 0 20px; font-size: 13px; 
+            color: rgba(255,255,255,0.5); text-decoration: none; 
+            letter-spacing: 2px; transition: 0.3s; font-weight: 500;
         }
-        .side-menu a:hover { color: #fff; }
+        .side-menu a:hover { color: #d4af37; }
 
-        footer { position: fixed; bottom: 25px; width: 100%; text-align: center; z-index: 900; }
-        .copyright { font-size: 10px; color: rgba(255, 255, 255, 0.2); }
+        footer { position: fixed; bottom: 30px; width: 100%; text-align: center; z-index: 900; }
+        .copyright { font-size: 10px; color: rgba(255, 255, 255, 0.25); letter-spacing: 1px; }
 
-        /* 모바일 반응형 최적화 */
+        /* 모바일 대응 반응형 디자인 */
         @media (max-width: 1024px) {
-            nav { padding: 0 25px; height: 110px; justify-content: flex-start; } /* 모바일 왼쪽 유지 */
-            .logo-img { height: 75px !important; } 
-            .main-title { font-size: 28px; margin-bottom: 10px; }
-            .main-sub { font-size: 12px; margin-bottom: 35px; letter-spacing: 0.2em; }
-            
-            .enter-btn { padding: 14px 0; width: 220px; font-size: 12px; }
-            .live-btn { padding: 12px 0; width: 220px; font-size: 11px; }
-            
-            .side-menu { bottom: 75px; }
-            .side-menu a { font-size: 14px; margin: 0 12px; } 
-            footer { bottom: 30px; }
+            nav { padding: 0 25px; height: 100px; }
+            .logo-img { height: 70px; } 
+            .main-title { font-size: 28px; }
+            .main-sub { font-size: 11px; margin-bottom: 40px; }
+            .enter-btn, .live-btn { width: 240px; }
+            .side-menu { bottom: 85px; }
+            footer { bottom: 40px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- 상단 로고 -->
     <nav>
         <a href="index.html">
-            <img src="./image/image_1.png" alt="(주)결 로고" class="logo-img">
+            <img src="./image/image_1.png" alt="(주)결 인테리어 로고" class="logo-img">
         </a>
     </nav>
 
+    <!-- 배경 비디오 영역 -->
     <div class="video-background">
         <video class="video-mobile" autoplay muted loop playsinline preload="auto" poster="./image/main-thumb.jpg">
             <source src="./image/mobile-video.mp4" type="video/mp4">
@@ -110,21 +155,24 @@
         </video>
     </div>
 
+    <!-- 중앙 메인 섹션 -->
     <main>
         <h1 class="main-title">상업공간의 성공과 주거의 품격,<br>결이 다른 공간을 만듭니다.</h1>
         <p class="main-sub">INTERIOR DESIGN & ARCHITECTURE (주)결</p>
         
         <div class="btn-group">
-            <a href="about.html" class="enter-btn">ENTER VIEW</a>
-            <a href="live-report.html" class="live-btn">LIVE 현장 리포트</a>
+            <a href="about.html" class="btn-base enter-btn">ENTER VIEW</a>
+            <a href="live-report.html" class="btn-base live-btn">LIVE 현장 리포트</a>
         </div>
     </main>
 
+    <!-- 블로그 및 카톡 연결 링크 -->
     <aside class="side-menu">
         <a href="http://blog.naver.com/rotte123" target="_blank" rel="noopener noreferrer">NAVER BLOG</a>
         <a href="https://pf.kakao.com/_uxhhjX/chat" target="_blank" rel="noopener noreferrer">KAKAO TALK</a>
     </aside>
 
+    <!-- 하단 카피라이트 -->
     <footer>
         <p class="copyright">© 2026 (주)결 KYEOL Co., Ltd. All rights reserved.</p>
     </footer>
