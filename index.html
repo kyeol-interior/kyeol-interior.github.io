@@ -79,12 +79,13 @@
             color: rgba(255,255,255,0.7); margin-bottom: 50px; 
         }
 
-        /* 버튼 디자인 */
+        /* 버튼 디자인 (white-space 추가로 절대 두 줄 방지) */
         .btn-group { display: flex; flex-direction: column; gap: 18px; align-items: center; }
         .btn-base {
             display: flex; align-items: center; justify-content: center;
             text-decoration: none; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            white-space: nowrap; 
         }
         .enter-btn { 
             padding: 16px 70px; border: 1px solid rgba(255,255,255,0.8); 
@@ -143,7 +144,7 @@
         .btn-submit { background-color: #1a365d; color: white; }
         .btn-cancel { background-color: #edf2f7; color: #4a5568; }
 
-        /* 📈 [입찰 계산기] 관리자 전용 컨테이너 스크린 */
+        /* 📈 [입찰 계산기] 마스터 컨테이너 */
         #adminAppContainer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #f7fafc; z-index: 9998; display: none; overflow-y: auto; color: #2d3748; padding: 20px 15px;
@@ -168,7 +169,6 @@
         .tab-content.active { display: block; }
         .form-group { margin-bottom: 15px; }
         
-        /* 유연한 레이아웃 구조 설계 (모바일에서 뒤틀림 방지 핵심) */
         .form-row { display: flex; flex-wrap: wrap; gap: 12px; }
         .form-row .form-group { flex: 1; min-width: 120px; }
         
@@ -191,34 +191,40 @@
         .price-highlight { font-size: 17px; color: #e53e3e; font-weight: bold; }
         .notice-box { background-color: #f7fafc; border: 1px solid #edf2f7; padding: 10px; border-radius: 6px; font-size: 12px; color: #718096; margin-bottom: 12px; line-height: 1.4; text-align: left; }
         
-        .chart-container { margin-top: 12px; background: #fff; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; position: relative; width: 100%; height: auto; }
+        /* 📉 차트 래퍼: 모바일에서 찌그러짐을 완벽 방어하는 유연한 가로 정렬 컨테이너 */
+        .chart-container { 
+            margin-top: 12px; background: #fff; padding: 15px 10px; 
+            border: 1px solid #e2e8f0; border-radius: 8px; 
+            position: relative; width: 100%; height: 240px; 
+        }
         .input-inline { padding: 10px !important; font-size: 14px !important; border: 1px solid #cbd5e0 !important; border-radius: 6px !important; }
         .btn-exit { background: #e53e3e; color: white; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; border: none; cursor: pointer; position: absolute; top: 25px; right: 25px; }
 
-        /* 📱 초강력 모바일 커스텀 반응형 스펙 추가 */
+        /* 📱 모바일 디바이스 전용 브레이크포인트 */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 100px; }
             .logo-img { height: 70px; } 
             .main-title { font-size: 24px; }
             .main-sub { font-size: 11px; margin-bottom: 40px; }
-            .enter-btn, .live-btn { width: 240px; }
+            .enter-btn, .live-btn { width: 260px; padding: 15px 30px; letter-spacing: 2px; }
+            
             .side-menu { bottom: 85px; }
             footer { bottom: 40px; }
             main { height: auto; padding-top: 140px; padding-bottom: 140px; }
             
-            /* 계산기 내부 모바일 조율 */
             .calc-container { padding: 20px 15px; }
             .calc-container h1 { font-size: 18px; text-align: left; width: 70%; }
             .btn-exit { top: 20px; right: 15px; padding: 5px 10px; }
             
-            /* 입력폼 모바일 가독성: 좁은 화면에서는 한 줄에 1~2개만 나오도록 유연하게 확장 */
             .form-row { flex-direction: column; gap: 0; }
             .form-row .form-group { width: 100%; margin-bottom: 15px; }
             
-            /* 축적 페이지 모바일 분할 래핑 */
             #dbTab .form-row { flex-direction: row; }
             #dbTab .form-row > div, #dbTab .form-row > .form-size { flex: none !important; width: 100% !important; margin-bottom: 15px; }
             #dbTab .form-row > .form-size { display: flex; flex-direction: column; }
+            
+            /* 모바일 화면에서 차트 세로 높이를 충분히 확보하여 글자/바 겹침 해소 */
+            .chart-container { height: 260px; padding: 10px 5px; }
         }
     </style>
 </head>
@@ -312,280 +318,3 @@
                         <label for="hahan">투찰 하한선 (%)</label>
                         <input type="number" id="hahan" value="89.745" step="0.001" class="highlight-input">
                     </div>
-                    <div class="form-group">
-                        <label for="avalue">A값 (원)</label>
-                        <input type="number" id="avalue" value="0" placeholder="없으면 0">
-                    </div>
-                </div>
-                <button class="calc-btn" onclick="calculateBid()">클라우드 데이터 기반 최적 투찰가 산출</button>
-                <div class="result-section" id="resultSection">
-                    <div class="result-title">📊 분석 기반 추천 시나리오</div>
-                    <div id="resultsContainer"></div>
-                </div>
-            </div>
-
-            <div id="dbTab" class="tab-content">
-                <div style="background-color: #ebf8ff; padding: 12px; border-radius: 6px; font-size: 13px; color: #2b6cb0; margin-bottom: 15px; line-height: 1.5; text-align: left;">
-                    📝 <strong>실시간 개찰 결과 정보 축적 (전사 공유)</strong><br>
-                    여기서 등록하는 정보는 클라우드를 통해 전 직원의 계산기에 즉시 강제 병합됩니다.
-                </div>
-                <div style="background: #f7fafc; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 20px;">
-                    <div class="form-row" style="margin-bottom: 0;">
-                        <div class="form-group">
-                            <label>발주처 그룹 선택</label>
-                            <select id="newInstitution" class="input-inline">
-                                <option value="edu">전북교육청 및 산하 학교</option>
-                                <option value="local">전북도청 / 시·군청 / 관공서</option>
-                                <option value="etc">기타 공공기관 / 대학</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label style="color:#2b6cb0;">공고 개찰 일자</label>
-                            <input type="date" id="bidDate" class="input-inline">
-                        </div>
-                    </div>
-                    <div class="form-row" style="margin-bottom: 0;">
-                        <div class="form-size">
-                            <label>기초금액 (원)</label>
-                            <input type="number" id="newGicho" class="input-inline" placeholder="숫자만 입력">
-                        </div>
-                        <div class="form-size">
-                            <label style="font-weight:bold;">1등 낙찰금액 (원)</label>
-                            <input type="number" id="newResult" class="input-inline" placeholder="숫자만 입력">
-                        </div>
-                        <div class="form-size">
-                            <label style="font-weight:bold;">하한선 (%)</label>
-                            <input type="number" id="newHahan" value="89.745" step="0.001" class="input-inline">
-                        </div>
-                        <div class="form-size">
-                            <label style="font-weight:bold;">A값 (원)</label>
-                            <input type="number" id="newAvalue" value="0" class="input-inline">
-                        </div>
-                    </div>
-                    <button class="calc-btn" style="background-color:#319795; padding: 12px; font-size:14px; margin-top:5px;" onclick="uploadToCloud()">⚡ 새 낙찰 정보 클라우드 전송 및 반영</button>
-                </div>
-                <div style="font-weight:bold; font-size:14px; margin-bottom:10px; color:#1a365d; text-align: left;">📈 실시간 동기화 마스터 사정률 빈도 차트</div>
-                <div class="chart-container">
-                    <canvas id="liveChart"></canvas>
-                </div>
-            </div>
-            <div class="footer" style="color: #a0aec0; font-size: 12px; margin-top: 20px; text-align: right; border-top: 1px dashed #e2e8f0; padding-top: 10px;">만든사람: <strong>김용대</strong></div>
-        </div>
-    </div>
-
-    <script>
-        function openLoginModal() {
-            document.getElementById('passInput').value = "";
-            document.getElementById('loginOverlay').style.display = 'flex';
-            document.getElementById('passInput').focus();
-        }
-
-        function closeLoginModal() {
-            document.getElementById('loginOverlay').style.display = 'none';
-        }
-
-        function checkPassword() {
-            const pass = document.getElementById('passInput').value;
-            if(pass === "6452") { 
-                closeLoginModal();
-                document.getElementById('adminAppContainer').style.display = 'block';
-                document.body.style.overflow = 'auto'; 
-                initFirebase(); 
-            } else {
-                alert("보안 암호가 올바르지 않습니다.");
-                document.getElementById('passInput').value = "";
-                document.getElementById('passInput').focus();
-            }
-        }
-
-        function exitAdminSystem() {
-            if(confirm("관리자 프로그램에서 나가시겠습니까?")) {
-                document.getElementById('adminAppContainer').style.display = 'none';
-                document.body.style.overflow = 'hidden'; 
-                window.scrollTo(0,0);
-            }
-        }
-
-        const firebaseConfig = {
-            databaseURL: "https://kyeol-bid-default-rtdb.firebaseio.com/"
-        };
-        
-        let dbCounts = {
-            edu:   { c1: 43, c2: 28, c3: 24, cOther: 43 }, 
-            local: { c1: 40, c2: 30, c3: 22, cOther: 46 }, 
-            etc:   { c1: 38, c2: 29, c3: 25, cOther: 46 }  
-        };
-        let samplePool = { edu: [100.0135, 99.3850, 99.9820], local: [100.0210, 99.3210, 99.8540], etc: [100.0050, 99.4120, 99.7650] };
-        let currentTotalCount = 138;
-
-        const today = new Date();
-        document.getElementById('bidDate').value = today.toISOString().substring(0, 10);
-
-        function initFirebase() {
-            if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-            const dbRef = firebase.database().ref('bidMaster');
-            
-            dbRef.on('value', (snapshot) => {
-                const data = snapshot.val();
-                if(data) {
-                    dbCounts = data.dbCounts || dbCounts;
-                    samplePool = data.samplePool || samplePool;
-                    currentTotalCount = data.currentTotalCount || currentTotalCount;
-                    
-                    document.getElementById('totalCount').innerText = currentTotalCount;
-                    document.getElementById('lastUpdateTime').innerText = data.lastDate || "2026-05-20 이전";
-                    if(document.getElementById('dbTab').classList.contains('active')) { updateChart(); }
-                }
-            });
-        }
-
-        function uploadToCloud() {
-            const type = document.getElementById('newInstitution').value;
-            const gicho = parseFloat(document.getElementById('newGicho').value);
-            const resultPrice = document.getElementById('newResult').value;
-            const hahan = parseFloat(document.getElementById('newHahan').value);
-            const avalue = parseFloat(document.getElementById('newAvalue').value) || 0;
-            const inputDate = document.getElementById('bidDate').value;
-
-            if(!gicho || !resultPrice) { alert('기초금액과 1등 낙찰금액을 기입해 주세요.'); return; }
-            if(!inputDate) { alert('공고의 개찰 일자를 올바르게 기입해 주세요.'); return; }
-
-            const targetRate = hahan / 100;
-            const rate = (((parseFloat(resultPrice) - avalue) / targetRate) + avalue) / gicho * 100;
-
-            if (rate >= 100.0000 && rate <= 100.1100) dbCounts[type].c1++;
-            else if (rate >= 99.2500 && rate <= 99.4500) dbCounts[type].c2++;
-            else if (rate >= 99.7500 && rate < 100.0000) dbCounts[type].c3++;
-            else dbCounts[type].cOther++;
-
-            samplePool[type].push(rate);
-            currentTotalCount++;
-
-            firebase.database().ref('bidMaster').set({
-                dbCounts: dbCounts,
-                samplePool: samplePool,
-                currentTotalCount: currentTotalCount,
-                lastDate: inputDate
-            }).then(() => {
-                alert(`클라우드 동기화 완료!\n[역산 사정률: ${rate.toFixed(4)}%]\n전 직원 시스템에 실시간 공정 수치가 강제 합산되었습니다.`);
-                document.getElementById('newGicho').value = '';
-                document.getElementById('newResult').value = '';
-            });
-        }
-
-        function switchTab(tabId, button) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            button.classList.add('active');
-            if (tabId === 'dbTab') { updateChart(); }
-        }
-
-        function getPercentages() {
-            let t1 = dbCounts.edu.c1 + dbCounts.local.c1 + dbCounts.etc.c1;
-            let t2 = dbCounts.edu.c2 + dbCounts.local.c2 + dbCounts.etc.c2;
-            let t3 = dbCounts.edu.c3 + dbCounts.local.c3 + dbCounts.etc.c3;
-            let tO = dbCounts.edu.cOther + dbCounts.local.cOther + dbCounts.etc.cOther;
-            let total = t1 + t2 + t3 + tO;
-            return { p1: ((t1/total)*100).toFixed(1), p2: ((t2/total)*100).toFixed(1), p3: ((t3/total)*100).toFixed(1), pOther: ((tO/total)*100).toFixed(1) };
-        }
-
-        function calculateBid() {
-            const type = document.getElementById('institution').value;
-            const gicho = parseFloat(document.getElementById('gicho').value);
-            const hahanInput = parseFloat(document.getElementById('hahan').value);
-            const avalue = parseFloat(document.getElementById('avalue').value) || 0;
-
-            if (!gicho || gicho <= 0) { alert('기초금액을 입력해 주세요.'); return; }
-            const pct = getPercentages();
-            
-            const getRateFromPool = (min, max, fallback) => {
-                const valid = samplePool[type].filter(r => r >= min && r <= max);
-                return valid.length > 0 ? valid[Math.floor(Math.random() * valid.length)] : fallback;
-            };
-
-            const rate1 = getRateFromPool(100.0000, 100.1100, 100.0150);
-            const rate2 = getRateFromPool(99.2500, 99.4500, 99.3800);
-            const rate3 = getRateFromPool(99.7500, 99.9999, 99.8200);
-
-            const targetRate = hahanInput / 100;
-            const finalRates = [rate1, rate2, rate3];
-            const containers = document.getElementById('resultsContainer');
-            containers.innerHTML = '';
-
-            const labels = [
-                { title: "추천 1안 (마스터 DB 100% 최빈 본전 타격)", badge: "badge-1", class: "rank-1", prob: `누적 빈도 ${pct.p1}%`, desc: "100.0000% ~ 100.1100% 위주 핵심 본전 박스권 매칭 단가입니다." },
-                { title: "추천 2안 (마스터 DB 치열 다수경쟁 방어선)", badge: "badge-2", class: "rank-2", prob: `누적 빈도 ${pct.p2}%`, desc: "99.2500% ~ 99.4500% 근처 하향 안전 수렴 데이터 기반 제안 단가입니다." },
-                { title: "추천 3안 (마스터 DB 후반대 전략 빈틈 타격)", badge: "badge-3", class: "rank-3", prob: `누적 빈도 ${pct.p3}%`, desc: "99.7500% ~ 99.9999% 사이 턱밑 낙찰 데이터 활용값입니다." }
-            ];
-
-            finalRates.forEach((rate, index) => {
-                const pureGicho = gicho - avalue;
-                let bidPrice = Math.round((pureGicho * (rate / 100) * targetRate) + avalue);
-                const card = document.createElement('div');
-                card.className = `result-card ${labels[index].class}`;
-                card.innerHTML = `
-                    <span class="badge ${labels[index].badge}">추천 ${index + 1}</span> <span class="prob-tag">${labels[index].prob}</span>
-                    <div style="font-weight: bold; font-size: 14px; margin-bottom: 8px; width: 70%; text-align:left;">${labels[index].title}</div>
-                    <div class="info-row"><span>보정 사정률:</span><span class="info-value" style="color:#2b6cb0;">${rate.toFixed(4)}%</span></div>
-                    <div class="info-row"><span>최종 실전 투찰 가격:</span><span class="info-value price-highlight">${bidPrice.toLocaleString()} 원</span></div>
-                    <div style="font-size: 11px; color: #718096; margin-top: 5px; text-align:left;">* ${labels[index].desc}</div>
-                `;
-                containers.appendChild(card);
-            });
-            document.getElementById('resultSection').style.display = 'block';
-        }
-
-        let liveChart = null;
-        function updateChart() {
-            const ctx = document.getElementById('liveChart').getContext('2d');
-            const pct = getPercentages();
-            if (liveChart !== null) { liveChart.destroy(); }
-            
-            // 모바일 해상도 판별하여 패딩 조정 (왼쪽 글자 잘림 완벽 방어)
-            const isMobile = window.innerWidth <= 1024;
-            const leftPadding = isMobile ? 150 : 200; 
-
-            liveChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['100.0000% ~ 100.1100% 구간', '99.2500% ~ 99.4500% 구간', '99.7500% ~ 99.9999% 구간', '기타 예외 사정률 구간'],
-                    datasets: [{
-                        label: '현재 마스터 DB 내 낙찰 빈도 지분 (%)',
-                        data: [pct.p1, pct.p2, pct.p3, pct.pOther],
-                        backgroundColor: ['rgba(229, 62, 92, 0.85)', 'rgba(221, 107, 32, 0.85)', 'rgba(49, 130, 206, 0.85)', 'rgba(160, 174, 192, 0.6)'],
-                        borderWidth: 1, barPercentage: 0.5
-                    }]
-                },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false, // 고정비 해제하여 모바일에서 유연하게 배치
-                    indexAxis: 'y', 
-                    layout: {
-                        padding: {
-                            left: leftPadding // 모바일일 때 왼쪽 폰트 마진을 다이나믹하게 확보하여 잘림 방지
-                        }
-                    },
-                    scales: { 
-                        x: { beginAtZero: true, max: 100 },
-                        y: {
-                            ticks: {
-                                mirror: false, // 글자가 막대 내부로 침범하지 않게 세팅
-                                crossAlign: 'end'
-                            }
-                        }
-                    }, 
-                    plugins: { legend: { display: false } } 
-                }
-            });
-            
-            // 모바일에서 차트 뭉개짐 방지를 위한 캔버스 높이 강제 조율
-            if(isMobile) {
-                ctx.canvas.parentNode.style.height = '180px';
-            } else {
-                ctx.canvas.parentNode.style.height = 'auto';
-            }
-        }
-    </script>
-</body>
-</html>
