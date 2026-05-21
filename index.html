@@ -22,120 +22,34 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     
     <style>
-        /* 기본 스타일 초기화 */
         * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
-        
-        body { 
-            background:#000; 
-            font-family: 'Noto Sans KR', sans-serif; 
-            overflow-x: hidden; 
-            min-height: 100vh; 
-            min-height: 100dvh; 
-            color: #fff; 
-        }
-
-        /* 배경 영상 및 이미지 레이어 */
-        .video-background {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; overflow: hidden; 
-            background: #000 url('./image/main-thumb.jpg') center center / cover no-repeat;
-        }
-        .video-mobile, .video-pc { 
-            position: absolute; width: 100%; height: 100%; object-fit: cover; 
-        }
+        body { background:#000; font-family: 'Noto Sans KR', sans-serif; overflow-x: hidden; min-height: 100vh; min-height: 100dvh; color: #fff; }
+        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; background: #000 url('./image/main-thumb.jpg') center center / cover no-repeat; }
+        .video-mobile, .video-pc { position: absolute; width: 100%; height: 100%; object-fit: cover; }
         .video-pc { display: none; }
         @media (min-width: 1025px) { .video-mobile { display: none; } .video-pc { display: block; } }
-        
-        .video-background::after { 
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.45); 
-        }
-
-        /* 네비게이션 (로고) */
-        nav { 
-            position:fixed; top:0; width:100%; height:140px; 
-            display:flex; justify-content: flex-start; align-items:center; 
-            padding:0 60px; background:transparent; z-index:1000; 
-        }
-        .logo-img { 
-            height: 100px; width: auto; 
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.15)); 
-        }
-
-        /* 메인 중앙 콘텐츠 */
-        main {
-            height: 100vh; height: 100dvh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            padding: 0 20px; position: relative; z-index: 1;
-        }
-        .main-title { 
-            font-size: clamp(24px, 5vw, 52px); 
-            font-weight: 800; line-height: 1.35; 
-            margin-bottom: 20px; letter-spacing: -0.03em; word-break: keep-all; 
-            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
-        }
-        .main-sub { 
-            font-size: 14px; font-weight: 300; letter-spacing: 0.4em; 
-            color: rgba(255,255,255,0.7); margin-bottom: 50px; 
-        }
-
-        /* 버튼 디자인 (white-space 추가로 절대 두 줄 방지) */
+        .video-background::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.45); }
+        nav { position:fixed; top:0; width:100%; height:140px; display:flex; justify-content: flex-start; align-items:center; padding:0 60px; background:transparent; z-index:1000; }
+        .logo-img { height: 100px; width: auto; filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.15)); }
+        main { height: 100vh; height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+        .main-title { font-size: clamp(24px, 5vw, 52px); font-weight: 800; line-height: 1.35; margin-bottom: 20px; letter-spacing: -0.03em; word-break: keep-all; text-shadow: 0 4px 20px rgba(0,0,0,0.8); }
+        .main-sub { font-size: 14px; font-weight: 300; letter-spacing: 0.4em; color: rgba(255,255,255,0.7); margin-bottom: 50px; }
         .btn-group { display: flex; flex-direction: column; gap: 18px; align-items: center; }
-        .btn-base {
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            white-space: nowrap; 
-        }
-        .enter-btn { 
-            padding: 16px 70px; border: 1px solid rgba(255,255,255,0.8); 
-            color: #fff; font-size: 13px; letter-spacing: 4px; 
-            background: rgba(255,255,255,0.05);
-        }
-        .enter-btn:hover { 
-            background: #fff; color: #000; font-weight: bold;
-            transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-        }
-        .live-btn { 
-            padding: 14px 45px; border: 1px solid #d4af37; 
-            color: #d4af37; font-size: 12px; letter-spacing: 2px; 
-            font-weight: 700; background: rgba(212, 175, 55, 0.1); 
-            border-radius: 4px; width: 260px;
-        }
-        .live-btn:hover { 
-            background: #d4af37; color: #000; 
-            transform: translateY(-5px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-        }
-
-        /* 하단 링크 메뉴 */
+        .btn-base { display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); white-space: nowrap; }
+        .enter-btn { padding: 16px 70px; border: 1px solid rgba(255,255,255,0.8); color: #fff; font-size: 13px; letter-spacing: 4px; background: rgba(255,255,255,0.05); }
+        .enter-btn:hover { background: #fff; color: #000; font-weight: bold; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+        .live-btn { padding: 14px 45px; border: 1px solid #d4af37; color: #d4af37; font-size: 12px; letter-spacing: 2px; font-weight: 700; background: rgba(212, 175, 55, 0.1); border-radius: 4px; width: 260px; }
+        .live-btn:hover { background: #d4af37; color: #000; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3); }
         .side-menu { position: fixed; width: 100%; bottom: 65px; text-align: center; z-index: 1000; }
-        .side-menu a { 
-            display: inline-block; margin: 0 20px; font-size: 13px; 
-            color: rgba(255,255,255,0.5); text-decoration: none; 
-            letter-spacing: 2px; transition: 0.3s; font-weight: 500;
-        }
+        .side-menu a { display: inline-block; margin: 0 20px; font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; letter-spacing: 2px; transition: 0.3s; font-weight: 500; }
         .side-menu a:hover { color: #d4af37; }
-
         footer { position: fixed; bottom: 30px; width: 100%; text-align: center; z-index: 900; }
         .copyright { font-size: 10px; color: rgba(255, 255, 255, 0.25); letter-spacing: 1px; }
-        
-        /* ⚡ 관리자 진입 버튼 스타일 명확화 (클릭 인식을 위해 패딩 및 커서 명시) */
-        .admin-link {
-            font-size: 10px; color: rgba(255, 255, 255, 0.15); text-decoration: none;
-            margin-left: 10px; transition: color 0.2s; cursor: pointer; display: inline-block; padding: 5px;
-        }
+        .admin-link { font-size: 10px; color: rgba(255, 255, 255, 0.15); text-decoration: none; margin-left: 10px; transition: color 0.2s; cursor: pointer; display: inline-block; padding: 5px; }
         .admin-link:hover { color: #d4af37; }
 
-        /* 🔒 비밀번호 입력 팝업 레이어 */
-        #loginOverlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); display: none; justify-content: center;
-            align-items: center; z-index: 9999; backdrop-filter: blur(5px);
-        }
-        .login-box {
-            background: white; padding: 35px 30px; border-radius: 12px;
-            text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); width: 90%; max-width: 340px; color: #2d3748;
-        }
+        #loginOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: none; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(5px); }
+        .login-box { background: white; padding: 35px 30px; border-radius: 12px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); width: 90%; max-width: 340px; color: #2d3748; }
         .login-box h2 { color: #1a365d; margin-bottom: 8px; font-size: 18px; font-weight: 800; }
         .login-box p { color: #718096; font-size: 12px; margin-bottom: 20px; }
         .login-box input { padding: 12px; width: 100%; box-sizing: border-box; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 20px; text-align: center; margin-bottom: 15px; letter-spacing: 6px; font-weight: bold; }
@@ -145,34 +59,18 @@
         .btn-submit { background-color: #1a365d; color: white; }
         .btn-cancel { background-color: #edf2f7; color: #4a5568; }
 
-        /* 📈 [입찰 계산기] 마스터 컨테이너 */
-        #adminAppContainer {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #f7fafc; z-index: 9998; display: none; overflow-y: auto; color: #2d3748; padding: 20px 15px;
-        }
-        .calc-container {
-            max-width: 630px; width: 100%; background: #ffffff; padding: 25px;
-            border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); margin: 0 auto; position: relative;
-        }
+        #adminAppContainer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #f7fafc; z-index: 9998; display: none; overflow-y: auto; color: #2d3748; padding: 20px 15px; }
+        .calc-container { max-width: 630px; width: 100%; background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); margin: 0 auto; position: relative; }
         .calc-container h1 { font-size: 22px; color: #1a365d; margin-bottom: 5px; text-align: center; font-weight: 800; }
-        .version-tag {
-            text-align: center; font-size: 12px; color: #4a5568; margin-bottom: 20px;
-            background: #edf2f7; padding: 6px 12px; border-radius: 30px; display: inline-block;
-            left: 50%; transform: translateX(-50%); position: relative; font-weight: bold; line-height: 1.5; width: auto; max-width: 100%;
-        }
+        .version-tag { text-align: center; font-size: 12px; color: #4a5568; margin-bottom: 20px; background: #edf2f7; padding: 6px 12px; border-radius: 30px; display: inline-block; left: 50%; transform: translateX(-50%); position: relative; font-weight: bold; line-height: 1.5; width: auto; max-width: 100%; }
         .tabs { display: flex; margin-bottom: 18px; border-bottom: 2px solid #e2e8f0; }
-        .tab-button {
-            flex: 1; padding: 11px; background: none; border: none; font-size: 14px; font-weight: bold;
-            color: #718096; cursor: pointer; text-align: center; transition: all 0.2s;
-        }
+        .tab-button { flex: 1; padding: 11px; background: none; border: none; font-size: 14px; font-weight: bold; color: #718096; cursor: pointer; text-align: center; transition: all 0.2s; }
         .tab-button.active { color: #2b6cb0; border-bottom: 3px solid #2b6cb0; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         .form-group { margin-bottom: 15px; }
-        
         .form-row { display: flex; flex-wrap: wrap; gap: 12px; }
         .form-row .form-group { flex: 1; min-width: 120px; }
-        
         label { display: block; font-weight: bold; margin-bottom: 6px; font-size: 14px; color: #2d3748; text-align: left; }
         .calc-container input, .calc-container select { width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; box-sizing: border-box; font-size: 15px; color: #2d3748; }
         .highlight-input { background-color: #fffaf0; border-color: #fbd38d !important; font-weight: bold; color: #dd6b20; }
@@ -191,38 +89,27 @@
         .info-value { font-weight: bold; color: #1a202c; }
         .price-highlight { font-size: 17px; color: #e53e3e; font-weight: bold; }
         .notice-box { background-color: #f7fafc; border: 1px solid #edf2f7; padding: 10px; border-radius: 6px; font-size: 12px; color: #718096; margin-bottom: 12px; line-height: 1.4; text-align: left; }
-        
-        .chart-container { 
-            margin-top: 12px; background: #fff; padding: 15px 10px; 
-            border: 1px solid #e2e8f0; border-radius: 8px; 
-            position: relative; width: 100%; height: 240px; 
-        }
+        .chart-container { margin-top: 12px; background: #fff; padding: 15px 10px; border: 1px solid #e2e8f0; border-radius: 8px; position: relative; width: 100%; height: 240px; }
         .input-inline { padding: 10px !important; font-size: 14px !important; border: 1px solid #cbd5e0 !important; border-radius: 6px !important; }
         .btn-exit { background: #e53e3e; color: white; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; border: none; cursor: pointer; position: absolute; top: 25px; right: 25px; }
 
-        /* 📱 모바일 디자인 디테일 설정 */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 100px; }
             .logo-img { height: 70px; } 
             .main-title { font-size: 24px; }
             .main-sub { font-size: 11px; margin-bottom: 40px; }
             .enter-btn, .live-btn { width: 260px; padding: 15px 30px; letter-spacing: 2px; }
-            
             .side-menu { bottom: 85px; }
             footer { bottom: 40px; }
             main { height: auto; padding-top: 140px; padding-bottom: 140px; }
-            
             .calc-container { padding: 20px 15px; }
             .calc-container h1 { font-size: 18px; text-align: left; width: 70%; }
             .btn-exit { top: 20px; right: 15px; padding: 5px 10px; }
-            
             .form-row { flex-direction: column; gap: 0; }
             .form-row .form-group { width: 100%; margin-bottom: 15px; }
-            
             #dbTab .form-row { flex-direction: row; }
             #dbTab .form-row > div, #dbTab .form-row > .form-size { flex: none !important; width: 100% !important; margin-bottom: 15px; }
             #dbTab .form-row > .form-size { display: flex; flex-direction: column; }
-            
             .chart-container { height: 260px; padding: 10px 5px; }
         }
     </style>
@@ -247,7 +134,6 @@
     <main id="mainPageContent">
         <h1 class="main-title">상업공간의 성공과 주거의 품격,<br>결이 다른 공간을 만듭니다.</h1>
         <p class="main-sub">INTERIOR DESIGN & ARCHITECTURE (주)결</p>
-        
         <div class="btn-group">
             <a href="about.html" class="btn-base enter-btn">ENTER VIEW</a>
             <a href="live-report.html" class="btn-base live-btn">LIVE 현장 리포트</a>
@@ -286,7 +172,7 @@
             <div style="text-align: center;">
                 <div class="version-tag">
                     🌐 사내 실시간 클라우드 동기화 모드 | 총 누적: <span id="totalCount">138</span>건<br>
-                    <small style="font-weight: normal; color: #718096; font-size: 11px;">(최근 업데이트 공고 개찰일: <span id="lastUpdateTime" style="color:#2b6cb0; font-weight:bold;">2026-05-20 이전</span>)</small>
+                    <small style="font-weight: normal; color: #718096; font-size: 11px;">(최근 업데이트 공고 개찰일: <span id="lastUpdateTime" style="color:#2b6cb0; font-weight:bold;">배경 동기화 중</span>)</small>
                 </div>
             </div>
             
@@ -335,6 +221,10 @@
                     여기서 등록하는 정보는 클라우드를 통해 전 직원의 계산기에 즉시 강제 병합됩니다.
                 </div>
                 <div style="background: #f7fafc; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label style="color:#e53e3e;">조달청 공고번호 (중복 방지 필터)</label>
+                        <input type="text" id="newBidNo" class="input-inline" placeholder="예: 20260512345-00" style="border:1px solid #feb2b2 !important; font-weight:bold;">
+                    </div>
                     <div class="form-row" style="margin-bottom: 0;">
                         <div class="form-group">
                             <label>발주처 그룹 선택</label>
@@ -440,6 +330,7 @@
             ] 
         };
         let currentTotalCount = 138;
+        let checkedLogs = {}; // 클라우드에 누적 등록된 공고번호 캐싱 저장소
 
         const today = new Date();
         document.getElementById('bidDate').value = today.toISOString().substring(0, 10);
@@ -454,6 +345,7 @@
                     dbCounts = data.dbCounts || dbCounts;
                     samplePool = data.samplePool || samplePool;
                     currentTotalCount = data.currentTotalCount || currentTotalCount;
+                    checkedLogs = data.checkedLogs || {}; // 서버에 기록된 공고 목록 로드
                     
                     document.getElementById('totalCount').innerText = currentTotalCount;
                     document.getElementById('lastUpdateTime').innerText = data.lastDate || "2026-05-20 이전";
@@ -463,6 +355,7 @@
         }
 
         function uploadToCloud() {
+            const bidNo = document.getElementById('newBidNo').value.trim();
             const type = document.getElementById('newInstitution').value;
             const gicho = parseFloat(document.getElementById('newGicho').value);
             const resultPrice = document.getElementById('newResult').value;
@@ -470,8 +363,15 @@
             const avalue = parseFloat(document.getElementById('newAvalue').value) || 0;
             const inputDate = document.getElementById('bidDate').value;
 
+            if(!bidNo) { alert('공고번호를 입력해 주세요. (중복 등록을 방지하는 키값입니다)'); return; }
             if(!gicho || !resultPrice) { alert('기초금액과 1등 낙찰금액을 기입해 주세요.'); return; }
             if(!inputDate) { alert('공고의 개찰 일자를 올바르게 기입해 주세요.'); return; }
+
+            // 🔒 [중복 검증 필터] 서버에 이미 해당 공고번호가 등록되어 있는지 대조
+            if(checkedLogs[bidNo]) {
+                alert(`⚠️ 중복 입력 방지 시스템 작동!\n\n해당 공고[번호: ${bidNo}]는 이미 다른 직원이 ${checkedLogs[bidNo]}에 등록 완료한 데이터입니다. 중복 합산되지 않도록 차단합니다.`);
+                return;
+            }
 
             const targetRate = hahan / 100;
             const rate = (((parseFloat(resultPrice) - avalue) / targetRate) + avalue) / gicho * 100;
@@ -483,14 +383,19 @@
 
             samplePool[type].push(rate);
             currentTotalCount++;
+            
+            // 공고 테이블 로그에 현재 등록 일자 기록
+            checkedLogs[bidNo] = inputDate;
 
             firebase.database().ref('bidMaster').set({
                 dbCounts: dbCounts,
                 samplePool: samplePool,
                 currentTotalCount: currentTotalCount,
-                lastDate: inputDate
+                lastDate: inputDate,
+                checkedLogs: checkedLogs // 중복방지 로그 클라우드 동기화
             }).then(() => {
-                alert(`클라우드 동기화 완료!\n[역산 사정률: ${rate.toFixed(4)}%]\n전 직원 시스템에 실시간 공정 수치가 강제 합산되었습니다.`);
+                alert(`클라우드 동기화 완료!\n[공고번호: ${bidNo}]\n[역산 사정률: ${rate.toFixed(4)}%]\n새 데이터가 안전하게 병합되었습니다.`);
+                document.getElementById('newBidNo').value = '';
                 document.getElementById('newGicho').value = '';
                 document.getElementById('newResult').value = '';
             });
@@ -510,6 +415,7 @@
             let t3 = dbCounts.edu.c3 + dbCounts.local.c3 + dbCounts.etc.c3;
             let tO = dbCounts.edu.cOther + dbCounts.local.cOther + dbCounts.etc.cOther;
             let total = t1 + t2 + t3 + tO;
+            if(total === 0) return { p1: 0, p2: 0, p3: 0, pOther: 0 };
             return { p1: ((t1/total)*100).toFixed(1), p2: ((t2/total)*100).toFixed(1), p3: ((t3/total)*100).toFixed(1), pOther: ((tO/total)*100).toFixed(1) };
         }
 
@@ -583,30 +489,12 @@
                     responsive: true, 
                     maintainAspectRatio: false, 
                     indexAxis: 'y', 
-                    layout: {
-                        padding: { left: 5, right: 15, top: 5, bottom: 5 }
-                    },
+                    layout: { padding: { left: 5, right: 15, top: 5, bottom: 5 } },
                     scales: { 
-                        x: { 
-                            beginAtZero: true, 
-                            max: 100,
-                            ticks: { font: { size: isMobile ? 10 : 12 } }
-                        },
-                        y: {
-                            ticks: {
-                                font: { 
-                                    size: isMobile ? 11 : 13, 
-                                    weight: 'bold' 
-                                },
-                                color: '#2d3748',
-                                crossAlign: 'end'
-                            }
-                        }
+                        x: { beginAtZero: true, max: 100, ticks: { font: { size: isMobile ? 10 : 12 } } },
+                        y: { ticks: { font: { size: isMobile ? 11 : 13, weight: 'bold' }, color: '#2d3748', crossAlign: 'end' } }
                     }, 
-                    plugins: { 
-                        legend: { display: false },
-                        tooltip: { enabled: true }
-                    }
+                    plugins: { legend: { display: false }, tooltip: { enabled: true } }
                 }
             });
         }
