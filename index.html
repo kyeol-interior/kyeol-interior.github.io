@@ -369,12 +369,14 @@
             if(!gicho || !resultPrice) { alert('기초금액과 1등 낙찰금액을 기입해 주세요.'); return; }
             if(!inputDate) { alert('공고의 개찰 일자를 올바르게 기입해 주세요.'); return; }
 
+            // ⚡ [버그 수정 완료] 중복 필터에 걸렸을 때 경고창을 띄운 뒤, 버튼의 락을 해제하고 함수를 종료합니다.
             if(checkedLogs[bidNo]) {
                 alert(`⚠️ 중복 입력 방지 시스템 작동!\n\n해당 공고[번호: ${bidNo}]는 이미 다른 직원이 ${checkedLogs[bidNo]}에 등록 완료한 데이터입니다. 중복 합산되지 않도록 차단합니다.`);
+                submitBtn.disabled = false;
+                submitBtn.innerText = "⚡ 새 낙찰 정보 클라우드 전송 및 반영";
                 return;
             }
 
-            // ⚡ [피드백 개선] 누르자마자 버튼 비활성화 및 텍스트 전환으로 무반응 현상 완전 해결
             submitBtn.disabled = true;
             submitBtn.innerText = "⏳ 클라우드 동기화 처리 중...";
 
@@ -398,14 +400,12 @@
                 lastDate: inputDate,
                 checkedLogs: checkedLogs 
             }).then(() => {
-                // ⚡ 브라우저 환경에 구애받지 않도록 alert을 확실하게 보장하고 입력란 강제 초기화
                 alert(`✅ 클라우드 전송 성공!\n\n[공고번호] ${bidNo}\n[역산 사정률] ${rate.toFixed(4)}%\n\n전사 통계 차트에 실시간 강제 반영되었습니다.`);
                 
                 document.getElementById('newBidNo').value = '';
                 document.getElementById('newGicho').value = '';
                 document.getElementById('newResult').value = '';
                 
-                // 버튼 상태 원상복구
                 submitBtn.disabled = false;
                 submitBtn.innerText = "⚡ 새 낙찰 정보 클라우드 전송 및 반영";
             }).catch((err) => {
