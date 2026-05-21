@@ -270,7 +270,6 @@
     </div>
 
     <script>
-        // ⚡ [새 기능] 사용자가 값을 붙여넣는 순간, 보이지 않는 모든 줄바꿈과 공백을 실시간 추적해 박멸합니다.
         function sanitizeBidNo(inputEl) {
             inputEl.value = inputEl.value.replace(/[\s\t\n\r]/g, "");
         }
@@ -326,7 +325,7 @@
             local: [
                 100.4148, 100.8705, 99.5745, 99.5386, 99.4915, 100.2955, 100.1480, 100.9250, 99.1751, 100.1353,
                 98.9518, 99.8265, 100.6171, 100.0719, 100.5453, 99.0120, 99.2478, 100.9721, 99.4786, 99.7643,
-                99.0507, 99.1238, 100.7880, 99.3780, 90.4145, 101.0850, 99.3450, 99.4595, 100.2851, 100.6625
+                99.0507, 99.1238, 100.7880, 99.3780, 100.4145, 101.0850, 99.3450, 99.4595, 100.2851, 100.6625
             ], 
             etc: [
                 100.8735, 101.6115, 99.5068, 99.6773, 99.9833, 100.0008, 100.5983, 101.0875, 100.8725, 98.9030,
@@ -362,7 +361,6 @@
 
         function uploadToCloud() {
             const submitBtn = document.getElementById('submitBtn');
-            // 한번 더 전방위 공백 필터 처리 적용
             const bidNo = document.getElementById('newBidNo').value.replace(/[\s\t\n\r]/g, "");
             const type = document.getElementById('newInstitution').value;
             const gicho = parseFloat(document.getElementById('newGicho').value);
@@ -378,21 +376,26 @@
             submitBtn.disabled = true;
             submitBtn.innerText = "⏳ 클라우드 동기화 처리 중...";
 
+            // ⚡ [강제 타임아웃 설정] 3.5초간 응답 없으면 강제 취소 및 리셋 흐름
+            const timeoutId = setTimeout(() => {
+                alert("⚠️ [네트워크 지연 안내]\n\n클라우드 서버(Firebase) 연결이 일시적으로 거부되었거나 응답이 없습니다.\n\n파이어베이스 콘솔의 'Realtime Database' 주소가 맞는지, 혹은 규칙(Rules) 탭에서 읽기/쓰기가 .read: true, .write: true 로 허용되어 있는지 마스터 관리자 설정을 다시 점검해 주세요.");
+                submitBtn.disabled = false;
+                submitBtn.innerText = "⚡ 새 낙찰 정보 클라우드 전송 및 반영";
+            }, 3500);
+
             if(checkedLogs[bidNo]) {
+                clearTimeout(timeoutId); // 정상 분기 도달 시 타임아웃 해제
                 alert(`⚠️ 중복 입력 방지 시스템 작동!\n\n해당 공고[번호: ${bidNo}]는 이미 다른 직원이 ${checkedLogs[bidNo]}에 등록 완료한 데이터입니다. 중복 합산되지 않도록 차단합니다.`);
                 submitBtn.disabled = false;
                 submitBtn.innerText = "⚡ 새 낙찰 정보 클라우드 전송 및 반영";
                 return;
             }
 
-            // 전체 실행 프로세스 예외 감지 처리
             try {
                 const targetRate = hahan / 100;
                 const rate = (((parseFloat(resultPrice) - avalue) / targetRate) + avalue) / gicho * 100;
 
-                if (isNaN(rate) || !isFinite(rate)) {
-                    throw new Error("수학적 연산 오류 발생");
-                }
+                if (isNaN(rate) || !isFinite(rate)) { throw new Error("수식 오류"); }
 
                 if (rate >= 100.0000 && rate <= 100.1100) dbCounts[type].c1++;
                 else if (rate >= 99.2500 && rate <= 99.4500) dbCounts[type].c2++;
@@ -401,7 +404,6 @@
 
                 samplePool[type].push(rate);
                 currentTotalCount++;
-                
                 checkedLogs[bidNo] = inputDate;
 
                 firebase.database().ref('bidMaster').set({
@@ -411,6 +413,7 @@
                     lastDate: inputDate,
                     checkedLogs: checkedLogs 
                 }).then(() => {
+                    clearTimeout(timeoutId); // 전송 성공 시 타임아웃 해제
                     alert(`✅ 클라우드 전송 성공!\n\n[공고번호] ${bidNo}\n[역산 사정률] ${rate.toFixed(4)}%\n\n전사 통계 차트에 실시간 강제 반영되었습니다.`);
                     
                     document.getElementById('newBidNo').value = '';
@@ -420,13 +423,14 @@
                     submitBtn.disabled = false;
                     submitBtn.innerText = "⚡ 새 낙찰 정보 클라우드 전송 및 반영";
                 }).catch((err) => {
-                    alert("네트워크 오류로 등록에 실패했습니다. 다시 시도해 주세요.");
+                    clearTimeout(timeoutId); // 실패 응답 시 타임아웃 해제
+                    alert(`❌ 파이어베이스 연동 거부!\n원인: ${err.message || err.code}\n\nDB 규칙(Rules) 권한 설정을 확인하십시오.`);
                     submitBtn.disabled = false;
                     submitBtn.innerText = "⚡ 새 낙찰 정보 클라우드 전송 및 반영";
                 });
             } catch (error) {
-                // 어떤 에러가 나도 먹통되지 않고 무조건 버튼 락을 풀어 원상복구
-                alert("❌ 입력된 값에 정량화할 수 없는 수식 에러가 포함되어 있습니다. 숫자 및 공고번호 포맷을 다시 확인해 주세요.");
+                clearTimeout(timeoutId);
+                alert("❌ 입력된 값에 정량화할 수 없는 수식 에러가 포함되어 있습니다.");
                 submitBtn.disabled = false;
                 submitBtn.innerText = "⚡ 새 낙찰 정보 클라우드 전송 및 반영";
             }
