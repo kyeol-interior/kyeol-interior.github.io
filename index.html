@@ -74,7 +74,8 @@
         label { display: block; font-weight: bold; margin-bottom: 6px; font-size: 14px; color: #2d3748; text-align: left; }
         .calc-container input, .calc-container select { width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; box-sizing: border-box; font-size: 15px; color: #2d3748; }
         .highlight-input { background-color: #fffaf0; border-color: #fbd38d !important; font-weight: bold; color: #dd6b20; }
-        .calc-btn { width: 100%; padding: 12px; background-color: #1a365d; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .calc-btn { width: 100%; padding: 12px; background-color: #1a365d; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .calc-btn:disabled { background-color: #cbd5e0 !important; cursor: not-allowed; }
         .result-section { margin-top: 20px; display: none; }
         .result-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; color: #1a365d; text-align: left; }
         .result-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 10px; background-color: #fff; border-left: 5px solid #2b6cb0; position: relative; }
@@ -257,7 +258,7 @@
                             <input type="number" id="newAvalue" value="0" class="input-inline">
                         </div>
                     </div>
-                    <button class="calc-btn" style="background-color:#319795; padding: 12px; font-size:14px; margin-top:5px;" onclick="uploadToCloud()">⚡ 새 낙찰 정보 클라우드 전송 및 반영</button>
+                    <button id="submitBtn" class="calc-btn" style="background-color:#319795; padding: 12px; font-size:14px; margin-top:5px;" onclick="uploadToCloud()">⚡ 새 낙찰 정보 클라우드 전송 및 반영</button>
                 </div>
                 <div style="font-weight:bold; font-size:14px; margin-bottom:10px; color:#1a365d; text-align: left;">📈 실시간 동기화 마스터 사정률 빈도 차트</div>
                 <div class="chart-container">
@@ -330,7 +331,7 @@
             ] 
         };
         let currentTotalCount = 138;
-        let checkedLogs = {}; // 클라우드에 누적 등록된 공고번호 캐싱 저장소
+        let checkedLogs = {}; 
 
         const today = new Date();
         document.getElementById('bidDate').value = today.toISOString().substring(0, 10);
@@ -345,7 +346,7 @@
                     dbCounts = data.dbCounts || dbCounts;
                     samplePool = data.samplePool || samplePool;
                     currentTotalCount = data.currentTotalCount || currentTotalCount;
-                    checkedLogs = data.checkedLogs || {}; // 서버에 기록된 공고 목록 로드
+                    checkedLogs = data.checkedLogs || {}; 
                     
                     document.getElementById('totalCount').innerText = currentTotalCount;
                     document.getElementById('lastUpdateTime').innerText = data.lastDate || "2026-05-20 이전";
@@ -362,16 +363,20 @@
             const hahan = parseFloat(document.getElementById('newHahan').value);
             const avalue = parseFloat(document.getElementById('newAvalue').value) || 0;
             const inputDate = document.getElementById('bidDate').value;
+            const submitBtn = document.getElementById('submitBtn');
 
-            if(!bidNo) { alert('공고번호를 입력해 주세요. (중복 등록을 방지하는 키값입니다)'); return; }
+            if(!bidNo) { alert('공고번호를 입력해 주세요.'); return; }
             if(!gicho || !resultPrice) { alert('기초금액과 1등 낙찰금액을 기입해 주세요.'); return; }
             if(!inputDate) { alert('공고의 개찰 일자를 올바르게 기입해 주세요.'); return; }
 
-            // 🔒 [중복 검증 필터] 서버에 이미 해당 공고번호가 등록되어 있는지 대조
             if(checkedLogs[bidNo]) {
                 alert(`⚠️ 중복 입력 방지 시스템 작동!\n\n해당 공고[번호: ${bidNo}]는 이미 다른 직원이 ${checkedLogs[bidNo]}에 등록 완료한 데이터입니다. 중복 합산되지 않도록 차단합니다.`);
                 return;
             }
+
+            // ⚡ [피드백 개선] 누르자마자 버튼 비활성화 및 텍스트 전환으로 무반응 현상 완전 해결
+            submitBtn.disabled = true;
+            submitBtn.innerText = "⏳ 클라우드 동기화 처리 중...";
 
             const targetRate = hahan / 100;
             const rate = (((parseFloat(resultPrice) - avalue) / targetRate) + avalue) / gicho * 100;
@@ -384,7 +389,6 @@
             samplePool[type].push(rate);
             currentTotalCount++;
             
-            // 공고 테이블 로그에 현재 등록 일자 기록
             checkedLogs[bidNo] = inputDate;
 
             firebase.database().ref('bidMaster').set({
@@ -392,12 +396,22 @@
                 samplePool: samplePool,
                 currentTotalCount: currentTotalCount,
                 lastDate: inputDate,
-                checkedLogs: checkedLogs // 중복방지 로그 클라우드 동기화
+                checkedLogs: checkedLogs 
             }).then(() => {
-                alert(`클라우드 동기화 완료!\n[공고번호: ${bidNo}]\n[역산 사정률: ${rate.toFixed(4)}%]\n새 데이터가 안전하게 병합되었습니다.`);
+                // ⚡ 브라우저 환경에 구애받지 않도록 alert을 확실하게 보장하고 입력란 강제 초기화
+                alert(`✅ 클라우드 전송 성공!\n\n[공고번호] ${bidNo}\n[역산 사정률] ${rate.toFixed(4)}%\n\n전사 통계 차트에 실시간 강제 반영되었습니다.`);
+                
                 document.getElementById('newBidNo').value = '';
                 document.getElementById('newGicho').value = '';
                 document.getElementById('newResult').value = '';
+                
+                // 버튼 상태 원상복구
+                submitBtn.disabled = false;
+                submitBtn.innerText = "⚡ 새 낙찰 정보 클라우드 전송 및 반영";
+            }).catch((err) => {
+                alert("네트워크 오류로 등록에 실패했습니다. 다시 시도해 주세요.");
+                submitBtn.disabled = false;
+                submitBtn.innerText = "⚡ 새 낙찰 정보 클라우드 전송 및 반영";
             });
         }
 
