@@ -28,9 +28,9 @@
         body { 
             background:#000; 
             font-family: 'Noto Sans KR', sans-serif; 
-            overflow: hidden; 
-            height: 100vh; 
-            height: 100dvh; 
+            overflow-x: hidden; 
+            min-height: 100vh; 
+            min-height: 100dvh; 
             color: #fff; 
         }
 
@@ -64,12 +64,12 @@
 
         /* 메인 중앙 콘텐츠 */
         main {
-            height: 100%; display: flex; flex-direction: column;
+            height: 100vh; height: 100dvh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
             padding: 0 20px; position: relative; z-index: 1;
         }
         .main-title { 
-            font-size: clamp(28px, 5vw, 52px); 
+            font-size: clamp(24px, 5vw, 52px); 
             font-weight: 800; line-height: 1.35; 
             margin-bottom: 20px; letter-spacing: -0.03em; word-break: keep-all; 
             text-shadow: 0 4px 20px rgba(0,0,0,0.8);
@@ -118,7 +118,6 @@
         footer { position: fixed; bottom: 30px; width: 100%; text-align: center; z-index: 900; }
         .copyright { font-size: 10px; color: rgba(255, 255, 255, 0.25); letter-spacing: 1px; }
         
-        /* 🔒 관리자 로그인 숨김 링크 스타일 */
         .admin-link {
             font-size: 10px; color: rgba(255, 255, 255, 0.15); text-decoration: none;
             margin-left: 10px; transition: color 0.2s; cursor: pointer;
@@ -144,10 +143,10 @@
         .btn-submit { background-color: #1a365d; color: white; }
         .btn-cancel { background-color: #edf2f7; color: #4a5568; }
 
-        /* 📈 [입찰 계산기] 관리자 시스템 메인 스크린 (인증 전엔 완전 차단) */
+        /* 📈 [입찰 계산기] 관리자 전용 컨테이너 스크린 */
         #adminAppContainer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #f7fafc; z-index: 9998; display: none; overflow-y: auto; color: #2d3748; padding: 20px 10px;
+            background: #f7fafc; z-index: 9998; display: none; overflow-y: auto; color: #2d3748; padding: 20px 15px;
         }
         .calc-container {
             max-width: 630px; width: 100%; background: #ffffff; padding: 25px;
@@ -157,7 +156,7 @@
         .version-tag {
             text-align: center; font-size: 12px; color: #4a5568; margin-bottom: 20px;
             background: #edf2f7; padding: 6px 12px; border-radius: 30px; display: inline-block;
-            left: 50%; transform: translateX(-50%); position: relative; font-weight: bold; line-height: 1.5;
+            left: 50%; transform: translateX(-50%); position: relative; font-weight: bold; line-height: 1.5; width: auto; max-width: 100%;
         }
         .tabs { display: flex; margin-bottom: 18px; border-bottom: 2px solid #e2e8f0; }
         .tab-button {
@@ -168,8 +167,11 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         .form-group { margin-bottom: 15px; }
-        .form-row { display: flex; gap: 12px; }
-        .form-row .form-group { flex: 1; }
+        
+        /* 유연한 레이아웃 구조 설계 (모바일에서 뒤틀림 방지 핵심) */
+        .form-row { display: flex; flex-wrap: wrap; gap: 12px; }
+        .form-row .form-group { flex: 1; min-width: 120px; }
+        
         label { display: block; font-weight: bold; margin-bottom: 6px; font-size: 14px; color: #2d3748; text-align: left; }
         .calc-container input, .calc-container select { width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; box-sizing: border-box; font-size: 15px; color: #2d3748; }
         .highlight-input { background-color: #fffaf0; border-color: #fbd38d !important; font-weight: bold; color: #dd6b20; }
@@ -188,20 +190,35 @@
         .info-value { font-weight: bold; color: #1a202c; }
         .price-highlight { font-size: 17px; color: #e53e3e; font-weight: bold; }
         .notice-box { background-color: #f7fafc; border: 1px solid #edf2f7; padding: 10px; border-radius: 6px; font-size: 12px; color: #718096; margin-bottom: 12px; line-height: 1.4; text-align: left; }
-        .chart-container { margin-top: 12px; background: #fff; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; }
-        .input-inline { padding: 8px !important; font-size: 13px !important; border: 1px solid #cbd5e0 !important; border-radius: 4px !important; }
+        
+        .chart-container { margin-top: 12px; background: #fff; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; position: relative; width: 100%; height: auto; }
+        .input-inline { padding: 10px !important; font-size: 14px !important; border: 1px solid #cbd5e0 !important; border-radius: 6px !important; }
         .btn-exit { background: #e53e3e; color: white; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; border: none; cursor: pointer; position: absolute; top: 25px; right: 25px; }
 
-        /* 모바일 대응 반응형 디자인 */
+        /* 📱 초강력 모바일 커스텀 반응형 스펙 추가 */
         @media (max-width: 1024px) {
             nav { padding: 0 25px; height: 100px; }
             .logo-img { height: 70px; } 
-            .main-title { font-size: 28px; }
+            .main-title { font-size: 24px; }
             .main-sub { font-size: 11px; margin-bottom: 40px; }
             .enter-btn, .live-btn { width: 240px; }
             .side-menu { bottom: 85px; }
             footer { bottom: 40px; }
-            body { overflow: auto; }
+            main { height: auto; padding-top: 140px; padding-bottom: 140px; }
+            
+            /* 계산기 내부 모바일 조율 */
+            .calc-container { padding: 20px 15px; }
+            .calc-container h1 { font-size: 18px; text-align: left; width: 70%; }
+            .btn-exit { top: 20px; right: 15px; padding: 5px 10px; }
+            
+            /* 입력폼 모바일 가독성: 좁은 화면에서는 한 줄에 1~2개만 나오도록 유연하게 확장 */
+            .form-row { flex-direction: column; gap: 0; }
+            .form-row .form-group { width: 100%; margin-bottom: 15px; }
+            
+            /* 축적 페이지 모바일 분할 래핑 */
+            #dbTab .form-row { flex-direction: row; }
+            #dbTab .form-row > div, #dbTab .form-row > .form-size { flex: none !important; width: 100% !important; margin-bottom: 15px; }
+            #dbTab .form-row > .form-size { display: flex; flex-direction: column; }
         }
     </style>
 </head>
@@ -248,7 +265,7 @@
         <div class="login-box">
             <h2>보안 인증 시스템</h2>
             <p>(주)결 사내 마스터 관리자 공간입니다.</p>
-            <input type="password" id="passInput" placeholder="비밀번호 입력" onkeyup="if(window.event.keyCode==13){checkPassword()}">
+            <input type="password" id="passInput" placeholder="비밀번호 입력" pattern="[0-9]*" inputmode="numeric" onkeyup="if(window.event.keyCode==13){checkPassword()}">
             <div class="login-btn-group">
                 <button class="btn-cancel" onclick="closeLoginModal()">취소</button>
                 <button class="btn-submit" onclick="checkPassword()">인증하기</button>
@@ -313,39 +330,39 @@
                     여기서 등록하는 정보는 클라우드를 통해 전 직원의 계산기에 즉시 강제 병합됩니다.
                 </div>
                 <div style="background: #f7fafc; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 20px;">
-                    <div class="form-row" style="margin-bottom: 10px;">
-                        <div class="form-group" style="margin-bottom:0; flex: 1.2;">
-                            <label style="font-size:12px;">발주처 그룹 선택</label>
-                            <select id="newInstitution" class="input-inline" style="padding:8px;">
+                    <div class="form-row" style="margin-bottom: 0;">
+                        <div class="form-group">
+                            <label>발주처 그룹 선택</label>
+                            <select id="newInstitution" class="input-inline">
                                 <option value="edu">전북교육청 및 산하 학교</option>
                                 <option value="local">전북도청 / 시·군청 / 관공서</option>
                                 <option value="etc">기타 공공기관 / 대학</option>
                             </select>
                         </div>
-                        <div class="form-group" style="margin-bottom:0; flex: 1;">
-                            <label style="font-size:12px; color:#2b6cb0;">공고 개찰 일자</label>
-                            <input type="date" id="bidDate" class="input-inline" style="padding:7px;">
+                        <div class="form-group">
+                            <label style="color:#2b6cb0;">공고 개찰 일자</label>
+                            <input type="date" id="bidDate" class="input-inline">
                         </div>
                     </div>
-                    <div class="form-row" style="margin-bottom: 12px;">
-                        <div class="form-size" style="flex:1.2;">
-                            <label style="font-size:12px;">기초금액 (원)</label>
-                            <input type="number" id="newGicho" class="input-inline">
+                    <div class="form-row" style="margin-bottom: 0;">
+                        <div class="form-size">
+                            <label>기초금액 (원)</label>
+                            <input type="number" id="newGicho" class="input-inline" placeholder="숫자만 입력">
                         </div>
-                        <div class="form-size" style="flex:1.2;">
-                            <label style="font-size:12px; font-weight:bold;">1등 낙찰금액 (원)</label>
-                            <input type="number" id="newResult" class="input-inline">
+                        <div class="form-size">
+                            <label style="font-weight:bold;">1등 낙찰금액 (원)</label>
+                            <input type="number" id="newResult" class="input-inline" placeholder="숫자만 입력">
                         </div>
-                        <div class="form-size" style="flex:0.8;">
-                            <label style="font-size:12px; font-weight:bold;">하한선 (%)</label>
+                        <div class="form-size">
+                            <label style="font-weight:bold;">하한선 (%)</label>
                             <input type="number" id="newHahan" value="89.745" step="0.001" class="input-inline">
                         </div>
-                        <div class="form-size" style="flex:0.8;">
-                            <label style="font-size:12px; font-weight:bold;">A값 (원)</label>
+                        <div class="form-size">
+                            <label style="font-weight:bold;">A값 (원)</label>
                             <input type="number" id="newAvalue" value="0" class="input-inline">
                         </div>
                     </div>
-                    <button class="calc-btn" style="background-color:#319795; padding: 10px; font-size:14px;" onclick="uploadToCloud()">⚡ 새 낙찰 정보 클라우드 전송 및 반영</button>
+                    <button class="calc-btn" style="background-color:#319795; padding: 12px; font-size:14px; margin-top:5px;" onclick="uploadToCloud()">⚡ 새 낙찰 정보 클라우드 전송 및 반영</button>
                 </div>
                 <div style="font-weight:bold; font-size:14px; margin-bottom:10px; color:#1a365d; text-align: left;">📈 실시간 동기화 마스터 사정률 빈도 차트</div>
                 <div class="chart-container">
@@ -357,7 +374,6 @@
     </div>
 
     <script>
-        // --- 🔒 [보안 통제 파트] ---
         function openLoginModal() {
             document.getElementById('passInput').value = "";
             document.getElementById('loginOverlay').style.display = 'flex';
@@ -370,11 +386,11 @@
 
         function checkPassword() {
             const pass = document.getElementById('passInput').value;
-            if(pass === "6452") { // 요청하신 초기 패스워드 설정 완료
+            if(pass === "6452") { 
                 closeLoginModal();
                 document.getElementById('adminAppContainer').style.display = 'block';
-                document.body.style.overflow = 'auto'; // 관리자 전용 스크롤 활성화
-                initFirebase(); // 클라우드 DB 연결 가동
+                document.body.style.overflow = 'auto'; 
+                initFirebase(); 
             } else {
                 alert("보안 암호가 올바르지 않습니다.");
                 document.getElementById('passInput').value = "";
@@ -385,11 +401,11 @@
         function exitAdminSystem() {
             if(confirm("관리자 프로그램에서 나가시겠습니까?")) {
                 document.getElementById('adminAppContainer').style.display = 'none';
-                document.body.style.overflow = 'hidden'; // 메인 스크린 락 복원
+                document.body.style.overflow = 'hidden'; 
+                window.scrollTo(0,0);
             }
         }
 
-        // --- 📈 [클라우드 데이터베이스 계산기 파트] ---
         const firebaseConfig = {
             databaseURL: "https://kyeol-bid-default-rtdb.firebaseio.com/"
         };
@@ -402,7 +418,6 @@
         let samplePool = { edu: [100.0135, 99.3850, 99.9820], local: [100.0210, 99.3210, 99.8540], etc: [100.0050, 99.4120, 99.7650] };
         let currentTotalCount = 138;
 
-        // 오늘 날짜 설정 기본 빌드
         const today = new Date();
         document.getElementById('bidDate').value = today.toISOString().substring(0, 10);
 
@@ -526,6 +541,11 @@
             const ctx = document.getElementById('liveChart').getContext('2d');
             const pct = getPercentages();
             if (liveChart !== null) { liveChart.destroy(); }
+            
+            // 모바일 해상도 판별하여 패딩 조정 (왼쪽 글자 잘림 완벽 방어)
+            const isMobile = window.innerWidth <= 1024;
+            const leftPadding = isMobile ? 150 : 200; 
+
             liveChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -537,8 +557,34 @@
                         borderWidth: 1, barPercentage: 0.5
                     }]
                 },
-                options: { responsive: true, indexAxis: 'y', scales: { x: { beginAtZero: true, max: 100 } }, plugins: { legend: { display: false } } }
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false, // 고정비 해제하여 모바일에서 유연하게 배치
+                    indexAxis: 'y', 
+                    layout: {
+                        padding: {
+                            left: leftPadding // 모바일일 때 왼쪽 폰트 마진을 다이나믹하게 확보하여 잘림 방지
+                        }
+                    },
+                    scales: { 
+                        x: { beginAtZero: true, max: 100 },
+                        y: {
+                            ticks: {
+                                mirror: false, // 글자가 막대 내부로 침범하지 않게 세팅
+                                crossAlign: 'end'
+                            }
+                        }
+                    }, 
+                    plugins: { legend: { display: false } } 
+                }
             });
+            
+            // 모바일에서 차트 뭉개짐 방지를 위한 캔버스 높이 강제 조율
+            if(isMobile) {
+                ctx.canvas.parentNode.style.height = '180px';
+            } else {
+                ctx.canvas.parentNode.style.height = 'auto';
+            }
         }
     </script>
 </body>
