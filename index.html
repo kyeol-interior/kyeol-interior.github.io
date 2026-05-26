@@ -1,359 +1,191 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <title>주식회사 결 | 전주 인테리어·리모델링·실내건축 전문 (주)결</title>
-    <meta name="description" content="상업공간의 성공과 주거의 품격, 전주 인테리어 전문 디자인 기업 (주)결입니다.">
-    <meta name="keywords" content="전주인테리어, 전주리모델링, 주식회사결, 실내건축, 상업인테리어, 주거인테리어">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>(주)결 | 인테리어 견적 계산기</title>
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kyeol-interior.github.io/">
-    <meta property="og:title" content="(주)결 | KYEOL DESIGN">
-    <meta property="og:description" content="전주 인테리어·실내건축 전문 디자인 기업 (주)결">
-    <meta property="og:image" content="https://kyeol-interior.github.io/image/main-thumb.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;800&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
-        body { background:#000; font-family: 'Noto Sans KR', sans-serif; overflow-x: hidden; min-height: 100vh; min-height: 100dvh; color: #fff; }
-        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; background: #000 url('./image/main-thumb.jpg') center center / cover no-repeat; }
-        .video-mobile, .video-pc { position: absolute; width: 100%; height: 100%; object-fit: cover; }
-        .video-pc { display: none; }
-        @media (min-width: 1025px) { .video-mobile { display: none; } .video-pc { display: block; } }
-        .video-background::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.45); }
-        nav { position:fixed; top:0; width:100%; height:140px; display:flex; justify-content: flex-start; align-items:center; padding:0 60px; background:transparent; z-index:1000; }
-        .logo-img { height: 100px; width: auto; filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.15)); }
-        main { height: 100vh; height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; position: relative; z-index: 1; }
-        .main-title { font-size: clamp(24px, 5vw, 52px); font-weight: 800; line-height: 1.35; margin-bottom: 20px; letter-spacing: -0.03em; word-break: keep-all; text-shadow: 0 4px 20px rgba(0,0,0,0.8); }
-        .main-sub { font-size: 14px; font-weight: 300; letter-spacing: 0.4em; color: rgba(255,255,255,0.7); margin-bottom: 50px; }
-        .btn-group { display: flex; flex-direction: column; gap: 18px; align-items: center; }
-        .btn-base { display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); white-space: nowrap; }
-        .enter-btn { padding: 16px 70px; border: 1px solid rgba(255,255,255,0.8); color: #fff; font-size: 13px; letter-spacing: 4px; background: rgba(255,255,255,0.05); }
-        .enter-btn:hover { background: #fff; color: #000; font-weight: bold; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
-        .live-btn { padding: 14px 45px; border: 1px solid #d4af37; color: #d4af37; font-size: 12px; letter-spacing: 2px; font-weight: 700; background: rgba(212, 175, 55, 0.1); border-radius: 4px; width: 260px; }
-        .live-btn:hover { background: #d4af37; color: #000; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3); }
-        .side-menu { position: fixed; width: 100%; bottom: 65px; text-align: center; z-index: 1000; }
-        .side-menu a { display: inline-block; margin: 0 20px; font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; letter-spacing: 2px; transition: 0.3s; font-weight: 500; }
-        .side-menu a:hover { color: #d4af37; }
-        footer { position: fixed; bottom: 30px; width: 100%; text-align: center; z-index: 900; }
-        .copyright { font-size: 10px; color: rgba(255, 255, 255, 0.25); letter-spacing: 1px; }
-        .admin-link { font-size: 10px; color: rgba(255, 255, 255, 0.15); text-decoration: none; margin-left: 10px; transition: color 0.2s; cursor: pointer; display: inline-block; padding: 5px; }
-        .admin-link:hover { color: #d4af37; }
+<style>
+body {
+    margin:0;
+    font-family:'Noto Sans KR';
+    background:#0a0a0a;
+    color:#fff;
+}
 
-        #loginOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: none; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(5px); }
-        .login-box { background: white; padding: 35px 30px; border-radius: 12px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); width: 90%; max-width: 340px; color: #2d3748; }
-        .login-box h2 { color: #1a365d; margin-bottom: 8px; font-size: 18px; font-weight: 800; }
-        .login-box p { color: #718096; font-size: 12px; margin-bottom: 20px; }
-        .login-box input { padding: 12px; width: 100%; box-sizing: border-box; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 20px; text-align: center; margin-bottom: 15px; letter-spacing: 6px; font-weight: bold; }
-        .login-box input:focus { border-color: #2b6cb0; outline: none; }
-        .login-btn-group { display: flex; gap: 10px; }
-        .login-box button { flex: 1; padding: 12px; border: none; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; }
-        .btn-submit { background-color: #1a365d; color: white; }
-        .btn-cancel { background-color: #edf2f7; color: #4a5568; }
+header {
+    text-align:center;
+    padding:40px 20px 10px;
+}
 
-        #adminAppContainer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #f7fafc; z-index: 9998; display: none; overflow-y: auto; color: #2d3748; padding: 20px 15px; }
-        .calc-container { max-width: 630px; width: 100%; background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); margin: 0 auto; position: relative; }
-        .calc-container h1 { font-size: 22px; color: #1a365d; margin-bottom: 5px; text-align: center; font-weight: 800; }
-        .version-tag { text-align: center; font-size: 12px; color: #4a5568; margin-bottom: 20px; background: #edf2f7; padding: 6px 12px; border-radius: 30px; display: inline-block; left: 50%; transform: translateX(-50%); position: relative; font-weight: bold; line-height: 1.5; width: auto; max-width: 100%; }
-        .tabs { display: flex; margin-bottom: 18px; border-bottom: 2px solid #e2e8f0; }
-        .tab-button { flex: 1; padding: 11px; background: none; border: none; font-size: 14px; font-weight: bold; color: #718096; cursor: pointer; text-align: center; transition: all 0.2s; }
-        .tab-button.active { color: #2b6cb0; border-bottom: 3px solid #2b6cb0; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .form-group { margin-bottom: 15px; }
-        .form-row { display: flex; flex-wrap: wrap; gap: 12px; }
-        .form-row .form-group { flex: 1; min-width: 120px; }
-        label { display: block; font-weight: bold; margin-bottom: 6px; font-size: 14px; color: #2d3748; text-align: left; }
-        .calc-container input, .calc-container select { width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; box-sizing: border-box; font-size: 15px; color: #2d3748; }
-        .highlight-input { background-color: #fffaf0; border-color: #fbd38d !important; font-weight: bold; color: #dd6b20; }
-        .calc-btn { width: 100%; padding: 12px; background-color: #1a365d; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
-        .result-section { margin-top: 20px; display: none; }
-        .result-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; color: #1a365d; text-align: left; }
-        .result-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-bottom: 10px; background-color: #fff; border-left: 5px solid #2b6cb0; position: relative; }
-        .result-card.rank-1 { border-left-color: #e53e3e; }
-        .result-card.rank-2 { border-left-color: #dd6b20; }
-        .badge { display: inline-block; padding: 2px 6px; font-size: 11px; font-weight: bold; border-radius: 4px; color: white; margin-bottom: 4px; }
-        .badge-1 { background-color: #e53e3e; }
-        .badge-2 { background-color: #dd6b20; }
-        .badge-3 { background-color: #3182ce; }
-        .prob-tag { position: absolute; top: 12px; right: 12px; font-size: 12px; font-weight: bold; background-color: #edf2f7; padding: 3px 8px; border-radius: 20px; color: #4a5568; }
-        .info-row { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 14px; }
-        .info-value { font-weight: bold; color: #1a202c; }
-        .price-highlight { font-size: 17px; color: #e53e3e; font-weight: bold; }
-        .notice-box { background-color: #f7fafc; border: 1px solid #edf2f7; padding: 10px; border-radius: 6px; font-size: 12px; color: #718096; margin-bottom: 12px; line-height: 1.4; text-align: left; }
-        .chart-container { margin-top: 12px; background: #fff; padding: 15px 10px; border: 1px solid #e2e8f0; border-radius: 8px; position: relative; width: 100%; height: 240px; }
-        .input-inline { padding: 10px !important; font-size: 14px !important; border: 1px solid #cbd5e0 !important; border-radius: 6px !important; }
-        .btn-exit { background: #e53e3e; color: white; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; border: none; cursor: pointer; position: absolute; top: 25px; right: 25px; }
+h1 {
+    font-size:24px;
+}
 
-        @media (max-width: 1024px) {
-            nav { padding: 0 25px; height: 100px; }
-            .logo-img { height: 70px; } 
-            .main-title { font-size: 24px; }
-            .main-sub { font-size: 11px; margin-bottom: 40px; }
-            .enter-btn, .live-btn { width: 260px; padding: 15px 30px; letter-spacing: 2px; }
-            .side-menu { bottom: 85px; }
-            footer { bottom: 40px; }
-            main { height: auto; padding-top: 140px; padding-bottom: 140px; }
-            .calc-container { padding: 20px 15px; }
-            .calc-container h1 { font-size: 18px; text-align: left; width: 70%; }
-            .btn-exit { top: 20px; right: 15px; padding: 5px 10px; }
-            .form-row { flex-direction: column; gap: 0; }
-            .form-row .form-group { width: 100%; margin-bottom: 15px; }
-            #dbTab .form-row { flex-direction: row; }
-            #dbTab .form-row > div, #dbTab .form-row > .form-size { flex: none !important; width: 100% !important; margin-bottom: 15px; }
-            #dbTab .form-row > .form-size { display: flex; flex-direction: column; }
-            .chart-container { height: 260px; padding: 10px 5px; }
-        }
-    </style>
+.container {
+    max-width:600px;
+    margin:0 auto;
+    padding:20px;
+}
+
+.card {
+    background:#111;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+label {
+    display:block;
+    margin-bottom:6px;
+    font-size:13px;
+    color:#aaa;
+}
+
+input, select, textarea {
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:none;
+    margin-bottom:12px;
+}
+
+button {
+    width:100%;
+    padding:14px;
+    background:#d4af37;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover {
+    background:#fff;
+    color:#000;
+}
+
+.result {
+    display:none;
+    background:#1a1a1a;
+    padding:20px;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+.lock {
+    text-align:center;
+    font-size:14px;
+    color:#aaa;
+    margin-top:10px;
+}
+
+</style>
 </head>
+
 <body>
 
-    <nav>
-        <a href="index.html">
-            <img src="./image/image_1.png" alt="(주)결 인테리어 로고" class="logo-img">
-        </a>
-    </nav>
+<header>
+    <h1>전주 인테리어 견적 계산기</h1>
+    <p style="color:#aaa;font-size:13px;">(주)결 KYEOL DESIGN</p>
+</header>
 
-    <div class="video-background">
-        <video class="video-mobile" autoplay muted loop playsinline preload="auto" poster="./image/main-thumb.jpg">
-            <source src="./image/mobile-video.mp4" type="video/mp4">
-        </video>
-        <video class="video-pc" autoplay muted loop playsinline preload="auto" poster="./image/main-thumb.jpg">
-            <source src="./image/pc-video.mp4" type="video/mp4">
-        </video>
+<div class="container">
+
+    <!-- 입력 -->
+    <div class="card">
+        <label>공사 유형</label>
+        <select id="type">
+            <option value="res">주거 인테리어</option>
+            <option value="com">상업 인테리어</option>
+        </select>
+
+        <label>평수</label>
+        <input type="number" id="size" placeholder="예: 30">
+
+        <label>예산 기준 (만원)</label>
+        <input type="number" id="budget" placeholder="예: 3000">
     </div>
 
-    <main id="mainPageContent">
-        <h1 class="main-title">상업공간의 성공과 주거의 품격,<br>결이 다른 공간을 만듭니다.</h1>
-        <p class="main-sub">INTERIOR DESIGN & ARCHITECTURE (주)결</p>
-        <div class="btn-group">
-            <a href="about.html" class="btn-base enter-btn">ENTER VIEW</a>
-            <a href="live-report.html" class="btn-base live-btn">LIVE 현장 리포트</a>
-        </div>
-    </main>
+    <!-- 고객 정보 (필수) -->
+    <div class="card">
+        <label>이름</label>
+        <input type="text" id="name">
 
-    <aside class="side-menu">
-        <a href="http://blog.naver.com/rotte123" target="_blank" rel="noopener noreferrer">NAVER BLOG</a>
-        <a href="https://pf.kakao.com/_uxhhjX/chat" target="_blank" rel="noopener noreferrer">KAKAO TALK</a>
-    </aside>
+        <label>연락처</label>
+        <input type="text" id="phone">
 
-    <footer>
-        <p class="copyright">
-            © 2026 (주)결 KYEOL Co., Ltd. All rights reserved.
-            <span class="admin-link" onclick="openLoginModal()">ADMIN</span>
-        </p>
-    </footer>
+        <label>주소 (아파트/지역)</label>
+        <input type="text" id="address">
 
-    <div id="loginOverlay">
-        <div class="login-box">
-            <h2>보안 인증 시스템</h2>
-            <p>(주)결 사내 마스터 관리자 공간입니다.</p>
-            <input type="password" id="passInput" placeholder="비밀번호 입력" pattern="[0-9]*" inputmode="numeric" onkeyup="if(window.event.keyCode==13){checkPassword()}">
-            <div class="login-btn-group">
-                <button class="btn-cancel" onclick="closeLoginModal()">취소</button>
-                <button class="btn-submit" onclick="checkPassword()">인증하기</button>
-            </div>
-        </div>
+        <label>요청사항</label>
+        <textarea id="msg" placeholder="간단한 요청 내용을 입력해주세요"></textarea>
+
+        <button onclick="calculate()">견적 확인하기</button>
+
+        <div class="lock">※ 입력 완료 후 결과 확인 가능합니다</div>
     </div>
 
-    <div id="adminAppContainer">
-        <div class="calc-container">
-            <button class="btn-exit" onclick="exitAdminSystem()">나가기 X</button>
-            <h1>(주)결 입찰 확률 계산기</h1>
-            
-            <div style="text-align: center;">
-                <div class="version-tag">
-                    🌐 사내 실시간 클라우드 동기화 모드 | 총 누적: <span id="totalCount">0</span>건<br>
-                    <small style="font-weight: normal; color: #718096; font-size: 11px;">(최근 업데이트 공고 개찰일: <span id="lastUpdateTime" style="color:#2b6cb0; font-weight:bold;">동기화 중...</span>)</small>
-                </div>
-            </div>
-            
-            <div class="tabs">
-                <div class="tab-button active" onclick="switchTab('predictTab', this)">🎯 투찰 제안 예측</div>
-                <div class="tab-button" onclick="switchTab('dbTab', this)">📊 전직원 공유 통계 차트</div>
-            </div>
-            
-            <div id="predictTab" class="tab-content active">
-                <div class="notice-box">
-                    📢 <strong>전사 동기화 DB 연동 중</strong><br>
-                    누구든 새 전북지역 개찰 데이터를 등록하면 전 직원의 시뮬레이터 예측 단가와 지분율에 실시간으로 동시 반영됩니다.
-                </div>
-                <div class="form-group">
-                    <label for="institution">발주처 구분</label>
-                    <select id="institution">
-                        <option value="edu">전북교육청 및 산하 교육지원청 / 학교</option>
-                        <option value="local">전북도청 / 시·군청 / 일반 관공서</option>
-                        <option value="etc">기타 공공기관 / 대학교</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="gicho">기초금액 (원)</label>
-                    <input type="number" id="gicho" placeholder="예: 150000000">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="hahan">투찰 하한선 (%)</label>
-                        <input type="number" id="hahan" value="89.745" step="0.001" class="highlight-input">
-                    </div>
-                    <div class="form-group">
-                        <label for="avalue">A값 (원)</label>
-                        <input type="number" id="avalue" value="0" placeholder="없으면 0">
-                    </div>
-                </div>
-                <button class="calc-btn" onclick="calculateBid()">클라우드 데이터 기반 최적 투찰가 산출</button>
-                <div class="result-section" id="resultSection">
-                    <div class="result-title">📊 분석 기반 추천 시나리오</div>
-                    <div id="resultsContainer"></div>
-                </div>
-            </div>
-
-            <div id="dbTab" class="tab-content">
-                <div style="background-color: #ebf8ff; padding: 12px; border-radius: 6px; font-size: 13px; color: #2b6cb0; margin-bottom: 15px; line-height: 1.5; text-align: left;">
-                    📝 <strong>실시간 개찰 결과 정보 축적 (전사 공유)</strong><br>
-                    여기서 등록하는 정보는 클라우드를 통해 전 직원의 계산기에 즉시 강제 병합됩니다.
-                </div>
-                <div style="background: #f7fafc; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 20px;">
-                    <div class="form-group">
-                        <label style="color:#e53e3e;">조달청 공고번호 (중복 방지 필터)</label>
-                        <input type="text" id="newBidNo" class="input-inline" placeholder="예: 20260512345-00" style="border:1px solid #feb2b2 !important; font-weight:bold;">
-                    </div>
-                    <div class="form-row" style="margin-bottom: 0;">
-                        <div class="form-group">
-                            <label>발주처 그룹 선택</label>
-                            <select id="newInstitution" class="input-inline">
-                                <option value="edu">전북교육청 및 산하 학교</option>
-                                <option value="local">전북도청 / 시·군청 / 관공서</option>
-                                <option value="etc">기타 공공기관 / 대학</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label style="color:#2b6cb0;">공고 개찰 일자</label>
-                            <input type="date" id="bidDate" class="input-inline">
-                        </div>
-                    </div>
-                    <div class="form-row" style="margin-bottom: 0;">
-                        <div class="form-size">
-                            <label>기초금액 (원)</label>
-                            <input type="number" id="newGicho" class="input-inline" placeholder="숫자만 입력">
-                        </div>
-                        <div class="form-size">
-                            <label style="font-weight:bold;">1등 낙찰금액 (원)</label>
-                            <input type="number" id="newResult" class="input-inline" placeholder="숫자만 입력">
-                        </div>
-                        <div class="form-size">
-                            <label style="font-weight:bold;">하한선 (%)</label>
-                            <input type="number" id="newHahan" value="89.745" step="0.001" class="input-inline">
-                        </div>
-                        <div class="form-size">
-                            <label style="font-weight:bold;">A값 (원)</label>
-                            <input type="number" id="newAvalue" value="0" class="input-inline">
-                        </div>
-                    </div>
-                    <button class="calc-btn" style="background-color:#319795; padding: 12px; font-size:14px; margin-top:5px;" onclick="uploadToCloud()">⚡ 새 낙찰 정보 클라우드 전송 및 반영</button>
-                </div>
-                <div style="font-weight:bold; font-size:14px; margin-bottom:10px; color:#1a365d; text-align: left;">📈 실시간 동기화 마스터 사정률 빈도 차트</div>
-                <div class="chart-container">
-                    <canvas id="liveChart"></canvas>
-                </div>
-            </div>
-            <div class="footer" style="color: #a0aec0; font-size: 12px; margin-top: 20px; text-align: right; border-top: 1px dashed #e2e8f0; padding-top: 10px;">만든사람: <strong>김용대</strong></div>
-        </div>
+    <!-- 결과 -->
+    <div class="result" id="resultBox">
+        <h3>예상 견적 결과</h3>
+        <p id="resultText"></p>
     </div>
 
-    <script>
-        // 초기 설정
-        const firebaseConfig = { databaseURL: "https://kyeol-bid-default-rtdb.firebaseio.com/" };
-        let dbCounts, samplePool, currentTotalCount, checkedLogs;
+</div>
 
-        function initFirebase() {
-            if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-            const dbRef = firebase.database().ref('bidMaster');
-            dbRef.on('value', (snapshot) => {
-                const data = snapshot.val();
-                if(data) {
-                    dbCounts = data.dbCounts;
-                    samplePool = data.samplePool;
-                    currentTotalCount = data.currentTotalCount;
-                    checkedLogs = data.checkedLogs || {};
-                    document.getElementById('totalCount').innerText = currentTotalCount;
-                    document.getElementById('lastUpdateTime').innerText = data.lastDate || "데이터 없음";
-                    if(document.getElementById('dbTab').classList.contains('active')) { updateChart(); }
-                }
-            });
-        }
+<script>
 
-        // 로그인 모달 및 보안
-        function openLoginModal() { document.getElementById('passInput').value = ""; document.getElementById('loginOverlay').style.display = 'flex'; document.getElementById('passInput').focus(); }
-        function closeLoginModal() { document.getElementById('loginOverlay').style.display = 'none'; }
-        function checkPassword() {
-            if(document.getElementById('passInput').value === "6452") { 
-                closeLoginModal();
-                document.getElementById('adminAppContainer').style.display = 'block';
-                document.body.style.overflow = 'auto'; 
-                initFirebase(); 
-            } else { alert("보안 암호가 올바르지 않습니다."); document.getElementById('passInput').value = ""; document.getElementById('passInput').focus(); }
-        }
-        function exitAdminSystem() { if(confirm("관리자 프로그램에서 나가시겠습니까?")) { document.getElementById('adminAppContainer').style.display = 'none'; document.body.style.overflow = 'hidden'; window.scrollTo(0,0); } }
+function calculate() {
 
-        // 클라우드 데이터 업로드 (데이터 저장 확실히 보장)
-        function uploadToCloud() {
-            const bidNo = document.getElementById('newBidNo').value.trim();
-            const type = document.getElementById('newInstitution').value;
-            const gicho = parseFloat(document.getElementById('newGicho').value);
-            const resultPrice = document.getElementById('newResult').value;
-            const hahan = parseFloat(document.getElementById('newHahan').value);
-            const avalue = parseFloat(document.getElementById('newAvalue').value) || 0;
-            const inputDate = document.getElementById('bidDate').value;
+    // 고객정보 검증
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
 
-            if(!bidNo) { alert('공고번호를 입력해 주세요.'); return; }
-            if(!gicho || !resultPrice) { alert('금액을 입력해 주세요.'); return; }
-            if(checkedLogs[bidNo]) { alert('이미 등록된 공고입니다.'); return; }
+    if(!name || !phone || !address) {
+        alert("이름 / 연락처 / 주소는 필수 입력입니다.");
+        return;
+    }
 
-            // 데이터 가공
-            const targetRate = hahan / 100;
-            const rate = (((parseFloat(resultPrice) - avalue) / targetRate) + avalue) / gicho * 100;
-            
-            dbCounts[type][rate >= 100.0000 && rate <= 100.1100 ? 'c1' : (rate >= 99.2500 && rate <= 99.4500 ? 'c2' : (rate >= 99.7500 && rate < 100.0000 ? 'c3' : 'cOther'))]++;
-            samplePool[type].push(rate);
-            currentTotalCount++;
-            checkedLogs[bidNo] = inputDate;
+    // 계산 입력값
+    const type = document.getElementById('type').value;
+    const size = Number(document.getElementById('size').value);
+    const budget = Number(document.getElementById('budget').value);
 
-            // 서버 저장 및 완료 피드백
-            firebase.database().ref('bidMaster').set({
-                dbCounts: dbCounts,
-                samplePool: samplePool,
-                currentTotalCount: currentTotalCount,
-                lastDate: inputDate,
-                checkedLogs: checkedLogs
-            }).then(() => {
-                alert(`성공: 공고 ${bidNo} 데이터가 서버에 반영되었습니다.`);
-                document.getElementById('newBidNo').value = '';
-                document.getElementById('newGicho').value = '';
-                document.getElementById('newResult').value = '';
-            }).catch((err) => {
-                alert('저장 실패: ' + err.message);
-            });
-        }
+    if(!size || !budget) {
+        alert("평수와 예산을 입력해주세요.");
+        return;
+    }
 
-        // 차트 및 기타 로직 유지
-        function switchTab(tabId, button) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            button.classList.add('active');
-            if (tabId === 'dbTab') { updateChart(); }
-        }
+    // 기본 단가 로직
+    let base = (type === "res") ? 120 : 180;
 
-        // 기존 로직들 (getPercentages, calculateBid, updateChart 등) ... 
-        // [사용자님의 원본 코드의 나머지 JS 함수들을 그대로 유지해서 사용하시면 됩니다]
-    </script>
+    let estimate = size * base;
+
+    // 예산 반영 보정
+    if(budget > estimate) estimate *= 1.05;
+    else estimate *= 0.95;
+
+    // 결과 출력
+    document.getElementById('resultBox').style.display = 'block';
+
+    document.getElementById('resultText').innerHTML = `
+        예상 금액: <b>${Math.round(estimate).toLocaleString()}만원</b><br><br>
+        입력하신 정보 기반으로 산출된 참고 견적입니다.<br>
+        담당자가 확인 후 상세 견적을 안내드립니다.
+    `;
+
+    // 실제 운영용이면 여기서 DB / 카카오 전송 연결 가능
+    console.log({
+        name, phone, address,
+        type, size, budget,
+        estimate
+    });
+}
+
+</script>
+
 </body>
 </html>
