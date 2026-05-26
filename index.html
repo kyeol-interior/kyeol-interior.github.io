@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>부분공사 견적 | 방문·화장실·필름 즉시 견적</title>
+<title>부분공사 즉시 견적 | 필름 · 실리콘 · 보수공사</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;800&display=swap" rel="stylesheet">
 
@@ -15,31 +15,74 @@ background:#0b0b0b;
 color:#fff;
 }
 
-.hero{
-padding:50px 20px;
+header{
 text-align:center;
+padding:30px 15px;
 background:#111;
 }
 
-.hero h1{
-font-size:24px;
+header h1{
+font-size:22px;
 font-weight:900;
 }
 
 .container{
-max-width:600px;
+max-width:650px;
 margin:auto;
 padding:20px;
 }
 
+/* ACCORDION */
+.section{
+background:#151515;
+margin-top:12px;
+border-radius:12px;
+overflow:hidden;
+}
+
+.section-title{
+padding:14px;
+cursor:pointer;
+font-weight:800;
+background:#1c1c1c;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.section-content{
+display:none;
+padding:15px;
+}
+
+.item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+font-size:14px;
+color:#ddd;
+}
+
+.item input{
+width:70px;
+padding:6px;
+border-radius:6px;
+border:none;
+background:#222;
+color:#fff;
+text-align:center;
+}
+
+/* CUSTOMER */
 .card{
 background:#151515;
-padding:18px;
+padding:15px;
 border-radius:12px;
 margin-top:15px;
 }
 
-select,input{
+input,textarea{
 width:100%;
 padding:12px;
 margin-top:8px;
@@ -60,6 +103,12 @@ border-radius:8px;
 cursor:pointer;
 }
 
+button:hover{
+background:#fff;
+color:#000;
+}
+
+/* RESULT */
 .result{
 display:none;
 margin-top:15px;
@@ -75,9 +124,11 @@ font-weight:900;
 color:#d4af37;
 }
 
+/* FIXED CTA */
 .fixed{
 position:fixed;
 bottom:0;
+left:0;
 width:100%;
 display:flex;
 }
@@ -97,33 +148,58 @@ text-decoration:none;
 
 <body>
 
-<div class="hero">
-<h1>부분공사 즉시 견적</h1>
-<p style="color:#aaa;font-size:13px;">
-방문 / 화장실 / 싱크대 / 실리콘 / 필름
-</p>
-</div>
+<header>
+<h1>부분공사 즉시 견적 시스템</h1>
+<p style="color:#aaa;font-size:13px;">필름 · 실리콘 · 도배 · 보수 · 전기</p>
+</header>
 
 <div class="container">
 
-<!-- 작업 선택 -->
-<div class="card">
-<h3>공사 선택</h3>
+<!-- 1. 필름 -->
+<div class="section">
+<div class="section-title" onclick="toggle(this)">
+📌 필름 공사 <span>▼</span>
+</div>
+<div class="section-content">
 
-<select id="job" onchange="setUnit()">
-<option value="door">방문 필름 시공</option>
-<option value="bath">화장실 1칸</option>
-<option value="sink">싱크대 실리콘</option>
-<option value="film">창호/유리 필름</option>
-<option value="silicone">전체 실리콘 보수</option>
-</select>
+<div class="item">도어 필름 <input id="door_film" type="number" value="0"></div>
+<div class="item">방화문 필름 <input id="fire_door_film" type="number" value="0"></div>
+<div class="item">샷시 필름 <input id="window_film" type="number" value="0"></div>
+<div class="item">가구 필름 <input id="furniture_film" type="number" value="0"></div>
 
-<div id="unitBox"></div>
+</div>
 </div>
 
-<!-- 고객 정보 -->
+<!-- 2. 실리콘 -->
+<div class="section">
+<div class="section-title" onclick="toggle(this)">
+💧 실리콘 공사 <span>▼</span>
+</div>
+<div class="section-content">
+
+<div class="item">화장실 <input id="bathroom" type="number" value="0"></div>
+<div class="item">주방 <input id="kitchen" type="number" value="0"></div>
+<div class="item">창호 <input id="window_silicone" type="number" value="0"></div>
+
+</div>
+</div>
+
+<!-- 3. 도배/바닥 -->
+<div class="section">
+<div class="section-title" onclick="toggle(this)">
+🧱 마감 보수 <span>▼</span>
+</div>
+<div class="section-content">
+
+<div class="item">벽면 도배 <input id="wallpaper" type="number" value="0"></div>
+<div class="item">바닥 보수 <input id="floor" type="number" value="0"></div>
+
+</div>
+</div>
+
+<!-- 4. 고객정보 -->
 <div class="card">
-<h3>연락 정보</h3>
+<h3>고객 정보 입력</h3>
 
 <input id="name" placeholder="이름">
 <input id="phone" placeholder="연락처">
@@ -132,15 +208,15 @@ text-decoration:none;
 <button onclick="calc()">즉시 견적 보기</button>
 
 <p style="font-size:12px;color:#777;text-align:center;">
-※ 상담 목적 외 사용되지 않습니다
+※ 입력 후 결과 확인 가능합니다
 </p>
 </div>
 
-<!-- 결과 -->
+<!-- RESULT -->
 <div class="result" id="result">
 <div class="price" id="price"></div>
-<div style="margin-top:10px;">
-현장 기준 평균 견적입니다.
+<div style="margin-top:10px;color:#aaa;">
+현장 기준 예상 견적입니다
 </div>
 
 <button style="margin-top:12px;" onclick="kakao()">카카오 상담</button>
@@ -148,66 +224,71 @@ text-decoration:none;
 
 </div>
 
+<!-- FIXED CTA -->
 <div class="fixed">
-<a class="kakao" href="https://pf.kakao.com/_uxhhjX/chat">카카오</a>
-<a class="call" href="tel:01000000000">전화</a>
+<a class="kakao" href="https://pf.kakao.com/_uxhhjX/chat">카카오 상담</a>
+<a class="call" href="tel:01000000000">전화 상담</a>
 </div>
 
 <script>
 
-let unit=1;
+/* 단가 구조 */
+const priceTable = {
+door_film:35000,
+fire_door_film:45000,
+window_film:20000,
+furniture_film:25000,
+
+bathroom:120000,
+kitchen:80000,
+window_silicone:60000,
+
+wallpaper:50000,
+floor:30000
+};
+
 let last=0;
 
-function setUnit(){
-const job=document.getElementById('job').value;
-
-let html="";
-
-switch(job){
-case "door": unit=4; html="방문 1개 기준"; break;
-case "bath": unit=120; html="화장실 1칸 기준"; break;
-case "sink": unit=3; html="싱크대 1m 기준"; break;
-case "film": unit=2; html="창호 1㎡ 기준"; break;
-case "silicone": unit=1.5; html="1m 기준"; break;
+/* 아코디언 */
+function toggle(el){
+const content = el.nextElementSibling;
+content.style.display = content.style.display === "block" ? "none" : "block";
 }
 
-document.getElementById('unitBox').innerHTML=
-`<p style="color:#aaa;font-size:13px;">${html}</p>`;
-}
-
+/* 견적 계산 */
 function calc(){
 
 const name=document.getElementById('name').value;
 const phone=document.getElementById('phone').value;
 const addr=document.getElementById('addr').value;
 
-if(!name||!phone||!addr){
-alert("정보 입력 필요");
+if(!name || !phone || !addr){
+alert("고객 정보 입력 필요");
 return;
 }
 
-const job=document.getElementById('job').value;
+let total = 0;
 
-// 수량 (단순화)
-let qty=1;
+for(let key in priceTable){
+let qty = Number(document.getElementById(key).value || 0);
+total += qty * priceTable[key];
+}
 
-let price=qty*unit*10000;
+/* 심리 보정 */
+total *= 1.1;
 
-// 심리 보정
-price*=1.1;
-
-last=Math.round(price);
+last = Math.round(total);
 
 document.getElementById('result').style.display="block";
-document.getElementById('price').innerHTML=
-"예상 견적: "+last.toLocaleString()+"원";
+document.getElementById('price').innerHTML =
+"예상 견적: " + last.toLocaleString() + " 원";
+
 }
 
+/* 카카오 */
 function kakao(){
-window.open("https://pf.kakao.com/_uxhhjX/chat?msg=부분공사:"+last);
+window.open("https://pf.kakao.com/_uxhhjX/chat?msg=부분공사견적:"+last);
 }
-
-setUnit();
 
 </script>
 
