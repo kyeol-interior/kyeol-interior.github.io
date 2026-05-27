@@ -1,201 +1,248 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="전주 인테리어 전문 기업 (주)결을 소개합니다. 공간의 밀도를 다시 쓰는 정밀 시공, 장애인기업 인증을 보유한 믿을 수 있는 인테리어 파트너입니다.">
-    <title>ABOUT | (주)결</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+<meta name="description" content="전주 인테리어 전문 기업 (주)결을 소개합니다.">
+<title>ABOUT | (주)결</title>
 
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
-        body { background:#fff; font-family: 'Noto Sans KR', sans-serif; color:#111; overflow-x:hidden; }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 
-        nav {
-            position:fixed; top:0; width:100%; height:80px;
-            display:flex; justify-content:space-between; align-items:center;
-            padding:0 50px; background:#fff; z-index:1100; border-bottom:1px solid #f2f2f2;
-        }
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing:antialiased; }
 
-        .logo { font-family:'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#000; letter-spacing:4px; }
+body {
+    font-family:'Noto Sans KR', sans-serif;
+    background:#fff;
+    overflow-x:hidden;
+    color:#111;
+}
 
-        .nav-links { display:flex; gap:35px; }
-        .nav-links a { text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; transition:0.3s; }
-        .nav-links a.active { color:#000; font-weight:700; }
+/* ================= NAV ================= */
+nav {
+    position:fixed;
+    top:0;
+    width:100%;
+    height:80px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 50px;
+    background:#fff;
+    border-bottom:1px solid #eee;
+    z-index:2000;
+}
 
-        .menu-btn { display:none; cursor:pointer; flex-direction:column; gap:6px; }
-        .menu-btn span { width:22px; height:2px; background:#000; }
+/* LEFT */
+.nav-left {
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
 
-        /* 🔴 1분 견적 버튼 (추가 핵심) */
-        .quote-btn {
-            position:fixed;
-            right:20px;
-            top:22px;
-            z-index:1200;
-            background:#e11d48;
-            color:#fff;
-            padding:10px 14px;
-            font-size:12px;
-            font-weight:700;
-            border-radius:30px;
-            cursor:pointer;
-            box-shadow:0 6px 18px rgba(0,0,0,0.15);
-        }
+.logo {
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:3px;
+    text-decoration:none;
+    color:#000;
+}
 
-        .quote-btn:hover {
-            transform:translateY(-2px);
-        }
+/* 1분견적 버튼 (핵심 CTA) */
+.quick-estimate {
+    font-size:12px;
+    padding:8px 12px;
+    border:1px solid #000;
+    background:#000;
+    color:#fff;
+    cursor:pointer;
+    white-space:nowrap;
+}
 
-        /* 슬라이드 패널 */
-        .quote-panel {
-            position:fixed;
-            top:0;
-            right:-420px;
-            width:380px;
-            height:100vh;
-            background:#fff;
-            z-index:2000;
-            box-shadow:-10px 0 30px rgba(0,0,0,0.15);
-            transition:0.35s ease;
-            padding:20px;
-            overflow-y:auto;
-        }
+/* RIGHT MENU */
+.nav-right {
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
 
-        .quote-panel.active { right:0; }
+.nav-right a {
+    text-decoration:none;
+    font-size:13px;
+    color:#999;
+    letter-spacing:2px;
+}
 
-        .panel-title {
-            font-size:18px;
-            font-weight:700;
-            margin-bottom:20px;
-        }
+.nav-right a:hover {
+    color:#000;
+}
 
-        .opt {
-            padding:12px;
-            border:1px solid #eee;
-            margin-bottom:10px;
-            cursor:pointer;
-            border-radius:8px;
-        }
+/* MOBILE BUTTON */
+.menu-btn {
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+}
 
-        .opt:hover { border-color:#e11d48; }
+.menu-btn span {
+    width:22px;
+    height:2px;
+    background:#000;
+}
 
-        .close-btn {
-            float:right;
-            cursor:pointer;
-            font-size:14px;
-            color:#999;
-        }
+/* ================= MOBILE MENU ================= */
+.mobile-nav {
+    position:fixed;
+    top:-100%;
+    left:0;
+    width:100%;
+    background:#fff;
+    border-bottom:1px solid #eee;
+    padding:100px 40px 30px;
+    display:flex;
+    flex-direction:column;
+    transition:0.4s;
+    z-index:1500;
+}
 
-        /* ===== 기존 구조 절대 유지 ===== */
-        .mobile-nav {
-            position: fixed; top: -100%; left: 0; width: 100%;
-            background:#fff;
-            transition:0.4s;
-        }
+.mobile-nav.active {
+    top:0;
+}
 
-        .mobile-nav.active { top:0; }
+.mobile-nav a {
+    padding:15px 0;
+    font-size:16px;
+    border-bottom:1px solid #f2f2f2;
+    text-decoration:none;
+    color:#111;
+}
 
-        .wrapper { display:flex; width:100%; height:100vh; padding-top:80px; }
+/* ================= LAYOUT ================= */
+.wrapper {
+    display:flex;
+    height:100vh;
+    padding-top:80px;
+}
 
-        .text-side { flex:1; padding:0 8%; display:flex; flex-direction:column; justify-content:center; background:#fbfbfb; }
+.text-side {
+    flex:1;
+    padding:0 8%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
 
-        .img-side { flex:1.3; overflow:hidden; }
-        .img-side img { width:100%; height:100%; object-fit:cover; }
+.img-side {
+    flex:1.3;
+}
 
-        .title-main { font-size:34px; font-weight:700; margin-bottom:35px; }
+.img-side img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
-        .desc-text { font-size:17px; color:#444; line-height:2.1; }
+/* ================= MOBILE ================= */
+@media (max-width:1024px) {
 
-        .highlight-section { margin-top:45px; padding-top:35px; border-top:1px solid #ddd; }
+nav {
+    padding:0 20px;
+}
 
-        .cert-badge { display:inline-block; padding:7px 15px; background:#000; color:#fff; font-size:11px; margin-right:8px; }
+.nav-right {
+    display:none;
+}
 
-        /* 모바일 */
-        @media(max-width:1024px){
-            nav{padding:0 25px;}
-            .wrapper{flex-direction:column;}
-            .quote-panel{width:100%;}
-        }
-    </style>
+.menu-btn {
+    display:flex;
+}
+
+/* mobile wrapper */
+.wrapper {
+    flex-direction:column;
+    height:auto;
+}
+
+.img-side {
+    height:40vh;
+}
+
+.text-side {
+    padding:40px 20px;
+}
+
+/* 1분견적 모바일 위치 */
+.quick-estimate {
+    font-size:11px;
+    padding:6px 10px;
+}
+}
+</style>
 </head>
 
 <body>
 
-<!-- NAV -->
 <nav>
-    <a href="index.html" class="logo">KYEOL</a>
 
-    <div class="nav-links">
-        <a href="about.html" class="active">ABOUT</a>
+    <!-- LEFT -->
+    <div class="nav-left">
+        <a href="index.html" class="logo">KYEOL</a>
+        <button class="quick-estimate" onclick="location.href='proposal.html#estimate'">
+            1분견적
+        </button>
+    </div>
+
+    <!-- RIGHT (PC) -->
+    <div class="nav-right">
+        <a href="about.html">ABOUT</a>
         <a href="portfolio.html">PORTFOLIO</a>
         <a href="proposal.html">PROPOSAL</a>
         <a href="contact.html">CONTACT</a>
     </div>
 
-    <div class="menu-btn">
+    <!-- MOBILE HAMBURGER -->
+    <div class="menu-btn" id="menuBtn">
         <span></span><span></span><span></span>
     </div>
+
 </nav>
 
-<!-- 🔴 1분 견적 버튼 -->
-<div class="quote-btn" onclick="openQuote()">1분 견적</div>
-
-<!-- 슬라이드 패널 -->
-<div class="quote-panel" id="quotePanel">
-    <div class="panel-title">
-        1분 견적
-        <span class="close-btn" onclick="closeQuote()">닫기</span>
-    </div>
-
-    <div class="opt">필름 공사</div>
-    <div class="opt">도배 / 장판</div>
-    <div class="opt">주방 공사</div>
-    <div class="opt">화장실 공사</div>
-
-    <hr style="margin:20px 0;">
-
-    <input type="text" placeholder="연락처" style="width:100%;padding:10px;margin-bottom:10px;">
-    <input type="text" placeholder="아파트명" style="width:100%;padding:10px;margin-bottom:10px;">
-
-    <button style="width:100%;padding:12px;background:#e11d48;color:#fff;border:none;">
-        견적 요청
-    </button>
+<!-- MOBILE MENU -->
+<div class="mobile-nav" id="mobileNav">
+    <a href="about.html">ABOUT</a>
+    <a href="portfolio.html">PORTFOLIO</a>
+    <a href="proposal.html">PROPOSAL</a>
+    <a href="contact.html">CONTACT</a>
 </div>
 
-<!-- MOBILE MENU -->
-<div class="mobile-nav" id="dropdown"></div>
-
-<!-- CONTENT (그대로 유지) -->
+<!-- CONTENT -->
 <div class="wrapper">
+
     <div class="text-side">
-        <h1 class="title-main">"The devil is in the detail,<br>악마는 디테일에 있다."</h1>
+        <h1 style="font-size:34px; margin-bottom:30px;">
+            The devil is in the detail
+        </h1>
 
-        <p class="desc-text">
-            단순해 보이는 공간일지라도,<br>
-            그 완성도는 눈에 잘 띄지 않는<br>
-            작은 디테일에서 결정됩니다.
+        <p style="line-height:2;">
+            디테일이 공간의 완성도를 결정합니다.
         </p>
-
-        <div class="highlight-section">
-            <span class="cert-badge">실내건축공사업 면허 보유 법인</span>
-            <span class="cert-badge">인증 장애인기업</span>
-        </div>
     </div>
 
     <div class="img-side">
-        <img src="image/about1.jpg" alt="">
+        <img src="image/about1.jpg">
     </div>
+
 </div>
 
 <script>
-function openQuote(){
-    document.getElementById('quotePanel').classList.add('active');
-}
+const btn = document.getElementById('menuBtn');
+const nav = document.getElementById('mobileNav');
 
-function closeQuote(){
-    document.getElementById('quotePanel').classList.remove('active');
-}
+btn.onclick = () => {
+    nav.classList.toggle('active');
+};
 </script>
 
 </body>
