@@ -6,7 +6,7 @@
 <title>ABOUT | KYEOL</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-/* 기존 스타일 그대로 유지 */
+/* ================= RESET & NAV ================= */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#111;overflow-x:hidden;}
 
@@ -17,12 +17,12 @@ nav{position:fixed;top:0;width:100%;height:80px;display:flex;align-items:center;
 .nav-links a.active{color:#000;font-weight:700;}
 .nav-links a.estimate{color:#e60023;font-weight:800;padding:6px 10px;border-radius:6px;background:rgba(230,0,35,0.06);}
 
-/* 슬라이드 패널 */
+/* ================= 슬라이드 패널 (공통) ================= */
 #estimatePanel {
     position: fixed; top: 0; right: -50%; width: 50%; height: 100%;
     background: #fff; z-index: 2000;
     transition: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    padding: 100px 50px;
+    padding: 100px 30px;
     box-shadow: -5px 0 20px rgba(0,0,0,0.1);
 }
 #estimatePanel.active { right: 0; }
@@ -32,22 +32,23 @@ nav{position:fixed;top:0;width:100%;height:80px;display:flex;align-items:center;
 }
 .overlay.active { display: block; }
 
-/* 레이아웃 */
+/* ================= 기존 레이아웃 ================= */
 .wrapper{display:flex;width:100%;min-height:100vh;padding-top:80px;}
 .text-side{flex:1;padding:8%;display:flex;flex-direction:column;justify-content:center;background:#fbfbfb;}
 .img-side{flex:1.3;overflow:hidden;}
 .img-side img{width:100%;height:100%;object-fit:cover;}
-.title-main{font-size:34px;font-weight:700;line-height:1.4;margin-bottom:35px;}
+.title-main{font-size:34px;font-weight:700;line-height:1.4;margin-bottom:35px;word-break:keep-all;}
 .desc-text{font-size:17px;line-height:2.1;color:#444;}
 .desc-text b{color:#111;font-weight:700;}
 
-/* 모바일 대응 */
+/* ================= 모바일 대응 ================= */
 @media(max-width:1024px){
-    /* 모바일에서는 너비를 90%로 설정하여 전체화면 방지 */
-    #estimatePanel { width: 90%; right: -90%; }
-    .nav-links{display:none;}
+    /* 모바일에서도 슬라이드 패널은 화면의 50%만 차지 */
+    #estimatePanel { width: 50%; right: -50%; } 
+    
+    .nav-links{display:none;} /* PC메뉴 숨김 */
     .wrapper{flex-direction:column;height:auto;}
-    .img-side{height:40vh;order:2;}
+    .img-side{height:40vh;order:2;} /* 사진 하단 배치 */
     .text-side{padding:60px 25px;}
 }
 </style>
@@ -68,7 +69,7 @@ nav{position:fixed;top:0;width:100%;height:80px;display:flex;align-items:center;
 <div class="overlay" id="overlay" onclick="togglePanel()"></div>
 <div id="estimatePanel">
     <h1>1분 견적</h1>
-    <p>상담을 위한 간단한 정보를 입력해주세요.</p>
+    <p>견적 문의 내용을 입력해주세요.</p>
 </div>
 
 <div class="wrapper">
