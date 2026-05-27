@@ -18,9 +18,9 @@ nav{position:fixed;top:0;width:100%;height:80px;display:flex;align-items:center;
 .nav-links a.active{color:#000;font-weight:700;}
 .nav-links a.estimate{color:#e60023;font-weight:800;padding:6px 10px;border-radius:6px;background:rgba(230,0,35,0.06);}
 
-/* Slide Panel (2/3 width) */
+/* Slide Panel */
 #estimatePanel {
-    position: fixed; top: 0; right: -66.66%; width: 66.66%; height: 100%;
+    position: fixed; top: 0; right: -50%; width: 50%; height: 100%;
     background: #fff; z-index: 2000;
     transition: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     padding: 100px 30px;
@@ -54,6 +54,9 @@ nav{position:fixed;top:0;width:100%;height:80px;display:flex;align-items:center;
 
 /* Mobile Media Query */
 @media(max-width:1024px){
+    /* 모바일 슬라이딩 3/4 (75%) */
+    #estimatePanel { width: 75%; right: -75%; }
+    
     nav { padding: 0 25px; }
     .nav-links { display: none; }
     .mobile-controls { display: flex; }
@@ -107,7 +110,8 @@ nav{position:fixed;top:0;width:100%;height:80px;display:flex;align-items:center;
             단순해 보이는 공간일지라도,<br>
             그 완성도는 눈에 잘 띄지 않는<br>
             작은 디테일에서 결정됩니다.<br><br>
-            <b>"머무는 순간의 온기, 눈에 닿는 모든 곳에 결이 좋은 공간을 짓습니다."</b>
+            <b>"머무는 순간의 온기, 눈에 닿는 모든 곳에<br>
+            결이 좋은 공간을 짓습니다."</b>
         </p>
     </div>
     <div class="img-side">
