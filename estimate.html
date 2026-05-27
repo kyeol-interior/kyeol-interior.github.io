@@ -7,188 +7,152 @@
 <title>1분견적 | (주)결</title>
 
 <style>
-* {margin:0; padding:0; box-sizing:border-box; font-family:'Noto Sans KR', sans-serif;}
-body {background:#0f0f0f; color:#fff;}
+body {margin:0; background:#0f0f0f; color:#fff; font-family:Noto Sans KR;}
+.container {max-width:600px; margin:auto; padding:90px 20px;}
 
-header {
-    position:fixed;
-    top:0;
-    width:100%;
-    height:70px;
-    background:#111;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 20px;
-    border-bottom:1px solid #222;
-}
+h1 {font-size:22px; margin-bottom:5px;}
+.sub {color:#aaa; font-size:13px; margin-bottom:20px;}
 
-.logo {color:#fff; font-weight:700; text-decoration:none; letter-spacing:3px;}
-.home {color:#ff2d2d; font-weight:700; text-decoration:none; font-size:13px;}
-
-.container {
-    padding:100px 20px 120px;
-    max-width:600px;
-    margin:auto;
-}
-
-h1 {
-    font-size:22px;
-    margin-bottom:10px;
-}
-
-.sub {
-    font-size:13px;
-    color:#aaa;
-    margin-bottom:25px;
-}
-
-/* 카드 */
 .card {
-    background:#1a1a1a;
+    background:#151515;
     border:1px solid #222;
-    border-radius:12px;
     padding:15px;
+    border-radius:12px;
     margin-bottom:12px;
 }
 
-.title {
-    font-size:14px;
-    font-weight:700;
-    margin-bottom:10px;
-    color:#ff2d2d;
-}
+.title {color:#ff2d2d; font-size:13px; font-weight:800; margin-bottom:10px;}
 
-/* 체크 */
 .option {
     display:flex;
     justify-content:space-between;
     padding:10px;
-    background:#111;
+    background:#0f0f0f;
     border-radius:8px;
     margin-bottom:8px;
     cursor:pointer;
 }
 
-.option input {transform:scale(1.2);}
-
-input[type="number"], input[type="text"] {
-    width:100%;
-    padding:10px;
-    border-radius:8px;
-    border:1px solid #333;
-    background:#111;
-    color:#fff;
-    margin-top:8px;
-}
-
-/* 버튼 */
 .btn {
     width:100%;
     padding:14px;
     background:#ff2d2d;
     border:none;
-    border-radius:10px;
     color:#fff;
-    font-weight:700;
-    margin-top:15px;
-    cursor:pointer;
+    font-weight:800;
+    border-radius:10px;
+    margin-top:10px;
 }
 
 .result {
     background:#111;
+    border:1px solid #222;
     padding:15px;
     border-radius:10px;
     margin-top:15px;
-    border:1px solid #222;
 }
 
 .price {
-    font-size:20px;
-    font-weight:700;
+    font-size:22px;
     color:#ff2d2d;
+    font-weight:800;
 }
 
-.contact {
-    margin-top:20px;
-    padding:15px;
-    background:#0a0a0a;
-    border-radius:10px;
+input {
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    border-radius:8px;
+    border:1px solid #333;
+    background:#0f0f0f;
+    color:#fff;
 }
-
-small {color:#888;}
 </style>
 </head>
 
 <body>
 
-<header>
-    <a href="index.html" class="logo">KYEOL</a>
-    <a href="index.html" class="home">HOME</a>
-</header>
-
 <div class="container">
 
-<h1>1분 견적 시스템</h1>
-<p class="sub">원하는 항목만 선택하면 즉시 예상 견적이 계산됩니다</p>
+<h1>1분 견적 시스템 v2</h1>
+<p class="sub">문제만 선택하면 자동으로 견적이 계산됩니다</p>
 
-<!-- 1. 공간 -->
+<!-- 1 -->
 <div class="card">
-    <div class="title">공간 선택</div>
+<div class="title">공간 유형</div>
 
-    <label class="option">
-        <span>아파트</span>
-        <input type="radio" name="type" value="apartment" checked>
-    </label>
+<label class="option">
+<span>아파트</span>
+<input type="radio" name="type" value="a" checked>
+</label>
 
-    <label class="option">
-        <span>상가 / 사무실</span>
-        <input type="radio" name="type" value="office">
-    </label>
+<label class="option">
+<span>상가 / 사무실</span>
+<input type="radio" name="type" value="b">
+</label>
 </div>
 
-<!-- 2. 평수 -->
+<!-- 2 -->
 <div class="card">
-    <div class="title">평수 입력</div>
-    <input type="number" id="area" placeholder="예: 24">
+<div class="title">문제 선택 (핵심)</div>
+
+<label class="option">
+<span>필름 들뜸 / 손상</span>
+<input type="checkbox" value="film">
+</label>
+
+<label class="option">
+<span>도배 손상 / 오염</span>
+<input type="checkbox" value="wall">
+</label>
+
+<label class="option">
+<span>바닥 찍힘 / 마루 손상</span>
+<input type="checkbox" value="floor">
+</label>
+
+<label class="option">
+<span>문 / 문틀 손상</span>
+<input type="checkbox" value="door">
+</label>
+
+<label class="option">
+<span>욕실 실리콘 노후</span>
+<input type="checkbox" value="bath">
+</label>
 </div>
 
-<!-- 3. 공사 선택 -->
+<!-- 3 -->
 <div class="card">
-    <div class="title">공사 선택</div>
+<div class="title">공사 범위</div>
 
-    <label class="option">
-        <span>필름 (도어 / 문틀 / 가구)</span>
-        <input type="checkbox" value="film" checked>
-    </label>
+<label class="option">
+<span>부분 (1~3곳)</span>
+<input type="radio" name="range" value="1" checked>
+</label>
 
-    <label class="option">
-        <span>도배</span>
-        <input type="checkbox" value="wallpaper">
-    </label>
+<label class="option">
+<span>중간 (4~10곳)</span>
+<input type="radio" name="range" value="2">
+</label>
 
-    <label class="option">
-        <span>장판 / 바닥</span>
-        <input type="checkbox" value="floor">
-    </label>
+<label class="option">
+<span>전체</span>
+<input type="radio" name="range" value="3">
+</label>
 </div>
 
-<!-- 4. 버튼 -->
-<button class="btn" onclick="calc()">견적 계산하기</button>
+<button class="btn" onclick="calc()">즉시 견적 보기</button>
 
-<!-- 결과 -->
 <div id="result" class="result" style="display:none;">
-    <div>예상 견적</div>
-    <div class="price" id="price">0원</div>
-    <small>※ 실제 금액은 현장 조건에 따라 달라질 수 있습니다</small>
+<div>예상 견적</div>
+<div class="price" id="price">0원</div>
 
-    <div class="contact">
-        <div style="margin-bottom:10px;">빠른 상담 (필수 입력)</div>
-        <input type="text" id="name" placeholder="이름 / 아파트명">
-        <input type="text" id="phone" placeholder="연락처">
-
-        <button class="btn" onclick="send()">카카오 상담 요청</button>
-    </div>
+<div style="margin-top:15px;">
+<input type="text" id="name" placeholder="이름 / 아파트명">
+<input type="text" id="phone" placeholder="연락처">
+<button class="btn" onclick="send()">카카오 상담 연결</button>
+</div>
 </div>
 
 </div>
@@ -196,39 +160,42 @@ small {color:#888;}
 <script>
 
 function calc() {
-    let area = Number(document.getElementById("area").value || 0);
 
-    let base = 0;
+let base = 0;
 
-    let checks = document.querySelectorAll("input[type=checkbox]:checked");
+let items = document.querySelectorAll("input[type=checkbox]:checked");
 
-    checks.forEach(c => {
-        if(c.value === "film") base += area * 8;
-        if(c.value === "wallpaper") base += area * 12;
-        if(c.value === "floor") base += area * 10;
-    });
+items.forEach(i => {
+    if(i.value === "film") base += 120;
+    if(i.value === "wall") base += 100;
+    if(i.value === "floor") base += 150;
+    if(i.value === "door") base += 130;
+    if(i.value === "bath") base += 110;
+});
 
-    if(area < 10) base += 50;
+let range = document.querySelector("input[name=range]:checked").value;
 
-    document.getElementById("result").style.display = "block";
-    document.getElementById("price").innerText =
-        Math.round(base * 10000).toLocaleString() + "원";
+if(range == 1) base *= 1;
+if(range == 2) base *= 1.4;
+if(range == 3) base *= 2.1;
+
+if(base < 200) base = 250;
+
+document.getElementById("result").style.display = "block";
+document.getElementById("price").innerText =
+Math.round(base * 10000).toLocaleString() + "원";
 }
 
 function send() {
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
 
-    if(!name || !phone) {
-        alert("정보를 입력해주세요");
-        return;
-    }
+if(!name || !phone) {
+alert("정보 입력 필요");
+return;
+}
 
-    let msg = `1분견적 요청\n이름: ${name}\n연락처: ${phone}`;
-
-    let url = "https://pf.kakao.com/_uxhhjX/chat";
-
-    window.open(url, "_blank");
+window.open("https://pf.kakao.com/_uxhhjX/chat");
 }
 
 </script>
