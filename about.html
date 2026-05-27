@@ -1,62 +1,106 @@
-<!-- estimatePanel 내부 전체 교체용 코드 -->
-<div id="estimatePanel" style="overflow-y:auto; padding-bottom:50px;">
-    <h2 style="margin-bottom: 25px;">1분 견적 문의</h2>
-    <form id="estimateForm">
-        <!-- 1. 공사 유형 선택 -->
-        <label style="display:block; margin-bottom:5px; font-size:14px; font-weight:700;">공사 유형</label>
-        <select id="typeSelect" onchange="updateForm()" style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ddd;">
-            <option value="none">선택해주세요</option>
-            <option value="residence">주거 공간 리모델링</option>
-            <option value="commercial">상업 공간 인테리어</option>
-            <option value="partial">부분 공사</option>
-        </select>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABOUT | KYEOL</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Noto Sans KR', sans-serif; background: #fff; color: #111; overflow-x: hidden; }
 
-        <!-- 2. 동적 항목 영역 -->
-        <div id="dynamicFields"></div>
+    /* Nav */
+    nav { position: fixed; top: 0; width: 100%; height: 80px; display: flex; align-items: center; padding: 0 50px; border-bottom: 1px solid #eee; background: #fff; z-index: 1000; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; letter-spacing: 4px; text-decoration: none; color: #000; }
+    .nav-links { display: flex; gap: 28px; align-items: center; margin-left: auto; }
+    .nav-links a { text-decoration: none; color: #999; font-size: 13px; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
+    .nav-links a.active { color: #000; font-weight: 700; }
+    .nav-links a.estimate { color: #e60023; font-weight: 800; padding: 6px 10px; border-radius: 6px; background: rgba(230,0,35,0.06); }
 
-        <!-- 3. 공통: 연락처 -->
-        <label style="display:block; margin-bottom:5px; font-size:14px; font-weight:700; margin-top:15px;">연락처</label>
-        <input type="tel" id="userPhone" placeholder="010-0000-0000" style="width:100%; padding:10px; margin-bottom:20px; border:1px solid #ddd;">
+    /* Estimate Panel */
+    #estimatePanel { position: fixed; top: 0; right: -50%; width: 50%; height: 100%; background: #fff; z-index: 2000; transition: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); padding: 100px 40px; box-shadow: -5px 0 20px rgba(0,0,0,0.1); overflow-y: auto; }
+    #estimatePanel.active { right: 0; }
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); display: none; z-index: 1500; }
+    .overlay.active { display: block; }
 
-        <button type="button" onclick="calculateEstimate()" style="width:100%; padding:15px; background:#111; color:#fff; border:none; cursor:pointer;">견적 금액 산출하기</button>
-        
-        <div id="resultArea" style="margin-top:20px; padding:15px; background:#f9f9f9; display:none; font-weight:700; border:1px solid #eee;"></div>
-    </form>
+    /* Mobile UI */
+    .mobile-controls { display: none; position: fixed; top: 22px; right: 25px; z-index: 1200; align-items: center; gap: 15px; }
+    .mobile-estimate { color: #e60023; font-weight: 800; font-size: 13px; text-decoration: none; background: rgba(230,0,35,0.1); padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+    .menu-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
+    .menu-btn span { width: 22px; height: 2px; background: #000; }
+    .mobile-nav { position: fixed; top: -100%; left: 0; width: 100%; height: 100%; background: #fff; padding-top: 100px; transition: 0.4s ease; z-index: 999; }
+    .mobile-nav.active { top: 0; }
+    .mobile-nav a { display: block; padding: 15px 50px; text-decoration: none; color: #111; }
+
+    /* Wrapper */
+    .wrapper { display: flex; width: 100%; height: 100vh; padding-top: 80px; }
+    .text-side { flex: 1; padding: 0 8%; display: flex; flex-direction: column; justify-content: center; background: #fbfbfb; }
+    .img-side { flex: 1.3; overflow: hidden; }
+    .img-side img { width: 100%; height: 100%; object-fit: cover; }
+    .title-main { font-size: 34px; font-weight: 700; line-height: 1.4; margin-bottom: 35px; }
+    .desc-text { font-size: 17px; line-height: 2.1; color: #444; }
+    .desc-text b { color: #111; font-weight: 700; }
+
+    /* Media Query */
+    @media(max-width:1024px) {
+        nav { padding: 0 25px; }
+        .nav-links { display: none; }
+        .mobile-controls { display: flex; }
+        #estimatePanel { width: 75%; right: -75%; }
+        .wrapper { flex-direction: column; height: auto; }
+        .img-side { height: 40vh; order: 2; }
+        .text-side { padding: 40px 25px; order: 1; }
+        .title-main { font-size: 24px; }
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">KYEOL</a>
+    <div class="nav-links">
+        <a onclick="togglePanel()" class="estimate">1분견적</a>
+        <a href="about.html" class="active">ABOUT</a>
+        <a href="portfolio.html">PORTFOLIO</a>
+        <a href="proposal.html">PROPOSAL</a>
+        <a href="contact.html">CONTACT</a>
+    </div>
+</nav>
+
+<div class="mobile-controls">
+    <a onclick="togglePanel()" class="mobile-estimate">1분견적</a>
+    <div class="menu-btn" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</div>
+
+<div class="mobile-nav" id="mobileNav">
+    <a href="about.html">ABOUT</a>
+    <a href="portfolio.html">PORTFOLIO</a>
+    <a href="proposal.html">PROPOSAL</a>
+    <a href="contact.html">CONTACT</a>
+</div>
+
+<div class="overlay" id="overlay" onclick="togglePanel()"></div>
+<div id="estimatePanel">
+    <h1>1분 견적</h1>
+    <p>견적 문의 내용을 입력해주세요.</p>
+</div>
+
+<div class="wrapper">
+    <div class="text-side">
+        <h1 class="title-main">"The devil is in the detail,<br>악마는 디테일에 있다."</h1>
+        <p class="desc-text">단순해 보이는 공간일지라도,<br>그 완성도는 눈에 잘 띄지 않는<br>작은 디테일에서 결정됩니다.<br><br>
+        <b>"머무는 순간의 온기, 눈에 닿는 모든 곳에<br>결이 좋은 공간을 짓습니다."</b></p>
+    </div>
+    <div class="img-side">
+        <img src="image/about1.jpg" alt="About">
+    </div>
 </div>
 
 <script>
-function updateForm() {
-    const type = document.getElementById("typeSelect").value;
-    const container = document.getElementById("dynamicFields");
-    container.innerHTML = ""; // 초기화
-
-    if (type === "residence") {
-        container.innerHTML = `
-            <label style="display:block; margin-bottom:5px; font-size:14px; font-weight:700;">희망 공사 항목</label>
-            <label><input type="checkbox" name="item" value="500000"> 화장실 변경 (개소당 50만원 기준)</label><br>
-            <input type="number" name="qty" placeholder="개소 수 입력" style="width:100%; padding:5px; margin:5px 0;">`;
-    } else if (type === "commercial") {
-        container.innerHTML = `<p style="font-size:13px; color:#e60023;">※ 업종에 따라 자재비 및 마감재 수준이 상이하여 상세 상담이 필요합니다.</p>`;
-    } else if (type === "partial") {
-        container.innerHTML = `
-            <label><input type="checkbox" onchange="toggleDetail('film')"> 필름 공사</label>
-            <div id="filmDetail" style="display:none; padding:10px; background:#eee;">
-                도어 <input type="number" style="width:50px;">개소 | 방화문 <input type="number" style="width:50px;">개소
-            </div>
-            <label><input type="checkbox" onchange="toggleDetail('window')"> 창호 교체</label>
-            <select><option>프리미엄</option><option>일반</option></select>`;
-    }
-}
-
-function toggleDetail(id) {
-    const el = document.getElementById(id + "Detail");
-    el.style.display = el.style.display === "none" ? "block" : "none";
-}
-
-function calculateEstimate() {
-    // 여기에 귀사의 일위대가 단가표를 기반으로 한 계산 로직을 넣습니다.
-    const resultArea = document.getElementById("resultArea");
-    resultArea.style.display = "block";
-    resultArea.innerText = "산출된 예상 견적: 000,000원 (상세 상담 요망)";
-}
+    function togglePanel() { document.getElementById("estimatePanel").classList.toggle("active"); document.getElementById("overlay").classList.toggle("active"); }
+    function toggleMenu() { document.getElementById("mobileNav").classList.toggle("active"); }
 </script>
+
+</body>
+</html>
