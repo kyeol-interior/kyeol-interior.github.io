@@ -1,238 +1,235 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>주식회사 결 | 전주 인테리어·리모델링·실내건축 전문 (주)결</title>
+    <meta name="description" content="상업공간의 성공과 주거의 품격, 전주 인테리어 전문 디자인 기업 (주)결입니다.">
+    <meta name="keywords" content="전주인테리어, 전주리모델링, 주식회사결, 실내건축, 상업인테리어, 주거인테리어">
 
-<title>(주)결 | 전주 인테리어·리모델링</title>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kyeol-interior.github.io/">
+    <meta property="og:title" content="(주)결 | KYEOL DESIGN">
+    <meta property="og:description" content="전주 인테리어·실내건축 전문 디자인 기업 (주)결">
+    <meta property="og:image" content="https://kyeol-interior.github.io/image/main-thumb.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;800&display=swap" rel="stylesheet">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:'Noto Sans KR';
-  background:#000;
-  color:#fff;
-  overflow-x:hidden;
-}
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
+        body {
+            background:#000;
+            font-family:'Noto Sans KR', sans-serif;
+            overflow-x:hidden;
+            color:#fff;
+        }
 
-/* ===== VIDEO ===== */
-.video-bg{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  background:url('./image/main-thumb.jpg') center/cover;
-}
-video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:0.9;
-}
+        /* VIDEO */
+        .video-background {
+            position:absolute;
+            inset:0;
+            z-index:-1;
+            overflow:hidden;
+            background:#000;
+        }
 
-/* ===== NAV ===== */
-nav{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  padding:20px 40px;
-  z-index:10;
-}
-nav img{
-  height:70px;
-}
+        .video-mobile, .video-pc {
+            position:absolute;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
 
-/* ===== HERO ===== */
-.hero{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:0 20px;
-}
+        .video-pc { display:none; }
+        @media(min-width:1025px){
+            .video-mobile{display:none;}
+            .video-pc{display:block;}
+        }
 
-.hero h1{
-  font-size:clamp(22px,4vw,48px);
-  font-weight:800;
-  line-height:1.25;
-  max-width:900px;
-  word-break:keep-all;
-}
+        /* NAV */
+        nav {
+            position:fixed;
+            top:0;
+            width:100%;
+            height:120px;
+            display:flex;
+            align-items:center;
+            padding:0 50px;
+            z-index:10;
+        }
 
-.hero p{
-  margin-top:15px;
-  font-size:13px;
-  letter-spacing:4px;
-  opacity:0.7;
-}
+        .logo-img {
+            height:80px;
+        }
 
-/* ===== BUTTON ===== */
-.btn{
-  margin-top:30px;
-  padding:14px 40px;
-  border:1px solid #fff;
-  background:rgba(255,255,255,0.05);
-  cursor:pointer;
-}
+        /* MAIN */
+        main {
+            height:100vh;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            padding:0 20px;
+        }
 
-/* ===== BANNER ===== */
-.banner{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:92%;
-  max-width:520px;
-  background:#d4af37;
-  color:#000;
-  padding:15px;
-  border-radius:10px;
-  font-weight:700;
-  text-align:center;
-  cursor:pointer;
-  z-index:20;
-}
+        .main-title {
+            font-size:clamp(22px,4vw,52px);
+            font-weight:800;
+            line-height:1.25;
+            word-break:keep-all;
+        }
 
-/* ===== ESTIMATE PANEL ===== */
-.panel{
-  position:fixed;
-  right:-100%;
-  top:0;
-  width:100%;
-  max-width:420px;
-  height:100%;
-  background:#fff;
-  color:#000;
-  transition:0.4s;
-  z-index:999;
-  padding:20px;
-  overflow:auto;
-}
-.panel.open{
-  right:0;
-}
+        .main-sub {
+            margin-top:15px;
+            font-size:13px;
+            letter-spacing:4px;
+            opacity:0.7;
+        }
 
-.item{
-  border:1px solid #ddd;
-  padding:12px;
-  margin-bottom:10px;
-  border-radius:8px;
-  cursor:pointer;
-}
-.item.active{
-  background:#f3f3f3;
-  border-color:#d4af37;
-}
+        /* BUTTON GROUP (핵심 수정) */
+        .btn-group {
+            margin-top:40px;
+            display:flex;
+            flex-direction:column;   /* 👈 2줄 구조 */
+            gap:12px;
+            align-items:center;
+        }
 
-.calc-btn{
-  width:100%;
-  padding:15px;
-  background:#000;
-  color:#fff;
-  margin-top:15px;
-}
+        .btn-base {
+            width:260px;
+            padding:15px;
+            text-align:center;
+            text-decoration:none;
+            font-size:13px;
+            letter-spacing:3px;
+            transition:0.3s;
+            backdrop-filter:blur(10px);
+        }
 
-/* 모바일 타이틀 보호 */
-@media(max-width:768px){
-.hero h1{
-  font-size:22px;
-  line-height:1.3;
-}
-}
-</style>
+        .enter-btn {
+            border:1px solid #fff;
+            color:#fff;
+            background:rgba(255,255,255,0.05);
+        }
+
+        .enter-btn:hover {
+            background:#fff;
+            color:#000;
+        }
+
+        .live-btn {
+            border:1px solid #d4af37;
+            color:#d4af37;
+            background:rgba(212,175,55,0.08);
+        }
+
+        .live-btn:hover {
+            background:#d4af37;
+            color:#000;
+        }
+
+        /* SIDE MENU */
+        .side-menu {
+            position:fixed;
+            bottom:70px;
+            width:100%;
+            text-align:center;
+        }
+
+        .side-menu a {
+            margin:0 15px;
+            font-size:12px;
+            opacity:0.6;
+            color:#fff;
+            text-decoration:none;
+        }
+
+        .side-menu a:hover { opacity:1; color:#d4af37; }
+
+        footer {
+            position:fixed;
+            bottom:25px;
+            width:100%;
+            text-align:center;
+            font-size:10px;
+            opacity:0.3;
+        }
+
+        /* MOBILE TITLE FIX */
+        @media(max-width:768px){
+            .main-title{
+                font-size:20px;
+                line-height:1.3;
+            }
+
+            nav {
+                padding:0 25px;
+                height:90px;
+            }
+
+            .logo-img {
+                height:60px;
+            }
+
+            .btn-base{
+                width:240px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="video-bg">
-  <video autoplay muted loop>
-    <source src="./image/pc-video.mp4">
-  </video>
-</div>
+    <div class="video-background">
+        <video class="video-mobile" autoplay muted loop playsinline>
+            <source src="./image/mobile-video.mp4">
+        </video>
+        <video class="video-pc" autoplay muted loop playsinline>
+            <source src="./image/pc-video.mp4">
+        </video>
+    </div>
 
-<nav>
-  <img src="./image/image_1.png" alt="logo">
-</nav>
+    <!-- NAV -->
+    <nav>
+        <img src="./image/image_1.png" class="logo-img">
+    </nav>
 
-<div class="hero">
-  <h1>공간의 본질을 설계합니다</h1>
-  <p>INTERIOR DESIGN KYEOL</p>
+    <!-- MAIN -->
+    <main>
+        <h1 class="main-title">
+            상업공간의 성공과 주거의 품격,<br>
+            결이 다른 공간을 만듭니다.
+        </h1>
 
-  <button class="btn" onclick="openPanel()">견적 바로보기</button>
-</div>
+        <p class="main-sub">INTERIOR DESIGN & ARCHITECTURE (주)결</p>
 
-<!-- 🔥 견적 배너 -->
-<div class="banner" onclick="openPanel()">
-  🔥 우리 집 공사비용 바로 계산하기 (1분 견적)
-</div>
+        <!-- 🔥 2줄 구조 -->
+        <div class="btn-group">
 
-<!-- ===== 견적 패널 ===== -->
-<div class="panel" id="panel">
+            <a href="about.html" class="btn-base enter-btn">
+                ENTER VIEW
+            </a>
 
-  <h2>부분 공사 견적</h2>
-  <p style="font-size:12px;color:#666;margin-bottom:15px;">
-    선택만 하면 자동 견적 계산
-  </p>
+            <a href="live-report.html" class="btn-base live-btn">
+                LIVE 현장
+            </a>
 
-  <!-- 필름 -->
-  <h3>필름 공사</h3>
+        </div>
+    </main>
 
-  <div class="item" onclick="toggle(this)">도어 필름 (방문 / 현관문)</div>
-  <div class="item" onclick="toggle(this)">샷시 프레임 필름</div>
-  <div class="item" onclick="toggle(this)">가구 필름 (붙박이장 등)</div>
+    <!-- SIDE -->
+    <div class="side-menu">
+        <a href="http://blog.naver.com/rotte123" target="_blank">BLOG</a>
+        <a href="https://pf.kakao.com/_uxhhjX/chat" target="_blank">KAKAO</a>
+    </div>
 
-  <!-- 실리콘 -->
-  <h3>실리콘 공사</h3>
-
-  <div class="item" onclick="toggle(this)">화장실 전체 실리콘</div>
-  <div class="item" onclick="toggle(this)">싱크대 주방 실리콘</div>
-  <div class="item" onclick="toggle(this)">샷시 누수 실리콘</div>
-
-  <!-- 도배/장판 -->
-  <h3>도배/장판</h3>
-
-  <div class="item" onclick="toggle(this)">부분 도배</div>
-  <div class="item" onclick="toggle(this)">전체 장판 교체</div>
-
-  <button class="calc-btn" onclick="calc()">예상 견적 확인</button>
-
-  <div id="result" style="margin-top:20px;font-weight:bold;"></div>
-
-</div>
-
-<script>
-let selected = [];
-
-function openPanel(){
-  document.getElementById('panel').classList.add('open');
-}
-
-function toggle(el){
-  el.classList.toggle('active');
-}
-
-function calc(){
-  let items = document.querySelectorAll('.item.active');
-  let price = 0;
-
-  items.forEach(i=>{
-    if(i.innerText.includes('도어')) price += 150000;
-    if(i.innerText.includes('샷시')) price += 200000;
-    if(i.innerText.includes('가구')) price += 180000;
-    if(i.innerText.includes('화장실')) price += 250000;
-    if(i.innerText.includes('싱크대')) price += 180000;
-    if(i.innerText.includes('도배')) price += 300000;
-    if(i.innerText.includes('장판')) price += 350000;
-  });
-
-  document.getElementById('result').innerText =
-    "예상 견적: " + price.toLocaleString() + "원 ~";
-}
-</script>
+    <footer>
+        © 2026 (주)결 KYEOL DESIGN
+    </footer>
 
 </body>
 </html>
