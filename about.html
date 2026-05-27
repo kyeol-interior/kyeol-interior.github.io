@@ -75,6 +75,22 @@ nav{
     background:rgba(230,0,35,0.06);
 }
 
+/* Overlay */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.3);
+    display:none;
+    z-index:2500;
+}
+
+.overlay.active{
+    display:block;
+}
+
 /* Estimate Panel */
 #estimatePanel{
     position:fixed;
@@ -92,21 +108,6 @@ nav{
 
 #estimatePanel.active{
     right:0;
-}
-
-.overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.3);
-    display:none;
-    z-index:2500;
-}
-
-.overlay.active{
-    display:block;
 }
 
 /* Form */
@@ -148,6 +149,7 @@ nav{
     text-align:center;
     border-radius:4px;
     font-size:13px;
+    transition:0.3s;
 }
 
 .house-btn.active{
@@ -294,25 +296,46 @@ nav{
 
 <body>
 
-<div id="overlay" class="overlay" onclick="togglePanel()"></div>
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="closePanel()"></div>
 
+<!-- Nav -->
 <nav>
 
     <a href="index.html" class="logo">KYEOL</a>
 
     <div class="nav-links">
-        <a onclick="togglePanel()" class="estimate">1분견적</a>
-        <a href="about.html" class="active">ABOUT</a>
-        <a href="portfolio.html">PORTFOLIO</a>
-        <a href="proposal.html">PROPOSAL</a>
-        <a href="contact.html">CONTACT</a>
+
+        <a onclick="openPanel()" class="estimate">
+            1분견적
+        </a>
+
+        <a href="about.html" class="active">
+            ABOUT
+        </a>
+
+        <a href="portfolio.html">
+            PORTFOLIO
+        </a>
+
+        <a href="proposal.html">
+            PROPOSAL
+        </a>
+
+        <a href="contact.html">
+            CONTACT
+        </a>
+
     </div>
 
 </nav>
 
+<!-- Mobile -->
 <div class="mobile-controls">
 
-    <a onclick="togglePanel()" class="mobile-estimate">1분견적</a>
+    <a onclick="openPanel()" class="mobile-estimate">
+        1분견적
+    </a>
 
     <div class="menu-btn">
         <span></span>
@@ -323,10 +346,11 @@ nav{
 </div>
 
 <!-- Estimate Panel -->
-
 <div id="estimatePanel">
 
-    <h2 style="margin-bottom:25px;">1분 견적</h2>
+    <h2 style="margin-bottom:25px;">
+        1분 견적
+    </h2>
 
     <label style="font-weight:700; margin-bottom:10px; display:block;">
         공사 유형
@@ -376,7 +400,6 @@ nav{
 </div>
 
 <!-- Main -->
-
 <div class="wrapper">
 
     <div class="text-side">
@@ -410,14 +433,22 @@ nav{
 
 <script>
 
-/* EmailJS 초기화 */
+/* EmailJS */
 emailjs.init("sm7crJ5wvq3K7Phnz");
 
 /* 패널 열기 */
-function togglePanel(){
+function openPanel(){
 
-    document.getElementById("estimatePanel").classList.toggle("active");
-    document.getElementById("overlay").classList.toggle("active");
+    document.getElementById("estimatePanel").classList.add("active");
+    document.getElementById("overlay").classList.add("active");
+
+}
+
+/* 패널 닫기 */
+function closePanel(){
+
+    document.getElementById("estimatePanel").classList.remove("active");
+    document.getElementById("overlay").classList.remove("active");
 
 }
 
@@ -432,7 +463,7 @@ function selectHouse(el){
 
 }
 
-/* 공사 유형 선택 */
+/* 공사유형 선택 */
 function selectType(el, type){
 
     document.querySelectorAll('.type-btn').forEach(btn=>{
@@ -509,6 +540,7 @@ function selectType(el, type){
         `;
 
     }
+
 }
 
 /* 견적 계산 */
@@ -548,7 +580,8 @@ function calculate(){
         houseType =
             document.querySelector('.house-btn.active')?.innerText || "선택안함";
 
-        pyung = document.getElementById('pyung').value || 0;
+        pyung =
+            document.getElementById('pyung').value || 0;
 
         isWindow =
             document.getElementById('isWindow').checked;
@@ -592,22 +625,26 @@ function calculate(){
         "template_0vo3ea6",
         {
 
-            project_type: type || "선택안함",
+            project_type:
+                type || "선택안함",
 
-            house_type: houseType || "-",
+            house_type:
+                houseType || "-",
 
-            pyung: pyung || "-",
+            pyung:
+                pyung || "-",
 
             window_option:
                 isWindow ? "포함" : "미포함",
 
             premium_option:
-                isPremium ? "프리미엄 선택" : "일반",
+                isPremium ? "프리미엄 자재 선택" : "일반 자재",
 
             bathroom_count:
                 bathQty || "0",
 
-            phone: phone,
+            phone:
+                phone,
 
             estimate_price:
                 total
@@ -622,6 +659,8 @@ function calculate(){
         console.log("메일 전송 성공", response);
 
         alert("견적 문의가 정상 접수되었습니다.");
+
+        closePanel();
 
     })
 
