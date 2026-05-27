@@ -2,14 +2,15 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>ABOUT | KYEOL</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-/* ================= RESET & NAV ================= */
+/* ================= RESET ================= */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#111;overflow-x:hidden;}
 
+/* ================= NAV ================= */
 nav{position:fixed;top:0;width:100%;height:80px;display:flex;align-items:center;padding:0 50px;border-bottom:1px solid #eee;background:#fff;z-index:1000;}
 .logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;letter-spacing:4px;text-decoration:none;color:#000;}
 .nav-links{display:flex;gap:28px;align-items:center;margin-left:auto;}
@@ -17,12 +18,12 @@ nav{position:fixed;top:0;width:100%;height:80px;display:flex;align-items:center;
 .nav-links a.active{color:#000;font-weight:700;}
 .nav-links a.estimate{color:#e60023;font-weight:800;padding:6px 10px;border-radius:6px;background:rgba(230,0,35,0.06);}
 
-/* ================= 슬라이드 패널 (공통) ================= */
+/* ================= 슬라이드 패널 (복원 및 고정) ================= */
 #estimatePanel {
     position: fixed; top: 0; right: -50%; width: 50%; height: 100%;
     background: #fff; z-index: 2000;
     transition: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    padding: 100px 30px;
+    padding: 100px 40px;
     box-shadow: -5px 0 20px rgba(0,0,0,0.1);
 }
 #estimatePanel.active { right: 0; }
@@ -32,35 +33,27 @@ nav{position:fixed;top:0;width:100%;height:80px;display:flex;align-items:center;
 }
 .overlay.active { display: block; }
 
-/* ================= 햄버거 메뉴 ================= */
-.menu-btn{display:none;flex-direction:column;gap:5px;cursor:pointer;margin-left:20px;}
-.menu-btn span{width:22px;height:2px;background:#000;}
-.mobile-nav{position:fixed;top:-100%;left:0;width:100%;background:#fff;padding:90px 0;transition:0.4s ease;z-index:999;}
-.mobile-nav.active{top:0;}
-.mobile-nav a{display:block;padding:15px 50px;text-decoration:none;color:#111;}
-
-/* ================= 기존 레이아웃 ================= */
-.wrapper{display:flex;width:100%;min-height:100vh;padding-top:80px;}
-.text-side{flex:1;padding:8%;display:flex;flex-direction:column;justify-content:center;background:#fbfbfb;}
+/* ================= 레이아웃 ================= */
+.wrapper{display:flex;width:100%;height:100vh;padding-top:80px;}
+.text-side{flex:1;padding:0 8%;display:flex;flex-direction:column;justify-content:center;background:#fbfbfb;}
 .img-side{flex:1.3;overflow:hidden;}
 .img-side img{width:100%;height:100%;object-fit:cover;}
 .title-main{font-size:34px;font-weight:700;line-height:1.4;margin-bottom:35px;word-break:keep-all;}
 .desc-text{font-size:17px;line-height:2.1;color:#444;}
 .desc-text b{color:#111;font-weight:700;}
 
-/* ================= 모바일 대응 ================= */
+/* ================= 모바일 환경 복원 ================= */
 @media(max-width:1024px){
-    #estimatePanel { width: 50%; right: -50%; } 
+    nav{padding:0 25px;height:70px;}
     .nav-links{display:none;}
-    .menu-btn{display:flex;}
-    .mobile-estimate{
-        position:fixed;top:22px;right:70px;z-index:1200;
-        color:#e60023;font-weight:800;font-size:13px;text-decoration:none;
-        background:rgba(230,0,35,0.1);padding:6px 10px;border-radius:6px;cursor:pointer;
-    }
+    
+    /* 패널 너비 강제 고정 */
+    #estimatePanel { width: 50%; right: -50%; } 
+    
     .wrapper{flex-direction:column;height:auto;}
     .img-side{height:40vh;order:2;}
-    .text-side{padding:60px 25px;}
+    .text-side{padding:60px 25px;order:1;}
+    .title-main{font-size:24px;}
 }
 </style>
 </head>
@@ -75,22 +68,12 @@ nav{position:fixed;top:0;width:100%;height:80px;display:flex;align-items:center;
         <a href="proposal.html">PROPOSAL</a>
         <a href="contact.html">CONTACT</a>
     </div>
-    <div class="menu-btn" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
-
-<a onclick="togglePanel()" class="mobile-estimate">1분견적</a>
-
-<div class="mobile-nav" id="mobileNav">
-    <a href="about.html">ABOUT</a>
-    <a href="portfolio.html">PORTFOLIO</a>
-    <a href="proposal.html">PROPOSAL</a>
-    <a href="contact.html">CONTACT</a>
-</div>
 
 <div class="overlay" id="overlay" onclick="togglePanel()"></div>
 <div id="estimatePanel">
     <h1>1분 견적</h1>
-    <p>견적 문의 내용을 입력해주세요.</p>
+    <p>견적 문의를 위한 폼을 여기에 구성하세요.</p>
 </div>
 
 <div class="wrapper">
@@ -110,9 +93,6 @@ nav{position:fixed;top:0;width:100%;height:80px;display:flex;align-items:center;
     function togglePanel() {
         document.getElementById("estimatePanel").classList.toggle("active");
         document.getElementById("overlay").classList.toggle("active");
-    }
-    function toggleMenu(){
-        document.getElementById("mobileNav").classList.toggle("active");
     }
 </script>
 
