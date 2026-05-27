@@ -4,23 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ABOUT | (주)결</title>
+<title>ABOUT | KYEOL</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
--webkit-font-smoothing:antialiased;
-}
-
+/* ================= RESET ================= */
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
+font-family:'Noto Sans KR',sans-serif;
 background:#fff;
-font-family:'Noto Sans KR', sans-serif;
 color:#111;
+overflow-x:hidden;
 }
 
 /* ================= NAV ================= */
@@ -30,36 +26,40 @@ top:0;
 width:100%;
 height:80px;
 display:flex;
-justify-content:space-between;
 align-items:center;
+justify-content:space-between;
 padding:0 50px;
-background:#fff;
 border-bottom:1px solid #eee;
+background:#fff;
 z-index:1000;
 }
 
-/* 🔥 KYEOL 원본 복구 */
+/* LOGO (KYEOL 원본 유지) */
 .logo{
-font-family:'Playfair Display', serif;
-font-weight:700;
+font-family:'Playfair Display',serif;
 font-size:24px;
+font-weight:700;
 letter-spacing:4px;
-color:#000;
 text-decoration:none;
+color:#000;
 }
 
-/* 메뉴 */
+/* ================= PC MENU ================= */
 .nav-links{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
 display:flex;
-gap:30px;
+gap:28px;
 align-items:center;
 }
 
 .nav-links a{
 text-decoration:none;
-color:#888;
+color:#999;
 font-size:13px;
 letter-spacing:2px;
+transition:0.3s;
 }
 
 .nav-links a.active{
@@ -67,13 +67,16 @@ color:#000;
 font-weight:700;
 }
 
-/* 🔥 1분견적 강조 */
+/* 🔥 1분견적 (PC - ABOUT 오른쪽 영역) */
 .nav-links a.estimate{
 color:#e60023;
 font-weight:800;
+padding:6px 10px;
+border-radius:6px;
+background:rgba(230,0,35,0.06);
 }
 
-/* ================= MOBILE MENU ================= */
+/* ================= HAMBURGER ================= */
 .menu-btn{
 display:none;
 flex-direction:column;
@@ -87,70 +90,78 @@ height:2px;
 background:#000;
 }
 
+/* ================= MOBILE MENU ================= */
 .mobile-nav{
 position:fixed;
 top:-100%;
 left:0;
 width:100%;
 background:#fff;
-padding:90px 0;
+border-bottom:1px solid #eee;
 display:flex;
 flex-direction:column;
-transition:0.4s;
+padding:90px 0 30px;
+transition:0.4s ease;
 z-index:999;
-border-bottom:1px solid #eee;
-}
-
-.mobile-nav.active{
-top:0;
 }
 
 .mobile-nav a{
-padding:15px 30px;
+padding:15px 50px;
 text-decoration:none;
 color:#111;
+font-size:16px;
+border-bottom:1px solid #f9f9f9;
 }
 
 /* ================= LAYOUT ================= */
 .wrapper{
 display:flex;
+width:100%;
 height:100vh;
 padding-top:80px;
 }
 
-.text{
+.text-side{
 flex:1;
 padding:0 8%;
 display:flex;
 flex-direction:column;
 justify-content:center;
+background:#fbfbfb;
 }
 
-.img{
+.img-side{
 flex:1.3;
+overflow:hidden;
 }
 
-.img img{
+.img-side img{
 width:100%;
 height:100%;
 object-fit:cover;
 }
 
-/* 타이틀 */
-.title{
+/* ================= TEXT ================= */
+.title-main{
 font-size:34px;
 font-weight:700;
 line-height:1.4;
-margin-bottom:30px;
+margin-bottom:35px;
+
+/* 🔥 줄바꿈 강제 방지 */
 word-break:keep-all;
+white-space:nowrap;
 }
 
-/* 설명 */
-.desc{
+.desc-text{
 font-size:17px;
-line-height:2;
+line-height:2.1;
 color:#444;
-word-break:keep-all;
+}
+
+.desc-text b{
+color:#111;
+font-weight:700;
 }
 
 /* 모바일 줄바꿈 */
@@ -168,8 +179,36 @@ height:70px;
 display:none;
 }
 
+/* 햄버거 */
 .menu-btn{
 display:flex;
+position:fixed;
+right:25px;
+top:25px;
+z-index:1200;
+}
+
+/* 🔥 모바일 1분견적 (햄버거 왼쪽) */
+.mobile-estimate{
+position:fixed;
+top:22px;
+right:70px;
+z-index:1200;
+
+color:#e60023;
+font-weight:800;
+font-size:13px;
+text-decoration:none;
+background:rgba(230,0,35,0.1);
+padding:6px 10px;
+border-radius:6px;
+}
+
+/* 제목 줄바꿈 해결 */
+.title-main{
+font-size:24px;
+white-space:normal;
+line-height:1.4;
 }
 
 .wrapper{
@@ -177,31 +216,9 @@ flex-direction:column;
 height:auto;
 }
 
-.img{
+.img-side{
 height:40vh;
-order:1;
 }
-
-.text{
-order:2;
-padding:40px 20px;
-}
-
-.title{
-font-size:24px;
-line-height:1.35;
-}
-
-/* 🔥 모바일 2줄 유지 */
-.desc{
-font-size:16px;
-line-height:1.8;
-}
-
-.mobile-br{
-display:block;
-}
-
 }
 
 </style>
@@ -209,60 +226,59 @@ display:block;
 
 <body>
 
+<!-- NAV -->
 <nav>
 
 <a href="index.html" class="logo">KYEOL</a>
 
 <div class="nav-links">
 <a href="about.html" class="active">ABOUT</a>
+<a href="estimate.html" class="estimate">1분견적</a>
 <a href="portfolio.html">PORTFOLIO</a>
 <a href="proposal.html">PROPOSAL</a>
-
-<!-- 🔥 1분견적 복구 -->
-<a href="estimate.html" class="estimate">1분견적</a>
-
 <a href="contact.html">CONTACT</a>
 </div>
 
-<div class="menu-btn" id="menuBtn">
+<div class="menu-btn" onclick="toggleMenu()">
 <span></span><span></span><span></span>
 </div>
 
 </nav>
 
-<!-- mobile -->
+<!-- MOBILE CTA -->
+<a href="estimate.html" class="mobile-estimate">1분견적</a>
+
+<!-- MOBILE MENU -->
 <div class="mobile-nav" id="mobileNav">
 <a href="about.html">ABOUT</a>
 <a href="portfolio.html">PORTFOLIO</a>
 <a href="proposal.html">PROPOSAL</a>
-<a href="estimate.html" style="color:#e60023;font-weight:800;">1분견적</a>
 <a href="contact.html">CONTACT</a>
 </div>
 
+<!-- CONTENT -->
 <div class="wrapper">
 
-<div class="text">
+<div class="text-side">
 
-<h1 class="title">
-"The devil is in the detail,<br>
-악마는 디테일에 있다."
+<h1 class="title-main">
+"The devil is in the detail,<br>악마는 디테일에 있다."
 </h1>
 
-<p class="desc">
+<p class="desc-text">
 단순해 보이는 공간일지라도,<br>
 그 완성도는 눈에 잘 띄지 않는<br>
 작은 디테일에서 결정됩니다.<br><br>
 
 <b>
-머무는 순간의 온기,<br class="mobile-br">
-결이 좋은 공간을 짓습니다.
+"머무는 순간의 온기, 눈에 닿는 모든 곳에<br class="mobile-br">
+결이 좋은 공간을 짓습니다."
 </b>
-
 </p>
 
 </div>
 
-<div class="img">
+<div class="img-side">
 <img src="image/about1.jpg">
 </div>
 
@@ -270,13 +286,9 @@ display:block;
 
 <script>
 
-const menuBtn = document.getElementById("menuBtn");
-const mobileNav = document.getElementById("mobileNav");
-
-menuBtn.onclick = () => {
-menuBtn.classList.toggle("open");
-mobileNav.classList.toggle("active");
-};
+function toggleMenu(){
+document.getElementById("mobileNav").classList.toggle("active");
+}
 
 </script>
 
