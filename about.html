@@ -24,6 +24,12 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); display: none; z-index: 1500; }
     .overlay.active { display: block; }
 
+    /* Form Styles */
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    select, input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+    .detail-box { background: #f9f9f9; padding: 15px; border-radius: 4px; margin-top: 10px; font-size: 13px; display: none; }
+
     /* Mobile UI */
     .mobile-controls { display: none; position: fixed; top: 22px; right: 25px; z-index: 1200; align-items: center; gap: 15px; }
     .mobile-estimate { color: #e60023; font-weight: 800; font-size: 13px; text-decoration: none; background: rgba(230,0,35,0.1); padding: 6px 10px; border-radius: 6px; cursor: pointer; }
@@ -33,7 +39,7 @@
     .mobile-nav.active { top: 0; }
     .mobile-nav a { display: block; padding: 15px 50px; text-decoration: none; color: #111; }
 
-    /* Wrapper */
+    /* Layout */
     .wrapper { display: flex; width: 100%; height: 100vh; padding-top: 80px; }
     .text-side { flex: 1; padding: 0 8%; display: flex; flex-direction: column; justify-content: center; background: #fbfbfb; }
     .img-side { flex: 1.3; overflow: hidden; }
@@ -81,9 +87,26 @@
 </div>
 
 <div class="overlay" id="overlay" onclick="togglePanel()"></div>
+
 <div id="estimatePanel">
-    <h1>1분 견적</h1>
-    <p>견적 문의 내용을 입력해주세요.</p>
+    <h2 style="margin-bottom: 20px;">1분 견적</h2>
+    <div class="form-group">
+        <label>공사 유형 선택</label>
+        <select id="mainType" onchange="updateForm()">
+            <option value="">선택해주세요</option>
+            <option value="residence">주거 공간 리모델링</option>
+            <option value="commercial">상업 공간 인테리어</option>
+            <option value="partial">부분 공사</option>
+        </select>
+    </div>
+
+    <div id="subFields"></div>
+
+    <div class="form-group">
+        <label>연락처</label>
+        <input type="tel" id="userPhone" placeholder="010-0000-0000">
+    </div>
+    <button onclick="calculate()" style="width:100%; padding:15px; background:#111; color:#fff; border:none; cursor:pointer;">견적 금액 산출하기</button>
 </div>
 
 <div class="wrapper">
@@ -100,6 +123,24 @@
 <script>
     function togglePanel() { document.getElementById("estimatePanel").classList.toggle("active"); document.getElementById("overlay").classList.toggle("active"); }
     function toggleMenu() { document.getElementById("mobileNav").classList.toggle("active"); }
+
+    function updateForm() {
+        const type = document.getElementById("mainType").value;
+        const subFields = document.getElementById("subFields");
+        subFields.innerHTML = "";
+
+        if(type === 'residence') {
+            subFields.innerHTML = `<div class="form-group"><label><input type="checkbox" onchange="toggle('bath')"> 화장실 변경</label><div id="bathDetail" class="detail-box">개소: <input type="number"></div></div>`;
+        } else if(type === 'commercial') {
+            subFields.innerHTML = `<p style="font-size:13px; color:#e60023; margin-bottom:15px;">※ 업종별 자재 수준에 따라 가격 차이가 큽니다. 상세 상담이 필요합니다.</p>`;
+        } else if(type === 'partial') {
+            subFields.innerHTML = `
+                <div class="form-group"><label><input type="checkbox" onchange="toggle('film')"> 필름공사</label><div id="filmDetail" class="detail-box">도어 <input type="number" style="width:50px">개소 | 샷시 <input type="number" style="width:50px">개소</div></div>
+                <div class="form-group"><label><input type="checkbox" onchange="toggle('silicone')"> 실리콘</label><div id="siliconeDetail" class="detail-box">화장실 <input type="number" style="width:50px">개소 | 싱크대 <input type="number" style="width:50px">m</div></div>`;
+        }
+    }
+    function toggle(id) { document.getElementById(id + 'Detail').style.display = event.target.checked ? 'block' : 'none'; }
+    function calculate() { alert("연락처를 확인했습니다. 상세 견적을 위해 곧 연락드리겠습니다."); }
 </script>
 
 </body>
