@@ -363,7 +363,7 @@ nav{
         </div>
 
         <div class="type-btn" onclick="selectType(this, 'commercial')">
-            상업 인테리어
+            상가 인테리어
         </div>
 
         <div class="type-btn" onclick="selectType(this, 'partial')">
@@ -422,13 +422,13 @@ nav{
 
     <div
         id="resultPrice"
-            style="
-                margin-top:20px;
-                text-align:center;
-                font-size:18px;
-                font-weight:800;
-                color:#e60023;
-            "
+        style="
+            margin-top:20px;
+            text-align:center;
+            font-size:18px;
+            font-weight:800;
+            color:#e60023;
+        "
     ></div>
 
 </div>
@@ -568,9 +568,22 @@ function selectType(el, type){
     }else{
 
         subFields.innerHTML = `
-            <div style="font-size:13px; color:#555;">
-                상세 내역은 상담을 통해 조율됩니다.
+
+            <div style="
+                font-size:13px;
+                line-height:1.9;
+                color:#e60023;
+                font-weight:500;
+            ">
+
+                자재 사양, 공사 범위, 업종 특성 및 현장 조건에 따라<br>
+                견적 금액은 달라질 수 있습니다.<br><br>
+
+                보다 정확한 상담과 안내를 위해<br>
+                담당자가 직접 상담 도와드리고 있습니다.
+
             </div>
+
         `;
 
     }
@@ -669,7 +682,7 @@ function calculate(){
 
     }else{
 
-        resultText = "상담을 통해 안내드립니다.";
+        resultText = "담당자 상담 후 안내드립니다.";
 
     }
 
