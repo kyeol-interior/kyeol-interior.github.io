@@ -25,19 +25,97 @@
 <div class="max-w-7xl mx-auto p-6">
     <div class="card mb-6">
         <h1 class="title">(주)결 인테리어 견적 계산기</h1>
+        <p class="sub mt-2">아파트 / 주택 인테리어 예상 견적 자동 계산</p>
     </div>
 
     <div class="grid lg:grid-cols-2 gap-6">
         <div class="card">
-            <label>고객 연락처 (상담용)</label>
-            <input type="tel" id="userPhone" placeholder="010-0000-0000" class="mb-5">
+            <h2 class="text-2xl font-bold mb-6">견적 옵션 선택</h2>
+            
+            <div class="mb-5">
+                <label>주거 형태</label>
+                <div class="flex gap-4">
+                    <div id="houseTypeBtn1" class="house-btn active" onclick="setHouseType('아파트')">아파트</div>
+                    <div id="houseTypeBtn2" class="house-btn" onclick="setHouseType('주택')">주택</div>
+                </div>
             </div>
 
+            <div class="mb-5">
+                <label>평수 입력</label>
+                <input type="number" id="size" placeholder="예: 24" value="24" oninput="calculate()">
+            </div>
+
+            <div class="mb-5">
+                <label>도배 종류</label>
+                <select id="wallpaper" onchange="calculate()">
+                    <option value="silk">실크 벽지</option>
+                    <option value="paper">합지 벽지</option>
+                    <option value="premium">고급 실크 벽지</option>
+                </select>
+            </div>
+
+            <div class="mb-5">
+                <label>바닥 종류</label>
+                <select id="floor" onchange="calculate()">
+                    <option value="18">1.8T 장판</option>
+                    <option value="22">2.2T 장판</option>
+                    <option value="45">4.5T 지아소리잠</option>
+                    <option value="50">5.0T X컴포트</option>
+                    <option value="kang">강마루</option>
+                    <option value="stone">대리석 마루</option>
+                </select>
+            </div>
+
+            <div class="mb-5">
+                <label>욕실 공사 (개소당 300만원)</label>
+                <select id="bathroom" onchange="calculate()">
+                    <option value="0">안함</option>
+                    <option value="1">욕실 1개</option>
+                    <option value="2">욕실 2개</option>
+                </select>
+            </div>
+
+            <div class="mb-5">
+                <label>샷시 필름</label>
+                <select id="windowFilm" onchange="calculate()">
+                    <option value="0">안함</option>
+                    <option value="1300000">샷시 필름 (+130만원)</option>
+                </select>
+            </div>
+
+            <div class="mb-5">
+                <label>샷시 교체</label>
+                <select id="windowReplace" onchange="calculate()">
+                    <option value="0">안함</option>
+                    <option value="7000000">기본 샷시 교체 (+700만원)</option>
+                    <option value="12000000">프리미엄 샷시 교체 (+1200만원)</option>
+                </select>
+            </div>
+        </div>
+
         <div class="result-card">
-            <div id="totalResult" class="total-price">0원</div>
+            <h2 class="text-3xl font-bold mb-8">예상 견적 결과</h2>
+            <div class="space-y-4">
+                <div class="flex justify-between"><span>도배</span><span id="wallpaperResult">0원</span></div>
+                <div class="flex justify-between"><span>바닥</span><span id="floorResult">0원</span></div>
+                <div class="flex justify-between"><span>욕실</span><span id="bathroomResult">0원</span></div>
+                <div class="flex justify-between"><span>철거(평당 12만)</span><span id="demolitionResult">0원</span></div>
+                <div class="flex justify-between"><span>샷시 필름</span><span id="filmResult">0원</span></div>
+                <div class="flex justify-between"><span>샷시 교체</span><span id="windowResult">0원</span></div>
+                <hr class="border-gray-700 my-4">
+                <div class="text-gray-300">최종 소비자 견적</div>
+                <div id="totalResult" class="total-price">0원</div>
+            </div>
             
-            <button onclick="sendKakao()" class="mt-6 w-full bg-yellow-400 text-black py-4 rounded-2xl font-bold">카카오톡으로 공유</button>
-            <button onclick="sendToAdmin()" class="mt-3 w-full bg-blue-600 text-white py-4 rounded-2xl font-bold">관리자에게 견적 신청하기</button>
+            <div class="mt-8">
+                <input type="tel" id="userPhone" placeholder="연락처를 입력해주세요" class="w-full p-4 rounded-xl text-black mb-3">
+                <button onclick="sendToAdmin()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold hover:bg-blue-700 transition">
+                    이메일로 견적 신청하기
+                </button>
+                <button onclick="sendKakao()" class="mt-3 w-full bg-yellow-400 text-black py-4 rounded-2xl font-bold hover:opacity-90 transition">
+                    카카오톡으로 견적 공유하기
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -47,23 +125,31 @@
     Kakao.init('2bad539efc54835e8a8e944d4c533e31');
     (function(){ emailjs.init("sm7crJ5wvq3K7Phnz"); })();
 
-    // 2. 견적 계산 함수 (기존 로직 유지)
-    function calculate() { /* 기존 코드 내용 그대로 복사 */ }
+    let selectedHouseType = '아파트';
 
-    // 3. EmailJS 발송 함수
-    function sendToAdmin() {
-        const templateParams = {
-            user_phone: document.getElementById("userPhone").value,
-            house_type: selectedHouseType,
-            size: document.getElementById("size").value,
-            total_price: document.getElementById("totalResult").innerText
-        };
-
-        emailjs.send('service_fz1110j', 'template_0vo3ea6', templateParams)
-            .then(() => alert("견적 신청이 완료되었습니다!"), 
-                  () => alert("전송 실패. 관리자에게 문의하세요."));
+    function setHouseType(type) {
+        selectedHouseType = type;
+        document.getElementById('houseTypeBtn1').classList.toggle('active', type === '아파트');
+        document.getElementById('houseTypeBtn2').classList.toggle('active', type === '주택');
+        calculate();
     }
-</script>
 
-</body>
-</html>
+    function numberFormat(num) { return Number(num).toLocaleString() + "원"; }
+
+    function calculate() {
+        const size = parseFloat(document.getElementById("size").value) || 0;
+        const wallpaper = document.getElementById("wallpaper").value;
+        const floor = document.getElementById("floor").value;
+        const bathroom = parseInt(document.getElementById("bathroom").value);
+        const windowFilm = parseInt(document.getElementById("windowFilm").value);
+        const windowReplace = parseInt(document.getElementById("windowReplace").value);
+
+        const wallpaperRates = { silk: 30000, paper: 18000, premium: 50000 };
+        const floorRates = { "18":35100, "22":65000, "45":120900, "50":156000, "kang":156000, "stone":182000 };
+        
+        const wallpaperCost = size * wallpaperRates[wallpaper];
+        const floorCost = size * floorRates[floor];
+        const bathroomCost = bathroom * 3000000;
+        const demolitionCost = size * 120000;
+        
+        const totalPrice =
