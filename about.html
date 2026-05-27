@@ -67,14 +67,6 @@ nav{
     font-weight:700;
 }
 
-.nav-links a.estimate{
-    color:#e60023;
-    font-weight:800;
-    padding:6px 10px;
-    border-radius:6px;
-    background:rgba(230,0,35,0.06);
-}
-
 /* Overlay */
 .overlay{
     position:fixed;
@@ -247,7 +239,7 @@ nav{
 
     font-size:11px;
     opacity:0.82;
-    margin-bottom:4px;
+    margin-bottom:6px;
     letter-spacing:1px;
 
 }
@@ -280,6 +272,14 @@ nav{
 
     nav{
         padding:0 22px;
+    }
+
+    .nav-links{
+        gap:16px;
+    }
+
+    .nav-links a{
+        font-size:11px;
     }
 
     #estimatePanel{
@@ -332,22 +332,18 @@ nav{
 
         padding:18px 20px;
 
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-
     }
 
     .floating-sub{
 
         font-size:12px;
-        margin-bottom:0;
+        margin-bottom:6px;
 
     }
 
     .floating-main{
 
-        font-size:18px;
+        font-size:20px;
 
     }
 
@@ -369,10 +365,6 @@ nav{
     </a>
 
     <div class="nav-links">
-
-        <a onclick="openPanel()" class="estimate">
-            1분견적
-        </a>
 
         <a href="about.html" class="active">
             ABOUT
