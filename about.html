@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>(주)결 인테리어 견적 계산기</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js"></script>
     <style>
         body { background: #f3f4f6; font-family: Pretendard, sans-serif; }
         .card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
@@ -106,11 +107,18 @@
                 <div id="totalResult" class="total-price">0원</div>
             </div>
             <div class="mt-8 bg-white/10 p-5 rounded-2xl" id="description">옵션을 선택하면 상세 설명이 표시됩니다.</div>
+            
+            <button onclick="sendKakao()" class="mt-6 w-full bg-yellow-400 text-black py-4 rounded-2xl font-bold hover:opacity-90 transition">
+                카카오톡으로 견적 보내기
+            </button>
         </div>
     </div>
 </div>
 
 <script>
+    // 카카오 SDK 초기화
+    Kakao.init('2bad539efc54835e8a8e944d4c533e31');
+
     let selectedHouseType = '아파트';
 
     function setHouseType(type) {
@@ -130,7 +138,6 @@
         const windowFilm = parseInt(document.getElementById("windowFilm").value);
         const windowReplace = parseInt(document.getElementById("windowReplace").value);
 
-        // 비용 계산
         const wallpaperRates = { silk: 30000, paper: 18000, premium: 50000 };
         const floorRates = { "18":35100, "22":65000, "45":120900, "50":156000, "kang":156000, "stone":182000 };
         
@@ -138,21 +145,26 @@
         const floorCost = size * floorRates[floor];
         const bathroomCost = bathroom * 3000000;
         const demolitionCost = size * 120000;
-        const filmCost = windowFilm;
-        const windowCost = windowReplace;
+        
+        const totalPrice = wallpaperCost + floorCost + bathroomCost + demolitionCost + windowFilm + windowReplace;
 
-        const totalPrice = wallpaperCost + floorCost + bathroomCost + demolitionCost + filmCost + windowCost;
-
-        // 화면 출력
         document.getElementById("wallpaperResult").innerText = numberFormat(wallpaperCost);
         document.getElementById("floorResult").innerText = numberFormat(floorCost);
         document.getElementById("bathroomResult").innerText = numberFormat(bathroomCost);
         document.getElementById("demolitionResult").innerText = numberFormat(demolitionCost);
-        document.getElementById("filmResult").innerText = numberFormat(filmCost);
-        document.getElementById("windowResult").innerText = numberFormat(windowCost);
+        document.getElementById("filmResult").innerText = numberFormat(windowFilm);
+        document.getElementById("windowResult").innerText = numberFormat(windowReplace);
         document.getElementById("totalResult").innerText = numberFormat(totalPrice);
-        
-        document.getElementById("description").innerHTML = `<b>주거 형태: ${selectedHouseType}</b><br>현재 ${size}평 기준으로 산출된 예상 견적입니다. 상세 항목별로 상담을 통해 최종 조율이 가능합니다.`;
+        document.getElementById("description").innerHTML = `<b>주거 형태: ${selectedHouseType}</b><br>현재 ${size}평 기준으로 산출된 예상 견적입니다.`;
+    }
+
+    function sendKakao() {
+        const total = document.getElementById("totalResult").innerText;
+        Kakao.Share.sendDefault({
+            objectType: 'text',
+            text: `[결 인테리어 견적 안내]\n주거 형태: ${selectedHouseType}\n평수: ${document.getElementById("size").value}평\n예상 금액: ${total}\n상담을 통해 조율 가능합니다.`,
+            link: { mobileWebUrl: window.location.href, webUrl: window.location.href },
+        });
     }
 
     calculate();
