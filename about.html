@@ -9,108 +9,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing:antialiased; }
-        body { background:#fff; font-family:'Noto Sans KR', sans-serif; color:#111; overflow-x:hidden; }
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; }
+        body { background:#fff; font-family: 'Noto Sans KR', sans-serif; color:#111; overflow-x:hidden; }
 
-        /* ================= NAV ================= */
         nav { 
-            position:fixed;
-            top:0;
-            width:100%;
-            height:80px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:0 50px;
-            background:#fff;
-            z-index:1100;
-            border-bottom:1px solid #f2f2f2;
+            position:fixed; top:0; width:100%; height:80px; 
+            display:flex; justify-content:space-between; align-items:center; 
+            padding:0 50px; background:#fff; z-index:1100; border-bottom:1px solid #f2f2f2;
         }
 
-        .logo {
-            font-family:'Playfair Display', serif;
-            font-size:24px;
-            font-weight:700;
-            text-decoration:none;
-            color:#000;
-            letter-spacing:4px;
-        }
+        .logo { font-family: 'Playfair Display', serif; font-size:24px; font-weight:700; text-decoration:none; color:#000; letter-spacing:4px; }
 
-        /* 기존 메뉴 유지 */
-        .nav-links {
-            display:flex;
-            gap:35px;
-            align-items:center;
-        }
-
-        .nav-links a {
-            text-decoration:none;
-            color:#999;
-            font-size:13px;
-            letter-spacing:2px;
-            transition:0.3s;
-        }
-
+        .nav-links { display:flex; gap:35px; }
+        .nav-links a { text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; transition: 0.3s; }
         .nav-links a.active { color:#000; font-weight:700; }
 
-        /* 🔴 1분견적 (ABOUT보다 왼쪽, NAV 내부 자연 삽입) */
-        .estimate-btn {
-            background:#e60012;
-            color:#fff;
-            font-size:12px;
-            font-weight:700;
-            padding:7px 12px;
-            border:none;
-            cursor:pointer;
-            white-space:nowrap;
-            margin-right:20px;
+        .menu-btn { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1200; }
+        .menu-btn span { width: 22px; height: 2px; background: #000; }
+
+        .mobile-nav {
+            position: fixed; top: -100%; left: 0; width: 100%;
+            background:#fff;
+            display:flex; flex-direction:column;
+            padding:100px 0 30px;
+            transition:0.4s;
+        }
+        .mobile-nav.active { top:0; }
+
+        .mobile-nav a {
+            padding:15px 50px;
+            text-decoration:none;
+            color:#111;
+            border-bottom:1px solid #f9f9f9;
         }
 
-        /* hamburger */
-        .menu-btn {
-            display:none;
-            flex-direction:column;
-            gap:6px;
-            cursor:pointer;
-        }
-
-        .menu-btn span {
-            width:22px;
-            height:2px;
-            background:#000;
-        }
-
-        /* ================= MOBILE ================= */
-        @media (max-width:1024px) {
-
-            nav {
-                padding:0 20px;
-            }
-
-            /* PC 메뉴 숨김 */
-            .nav-links {
-                display:none;
-            }
-
-            /* 모바일에서 1분견적 위치 안정 (햄버거 왼쪽 유지) */
-            .nav-right {
-                display:flex;
-                align-items:center;
-                gap:12px;
-            }
-
-            .menu-btn {
-                display:flex;
-            }
-
-            .estimate-btn {
-                font-size:11px;
-                padding:6px 10px;
-                margin-right:10px;
-            }
-        }
-
-        /* ================= PAGE LAYOUT (원본 유지) ================= */
         .wrapper {
             display:flex;
             width:100%;
@@ -143,30 +75,84 @@
             font-weight:700;
             line-height:1.4;
             margin-bottom:35px;
+            word-break:keep-all;
         }
 
         .desc-text {
             font-size:17px;
             color:#444;
+            font-weight:300;
             line-height:2.1;
         }
 
         .mobile-br { display:none; }
 
-        @media (max-width:1024px) {
+        .highlight-section {
+            margin-top:45px;
+            padding-top:35px;
+            border-top:1px solid #ddd;
+        }
+
+        .cert-badge {
+            display:inline-block;
+            padding:7px 15px;
+            background:#000;
+            color:#fff;
+            font-size:11px;
+            margin-right:8px;
+        }
+
+        /* =========================
+           MOBILE FIX 핵심 영역
+        ========================== */
+        @media (max-width: 1024px) {
+
+            nav { padding:0 25px; height:70px; }
+            .logo { font-size:20px; }
+            .nav-links { display:none; }
+            .menu-btn { display:flex; }
+
             .wrapper {
                 flex-direction:column;
                 height:auto;
-                padding-top:80px;
+                padding-top:70px;
             }
 
             .img-side {
+                order:1;
                 height:40vh;
             }
 
             .text-side {
-                padding:50px 25px;
+                order:2;
+                padding:50px 25px 80px;
                 background:#fff;
+            }
+
+            .title-main {
+                font-size:24px;
+                line-height:1.25;
+
+                /* 🔥 핵심: 2줄 강제 */
+                max-width: 20ch;
+                margin: 0 auto 20px auto;
+                text-align:center;
+            }
+
+            .desc-text {
+                font-size:16px;
+                line-height:1.8;
+
+                /* 🔥 핵심: 2줄 안정화 */
+                max-width: 34ch;
+                margin: 0 auto;
+                text-align:center;
+                word-break:keep-all;
+            }
+
+            /* 🔥 줄깨짐 방지 */
+            .desc-text br {
+                display:none;
             }
 
             .mobile-br {
@@ -178,40 +164,29 @@
 
 <body>
 
-<!-- ================= NAV ================= -->
 <nav>
-
-    <!-- LEFT -->
     <a href="index.html" class="logo">KYEOL</a>
 
-    <!-- CENTER MENU + 1분견적 (핵심 구조) -->
-    <div style="display:flex; align-items:center;">
-
-        <!-- 🔴 1분견적 (ABOUT보다 왼쪽, 로고 옆 자연 위치) -->
-        <button class="estimate-btn"
-                onclick="location.href='estimate.html'">
-            1분견적
-        </button>
-
-        <div class="nav-links">
-            <a href="about.html" class="active">ABOUT</a>
-            <a href="portfolio.html">PORTFOLIO</a>
-            <a href="proposal.html">PROPOSAL</a>
-            <a href="contact.html">CONTACT</a>
-        </div>
-
+    <div class="nav-links">
+        <a href="about.html" class="active">ABOUT</a>
+        <a href="portfolio.html">PORTFOLIO</a>
+        <a href="proposal.html">PROPOSAL</a>
+        <a href="contact.html">CONTACT</a>
     </div>
 
-    <!-- MOBILE HAMBURGER -->
     <div class="menu-btn" id="menuToggle">
         <span></span><span></span><span></span>
     </div>
-
 </nav>
 
-<!-- ================= CONTENT ================= -->
-<div class="wrapper">
+<div class="mobile-nav" id="dropdown">
+    <a href="about.html">ABOUT</a>
+    <a href="portfolio.html">PORTFOLIO</a>
+    <a href="proposal.html">PROPOSAL</a>
+    <a href="contact.html">CONTACT</a>
+</div>
 
+<div class="wrapper">
     <div class="text-side">
         <h1 class="title-main">
             "The devil is in the detail,<br>
@@ -220,22 +195,41 @@
 
         <p class="desc-text">
             단순해 보이는 공간일지라도,<br>
-            그 완성도는 작은 디테일에서 결정됩니다.<br><br>
+            그 완성도는 눈에 잘 띄지 않는<br>
+            작은 디테일에서 결정됩니다.<br><br>
 
-            <b>머무는 순간의 온기, 결이 좋은 공간을 짓습니다.</b>
+            <b>
+                "머무는 순간의 온기, 눈에 닿는 모든 곳에<br class="mobile-br">
+                결이 좋은 공간을 짓습니다."
+            </b>
         </p>
+
+        <div class="highlight-section">
+            <span class="cert-badge">실내건축공사업 면허 보유 법인</span>
+            <span class="cert-badge">인증 장애인기업</span>
+        </div>
     </div>
 
     <div class="img-side">
-        <img src="image/about1.jpg" alt="About">
+        <img src="image/about1.jpg" alt="About Kyeol">
     </div>
-
 </div>
 
 <script>
-document.getElementById('menuToggle').onclick = function(){
-    this.classList.toggle('open');
-};
+    const menuToggle = document.getElementById('menuToggle');
+    const dropdown = document.getElementById('dropdown');
+
+    menuToggle.onclick = () => {
+        menuToggle.classList.toggle('open');
+        dropdown.classList.toggle('active');
+    };
+
+    document.onclick = (e) => {
+        if (!dropdown.contains(e.target) && !menuToggle.contains(e.target)) {
+            menuToggle.classList.remove('open');
+            dropdown.classList.remove('active');
+        }
+    };
 </script>
 
 </body>
