@@ -23,7 +23,7 @@ body{
     overflow-x:hidden;
 }
 
-/* Nav */
+/* NAV */
 nav{
     position:fixed;
     top:0;
@@ -59,7 +59,6 @@ nav{
     color:#999;
     font-size:13px;
     letter-spacing:2px;
-    cursor:pointer;
     transition:0.3s;
 }
 
@@ -68,7 +67,7 @@ nav{
     font-weight:700;
 }
 
-/* Mobile Hamburger */
+/* Mobile Menu Button */
 .mobile-menu-btn{
     display:none;
     flex-direction:column;
@@ -108,7 +107,6 @@ nav{
     font-size:18px;
     padding:18px 0;
     border-bottom:1px solid #eee;
-    letter-spacing:1px;
 }
 
 /* Overlay */
@@ -136,7 +134,7 @@ nav{
     height:100%;
     background:#fff;
     z-index:3000;
-    transition:0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition:0.45s cubic-bezier(0.25,0.8,0.25,1);
     padding:100px 40px;
     box-shadow:-5px 0 30px rgba(0,0,0,0.12);
     overflow-y:auto;
@@ -181,15 +179,14 @@ nav{
 .house-btn{
     padding:12px;
     border:1px solid #ddd;
-    cursor:pointer;
-    text-align:center;
     border-radius:8px;
-    font-size:13px;
+    text-align:center;
+    cursor:pointer;
 }
 
 .house-btn.active{
-    border-color:#111;
     background:#eee;
+    border-color:#111;
 }
 
 .detail-section{
@@ -202,7 +199,28 @@ nav{
     font-size:13px;
 }
 
-/* Layout */
+.partial-group{
+    margin-bottom:24px;
+}
+
+.partial-title{
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.partial-checks{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.partial-checks label{
+    display:flex;
+    gap:6px;
+    font-size:13px;
+}
+
+/* Main */
 .wrapper{
     display:flex;
     width:100%;
@@ -232,7 +250,6 @@ nav{
 
 .title-main{
     font-size:34px;
-    font-weight:700;
     line-height:1.4;
     margin-bottom:35px;
 }
@@ -243,12 +260,7 @@ nav{
     color:#444;
 }
 
-.desc-text b{
-    color:#111;
-    font-weight:700;
-}
-
-/* Floating CTA */
+/* Floating Estimate */
 .floating-estimate{
     position:fixed;
     right:24px;
@@ -260,19 +272,13 @@ nav{
     padding:18px 24px;
     cursor:pointer;
     box-shadow:0 12px 35px rgba(230,0,35,0.32);
-    transition:0.3s;
     animation:floatingPulse 2s infinite;
-}
-
-.floating-estimate:hover{
-    transform:translateY(-4px);
 }
 
 .floating-sub{
     font-size:11px;
-    opacity:0.82;
+    opacity:0.85;
     margin-bottom:6px;
-    letter-spacing:1px;
 }
 
 .floating-main{
@@ -286,31 +292,7 @@ nav{
     100%{ transform:scale(1); }
 }
 
-/* Partial */
-.partial-group{
-    margin-bottom:24px;
-}
-
-.partial-title{
-    font-weight:700;
-    margin-bottom:10px;
-    color:#111;
-}
-
-.partial-checks{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.partial-checks label{
-    display:flex;
-    gap:6px;
-    align-items:flex-start;
-    font-size:13px;
-}
-
-/* Responsive */
+/* Mobile */
 @media(max-width:1024px){
 
     nav{
@@ -352,7 +334,6 @@ nav{
 
     .desc-text{
         font-size:15px;
-        line-height:1.9;
     }
 
     .btn-group{
@@ -364,20 +345,9 @@ nav{
     }
 
     .floating-estimate{
+        width:calc(100% - 32px);
         right:16px;
         bottom:16px;
-        width:calc(100% - 32px);
-        border-radius:18px;
-        padding:18px 20px;
-    }
-
-    .floating-sub{
-        font-size:12px;
-        margin-bottom:6px;
-    }
-
-    .floating-main{
-        font-size:20px;
     }
 
 }
@@ -390,7 +360,7 @@ nav{
 <!-- Overlay -->
 <div id="overlay" class="overlay" onclick="closePanel()"></div>
 
-<!-- Nav -->
+<!-- NAV -->
 <nav>
 
     <a href="index.html" class="logo">
@@ -399,21 +369,10 @@ nav{
 
     <div class="nav-links">
 
-        <a href="about.html" class="active">
-            ABOUT
-        </a>
-
-        <a href="portfolio.html">
-            PORTFOLIO
-        </a>
-
-        <a href="proposal.html">
-            PROPOSAL
-        </a>
-
-        <a href="contact.html">
-            CONTACT
-        </a>
+        <a href="about.html" class="active">ABOUT</a>
+        <a href="portfolio.html">PORTFOLIO</a>
+        <a href="proposal.html">PROPOSAL</a>
+        <a href="contact.html">CONTACT</a>
 
     </div>
 
@@ -436,7 +395,7 @@ nav{
 
 </div>
 
-<!-- Floating Estimate -->
+<!-- Floating -->
 <div id="floatingEstimate" class="floating-estimate" onclick="openPanel()">
 
     <div class="floating-sub">
@@ -480,7 +439,7 @@ nav{
     <!-- Dynamic -->
     <div id="subFields" class="detail-section"></div>
 
-    <!-- Request Date -->
+    <!-- Date -->
     <label style="font-weight:700; margin-bottom:5px; display:block;">
         시공 요청 일자
     </label>
@@ -489,14 +448,7 @@ nav{
         type="text"
         id="requestDate"
         placeholder="예 : 26년 5월 27일"
-        style="
-            width:100%;
-            padding:14px;
-            margin-bottom:18px;
-            border:1px solid #ddd;
-            border-radius:10px;
-            font-size:14px;
-        "
+        style="width:100%; padding:14px; margin-bottom:18px; border:1px solid #ddd; border-radius:10px;"
     >
 
     <!-- Area -->
@@ -508,14 +460,7 @@ nav{
         type="text"
         id="requestArea"
         placeholder="예 : 전주시 완산구 평화동"
-        style="
-            width:100%;
-            padding:14px;
-            margin-bottom:18px;
-            border:1px solid #ddd;
-            border-radius:10px;
-            font-size:14px;
-        "
+        style="width:100%; padding:14px; margin-bottom:18px; border:1px solid #ddd; border-radius:10px;"
     >
 
     <!-- Phone -->
@@ -527,14 +472,7 @@ nav{
         type="tel"
         id="userPhone"
         placeholder="010-0000-0000"
-        style="
-            width:100%;
-            padding:14px;
-            margin-bottom:20px;
-            border:1px solid #ddd;
-            border-radius:10px;
-            font-size:14px;
-        "
+        style="width:100%; padding:14px; margin-bottom:20px; border:1px solid #ddd; border-radius:10px;"
     >
 
     <!-- Buttons -->
@@ -542,48 +480,23 @@ nav{
 
         <button
             onclick="resetEstimate()"
-            style="
-                width:35%;
-                padding:16px;
-                background:#f5f5f5;
-                color:#111;
-                border:1px solid #ddd;
-                border-radius:10px;
-                cursor:pointer;
-                font-weight:700;
-            "
+            style="width:35%; padding:16px; background:#f5f5f5; border:1px solid #ddd; border-radius:10px; cursor:pointer; font-weight:700;"
         >
             초기화
         </button>
 
         <button
             onclick="calculate()"
-            style="
-                width:65%;
-                padding:16px;
-                background:#111;
-                color:#fff;
-                border:none;
-                border-radius:10px;
-                cursor:pointer;
-                font-weight:700;
-            "
+            style="width:65%; padding:16px; background:#111; color:#fff; border:none; border-radius:10px; cursor:pointer; font-weight:700;"
         >
             견적 문의하기
         </button>
 
     </div>
 
-    <div
-        id="resultPrice"
-        style="
-            margin-top:20px;
-            text-align:center;
-            font-size:17px;
-            font-weight:800;
-            color:#e60023;
-        "
-    ></div>
+    <div id="resultPrice"
+         style="margin-top:20px; text-align:center; font-size:17px; font-weight:800; color:#e60023;">
+    </div>
 
 </div>
 
@@ -600,12 +513,7 @@ nav{
         <p class="desc-text">
             단순해 보이는 공간일지라도,<br>
             그 완성도는 눈에 잘 띄지 않는<br>
-            작은 디테일에서 결정됩니다.<br><br>
-
-            <b>
-                "머무는 순간의 온기, 눈에 닿는 모든 곳에<br>
-                결이 좋은 공간을 짓습니다."
-            </b>
+            작은 디테일에서 결정됩니다.
         </p>
 
     </div>
@@ -633,7 +541,7 @@ function toggleMobileMenu(){
 
 }
 
-/* Open Panel */
+/* Open */
 function openPanel(){
 
     document.getElementById("estimatePanel").classList.add("active");
@@ -643,7 +551,7 @@ function openPanel(){
 
 }
 
-/* Close Panel */
+/* Close */
 function closePanel(){
 
     document.getElementById("estimatePanel").classList.remove("active");
@@ -661,6 +569,374 @@ function selectHouse(el){
     });
 
     el.classList.add('active');
+
+}
+
+/* Type */
+function selectType(el, type){
+
+    document.querySelectorAll('.type-btn').forEach(btn=>{
+        btn.classList.remove('active');
+    });
+
+    el.classList.add('active');
+
+    const subFields = document.getElementById('subFields');
+
+    subFields.style.display = 'block';
+
+    /* Residence */
+    if(type === 'residence'){
+
+        subFields.innerHTML = `
+
+            <div style="margin-bottom:10px;">
+                주거형태
+            </div>
+
+            <div class="house-group">
+
+                <div class="house-btn" onclick="selectHouse(this)">
+                    주택
+                </div>
+
+                <div class="house-btn" onclick="selectHouse(this)">
+                    아파트
+                </div>
+
+            </div>
+
+            <div style="margin-bottom:12px;">
+                평수 :
+                <input type="number" id="pyung" style="width:70px; padding:6px;"> 평
+            </div>
+
+            <div style="margin-bottom:8px;">
+                <input type="checkbox" id="isWindow">
+                창호 교체 포함
+            </div>
+
+            <div style="margin-bottom:12px;">
+                <input type="checkbox" id="isPremium">
+                프리미엄 자재 선택
+            </div>
+
+            <div style="margin-bottom:10px;">
+                화장실 공사 :
+
+                <select id="bathQty">
+                    <option value="0">0개소</option>
+                    <option value="1">1개소</option>
+                    <option value="2">2개소</option>
+                </select>
+
+            </div>
+
+        `;
+
+    }
+
+    /* Commercial */
+    else if(type === 'commercial'){
+
+        subFields.innerHTML = `
+
+            <div style="
+                font-size:13px;
+                line-height:1.9;
+                color:#e60023;
+            ">
+
+                자재 사양, 공사 범위, 업종 특성 및 현장 조건에 따라
+                견적 금액은 달라질 수 있습니다.<br><br>
+
+                보다 정확한 상담과 안내를 위해
+                담당자가 직접 상담 도와드리고 있습니다.
+
+            </div>
+
+        `;
+
+    }
+
+    /* Partial */
+    else if(type === 'partial'){
+
+        subFields.innerHTML = `
+
+            <!-- 필름 -->
+            <div class="partial-group">
+
+                <div class="partial-title">
+                    필름
+                </div>
+
+                <div class="partial-checks">
+
+                    <label><input type="checkbox" value="방문(도어)"> 방문(도어)</label>
+                    <label><input type="checkbox" value="방문틀(도어틀)"> 방문틀(도어틀)</label>
+                    <label><input type="checkbox" value="싱크대"> 싱크대</label>
+                    <label><input type="checkbox" value="붙박이장"> 붙박이장</label>
+                    <label><input type="checkbox" value="화장대"> 화장대</label>
+                    <label><input type="checkbox" value="신발장"> 신발장</label>
+                    <label><input type="checkbox" value="현관방화문"> 현관방화문</label>
+                    <label><input type="checkbox" value="샷시(창호)"> 샷시(창호)</label>
+
+                </div>
+
+            </div>
+
+            <!-- 실리콘 -->
+            <div class="partial-group">
+
+                <div class="partial-title">
+                    실리콘(코킹)
+                </div>
+
+                <div class="partial-checks">
+
+                    <label><input type="checkbox" value="화장실 세면대"> 화장실 세면대</label>
+                    <label><input type="checkbox" value="화장실 변기"> 화장실 변기</label>
+                    <label><input type="checkbox" value="싱크대 코킹"> 싱크대</label>
+                    <label><input type="checkbox" value="샷시 코킹"> 샷시(창호)</label>
+                    <label><input type="checkbox" value="필름지 시공부위"> 필름지 시공부위</label>
+
+                </div>
+
+            </div>
+
+            <!-- 도배 -->
+            <div class="partial-group">
+
+                <div class="partial-title">
+                    도배
+                </div>
+
+                <div class="partial-checks">
+
+                    <label><input type="checkbox" value="안방 도배"> 안방</label>
+                    <label><input type="checkbox" value="거실 도배"> 거실</label>
+                    <label><input type="checkbox" value="작은방 도배"> 작은방</label>
+
+                </div>
+
+            </div>
+
+            <!-- 도장 -->
+            <div class="partial-group">
+
+                <div class="partial-title">
+                    도장(페인트)
+                </div>
+
+                <div class="partial-checks">
+
+                    <label><input type="checkbox" value="베란다 도장"> 베란다</label>
+                    <label><input type="checkbox" value="현관 도장"> 현관</label>
+
+                </div>
+
+            </div>
+
+            <!-- 도어 -->
+            <div class="partial-group">
+
+                <div class="partial-title">
+                    도어시공
+                </div>
+
+                <div class="partial-checks">
+
+                    <label><input type="checkbox" value="중문"> 중문</label>
+
+                    <label style="grid-column:1/-1;">
+                        안방도어 외 몇개소 :
+                        <input
+                            type="text"
+                            id="doorExtra"
+                            placeholder="예 : 방문 3개"
+                            style="
+                                margin-top:6px;
+                                width:100%;
+                                padding:10px;
+                                border:1px solid #ddd;
+                                border-radius:8px;
+                            "
+                        >
+                    </label>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+/* Reset */
+function resetEstimate(){
+
+    document.querySelectorAll('.type-btn').forEach(btn=>{
+        btn.classList.remove('active');
+    });
+
+    document.getElementById('subFields').style.display = 'none';
+    document.getElementById('subFields').innerHTML = '';
+
+    document.getElementById('requestDate').value = '';
+    document.getElementById('requestArea').value = '';
+    document.getElementById('userPhone').value = '';
+    document.getElementById('resultPrice').innerText = '';
+
+}
+
+/* Send */
+function calculate(){
+
+    const requestDate =
+        document.getElementById("requestDate").value || "미입력";
+
+    const requestArea =
+        document.getElementById("requestArea").value || "미입력";
+
+    const phone =
+        document.getElementById("userPhone").value;
+
+    if(phone.length < 10){
+
+        alert("연락처를 정확히 입력해주세요.");
+        return;
+
+    }
+
+    const type =
+        document.querySelector('.type-btn.active')?.innerText || "선택안함";
+
+    let message = "";
+
+    /* Residence */
+    if(type === "주거 리모델링"){
+
+        const houseType =
+            document.querySelector('.house-btn.active')?.innerText || "선택안함";
+
+        const pyung =
+            document.getElementById('pyung')?.value || "미입력";
+
+        const isWindow =
+            document.getElementById('isWindow')?.checked ? "포함" : "미포함";
+
+        const isPremium =
+            document.getElementById('isPremium')?.checked ? "선택" : "미선택";
+
+        const bathQty =
+            document.getElementById('bathQty')?.value || "0";
+
+        message =
+
+`[ 1분 견적 문의 ]
+
+공사 유형 : ${type}
+
+주거 형태 : ${houseType}
+
+평수 : ${pyung}평
+
+창호 교체 : ${isWindow}
+
+프리미엄 자재 : ${isPremium}
+
+화장실 공사 : ${bathQty}개소
+
+시공 요청 일자 : ${requestDate}
+
+시공 요청 지역 : ${requestArea}
+
+연락처 : ${phone}`;
+
+    }
+
+    /* Commercial */
+    else if(type === "상가 인테리어"){
+
+        message =
+
+`[ 1분 견적 문의 ]
+
+공사 유형 : ${type}
+
+상업 공간 인테리어 상담 요청
+
+시공 요청 일자 : ${requestDate}
+
+시공 요청 지역 : ${requestArea}
+
+연락처 : ${phone}`;
+
+    }
+
+    /* Partial */
+    else if(type === "부분시공"){
+
+        const checkedItems = [];
+
+        document
+            .querySelectorAll('#subFields input[type="checkbox"]:checked')
+            .forEach(el=>{
+
+                checkedItems.push(el.value);
+
+            });
+
+        const doorExtra =
+            document.getElementById("doorExtra")?.value || "";
+
+        message =
+
+`[ 1분 견적 문의 ]
+
+공사 유형 : ${type}
+
+선택 항목 :
+
+${checkedItems.length ? checkedItems.join('\n') : '선택 없음'}
+
+${doorExtra ? '\n추가 도어시공 : ' + doorExtra : ''}
+
+시공 요청 일자 : ${requestDate}
+
+시공 요청 지역 : ${requestArea}
+
+연락처 : ${phone}`;
+
+    }
+
+    document.getElementById("resultPrice").innerText =
+        "문의가 정상 접수되었습니다.";
+
+    emailjs.send(
+        "service_fz1110j",
+        "template_0vo3ea6",
+        {
+            message:message
+        }
+    )
+
+    .then(function(){
+
+        alert("담당자가 빠르게 연락드리겠습니다.");
+
+        closePanel();
+
+    })
+
+    .catch(function(){
+
+        alert("메일 전송에 실패했습니다.");
+
+    });
 
 }
 
