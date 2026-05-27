@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>전주 부분공사 자동 견적 시스템</title>
+
+<style>
+body{
+margin:0;
+font-family:Noto Sans KR;
+background:#0b0b0b;
+color:#fff;
+}
+
+.container{
+max-width:720px;
+margin:auto;
+padding:20px;
+}
+
+h2{margin-bottom:10px;}
+
+.card{
+background:#151515;
+padding:18px;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+label{
+font-size:13px;
+color:#aaa;
+display:block;
+margin-top:10px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:5px;
+border-radius:8px;
+border:none;
+background:#222;
+color:#fff;
+}
+
+button{
+width:100%;
+padding:14px;
+background:#d4af37;
+border:none;
+font-weight:900;
+border-radius:8px;
+margin-top:15px;
+cursor:pointer;
+}
+
+.result{
+display:none;
+background:#1b1b1b;
+padding:18px;
+border-left:4px solid #d4af37;
+border-radius:10px;
+margin-top:20px;
+}
+
+.price{
+font-size:22px;
+font-weight:900;
+color:#d4af37;
+}
+
+.small{
+color:#aaa;
+font-size:12px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🔧 전주 마감공사 자동 견적</h2>
+
+<p class="small">개수 / 평수 입력 기반 실시간 견적</p>
+
+<!-- 필름 -->
+<div class="card">
+<h3>필름 공사</h3>
+<label>도어 / 방화문 / 가구 개수 (개)</label>
+<input type="number" id="film" placeholder="예: 5">
+</div>
+
+<!-- 실리콘 -->
+<div class="card">
+<h3>실리콘 공사</h3>
+<label>시공 개소 (욕실/주방/창호)</label>
+<input type="number" id="silicone" placeholder="예: 3">
+</div>
+
+<!-- 도배 -->
+<div class="card">
+<h3>도배 공사</h3>
+<label>평수 (㎡ 기준)</label>
+<input type="number" id="wallpaper" placeholder="예: 20">
+</div>
+
+<!-- 장판 -->
+<div class="card">
+<h3>장판 공사</h3>
+<label>평수 (㎡ 기준)</label>
+<input type="number" id="flooring" placeholder="예: 20">
+</div>
+
+<!-- 고객정보 -->
+<div class="card">
+<h3>고객 정보</h3>
+
+<label>이름</label>
+<input id="name">
+
+<label>연락처</label>
+<input id="phone">
+
+<label>주소</label>
+<input id="addr">
+</div>
+
+<button onclick="calc()">실시간 견적 계산</button>
+
+<div class="result" id="result">
+
+<div class="price" id="price"></div>
+
+<p class="small" id="detail"></p>
+
+<button onclick="kakao()">카카오 상담 요청</button>
+
+</div>
+
+</div>
+
+<script>
+
+function calc(){
+
+let film = Number(document.getElementById("film").value)||0;
+let silicone = Number(document.getElementById("silicone").value)||0;
+let wallpaper = Number(document.getElementById("wallpaper").value)||0;
+let flooring = Number(document.getElementById("flooring").value)||0;
+
+if(!document.getElementById("name").value){
+alert("고객 정보를 입력해주세요");
+return;
+}
+
+/* 단가 구조 (현장 기준 평균) */
+let filmPrice = film * 35000;
+let siliconePrice = silicone * 45000;
+let wallpaperPrice = wallpaper * 12000;
+let flooringPrice = flooring * 15000;
+
+let total = filmPrice + siliconePrice + wallpaperPrice + flooringPrice;
+
+/* 범위 ±10% */
+let min = Math.floor(total * 0.9);
+let max = Math.floor(total * 1.1);
+
+document.getElementById("price").innerText =
+"예상 견적: " + min.toLocaleString() + " ~ " + max.toLocaleString() + "원";
+
+document.getElementById("detail").innerText =
+"필름 " + filmPrice.toLocaleString() +
+" / 실리콘 " + siliconePrice.toLocaleString() +
+" / 도배 " + wallpaperPrice.toLocaleString() +
+" / 장판 " + flooringPrice.toLocaleString();
+
+document.getElementById("result").style.display="block";
+}
+
+function kakao(){
+
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let addr=document.getElementById("addr").value;
+
+let msg =
+`견적문의
+이름:${name}
+연락처:${phone}
+주소:${addr}`;
+
+window.open("https://pf.kakao.com/_uxhhjX/chat?msg="+encodeURIComponent(msg));
+}
+
+</script>
+
+</body>
+</html>

@@ -3,268 +3,231 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>부분수리 + 전체인테리어 즉시 견적 | (주)결</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;800&display=swap" rel="stylesheet">
+<title>(주)결 | 전주 인테리어 · 마감공사 전문</title>
 
 <style>
 body{
 margin:0;
-font-family:'Noto Sans KR';
-background:#0b0b0b;
+font-family:Noto Sans KR;
+background:#000;
 color:#fff;
 }
 
-.hero{
+header{
 padding:40px 20px;
 text-align:center;
 background:#111;
 }
 
-.hero h1{
-font-size:22px;
-font-weight:900;
+nav a{
+color:#aaa;
+margin:0 10px;
+text-decoration:none;
+font-size:14px;
 }
 
+nav a:hover{color:#d4af37;}
+
 .container{
-max-width:650px;
+max-width:1000px;
 margin:auto;
 padding:20px;
 }
 
-/* PROBLEM GRID */
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-margin-top:15px;
-}
-
-.problem{
-background:#1b1b1b;
-padding:14px;
-border-radius:10px;
-cursor:pointer;
-font-size:13px;
+/* HERO */
+.hero{
 text-align:center;
-border:1px solid transparent;
-transition:0.2s;
+padding:70px 20px 30px;
 }
 
-.problem.active{
-border:1px solid #d4af37;
-background:#222;
-}
-
-/* CARD */
-.card{
-background:#151515;
-padding:15px;
-border-radius:12px;
-margin-top:15px;
-}
-
-input,select{
-width:100%;
-padding:12px;
-margin-top:8px;
+.hero h2{
+font-size:26px;
 margin-bottom:10px;
-border-radius:8px;
-border:none;
-background:#222;
-color:#fff;
 }
 
-button{
-width:100%;
-padding:14px;
-background:#d4af37;
-border:none;
-font-weight:900;
-border-radius:8px;
-cursor:pointer;
+.hero p{
+color:#aaa;
 }
 
-.result{
-display:none;
-margin-top:15px;
+/* CTA BANNER */
+.banner{
+margin:25px auto;
 padding:18px;
-background:#1b1b1b;
-border-left:4px solid #d4af37;
-border-radius:10px;
-}
-
-.price{
-font-size:20px;
-font-weight:900;
-color:#d4af37;
-}
-
-.fixed{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-display:flex;
-}
-
-.fixed a{
-flex:1;
+background:linear-gradient(135deg,#1b1b1b,#111);
+border-left:5px solid #d4af37;
+border-radius:12px;
 text-align:center;
-padding:14px;
+}
+
+.banner h3{
+margin:0;
+font-size:18px;
+}
+
+.banner p{
+color:#aaa;
+font-size:13px;
+margin-top:6px;
+}
+
+.btn{
+display:inline-block;
+margin-top:12px;
+padding:14px 20px;
+background:#d4af37;
+color:#000;
 font-weight:900;
 text-decoration:none;
+border-radius:8px;
 }
 
-.kakao{background:#fee500;color:#000;}
-.call{background:#d4af37;color:#000;}
+/* SERVICE */
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-top:30px;
+}
 
-.small{
-font-size:12px;
+.card{
+background:#151515;
+padding:18px;
+border-radius:12px;
+border:1px solid #222;
+}
+
+.card h3{
+color:#d4af37;
+margin:0 0 10px 0;
+}
+
+.card p{
 color:#aaa;
-margin-top:8px;
-line-height:1.4;
+font-size:13px;
+}
+
+.card a{
+display:inline-block;
+margin-top:10px;
+color:#fff;
+text-decoration:none;
+border-bottom:1px solid #444;
+}
+
+/* DIVIDER */
+.section-title{
+margin-top:40px;
+margin-bottom:10px;
+color:#d4af37;
+font-size:16px;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:40px;
+color:#555;
+font-size:12px;
+border-top:1px solid #222;
+margin-top:50px;
+}
+
+@media(max-width:768px){
+.grid{grid-template-columns:1fr;}
+.hero h2{font-size:20px;}
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="hero">
-<h1>문제 선택 → 즉시 견적</h1>
-<p style="color:#aaa;font-size:13px;">
-부분수리 + 전체인테리어 모두 가능
-</p>
-</div>
+<header>
+<h1>(주)결 KYEOL DESIGN</h1>
+<nav>
+<a href="index.html">HOME</a>
+<a href="seo-film.html">필름</a>
+<a href="seo-silicone.html">실리콘</a>
+<a href="seo-wallpaper.html">도배</a>
+<a href="seo-flooring.html">장판</a>
+<a href="estimate.html">즉시견적</a>
+</nav>
+</header>
 
 <div class="container">
 
-<!-- PROBLEM SELECT -->
-<div class="card">
-<h3>어떤 문제가 있나요?</h3>
+<!-- HERO -->
+<div class="hero">
+<h2>작은 공사도 제대로 하는 회사</h2>
+<p>전주 필름 · 실리콘 · 도배 · 장판 전문 시공</p>
+</div>
+
+<!-- 🔥 BANNER 1 (핵심 전환) -->
+<div class="banner">
+<h3>🔧 실시간 자동 견적 확인</h3>
+<p>개수 / 평수 입력으로 바로 금액 확인</p>
+<a class="btn" href="estimate.html">즉시 견적 계산</a>
+</div>
+
+<!-- SERVICE -->
+<div class="section-title">주요 시공</div>
 
 <div class="grid">
 
-<div class="problem" onclick="toggleProblem(this,'door')">문 / 방문 손상</div>
-<div class="problem" onclick="toggleProblem(this,'silicone')">실리콘 곰팡이</div>
-<div class="problem" onclick="toggleProblem(this,'wall')">벽지 오염</div>
-<div class="problem" onclick="toggleProblem(this,'light')">조명 고장</div>
-<div class="problem" onclick="toggleProblem(this,'window')">창문 틈 / 외풍</div>
-<div class="problem" onclick="toggleProblem(this,'full')">전체 인테리어</div>
-
-</div>
-
-<p class="small">
-선택된 문제는 자동으로 공사 항목으로 변환됩니다
-</p>
-</div>
-
-<!-- INPUT -->
 <div class="card">
+<h3>필름 시공</h3>
+<p>방문 / 방화문 / 샷시 / 가구</p>
+<a href="seo-film.html">자세히 보기 →</a>
+</div>
 
-<h3>추가 정보</h3>
+<div class="card">
+<h3>실리콘 시공</h3>
+<p>욕실 / 주방 / 창문 누수</p>
+<a href="seo-silicone.html">자세히 보기 →</a>
+</div>
 
-<input id="name" placeholder="이름">
-<input id="phone" placeholder="연락처">
-<input id="addr" placeholder="주소 (아파트)">
+<div class="card">
+<h3>도배 시공</h3>
+<p>원룸 / 부분 / 전체 도배</p>
+<a href="seo-wallpaper.html">자세히 보기 →</a>
+</div>
 
-<select id="size">
-<option value="0">평수 선택 (전체공사 시)</option>
-<option value="20">20평</option>
-<option value="30">30평</option>
-<option value="40">40평</option>
-<option value="50">50평 이상</option>
-</select>
+<div class="card">
+<h3>장판 시공</h3>
+<p>원룸 / 아파트 바닥 교체</p>
+<a href="seo-flooring.html">자세히 보기 →</a>
+</div>
 
-<button onclick="calc()">즉시 견적 보기</button>
+</div>
 
-<p class="small">
-※ 부분수리 + 전체공사 자동 비교 견적 제공
+<!-- 🔥 BANNER 2 (중간 전환) -->
+<div class="banner">
+<h3>💡 우리 집 공사 비용 바로 확인</h3>
+<p>간단 입력으로 예상 견적 확인</p>
+<a class="btn" href="estimate.html">견적 계산하기</a>
+</div>
+
+<!-- 추가 정보 -->
+<div class="section-title">왜 (주)결인가</div>
+<p style="color:#aaa;font-size:13px;line-height:1.6;">
+전주 지역 기반 마감공사 전문 업체로<br>
+필름, 실리콘, 도배, 장판 등 소규모 공사에 집중하여<br>
+빠른 대응과 합리적인 견적을 제공합니다.
 </p>
 
-</div>
-
-<!-- RESULT -->
-<div class="result" id="result">
-<div class="price" id="price"></div>
-<div id="detail"></div>
-
-<button style="margin-top:10px;" onclick="kakao()">카카오 상담</button>
+<!-- 🔥 BANNER 3 (최종 전환) -->
+<div class="banner">
+<h3>📞 지금 바로 견적 상담</h3>
+<p>클릭 한 번으로 상담 연결</p>
+<a class="btn" href="estimate.html">즉시 견적 시작</a>
 </div>
 
 </div>
 
-<div class="fixed">
-<a class="kakao" href="https://pf.kakao.com/_uxhhjX/chat">카카오 상담</a>
-<a class="call" href="tel:01000000000">전화 상담</a>
-</div>
-
-<script>
-
-let selected = {};
-let last = 0;
-
-/* 문제 선택 */
-function toggleProblem(el,type){
-
-el.classList.toggle("active");
-
-if(el.classList.contains("active")){
-selected[type]=1;
-}else{
-delete selected[type];
-}
-}
-
-/* 견적 엔진 */
-function calc(){
-
-const name=document.getElementById('name').value;
-const phone=document.getElementById('phone').value;
-const addr=document.getElementById('addr').value;
-
-if(!name || !phone || !addr){
-alert("고객 정보 입력 필요");
-return;
-}
-
-/* PARTIAL */
-let partial = 0;
-
-if(selected.door) partial += 120000;
-if(selected.silicone) partial += 150000;
-if(selected.wall) partial += 100000;
-if(selected.light) partial += 80000;
-if(selected.window) partial += 120000;
-
-/* FULL */
-let size = Number(document.getElementById('size').value);
-let full = size > 0 ? size * 150000 : 0;
-
-/* HYBRID LOGIC */
-let recommend = partial;
-
-if(full > 0){
-recommend = Math.min(partial + full*0.2, full);
-}
-
-last = Math.round(recommend);
-
-/* UI */
-document.getElementById('result').style.display="block";
-
-document.getElementById('price').innerHTML =
-"예상 견적: " + last.toLocaleString() + " 원";
-
-document.getElementById('detail').innerHTML =
-"부분수리 기준 + 전체공사 비교 견적 포함";
-}
-
-function kakao(){
-window.open("https://pf.kakao.com/_uxhhjX/chat?msg=견적:"+last);
-}
-
-</script>
+<footer>
+© 2026 (주)결 KYEOL Co., Ltd.
+</footer>
 
 </body>
 </html>
