@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <meta name="description" content="전주 인테리어 전문 기업 (주)결을 소개합니다.">
+    <meta name="description" content="전주 인테리어 전문 기업 (주)결을 소개합니다. 공간의 밀도를 다시 쓰는 정밀 시공, 장애인기업 인증을 보유한 믿을 수 있는 인테리어 파트너입니다.">
     <title>ABOUT | (주)결</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
@@ -39,19 +39,20 @@
         .nav-left {
             display:flex;
             align-items:center;
-            gap:25px;
+            gap:14px;
         }
 
+        /* 1분견적 CTA */
         .estimate-btn {
             font-size:12px;
-            font-weight:700;
+            font-weight:800;
             color:#e60012;
             text-decoration:none;
-            letter-spacing:2px;
-            padding:6px 10px;
+            padding:6px 12px;
             border:1px solid #e60012;
-            border-radius:4px;
-            transition:0.3s;
+            border-radius:6px;
+            transition:0.25s;
+            white-space:nowrap;
         }
 
         .estimate-btn:hover {
@@ -71,9 +72,12 @@
             letter-spacing:2px;
         }
 
-        .nav-links a.active { color:#000; font-weight:700; }
+        .nav-links a.active {
+            color:#000;
+            font-weight:700;
+        }
 
-        /* hamburger */
+        /* 햄버거 */
         .menu-btn {
             display:none;
             flex-direction:column;
@@ -87,7 +91,7 @@
             background:#000;
         }
 
-        /* MOBILE MENU */
+        /* MOBILE NAV */
         .mobile-nav {
             position:fixed;
             top:-100%;
@@ -96,11 +100,13 @@
             background:#fff;
             border-bottom:1px solid #eee;
             padding:100px 0 30px;
-            transition:0.4s;
+            transition:0.35s;
             z-index:1050;
         }
 
-        .mobile-nav.active { top:0; }
+        .mobile-nav.active {
+            top:0;
+        }
 
         .mobile-nav a {
             display:block;
@@ -112,7 +118,7 @@
 
         .mobile-estimate {
             color:#e60012 !important;
-            font-weight:700;
+            font-weight:900;
         }
 
         /* LAYOUT */
@@ -149,11 +155,6 @@
             word-break:keep-all;
         }
 
-        /* 핵심: 줄바꿈 방지 */
-        .title-main br {
-            display:block;
-        }
-
         .desc-text {
             font-size:17px;
             line-height:2.1;
@@ -183,24 +184,32 @@
         @media (max-width:1024px) {
 
             nav {
-                padding:0 20px;
+                padding:0 18px;
                 height:70px;
             }
 
-            .nav-links { display:none; }
-
-            .menu-btn { display:flex; }
-
-            .nav-left {
-                gap:12px;
+            .nav-links {
+                display:none;
             }
 
+            .menu-btn {
+                display:flex;
+            }
+
+            .nav-left {
+                gap:10px;
+            }
+
+            /* 🔥 모바일 CTA 강화 */
             .estimate-btn {
                 font-size:11px;
-                padding:5px 8px;
-                /* 모바일에서는 햄버거 기준 오른쪽으로 밀림 */
-                margin-left:auto;
-                margin-right:10px;
+                padding:10px 12px;
+                background:#e60012;
+                color:#fff;
+                border:none;
+                border-radius:8px;
+                font-weight:900;
+                box-shadow:0 6px 18px rgba(230,0,18,0.25);
             }
 
             .wrapper {
@@ -218,10 +227,9 @@
 
             .title-main {
                 font-size:22px;
-                line-height:1.35;
+                line-height:1.35; /* 3줄 방지 */
             }
 
-            /* 핵심: 3줄 방지 */
             .desc-text {
                 font-size:15px;
                 line-height:1.9;
@@ -231,6 +239,7 @@
                 display:block;
             }
         }
+
     </style>
 </head>
 
@@ -241,8 +250,6 @@
 
     <div class="nav-left">
         <a href="index.html" class="logo">KYEOL</a>
-
-        <!-- PC / MOBILE 공통 1분견적 -->
         <a href="estimate.html" class="estimate-btn">1분견적</a>
     </div>
 
@@ -259,7 +266,7 @@
 
 </nav>
 
-<!-- MOBILE MENU -->
+<!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
     <a href="about.html">ABOUT</a>
     <a href="portfolio.html">PORTFOLIO</a>
