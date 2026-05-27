@@ -1,176 +1,242 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="전주 인테리어 전문 기업 (주)결을 소개합니다. 공간의 밀도를 다시 쓰는 정밀 시공, 장애인기업 인증을 보유한 믿을 수 있는 인테리어 파트너입니다.">
+    <title>ABOUT | (주)결</title>
 
-<title>ABOUT | (주)결</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Noto Sans KR;background:#fff;overflow-x:hidden;}
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing:antialiased; }
+        body { background:#fff; font-family:'Noto Sans KR', sans-serif; color:#111; overflow-x:hidden; }
 
-/* ================= NAV ================= */
-nav{
-    position:fixed;
-    top:0;
-    width:100%;
-    height:80px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 40px;
-    background:#fff;
-    border-bottom:1px solid #eee;
-    z-index:2000;
-}
+        /* ================= NAV ================= */
+        nav { 
+            position:fixed;
+            top:0;
+            width:100%;
+            height:80px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:0 50px;
+            background:#fff;
+            z-index:1100;
+            border-bottom:1px solid #f2f2f2;
+        }
 
-/* LEFT */
-.logo{
-    font-size:20px;
-    font-weight:700;
-    text-decoration:none;
-    color:#000;
-}
+        .logo {
+            font-family:'Playfair Display', serif;
+            font-size:24px;
+            font-weight:700;
+            text-decoration:none;
+            color:#000;
+            letter-spacing:4px;
+        }
 
-/* CENTER MENU */
-.nav-center{
-    display:flex;
-    gap:28px;
-}
+        /* 기존 메뉴 유지 */
+        .nav-links {
+            display:flex;
+            gap:35px;
+            align-items:center;
+        }
 
-.nav-center a{
-    font-size:13px;
-    text-decoration:none;
-    color:#999;
-    letter-spacing:2px;
-}
+        .nav-links a {
+            text-decoration:none;
+            color:#999;
+            font-size:13px;
+            letter-spacing:2px;
+            transition:0.3s;
+        }
 
-.nav-center a:hover{color:#000;}
+        .nav-links a.active { color:#000; font-weight:700; }
 
-/* RIGHT AREA */
-.nav-right{
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
+        /* 🔴 1분견적 (ABOUT보다 왼쪽, NAV 내부 자연 삽입) */
+        .estimate-btn {
+            background:#e60012;
+            color:#fff;
+            font-size:12px;
+            font-weight:700;
+            padding:7px 12px;
+            border:none;
+            cursor:pointer;
+            white-space:nowrap;
+            margin-right:20px;
+        }
 
-/* 1분견적 (강제 우측 고정 CTA) */
-.quick-estimate{
-    background:#e60012;
-    color:#fff;
-    border:none;
-    padding:7px 12px;
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-    white-space:nowrap;
-}
+        /* hamburger */
+        .menu-btn {
+            display:none;
+            flex-direction:column;
+            gap:6px;
+            cursor:pointer;
+        }
 
-/* hamburger */
-.menu-btn{
-    display:none;
-    flex-direction:column;
-    gap:4px;
-    cursor:pointer;
-}
+        .menu-btn span {
+            width:22px;
+            height:2px;
+            background:#000;
+        }
 
-.menu-btn span{
-    width:22px;
-    height:2px;
-    background:#000;
-}
+        /* ================= MOBILE ================= */
+        @media (max-width:1024px) {
 
-/* ================= MOBILE ================= */
-@media(max-width:1024px){
+            nav {
+                padding:0 20px;
+            }
 
-nav{
-    padding:0 15px;
-}
+            /* PC 메뉴 숨김 */
+            .nav-links {
+                display:none;
+            }
 
-/* center menu 제거 */
-.nav-center{
-    display:none;
-}
+            /* 모바일에서 1분견적 위치 안정 (햄버거 왼쪽 유지) */
+            .nav-right {
+                display:flex;
+                align-items:center;
+                gap:12px;
+            }
 
-/* RIGHT 유지 */
-.menu-btn{
-    display:flex;
-}
+            .menu-btn {
+                display:flex;
+            }
 
-.quick-estimate{
-    font-size:11px;
-    padding:6px 10px;
-}
+            .estimate-btn {
+                font-size:11px;
+                padding:6px 10px;
+                margin-right:10px;
+            }
+        }
 
-}
+        /* ================= PAGE LAYOUT (원본 유지) ================= */
+        .wrapper {
+            display:flex;
+            width:100%;
+            height:100vh;
+            padding-top:80px;
+        }
 
-/* layout */
-.wrapper{
-    display:flex;
-    padding-top:80px;
-    height:100vh;
-}
+        .text-side {
+            flex:1;
+            padding:0 8%;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            background:#fbfbfb;
+        }
 
-.text{
-    flex:1;
-    padding:80px;
-}
+        .img-side {
+            flex:1.3;
+            overflow:hidden;
+        }
 
-.img{
-    flex:1;
-}
+        .img-side img {
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
 
-.img img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-</style>
+        .title-main {
+            font-size:34px;
+            font-weight:700;
+            line-height:1.4;
+            margin-bottom:35px;
+        }
+
+        .desc-text {
+            font-size:17px;
+            color:#444;
+            line-height:2.1;
+        }
+
+        .mobile-br { display:none; }
+
+        @media (max-width:1024px) {
+            .wrapper {
+                flex-direction:column;
+                height:auto;
+                padding-top:80px;
+            }
+
+            .img-side {
+                height:40vh;
+            }
+
+            .text-side {
+                padding:50px 25px;
+                background:#fff;
+            }
+
+            .mobile-br {
+                display:block;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
+<!-- ================= NAV ================= -->
 <nav>
 
     <!-- LEFT -->
-    <a class="logo" href="index.html">KYEOL</a>
+    <a href="index.html" class="logo">KYEOL</a>
 
-    <!-- CENTER -->
-    <div class="nav-center">
-        <a href="about.html">ABOUT</a>
-        <a href="portfolio.html">PORTFOLIO</a>
-        <a href="proposal.html">PROPOSAL</a>
-        <a href="contact.html">CONTACT</a>
-    </div>
+    <!-- CENTER MENU + 1분견적 (핵심 구조) -->
+    <div style="display:flex; align-items:center;">
 
-    <!-- RIGHT -->
-    <div class="nav-right">
-
-        <!-- 1분견적 (우측 고정) -->
-        <button class="quick-estimate"
-            onclick="location.href='estimate.html'">
+        <!-- 🔴 1분견적 (ABOUT보다 왼쪽, 로고 옆 자연 위치) -->
+        <button class="estimate-btn"
+                onclick="location.href='estimate.html'">
             1분견적
         </button>
 
-        <!-- hamburger -->
-        <div class="menu-btn">
-            <span></span><span></span><span></span>
+        <div class="nav-links">
+            <a href="about.html" class="active">ABOUT</a>
+            <a href="portfolio.html">PORTFOLIO</a>
+            <a href="proposal.html">PROPOSAL</a>
+            <a href="contact.html">CONTACT</a>
         </div>
 
     </div>
 
+    <!-- MOBILE HAMBURGER -->
+    <div class="menu-btn" id="menuToggle">
+        <span></span><span></span><span></span>
+    </div>
+
 </nav>
 
-<!-- CONTENT -->
+<!-- ================= CONTENT ================= -->
 <div class="wrapper">
-    <div class="text">
-        ABOUT CONTENT
+
+    <div class="text-side">
+        <h1 class="title-main">
+            "The devil is in the detail,<br>
+            악마는 디테일에 있다."
+        </h1>
+
+        <p class="desc-text">
+            단순해 보이는 공간일지라도,<br>
+            그 완성도는 작은 디테일에서 결정됩니다.<br><br>
+
+            <b>머무는 순간의 온기, 결이 좋은 공간을 짓습니다.</b>
+        </p>
     </div>
-    <div class="img">
-        <img src="image/about1.jpg">
+
+    <div class="img-side">
+        <img src="image/about1.jpg" alt="About">
     </div>
+
 </div>
+
+<script>
+document.getElementById('menuToggle').onclick = function(){
+    this.classList.toggle('open');
+};
+</script>
 
 </body>
 </html>
