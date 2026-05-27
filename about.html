@@ -46,6 +46,7 @@ nav{
     color:#000;
 }
 
+/* PC Menu */
 .nav-links{
     display:flex;
     gap:28px;
@@ -65,6 +66,73 @@ nav{
 .nav-links a.active{
     color:#000;
     font-weight:700;
+}
+
+/* Mobile Hamburger */
+.mobile-menu-btn{
+
+    display:none;
+
+    flex-direction:column;
+
+    gap:5px;
+
+    margin-left:auto;
+
+    cursor:pointer;
+
+}
+
+.mobile-menu-btn span{
+
+    width:24px;
+    height:2px;
+    background:#111;
+
+}
+
+/* Mobile Menu */
+#mobileMenu{
+
+    position:fixed;
+
+    top:80px;
+    right:-100%;
+
+    width:100%;
+    height:calc(100vh - 80px);
+
+    background:#fff;
+
+    z-index:2000;
+
+    transition:0.35s;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:40px 28px;
+
+}
+
+#mobileMenu.active{
+    right:0;
+}
+
+#mobileMenu a{
+
+    text-decoration:none;
+
+    color:#111;
+
+    font-size:18px;
+
+    padding:18px 0;
+
+    border-bottom:1px solid #eee;
+
+    letter-spacing:1px;
+
 }
 
 /* Overlay */
@@ -275,11 +343,11 @@ nav{
     }
 
     .nav-links{
-        gap:16px;
+        display:none;
     }
 
-    .nav-links a{
-        font-size:11px;
+    .mobile-menu-btn{
+        display:flex;
     }
 
     #estimatePanel{
@@ -364,6 +432,7 @@ nav{
         KYEOL
     </a>
 
+    <!-- PC Menu -->
     <div class="nav-links">
 
         <a href="about.html" class="active">
@@ -384,7 +453,37 @@ nav{
 
     </div>
 
+    <!-- Mobile Hamburger -->
+    <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
 </nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu">
+
+    <a href="about.html">
+        ABOUT
+    </a>
+
+    <a href="portfolio.html">
+        PORTFOLIO
+    </a>
+
+    <a href="proposal.html">
+        PROPOSAL
+    </a>
+
+    <a href="contact.html">
+        CONTACT
+    </a>
+
+</div>
 
 <!-- Floating CTA -->
 <div class="floating-estimate" onclick="openPanel()">
@@ -531,6 +630,16 @@ nav{
 <script>
 
 emailjs.init("sm7crJ5wvq3K7Phnz");
+
+/* 모바일 메뉴 */
+function toggleMobileMenu(){
+
+    document
+        .getElementById("mobileMenu")
+        .classList
+        .toggle("active");
+
+}
 
 /* 패널 열기 */
 function openPanel(){
