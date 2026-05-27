@@ -213,7 +213,6 @@ nav{
 }
 
 /* Floating CTA */
-
 .floating-estimate{
 
     position:fixed;
@@ -241,9 +240,7 @@ nav{
 }
 
 .floating-estimate:hover{
-
     transform:translateY(-4px);
-
 }
 
 .floating-sub{
@@ -278,20 +275,11 @@ nav{
 
 }
 
-/* Mobile */
-
+/* Responsive */
 @media(max-width:1024px){
 
     nav{
         padding:0 22px;
-    }
-
-    .nav-links{
-        gap:14px;
-    }
-
-    .nav-links a{
-        font-size:11px;
     }
 
     #estimatePanel{
@@ -332,6 +320,7 @@ nav{
         grid-template-columns:1fr;
     }
 
+    /* Mobile Floating CTA */
     .floating-estimate{
 
         right:16px;
@@ -719,21 +708,96 @@ function calculate(){
     const type =
         document.querySelector('.type-btn.active')?.innerText || "선택안함";
 
+    let message = "";
+
+    /* 주거 리모델링 */
+    if(type === "주거 리모델링"){
+
+        const houseType =
+            document.querySelector('.house-btn.active')?.innerText || "선택안함";
+
+        const pyung =
+            document.getElementById('pyung')?.value || "미입력";
+
+        const isWindow =
+            document.getElementById('isWindow')?.checked
+            ? "포함"
+            : "미포함";
+
+        const isPremium =
+            document.getElementById('isPremium')?.checked
+            ? "선택"
+            : "미선택";
+
+        const bathQty =
+            document.getElementById('bathQty')?.value || "0";
+
+        message =
+
+`[ 1분 견적 문의 ]
+
+공사 유형 : ${type}
+
+주거 형태 : ${houseType}
+
+평수 : ${pyung}평
+
+창호 교체 : ${isWindow}
+
+프리미엄 자재 : ${isPremium}
+
+화장실 공사 : ${bathQty}개소
+
+연락처 : ${phone}`;
+
+    }
+
+    /* 상가 인테리어 */
+    else if(type === "상가 인테리어"){
+
+        message =
+
+`[ 1분 견적 문의 ]
+
+공사 유형 : ${type}
+
+상세 상담 요청
+
+연락처 : ${phone}`;
+
+    }
+
+    /* 부분시공 */
+    else if(type === "부분시공"){
+
+        message =
+
+`[ 1분 견적 문의 ]
+
+공사 유형 : ${type}
+
+부분시공 상담 요청
+
+연락처 : ${phone}`;
+
+    }
+
     document.getElementById("resultPrice").innerText =
         "문의가 정상 접수되었습니다.";
 
+    /* 메일 전송 */
     emailjs.send(
         "service_fz1110j",
         "template_0vo3ea6",
         {
-            project_type:type,
-            phone:phone
+            message:message
         }
     )
 
     .then(function(){
 
         alert("담당자가 빠르게 연락드리겠습니다.");
+
         closePanel();
 
     })
