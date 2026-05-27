@@ -397,7 +397,6 @@ nav{
         KYEOL
     </a>
 
-    <!-- PC Menu -->
     <div class="nav-links">
 
         <a href="about.html" class="active">
@@ -437,8 +436,8 @@ nav{
 
 </div>
 
-<!-- Floating CTA -->
-<div class="floating-estimate" onclick="openPanel()">
+<!-- Floating Estimate -->
+<div id="floatingEstimate" class="floating-estimate" onclick="openPanel()">
 
     <div class="floating-sub">
         무료 상담 가능
@@ -457,6 +456,7 @@ nav{
         1분 견적
     </h2>
 
+    <!-- Type -->
     <label style="font-weight:700; margin-bottom:10px; display:block;">
         공사 유형
     </label>
@@ -477,9 +477,10 @@ nav{
 
     </div>
 
+    <!-- Dynamic -->
     <div id="subFields" class="detail-section"></div>
 
-    <!-- 시공 요청 일자 -->
+    <!-- Request Date -->
     <label style="font-weight:700; margin-bottom:5px; display:block;">
         시공 요청 일자
     </label>
@@ -498,7 +499,7 @@ nav{
         "
     >
 
-    <!-- 시공 요청 지역 -->
+    <!-- Area -->
     <label style="font-weight:700; margin-bottom:5px; display:block;">
         시공 요청 지역
     </label>
@@ -517,7 +518,7 @@ nav{
         "
     >
 
-    <!-- 연락처 -->
+    <!-- Phone -->
     <label style="font-weight:700; margin-bottom:5px; display:block;">
         연락처
     </label>
@@ -622,7 +623,7 @@ nav{
 
 emailjs.init("sm7crJ5wvq3K7Phnz");
 
-/* 모바일 메뉴 */
+/* Mobile Menu */
 function toggleMobileMenu(){
 
     document
@@ -632,23 +633,27 @@ function toggleMobileMenu(){
 
 }
 
-/* 패널 열기 */
+/* Open Panel */
 function openPanel(){
 
     document.getElementById("estimatePanel").classList.add("active");
     document.getElementById("overlay").classList.add("active");
 
+    document.getElementById("floatingEstimate").style.display = "none";
+
 }
 
-/* 패널 닫기 */
+/* Close Panel */
 function closePanel(){
 
     document.getElementById("estimatePanel").classList.remove("active");
     document.getElementById("overlay").classList.remove("active");
 
+    document.getElementById("floatingEstimate").style.display = "block";
+
 }
 
-/* 주거형태 */
+/* House */
 function selectHouse(el){
 
     document.querySelectorAll('.house-btn').forEach(btn=>{
@@ -656,292 +661,6 @@ function selectHouse(el){
     });
 
     el.classList.add('active');
-
-}
-
-/* 유형 선택 */
-function selectType(el, type){
-
-    document.querySelectorAll('.type-btn').forEach(btn=>{
-        btn.classList.remove('active');
-    });
-
-    el.classList.add('active');
-
-    const subFields = document.getElementById('subFields');
-
-    subFields.style.display = 'block';
-
-    /* 주거 */
-    if(type === 'residence'){
-
-        subFields.innerHTML = `
-
-            <div style="margin-bottom:10px;">
-                주거형태
-            </div>
-
-            <div class="house-group">
-
-                <div class="house-btn" onclick="selectHouse(this)">
-                    주택
-                </div>
-
-                <div class="house-btn" onclick="selectHouse(this)">
-                    아파트
-                </div>
-
-            </div>
-
-            <div style="margin-bottom:12px;">
-                평수 :
-                <input type="number" id="pyung" style="width:70px; padding:6px;"> 평
-            </div>
-
-            <div style="margin-bottom:8px;">
-                <input type="checkbox" id="isWindow">
-                창호 교체 포함
-            </div>
-
-            <div style="margin-bottom:12px;">
-                <input type="checkbox" id="isPremium">
-                프리미엄 자재 선택
-            </div>
-
-            <div style="margin-bottom:10px;">
-                화장실 공사 :
-
-                <select id="bathQty">
-                    <option value="0">0개소</option>
-                    <option value="1">1개소</option>
-                    <option value="2">2개소</option>
-                </select>
-
-            </div>
-
-        `;
-
-    }
-
-    /* 상가 */
-    else if(type === 'commercial'){
-
-        subFields.innerHTML = `
-
-            <div style="
-                font-size:13px;
-                line-height:1.9;
-                color:#e60023;
-            ">
-
-                자재 사양, 공사 범위, 업종 특성 및 현장 조건에 따라<br>
-                견적 금액은 달라질 수 있습니다.<br><br>
-
-                보다 정확한 상담과 안내를 위해<br>
-                담당자가 직접 상담 도와드리고 있습니다.
-
-            </div>
-
-        `;
-
-    }
-
-    /* 부분시공 */
-    else if(type === 'partial'){
-
-        subFields.innerHTML = `
-
-            <div class="partial-group">
-
-                <div class="partial-title">
-                    필름
-                </div>
-
-                <div class="partial-checks">
-
-                    <label><input type="checkbox" value="방문(도어)"> 방문(도어)</label>
-                    <label><input type="checkbox" value="방문틀(도어틀)"> 방문틀(도어틀)</label>
-                    <label><input type="checkbox" value="싱크대"> 싱크대</label>
-                    <label><input type="checkbox" value="붙박이장"> 붙박이장</label>
-                    <label><input type="checkbox" value="화장대"> 화장대</label>
-                    <label><input type="checkbox" value="신발장"> 신발장</label>
-                    <label><input type="checkbox" value="현관방화문"> 현관방화문</label>
-                    <label><input type="checkbox" value="샷시(창호)"> 샷시(창호)</label>
-
-                </div>
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-/* 초기화 */
-function resetEstimate(){
-
-    document.querySelectorAll('.type-btn').forEach(btn=>{
-        btn.classList.remove('active');
-    });
-
-    document.getElementById('subFields').style.display = 'none';
-    document.getElementById('subFields').innerHTML = '';
-
-    document.getElementById('requestDate').value = '';
-    document.getElementById('requestArea').value = '';
-    document.getElementById('userPhone').value = '';
-    document.getElementById('resultPrice').innerText = '';
-
-}
-
-/* 문의 */
-function calculate(){
-
-    const requestDate =
-        document.getElementById("requestDate").value || "미입력";
-
-    const requestArea =
-        document.getElementById("requestArea").value || "미입력";
-
-    const phone =
-        document.getElementById("userPhone").value;
-
-    if(phone.length < 10){
-
-        alert("연락처를 정확히 입력해주세요.");
-        return;
-
-    }
-
-    const type =
-        document.querySelector('.type-btn.active')?.innerText || "선택안함";
-
-    let message = "";
-
-    /* 주거 */
-    if(type === "주거 리모델링"){
-
-        const houseType =
-            document.querySelector('.house-btn.active')?.innerText || "선택안함";
-
-        const pyung =
-            document.getElementById('pyung')?.value || "미입력";
-
-        const isWindow =
-            document.getElementById('isWindow')?.checked
-            ? "포함"
-            : "미포함";
-
-        const isPremium =
-            document.getElementById('isPremium')?.checked
-            ? "선택"
-            : "미선택";
-
-        const bathQty =
-            document.getElementById('bathQty')?.value || "0";
-
-        message =
-
-`[ 1분 견적 문의 ]
-
-공사 유형 : ${type}
-
-주거 형태 : ${houseType}
-
-평수 : ${pyung}평
-
-창호 교체 : ${isWindow}
-
-프리미엄 자재 : ${isPremium}
-
-화장실 공사 : ${bathQty}개소
-
-시공 요청 일자 : ${requestDate}
-
-시공 요청 지역 : ${requestArea}
-
-연락처 : ${phone}`;
-
-    }
-
-    /* 상가 */
-    else if(type === "상가 인테리어"){
-
-        message =
-
-`[ 1분 견적 문의 ]
-
-공사 유형 : ${type}
-
-상업 공간 인테리어 상담 요청
-
-※ 업종 / 공사 범위 / 자재 사양에 따라
-상세 견적 상담 예정
-
-시공 요청 일자 : ${requestDate}
-
-시공 요청 지역 : ${requestArea}
-
-연락처 : ${phone}`;
-
-    }
-
-    /* 부분시공 */
-    else if(type === "부분시공"){
-
-        const checkedItems = [];
-
-        document
-            .querySelectorAll('#subFields input[type="checkbox"]:checked')
-            .forEach(el=>{
-
-                checkedItems.push(el.value);
-
-            });
-
-        message =
-
-`[ 1분 견적 문의 ]
-
-공사 유형 : ${type}
-
-선택 항목 :
-
-${checkedItems.length ? checkedItems.join('\n') : '선택 없음'}
-
-시공 요청 일자 : ${requestDate}
-
-시공 요청 지역 : ${requestArea}
-
-연락처 : ${phone}`;
-
-    }
-
-    document.getElementById("resultPrice").innerText =
-        "문의가 정상 접수되었습니다.";
-
-    emailjs.send(
-        "service_fz1110j",
-        "template_0vo3ea6",
-        {
-            message:message
-        }
-    )
-
-    .then(function(){
-
-        alert("담당자가 빠르게 연락드리겠습니다.");
-
-        closePanel();
-
-    })
-
-    .catch(function(){
-
-        alert("메일 전송에 실패했습니다.");
-
-    });
 
 }
 
