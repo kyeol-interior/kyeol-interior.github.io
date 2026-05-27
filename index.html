@@ -1,40 +1,125 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>주식회사 결 | 전주 인테리어·리모델링·실내건축 전문 (주)결</title>
+<title>주식회사 결 | 전주 인테리어</title>
 
-    <meta name="description" content="상업공간의 성공과 주거의 품격, 전주 인테리어 전문 디자인 기업 (주)결입니다.">
-    <meta name="keywords" content="전주인테리어, 전주리모델링, 주식회사결, 실내건축, 상업인테리어, 주거인테리어">
+<meta name="description" content="전주 인테리어 전문 (주)결">
+<meta name="keywords" content="전주인테리어, 리모델링, 실내건축">
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kyeol-interior.github.io/">
-    <meta property="og:title" content="(주)결 | KYEOL DESIGN">
-    <meta property="og:description" content="전주 인테리어·실내건축 전문 디자인 기업 (주)결">
-    <meta property="og:image" content="https://kyeol-interior.github.io/image/main-thumb.jpg">
-
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;800&display=swap" rel="stylesheet">
 
 <style>
+
+/* =====================
+   기본
+===================== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Noto Sans KR',sans-serif;}
 body{background:#000;color:#fff;overflow-x:hidden;}
 
-/* ===== 기존 배경 ===== */
-.video-background{position:absolute;width:100%;height:100%;z-index:-1;overflow:hidden;}
-.video-background::after{content:"";position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.45);}
-.video-mobile,.video-pc{position:absolute;width:100%;height:100%;object-fit:cover;}
+/* =====================
+   네비 (로고 복구)
+===================== */
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:110px;
+    display:flex;
+    align-items:center;
+    padding:0 40px;
+    z-index:9999;
+}
+
+.logo-img{
+    height:80px;
+    width:auto;
+    filter:drop-shadow(0 0 10px rgba(255,255,255,0.2));
+}
+
+/* =====================
+   비디오 배경
+===================== */
+.video-background{
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    overflow:hidden;
+}
+
+.video-background::after{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.45);
+}
+
+.video-mobile,.video-pc{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
 .video-pc{display:none;}
-@media(min-width:1025px){.video-mobile{display:none;}.video-pc{display:block;}}
+@media(min-width:1025px){
+    .video-mobile{display:none;}
+    .video-pc{display:block;}
+}
 
-/* ===== 메인 ===== */
-main{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
-.main-title{font-size:40px;font-weight:800;margin-bottom:15px;}
-.main-sub{opacity:0.7;margin-bottom:40px;}
-.btn-group a{display:inline-block;margin:10px;padding:14px 30px;border:1px solid #fff;color:#fff;text-decoration:none;}
+/* =====================
+   메인 (타이틀 안정화)
+===================== */
+main{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:0 20px;
+}
 
-/* ===== 하단 배너 ===== */
+.main-title{
+    font-size:clamp(20px,5vw,48px);
+    font-weight:800;
+    line-height:1.25;
+    letter-spacing:-0.02em;
+    word-break:keep-all;
+    max-width:90%;
+}
+
+.main-sub{
+    margin-top:12px;
+    font-size:13px;
+    opacity:0.7;
+    letter-spacing:0.3em;
+}
+
+/* =====================
+   버튼
+===================== */
+.btn-group{
+    margin-top:40px;
+}
+
+.btn-group a{
+    display:inline-block;
+    margin:8px;
+    padding:14px 28px;
+    border:1px solid #fff;
+    color:#fff;
+    text-decoration:none;
+}
+
+/* =====================
+   견적 배너
+===================== */
 .estimate-banner{
     position:fixed;
     bottom:0;
@@ -44,12 +129,14 @@ main{height:100vh;display:flex;flex-direction:column;justify-content:center;alig
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:14px 18px;
+    padding:14px 16px;
     z-index:9999;
     cursor:pointer;
 }
+
 .estimate-banner strong{font-size:14px;}
-.estimate-banner span{font-size:12px;opacity:0.8;}
+.estimate-banner span{font-size:11px;opacity:0.8;}
+
 .estimate-btn{
     background:#fff;
     color:#1a365d;
@@ -59,17 +146,22 @@ main{height:100vh;display:flex;flex-direction:column;justify-content:center;alig
     font-size:12px;
 }
 
-/* ===== 모달 ===== */
+/* =====================
+   모달
+===================== */
 .estimate-modal{
     display:none;
     position:fixed;
-    top:0;left:0;
-    width:100%;height:100%;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
     background:rgba(0,0,0,0.7);
     justify-content:center;
     align-items:center;
     z-index:10000;
 }
+
 .estimate-box{
     background:#fff;
     color:#333;
@@ -78,7 +170,12 @@ main{height:100vh;display:flex;flex-direction:column;justify-content:center;alig
     padding:20px;
     border-radius:12px;
 }
-.estimate-box h2{color:#1a365d;margin-bottom:10px;}
+
+.estimate-box h2{
+    color:#1a365d;
+    margin-bottom:12px;
+}
+
 .estimate-box select,
 .estimate-box input{
     width:100%;
@@ -87,6 +184,7 @@ main{height:100vh;display:flex;flex-direction:column;justify-content:center;alig
     border:1px solid #ddd;
     border-radius:6px;
 }
+
 .calc-btn{
     width:100%;
     padding:12px;
@@ -96,6 +194,7 @@ main{height:100vh;display:flex;flex-direction:column;justify-content:center;alig
     border-radius:6px;
     font-weight:bold;
 }
+
 .result{
     margin-top:10px;
     background:#f7fafc;
@@ -103,6 +202,7 @@ main{height:100vh;display:flex;flex-direction:column;justify-content:center;alig
     border-radius:6px;
     display:none;
 }
+
 .close-btn{
     margin-top:10px;
     width:100%;
@@ -112,12 +212,47 @@ main{height:100vh;display:flex;flex-direction:column;justify-content:center;alig
     border:none;
     border-radius:6px;
 }
+
+/* =====================
+   모바일 보정
+===================== */
+@media(max-width:768px){
+    .main-title{
+        font-size:22px;
+        line-height:1.2;
+    }
+
+    .main-sub{
+        font-size:11px;
+        letter-spacing:0.25em;
+    }
+
+    nav{
+        padding:0 20px;
+    }
+
+    .logo-img{
+        height:65px;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- ===== 배경 ===== -->
+<!-- =====================
+   로고 (복구 핵심)
+===================== -->
+<nav>
+    <a href="index.html">
+        <img src="./image/image_1.png" class="logo-img" alt="KYEOL">
+    </a>
+</nav>
+
+<!-- =====================
+   배경
+===================== -->
 <div class="video-background">
     <video class="video-mobile" autoplay muted loop>
         <source src="./image/mobile-video.mp4">
@@ -127,42 +262,50 @@ main{height:100vh;display:flex;flex-direction:column;justify-content:center;alig
     </video>
 </div>
 
-<!-- ===== 메인 ===== -->
+<!-- =====================
+   메인
+===================== -->
 <main>
-    <h1 class="main-title">공간의 본질을 설계합니다</h1>
+    <h1 class="main-title">
+        상업공간의 성공과 주거의 품격,<br>
+        결이 다른 공간을 만듭니다
+    </h1>
+
     <p class="main-sub">INTERIOR DESIGN & ARCHITECTURE</p>
 
     <div class="btn-group">
         <a href="about.html">ENTER</a>
-        <a href="live-report.html">LIVE REPORT</a>
+        <a href="live-report.html">LIVE</a>
     </div>
 </main>
 
-<!-- ===== 기존 관리자/메뉴 구조 유지 (생략 없이 유지 가능) ===== -->
-
-<!-- ===== 견적 배너 ===== -->
+<!-- =====================
+   견적 배너
+===================== -->
 <div class="estimate-banner" onclick="openEstimate()">
     <div>
         <strong>30초 간편 견적</strong><br>
-        <span>필름 / 도배 / 실리콘 / 장판 즉시 견적 확인</span>
+        <span>필름 / 도배 / 실리콘 / 장판</span>
     </div>
     <div class="estimate-btn">견적보기</div>
 </div>
 
-<!-- ===== 견적 모달 ===== -->
+<!-- =====================
+   견적 모달
+===================== -->
 <div class="estimate-modal" id="estimateModal">
     <div class="estimate-box">
-        <h2>간편 견적 시스템</h2>
+        <h2>간편 견적</h2>
 
         <select id="type">
-            <option value="film">필름 공사</option>
-            <option value="silicone">실리콘 공사</option>
+            <option value="film">필름</option>
+            <option value="silicone">실리콘</option>
             <option value="wallpaper">도배</option>
-            <option value="floor">장판/마루</option>
+            <option value="floor">장판</option>
         </select>
 
-        <input type="number" id="qty" placeholder="수량 입력">
-        <input type="text" id="addr" placeholder="지역 / 아파트명">
+        <input type="number" id="qty" placeholder="수량">
+        <input type="text" id="addr" placeholder="아파트 / 지역">
         <input type="text" id="phone" placeholder="연락처">
 
         <button class="calc-btn" onclick="calc()">견적 계산</button>
@@ -174,42 +317,39 @@ main{height:100vh;display:flex;flex-direction:column;justify-content:center;alig
 </div>
 
 <script>
-// ===== 견적 열기/닫기 =====
+
 function openEstimate(){
     document.getElementById('estimateModal').style.display='flex';
 }
+
 function closeEstimate(){
     document.getElementById('estimateModal').style.display='none';
 }
 
-// ===== 견적 계산 =====
 function calc(){
     let type=document.getElementById('type').value;
     let qty=parseFloat(document.getElementById('qty').value);
     let phone=document.getElementById('phone').value;
 
     if(!qty||!phone){
-        alert("수량과 연락처 필수");
+        alert("필수 입력");
         return;
     }
 
-    let price=0;
+    let priceMap={
+        film:18000,
+        silicone:12000,
+        wallpaper:15000,
+        floor:22000
+    };
 
-    if(type==="film") price=18000;
-    if(type==="silicone") price=12000;
-    if(type==="wallpaper") price=15000;
-    if(type==="floor") price=22000;
-
-    let total=qty*price;
+    let total=qty*priceMap[type];
 
     let box=document.getElementById('resultBox');
     box.style.display='block';
-    box.innerHTML=
-        "예상 견적: <b>"+total.toLocaleString()+"원</b><br>" +
-        "※ 현장에 따라 변동될 수 있습니다.";
-
-    console.log("문의:",type,qty,phone);
+    box.innerHTML="예상 견적: <b>"+total.toLocaleString()+"원</b>";
 }
+
 </script>
 
 </body>
