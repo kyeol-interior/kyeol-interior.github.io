@@ -17,7 +17,7 @@ color:#111;
 overflow-x:hidden;
 }
 
-/* ================= NAV ================= */
+/* NAV */
 nav{
 position:fixed;
 top:0;
@@ -44,7 +44,6 @@ color:#000;
 margin-left:auto;
 display:flex;
 gap:28px;
-align-items:center;
 }
 
 .nav-links a{
@@ -58,7 +57,7 @@ color:#000;
 font-weight:700;
 }
 
-/* ================= HAMBURGER ================= */
+/* MOBILE HAMBURGER */
 .menu-btn{
 display:none;
 flex-direction:column;
@@ -85,9 +84,7 @@ padding:40px;
 transition:.3s;
 }
 
-#mobileMenu.active{
-right:0;
-}
+#mobileMenu.active{right:0;}
 
 #mobileMenu a{
 display:block;
@@ -97,7 +94,7 @@ text-decoration:none;
 color:#111;
 }
 
-/* ================= MAIN ================= */
+/* MAIN */
 .wrapper{
 display:flex;
 width:100%;
@@ -137,7 +134,7 @@ line-height:2;
 color:#444;
 }
 
-/* ================= CTA ================= */
+/* CTA */
 .cta-estimate{
 position:fixed;
 right:24px;
@@ -151,17 +148,10 @@ cursor:pointer;
 box-shadow:0 12px 35px rgba(230,0,35,0.35);
 }
 
-.cta-sub{
-font-size:11px;
-opacity:0.85;
-}
+.cta-sub{font-size:11px;opacity:0.85;}
+.cta-main{font-size:18px;font-weight:800;}
 
-.cta-main{
-font-size:18px;
-font-weight:800;
-}
-
-/* ================= PANEL ================= */
+/* PANEL */
 #overlay{
 position:fixed;
 top:0;
@@ -172,10 +162,7 @@ background:rgba(0,0,0,0.35);
 display:none;
 z-index:2500;
 }
-
-#overlay.active{
-display:block;
-}
+#overlay.active{display:block;}
 
 #estimatePanel{
 position:fixed;
@@ -189,10 +176,7 @@ transition:.4s;
 padding:90px 25px;
 overflow-y:auto;
 }
-
-#estimatePanel.active{
-right:0;
-}
+#estimatePanel.active{right:0;}
 
 .btn-group{
 display:grid;
@@ -217,14 +201,20 @@ color:#fff;
 margin-top:20px;
 }
 
-input{
+input,select{
 width:100%;
 padding:12px;
 margin:8px 0;
 border:1px solid #ddd;
 }
 
-/* ================= MOBILE ================= */
+.partial-group{
+margin-top:15px;
+padding:10px;
+border:1px solid #eee;
+}
+
+/* MOBILE */
 @media(max-width:1024px){
 
 .nav-links{display:none;}
@@ -260,12 +250,10 @@ text-align:center;
 
 <body>
 
-<!-- OVERLAY -->
 <div id="overlay" onclick="closePanel()"></div>
 
-<!-- NAV (구조 유지 + 햄버거 복구) -->
+<!-- NAV -->
 <nav>
-
 <a href="index.html" class="logo">KYEOL</a>
 
 <div class="nav-links">
@@ -278,7 +266,6 @@ text-align:center;
 <div class="menu-btn" onclick="toggleMenu()">
 <span></span><span></span><span></span>
 </div>
-
 </nav>
 
 <!-- MOBILE MENU -->
@@ -289,11 +276,10 @@ text-align:center;
 <a href="contact.html">CONTACT</a>
 </div>
 
-<!-- MAIN (완전 유지) -->
+<!-- MAIN -->
 <div class="wrapper">
 
 <div class="text-side">
-
 <h1 class="title-main">
 "The devil is in the detail,<br>
 악마는 디테일에 있다."
@@ -309,7 +295,6 @@ text-align:center;
 눈에 닿는 모든 곳에 결이 좋은 공간을 짓습니다.
 </b>
 </p>
-
 </div>
 
 <div class="img-side">
@@ -318,7 +303,7 @@ text-align:center;
 
 </div>
 
-<!-- CTA (하단 유지) -->
+<!-- CTA -->
 <div class="cta-estimate" onclick="openPanel()">
 <div class="cta-sub">무료 상담 가능</div>
 <div class="cta-main">1분 견적 →</div>
@@ -330,18 +315,18 @@ text-align:center;
 <h2>1분 견적</h2>
 
 <div class="btn-group">
-<div class="type-btn" onclick="selectType(this,'residence')">주거</div>
-<div class="type-btn" onclick="selectType(this,'commercial')">상가</div>
+<div class="type-btn" onclick="selectType(this,'residence')">주거 리모델링</div>
+<div class="type-btn" onclick="selectType(this,'commercial')">상가 인테리어</div>
 <div class="type-btn" onclick="selectType(this,'partial')">부분시공</div>
 </div>
 
 <div id="subFields"></div>
 
-<input id="requestDate" placeholder="시공일">
-<input id="requestArea" placeholder="지역">
+<input id="requestDate" placeholder="시공 요청 일자 (예: 26년 5월 27일)">
+<input id="requestArea" placeholder="시공 요청 지역 (예: 전주시 완산구)">
 <input id="userPhone" placeholder="연락처">
 
-<button onclick="calculate()">전송</button>
+<button onclick="calculate()">견적 문의하기</button>
 
 </div>
 
@@ -360,34 +345,106 @@ document.getElementById("estimatePanel").classList.remove("active");
 document.getElementById("overlay").classList.remove("active");
 }
 
+/* ================= FULL RESTORE ================= */
 function selectType(el,type){
+
 document.querySelectorAll(".type-btn").forEach(e=>e.classList.remove("active"));
 el.classList.add("active");
 
 const sub=document.getElementById("subFields");
 
+/* 주거 */
 if(type==="residence"){
 sub.innerHTML=`
-<input placeholder="평수">
-<label><input type="checkbox">창호</label>
-<label><input type="checkbox">프리미엄</label>
+<div class="partial-group">
+<label>주거 형태</label><br>
+<label><input type="radio" name="home"> 주택</label>
+<label><input type="radio" name="home"> 아파트</label>
+</div>
+
+<div class="partial-group">
+평수 : <input type="number" id="pyung"> 평
+</div>
+
+<div class="partial-group">
+<label><input type="checkbox" id="window"> 창호 교체 포함</label><br>
+<label><input type="checkbox" id="premium"> 프리미엄 자재 선택</label>
+</div>
+
+<div class="partial-group">
+화장실 공사 :
+<select id="bath">
+<option value="0">0개소</option>
+<option value="1">1개소</option>
+<option value="2">2개소</option>
+</select>
+</div>
 `;
 }
 
+/* 상가 */
 if(type==="commercial"){
 sub.innerHTML=`
-<p style="color:#e60023;">
-자재 / 업종 / 현장 조건에 따라 상담이 필요합니다.
-</p>`;
-}
-
-if(type==="partial"){
-sub.innerHTML=`
-<label><input type="checkbox">필름</label>
-<label><input type="checkbox">도배</label>
-<label><input type="checkbox">실리콘</label>
+<p style="color:#e60023;line-height:1.8;">
+자재비, 요구사항, 업종, 현장 조건에 따라 금액이 달라집니다.<br>
+정확한 견적은 담당자 상담을 통해 안내드립니다.
+</p>
 `;
 }
+
+/* 부분시공 */
+if(type==="partial"){
+sub.innerHTML=`
+<div class="partial-group">
+<b>필름</b><br>
+<label><input type="checkbox" value="방문"> 방문</label>
+<label><input type="checkbox" value="싱크대"> 싱크대</label>
+<label><input type="checkbox" value="붙박이장"> 붙박이장</label>
+<label><input type="checkbox" value="현관문"> 현관문</label>
+</div>
+
+<div class="partial-group">
+<b>실리콘</b><br>
+<label><input type="checkbox" value="세면대"> 세면대</label>
+<label><input type="checkbox" value="변기"> 변기</label>
+<label><input type="checkbox" value="샷시"> 샷시</label>
+</div>
+
+<div class="partial-group">
+<b>도배</b><br>
+<label><input type="checkbox" value="안방"> 안방</label>
+<label><input type="checkbox" value="거실"> 거실</label>
+</div>
+
+<div class="partial-group">
+<b>도장</b><br>
+<label><input type="checkbox" value="베란다"> 베란다</label>
+<label><input type="checkbox" value="현관"> 현관</label>
+</div>
+
+<div class="partial-group">
+<b>도어</b><br>
+<label><input type="checkbox" value="중문"> 중문</label><br>
+기타 : <input type="text" id="doorExtra">
+</div>
+`;
+}
+}
+
+/* SEND */
+function calculate(){
+
+const phone=document.getElementById("userPhone").value;
+if(phone.length<10) return alert("연락처 입력");
+
+const type=document.querySelector(".type-btn.active")?.innerText;
+const date=document.getElementById("requestDate").value;
+const area=document.getElementById("requestArea").value;
+
+let message=`[1분견적]\n유형:${type}\n${date}\n${area}\n${phone}`;
+
+alert("전송 완료 (구조 복구 버전)");
+console.log(message);
 }
 </script>
 
