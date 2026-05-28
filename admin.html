@@ -3,131 +3,313 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ADMIN | KYEOL</title>
+<title>ABOUT | KYEOL</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 
 <style>
-body{font-family:sans-serif;padding:40px;background:#f5f5f5;}
-.box{max-width:600px;margin:auto;background:#fff;padding:20px;border-radius:10px;}
-input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;}
-button{padding:12px;width:100%;margin-top:10px;background:#111;color:#fff;border:none;cursor:pointer;}
-h2{margin-bottom:20px;}
-.hidden{display:none;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#111;overflow-x:hidden;}
+
+nav{
+position:fixed;top:0;width:100%;height:80px;
+display:flex;align-items:center;
+padding:0 50px;border-bottom:1px solid #eee;
+background:#fff;z-index:1000;
+}
+
+.logo{
+font-family:'Playfair Display',serif;
+font-size:24px;font-weight:700;
+letter-spacing:4px;color:#000;text-decoration:none;
+}
+
+.nav-links{
+margin-left:auto;
+display:flex;
+gap:28px;
+align-items:center;
+}
+
+.nav-links a{
+color:#999;
+text-decoration:none;
+font-size:13px;
+cursor:pointer;
+}
+
+.nav-links a.active{
+color:#000;
+font-weight:700;
+}
+
+/* MAIN */
+.wrapper{
+display:flex;
+width:100%;
+height:100vh;
+padding-top:80px;
+}
+
+.text-side{
+flex:1;
+padding:0 8%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+background:#fbfbfb;
+}
+
+.img-side{
+flex:1.3;
+}
+
+.img-side img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.title-main{
+font-size:34px;
+margin-bottom:30px;
+line-height:1.4;
+}
+
+.desc-text{
+font-size:17px;
+line-height:2;
+color:#444;
+}
+
+/* PANEL */
+#overlay{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.35);
+display:none;
+z-index:2500;
+}
+
+#overlay.active{
+display:block;
+}
+
+#estimatePanel{
+position:fixed;
+top:0;right:-100%;
+width:100%;height:100%;
+background:#fff;
+z-index:3000;
+transition:.4s;
+padding:90px 25px;
+overflow-y:auto;
+}
+
+#estimatePanel.active{
+right:0;
+}
+
+.btn-group{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:10px;
+margin-top:15px;
+}
+
+.type-btn{
+padding:12px;
+border:1px solid #ddd;
+text-align:center;
+cursor:pointer;
+}
+
+.type-btn.active{
+background:#111;
+color:#fff;
+}
+
+#subFields{
+margin-top:20px;
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ddd;
+}
+
+button{
+padding:14px;
+width:100%;
+border:none;
+cursor:pointer;
+background:#111;
+color:#fff;
+}
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<!-- OVERLAY -->
+<div id="overlay" onclick="closePanel()"></div>
 
-<h2>관리자 로그인</h2>
+<!-- NAV -->
+<nav>
+<a href="index.html" class="logo">KYEOL</a>
 
-<div id="loginBox">
-<input id="email" placeholder="이메일">
-<input id="password" type="password" placeholder="비밀번호">
-<button onclick="login()">로그인</button>
-</div>
+<div class="nav-links">
 
-<div id="adminBox" class="hidden">
-
-<h3>견적 설정</h3>
-
-<input id="basePrice" placeholder="기본 단가">
-<input id="premiumPrice" placeholder="프리미엄 단가">
-<input id="windowPrice" placeholder="창호 단가">
-
-<h3>상가 안내 문구</h3>
-<input id="commercialNotice" placeholder="상가 안내 문구">
-
-<button onclick="save()">저장</button>
+<a onclick="openPanel()">1분견적</a>
+<a href="about.html" class="active">ABOUT</a>
+<a href="portfolio.html">PORTFOLIO</a>
+<a href="proposal.html">PROPOSAL</a>
+<a href="contact.html">CONTACT</a>
 
 </div>
+</nav>
+
+<!-- MAIN -->
+<div class="wrapper">
+
+<div class="text-side">
+
+<h1 class="title-main">
+"The devil is in the detail,<br>
+악마는 디테일에 있다."
+</h1>
+
+<p class="desc-text">
+단순해 보이는 공간일지라도,<br>
+그 완성도는 눈에 잘 띄지 않는<br>
+작은 디테일에서 결정됩니다.<br><br>
+
+<b>
+머무는 순간의 온기,<br>
+눈에 닿는 모든 곳에 결이 좋은 공간을 짓습니다.
+</b>
+</p>
 
 </div>
 
-<script type="module">
+<div class="img-side">
+<img src="image/about1.jpg">
+</div>
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-import {
-getFirestore,
-doc,
-getDoc,
-setDoc
-} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+</div>
 
-import {
-getAuth,
-signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+<!-- PANEL -->
+<div id="estimatePanel">
 
-const firebaseConfig = {
-apiKey:"AIzaSyD2Ct9z_RzhkheCicuZXf5-mL10S7cU3zc",
-authDomain:"kyeol-site.firebaseapp.com",
-projectId:"kyeol-site",
-storageBucket:"kyeol-site.firebasestorage.app",
-messagingSenderId:"1051027367783",
-appId:"1:1051027367783:web:efa4b6d64ecff81da7f1c2"
-};
+<h2>1분 견적</h2>
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+<div class="btn-group">
 
-/* LOGIN */
-window.login = async function(){
+<div class="type-btn" onclick="selectType(this,'residence')">주거</div>
+<div class="type-btn" onclick="selectType(this,'commercial')">상가</div>
+<div class="type-btn" onclick="selectType(this,'partial')">부분시공</div>
 
-const email = document.getElementById("email").value;
-const password = document.getElementById("password").value;
+</div>
 
-try{
+<div id="subFields"></div>
 
-await signInWithEmailAndPassword(auth,email,password);
+<input id="requestDate" placeholder="시공일">
+<input id="requestArea" placeholder="지역">
+<input id="userPhone" placeholder="연락처">
 
-document.getElementById("loginBox").style.display="none";
-document.getElementById("adminBox").classList.remove("hidden");
+<button onclick="calculate()">전송</button>
 
-loadData();
+<div id="resultPrice"></div>
 
-}catch(e){
-alert("로그인 실패");
+</div>
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init("sm7crJ5wvq3K7Phnz");
+
+/* OPEN */
+function openPanel(){
+document.getElementById("estimatePanel").classList.add("active");
+document.getElementById("overlay").classList.add("active");
 }
 
+/* CLOSE */
+function closePanel(){
+document.getElementById("estimatePanel").classList.remove("active");
+document.getElementById("overlay").classList.remove("active");
 }
 
-/* LOAD */
-async function loadData(){
+/* TYPE */
+function selectType(el,type){
 
-const snap = await getDoc(doc(db,"settings","estimate"));
+document.querySelectorAll(".type-btn").forEach(e=>e.classList.remove("active"));
+el.classList.add("active");
 
-if(snap.exists()){
+const sub=document.getElementById("subFields");
 
-const d = snap.data();
-
-document.getElementById("basePrice").value = d.basePrice || 0;
-document.getElementById("premiumPrice").value = d.premiumPrice || 0;
-document.getElementById("windowPrice").value = d.windowPrice || 0;
-document.getElementById("commercialNotice").value = d.commercialNotice || "";
-
+if(type==="residence"){
+sub.innerHTML=`
+<input id="pyung" placeholder="평수">
+<label><input type="checkbox" id="win">창호</label>
+<label><input type="checkbox" id="pre">프리미엄</label>
+`;
 }
 
+if(type==="commercial"){
+sub.innerHTML=`
+<p style="color:red">
+자재비 / 업종 / 요구사항에 따라 견적이 달라지며,<br>
+정확한 안내는 담당자 상담을 통해 진행됩니다.
+</p>`;
 }
 
-/* SAVE */
-window.save = async function(){
-
-await setDoc(doc(db,"settings","estimate"),{
-
-basePrice:Number(document.getElementById("basePrice").value),
-premiumPrice:Number(document.getElementById("premiumPrice").value),
-windowPrice:Number(document.getElementById("windowPrice").value),
-commercialNotice:document.getElementById("commercialNotice").value
-
-});
-
-alert("저장 완료");
-loadData();
-
+if(type==="partial"){
+sub.innerHTML=`
+<label><input type="checkbox" value="필름">필름</label>
+<label><input type="checkbox" value="도배">도배</label>
+<label><input type="checkbox" value="실리콘">실리콘</label>
+`;
+}
 }
 
+/* SEND */
+function calculate(){
+
+const phone=document.getElementById("userPhone").value;
+if(phone.length<10) return alert("연락처 입력");
+
+const type=document.querySelector(".type-btn.active")?.innerText;
+
+const date=document.getElementById("requestDate").value;
+const area=document.getElementById("requestArea").value;
+
+let message="";
+
+if(type==="주거"){
+message=`주거 문의\n${date}\n${area}\n${phone}`;
+}
+
+if(type==="상가"){
+message=`상가 문의\n${date}\n${area}\n${phone}`;
+}
+
+if(type==="부분시공"){
+
+const list=[...document.querySelectorAll("#subFields input:checked")]
+.map(e=>e.value);
+
+message=`부분시공\n${list.join(",")}\n${date}\n${area}\n${phone}`;
+}
+
+emailjs.send("service_fz1110j","template_0vo3ea6",{message});
+
+document.getElementById("resultPrice").innerText="전송 완료";
+}
 </script>
 
 </body>
