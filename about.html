@@ -1,129 +1,125 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ABOUT | KYEOL</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
-<style>
-    *{ margin:0; padding:0; box-sizing:border-box; }
-    body{ font-family:'Noto Sans KR', sans-serif; background:#fff; color:#111; overflow-x:hidden; }
-    nav{ position:fixed; top:0; width:100%; height:80px; display:flex; align-items:center; padding:0 50px; border-bottom:1px solid #eee; background:#fff; z-index:1000; }
-    .logo{ font-family:'Playfair Display', serif; font-size:24px; font-weight:700; letter-spacing:4px; text-decoration:none; color:#000; }
-    .nav-links{ display:flex; gap:28px; align-items:center; margin-left:auto; }
-    .nav-links a{ text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; transition:0.3s; }
-    .nav-links a.active{ color:#000; font-weight:700; }
-    .mobile-menu-btn{ display:none; flex-direction:column; gap:5px; margin-left:auto; cursor:pointer; }
-    .mobile-menu-btn span{ width:24px; height:2px; background:#111; }
-    #mobileMenu{ position:fixed; top:80px; right:-100%; width:100%; height:calc(100vh - 80px); background:#fff; z-index:2000; transition:0.35s; display:flex; flex-direction:column; padding:40px 28px; }
-    #mobileMenu.active{ right:0; }
-    #mobileMenu a{ text-decoration:none; color:#111; font-size:18px; padding:18px 0; border-bottom:1px solid #eee; }
-    .overlay{ position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.35); display:none; z-index:2500; }
-    .overlay.active{ display:block; }
-    #estimatePanel{ position:fixed; top:0; right:-50%; width:50%; height:100%; background:#fff; z-index:3000; transition:0.45s cubic-bezier(0.25,0.8,0.25,1); padding:100px 40px; box-shadow:-5px 0 30px rgba(0,0,0,0.12); overflow-y:auto; }
-    #estimatePanel.active{ right:0; }
-    .btn-group{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:20px; }
-    .type-btn{ padding:14px 5px; border:1px solid #ddd; background:#fff; cursor:pointer; text-align:center; border-radius:10px; font-size:13px; transition:0.25s; }
-    .type-btn.active{ border-color:#111; background:#111; color:#fff; }
-    .house-group{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:15px; }
-    .house-btn{ padding:12px; border:1px solid #ddd; border-radius:8px; text-align:center; cursor:pointer; }
-    .house-btn.active{ background:#eee; border-color:#111; }
-    .detail-section{ padding:15px; background:#fbfbfb; border:1px solid #eee; border-radius:10px; margin-bottom:20px; display:none; font-size:13px; }
-    .wrapper{ display:flex; width:100%; height:100vh; padding-top:80px; }
-    .text-side{ flex:1; padding:0 8%; display:flex; flex-direction:column; justify-content:center; background:#fbfbfb; }
-    .img-side{ flex:1.3; overflow:hidden; }
-    .img-side img{ width:100%; height:100%; object-fit:cover; }
-    .title-main{ font-size:34px; line-height:1.4; margin-bottom:35px; }
-    .desc-text{ font-size:17px; line-height:2.1; color:#444; }
-    .floating-estimate{ position:fixed; right:24px; bottom:24px; z-index:5000; background:#e60023; color:#fff; border-radius:22px; padding:18px 24px; cursor:pointer; box-shadow:0 12px 35px rgba(230,0,35,0.32); animation:floatingPulse 2s infinite; }
-    @keyframes floatingPulse{ 0%{ transform:scale(1); } 50%{ transform:scale(1.04); } 100%{ transform:scale(1); } }
-    @media(max-width:1024px){ nav{ padding:0 22px; } .nav-links{ display:none; } .mobile-menu-btn{ display:flex; } #estimatePanel{ width:100%; right:-100%; padding:90px 22px 140px; } .wrapper{ flex-direction:column; height:auto; } .img-side{ height:40vh; order:2; } .text-side{ padding:40px 24px; order:1; } .floating-estimate{ width:calc(100% - 32px); right:16px; bottom:16px; } }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT | KYEOL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        *{ margin:0; padding:0; box-sizing:border-box; }
+        body{ font-family:'Noto Sans KR', sans-serif; background:#fff; color:#111; overflow-x:hidden; }
+        nav{ position:fixed; top:0; width:100%; height:80px; display:flex; align-items:center; padding:0 50px; border-bottom:1px solid #eee; background:#fff; z-index:1000; }
+        .logo{ font-family:'Playfair Display', serif; font-size:24px; font-weight:700; letter-spacing:4px; text-decoration:none; color:#000; }
+        .nav-links{ display:flex; gap:28px; align-items:center; margin-left:auto; }
+        .nav-links a{ text-decoration:none; color:#999; font-size:13px; letter-spacing:2px; transition:0.3s; }
+        .nav-links a.active{ color:#000; font-weight:700; }
+        .mobile-menu-btn{ display:none; flex-direction:column; gap:5px; margin-left:auto; cursor:pointer; }
+        .mobile-menu-btn span{ width:24px; height:2px; background:#111; }
+        #mobileMenu{ position:fixed; top:80px; right:-100%; width:100%; height:calc(100vh - 80px); background:#fff; z-index:2000; transition:0.35s; display:flex; flex-direction:column; padding:40px 28px; }
+        #mobileMenu.active{ right:0; }
+        #mobileMenu a{ text-decoration:none; color:#111; font-size:18px; padding:18px 0; border-bottom:1px solid #eee; }
+        .overlay{ position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.35); display:none; z-index:2500; }
+        .overlay.active{ display:block; }
+        #estimatePanel{ position:fixed; top:0; right:-50%; width:50%; height:100%; background:#fff; z-index:3000; transition:0.45s cubic-bezier(0.25,0.8,0.25,1); padding:100px 40px; box-shadow:-5px 0 30px rgba(0,0,0,0.12); overflow-y:auto; }
+        #estimatePanel.active{ right:0; }
+        .btn-group{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:20px; }
+        .type-btn{ padding:14px 5px; border:1px solid #ddd; background:#fff; cursor:pointer; text-align:center; border-radius:10px; font-size:13px; transition:0.25s; }
+        .type-btn.active{ border-color:#111; background:#111; color:#fff; }
+        .detail-section{ padding:15px; background:#fbfbfb; border:1px solid #eee; border-radius:10px; margin-bottom:20px; display:none; font-size:13px; }
+        .wrapper{ display:flex; width:100%; height:100vh; padding-top:80px; }
+        .text-side{ flex:1; padding:0 8%; display:flex; flex-direction:column; justify-content:center; background:#fbfbfb; }
+        .img-side{ flex:1.3; overflow:hidden; }
+        .img-side img{ width:100%; height:100%; object-fit:cover; }
+        .title-main{ font-size:34px; line-height:1.4; margin-bottom:35px; }
+        .desc-text{ font-size:17px; line-height:2.1; color:#444; }
+        .floating-estimate{ position:fixed; right:24px; bottom:24px; z-index:5000; background:#e60023; color:#fff; border-radius:22px; padding:18px 24px; cursor:pointer; box-shadow:0 12px 35px rgba(230,0,35,0.32); }
+        @media(max-width:1024px){ nav{ padding:0 22px; } .nav-links{ display:none; } .mobile-menu-btn{ display:flex; } #estimatePanel{ width:100%; right:-100%; padding:90px 22px 140px; } .wrapper{ flex-direction:column; height:auto; } .img-side{ height:40vh; order:2; } .text-side{ padding:40px 24px; order:1; } }
+    </style>
 </head>
 <body>
-<div id="overlay" class="overlay" onclick="closePanel()"></div>
-<nav>
-    <a href="index.html" class="logo">KYEOL</a>
-    <div class="nav-links">
-        <a href="about.html" class="active">ABOUT</a>
+    <div id="overlay" class="overlay" onclick="closePanel()"></div>
+    <nav>
+        <a href="index.html" class="logo">KYEOL</a>
+        <div class="nav-links">
+            <a href="about.html" class="active">ABOUT</a>
+            <a href="portfolio.html">PORTFOLIO</a>
+            <a href="proposal.html">PROPOSAL</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+        <div class="mobile-menu-btn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
+    </nav>
+    <div id="mobileMenu">
+        <a href="about.html">ABOUT</a>
         <a href="portfolio.html">PORTFOLIO</a>
         <a href="proposal.html">PROPOSAL</a>
         <a href="contact.html">CONTACT</a>
     </div>
-    <div class="mobile-menu-btn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
-</nav>
-<div id="mobileMenu">
-    <a href="about.html">ABOUT</a>
-    <a href="portfolio.html">PORTFOLIO</a>
-    <a href="proposal.html">PROPOSAL</a>
-    <a href="contact.html">CONTACT</a>
-</div>
-<div id="floatingEstimate" class="floating-estimate" onclick="openPanel()">
-    <div style="font-size:11px; opacity:0.85; margin-bottom:6px;">무료 상담 가능</div>
-    <div style="font-size:20px; font-weight:800;">1분견적 →</div>
-</div>
-<div id="estimatePanel">
-    <h2 style="margin-bottom:25px;">1분 견적</h2>
-    <div class="btn-group">
-        <div class="type-btn" onclick="selectType(this, 'residence')">주거 리모델링</div>
-        <div class="type-btn" onclick="selectType(this, 'commercial')">상가 인테리어</div>
+    <div id="floatingEstimate" class="floating-estimate" onclick="openPanel()">
+        <div style="font-size:11px; opacity:0.85; margin-bottom:6px;">무료 상담 가능</div>
+        <div style="font-size:20px; font-weight:800;">1분견적 →</div>
     </div>
-    <div id="subFields" class="detail-section"></div>
-    <input type="tel" id="userPhone" placeholder="연락처 (010-0000-0000)" style="width:100%; padding:14px; margin-bottom:20px; border:1px solid #ddd; border-radius:10px;">
-    <button onclick="calculate()" style="width:100%; padding:16px; background:#111; color:#fff; border:none; border-radius:10px; cursor:pointer;">견적 문의하기</button>
-    <div id="resultPrice" style="margin-top:20px; font-weight:800; color:#e60023;"></div>
-</div>
-<div class="wrapper">
-    <div class="text-side">
-         <h1 class="title-main">"The devil is in the detail,<br>악마는 디테일에 있다."</h1>
-         <p class="desc-text">"머무는 순간의 온기, 눈에 닿는 모든 곳에<br>결이 좋은 공간을 짓습니다."</p>
+    <div id="estimatePanel">
+        <h2 style="margin-bottom:25px;">1분 견적</h2>
+        <div class="btn-group">
+            <div class="type-btn" onclick="selectType(this, 'residence')">주거 리모델링</div>
+            <div class="type-btn" onclick="selectType(this, 'commercial')">상가 인테리어</div>
+        </div>
+        <div id="subFields" class="detail-section"></div>
+        <input type="tel" id="userPhone" placeholder="연락처 (010-0000-0000)" style="width:100%; padding:14px; margin-bottom:20px; border:1px solid #ddd; border-radius:10px;">
+        <button onclick="calculate()" style="width:100%; padding:16px; background:#111; color:#fff; border:none; border-radius:10px; cursor:pointer;">견적 문의하기</button>
+        <div id="resultPrice" style="margin-top:20px; font-weight:800; color:#e60023;"></div>
     </div>
-    <div class="img-side"><img src="image/about1.jpg" alt="About"></div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-    emailjs.init("sm7crJ5wvq3K7Phnz");
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwM2VXrP2g1o18D-FjJrfDWW55jtaj6nHcJCyjgqlqma5RnuqK5mxQIAcS0wTILABr7/exec";
-    let siteConfig = {};
-    fetch(WEB_APP_URL).then(res => res.json()).then(data => { siteConfig = data; });
+    <div class="wrapper">
+        <div class="text-side">
+            <h1 class="title-main">"The devil is in the detail,<br>악마는 디테일에 있다."</h1>
+            <p class="desc-text">단순해 보이는 공간일지라도,<br>그 완성도는 눈에 잘 띄지 않는<br>작은 디테일에서 결정됩니다.<br><br><b>"머무는 순간의 온기, 눈에 닿는 모든 곳에<br>결이 좋은 공간을 짓습니다."</b></p>
+        </div>
+        <div class="img-side"><img src="image/about1.jpg" alt="About"></div>
+    </div>
 
-    function toggleMobileMenu(){ document.getElementById("mobileMenu").classList.toggle("active"); }
-    function openPanel(){ document.getElementById("estimatePanel").classList.add("active"); document.getElementById("overlay").classList.add("active"); document.getElementById("floatingEstimate").style.display = "none"; }
-    function closePanel(){ document.getElementById("estimatePanel").classList.remove("active"); document.getElementById("overlay").classList.remove("active"); document.getElementById("floatingEstimate").style.display = "block"; }
-    function selectHouse(el){ document.querySelectorAll('.house-btn').forEach(btn=>btn.classList.remove('active')); el.classList.add('active'); }
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        emailjs.init("sm7crJ5wvq3K7Phnz");
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwM2VXrP2g1o18D-FjJrfDWW55jtaj6nHcJCyjgqlqma5RnuqK5mxQIAcS0wTILABr7/exec";
+        let siteConfig = { "주거_기본평단가": 1500000, "상가_안내문구": "상담 도와드립니다." };
+        
+        fetch(WEB_APP_URL + "?t=" + Date.now())
+            .then(res => res.json())
+            .then(data => { siteConfig = data; });
 
-    function selectType(el, type){
-        document.querySelectorAll('.type-btn').forEach(btn=>btn.classList.remove('active'));
-        el.classList.add('active');
-        const subFields = document.getElementById('subFields');
-        subFields.style.display = 'block';
-        if(type === 'residence'){
-            subFields.innerHTML = `평수 : <input type="number" id="pyung" style="width:60px;"> 평`;
-        } else {
-            subFields.innerHTML = `<div style="color:#e60023;">${siteConfig.상가_안내문구 || "상담 도와드립니다."}</div>`;
+        function toggleMobileMenu(){ document.getElementById("mobileMenu").classList.toggle("active"); }
+        function openPanel(){ document.getElementById("estimatePanel").classList.add("active"); document.getElementById("overlay").classList.add("active"); document.getElementById("floatingEstimate").style.display = "none"; }
+        function closePanel(){ document.getElementById("estimatePanel").classList.remove("active"); document.getElementById("overlay").classList.remove("active"); document.getElementById("floatingEstimate").style.display = "block"; }
+        
+        function selectType(el, type){
+            document.querySelectorAll('.type-btn').forEach(btn=>btn.classList.remove('active'));
+            el.classList.add('active');
+            const subFields = document.getElementById('subFields');
+            subFields.style.display = 'block';
+            if(type === 'residence'){
+                subFields.innerHTML = `평수 : <input type="number" id="pyung" style="width:60px; padding:5px;"> 평`;
+            } else {
+                subFields.innerHTML = `<div style="color:#e60023;">${siteConfig.상가_안내문구}</div>`;
+            }
         }
-    }
 
-    function calculate(){
-        const phone = document.getElementById("userPhone").value;
-        const type = document.querySelector('.type-btn.active')?.innerText || "미선택";
-        if(phone.length < 10){ alert("연락처를 입력해주세요."); return; }
-        
-        let total = 0;
-        if(type === "주거 리모델링"){
-            const pyung = parseFloat(document.getElementById('pyung')?.value) || 0;
-            total = pyung * (siteConfig.주거_기본평단가 || 0);
+        function calculate(){
+            const phone = document.getElementById("userPhone").value;
+            const type = document.querySelector('.type-btn.active')?.innerText || "미선택";
+            if(phone.length < 10){ alert("연락처를 입력해주세요."); return; }
+            let total = 0;
+            if(type === "주거 리모델링"){
+                const pyung = parseFloat(document.getElementById('pyung')?.value) || 0;
+                total = pyung * (siteConfig.주거_기본평단가 || 1500000);
+            }
+            document.getElementById("resultPrice").innerText = "예상 견적: " + total.toLocaleString() + "원";
+            emailjs.send("service_fz1110j", "template_0vo3ea6", { message: type + " / " + phone + " / 견적: " + total })
+            .then(() => {
+                fetch(WEB_APP_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({ phone, type, total }) });
+                alert("문의가 접수되었습니다.");
+                closePanel();
+            });
         }
-        
-        document.getElementById("resultPrice").innerText = "예상 견적: " + total.toLocaleString() + "원";
-        
-        emailjs.send("service_fz1110j", "template_0vo3ea6", { message: type + " / " + phone + " / 견적: " + total })
-        .then(() => {
-            fetch(WEB_APP_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({ phone, type, total }) });
-            alert("문의가 접수되었습니다.");
-            closePanel();
-        });
-    }
-</script>
+    </script>
 </body>
 </html>
