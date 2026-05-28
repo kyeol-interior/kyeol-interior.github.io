@@ -103,13 +103,26 @@
 
             const items = siteData.filter(item => item.카테고리 === category);
             
-            items.forEach(item => {
-                subFields.innerHTML += `
-                    <label style="display:block; margin:8px 0; font-size:13px; cursor:pointer;">
-                        <input type="${item.타입}" class="dynamic-item" value="${item.단가}" data-name="${item.항목명}" name="${category}"> 
-                        ${item.항목명} ${item.단가 > 0 ? '(+' + parseInt(item.단가).toLocaleString() + '원)' : ''}
-                    </label>`;
-            });
+            // 상가 인테리어(commercial) 전용 처리
+            if (category === 'commercial') {
+                items.forEach(item => {
+                    if (item.타입 === 'text') {
+                        subFields.innerHTML += `
+                            <div style="color:#444; font-size:14px; line-height:1.6; word-break:keep-all; padding:10px 0;">
+                                ${item.항목명}
+                            </div>`;
+                    }
+                });
+            } else {
+                // 기존 주거(residence) / 부분시공(partial) 처리
+                items.forEach(item => {
+                    subFields.innerHTML += `
+                        <label style="display:block; margin:8px 0; font-size:13px; cursor:pointer;">
+                            <input type="${item.타입}" class="dynamic-item" value="${item.단가}" data-name="${item.항목명}" name="${category}"> 
+                            ${item.항목명} ${item.단가 > 0 ? '(+' + parseInt(item.단가).toLocaleString() + '원)' : ''}
+                        </label>`;
+                });
+            }
         }
 
         function calculate() {
