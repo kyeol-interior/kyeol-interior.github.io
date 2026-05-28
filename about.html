@@ -101,20 +101,20 @@
 
             const items = siteData.filter(item => item.카테고리 === category);
             
-            // 1. 주거 리모델링일 때 평수 입력창 추가
-            if (category === 'residence') {
-                subFields.innerHTML += `<div style="margin-bottom:15px; font-weight:bold;">평수 : <input type="number" id="pyung" style="width:60px; padding:5px; border:1px solid #ddd; border-radius:5px;"> 평</div>`;
+            // 1. 주거/부분시공일 때 평수 입력창 추가
+            if (category === 'residence' || category === 'partial') {
+                subFields.innerHTML += `<div style="margin-bottom:15px; font-weight:bold;">평수 입력 : <input type="number" id="pyung" style="width:60px; padding:5px; border:1px solid #ddd; border-radius:5px;"> 평</div>`;
             }
 
-            // 2. 항목 출력 (상가: 문구 출력, 주거/부분시공: 체크박스/라디오)
+            // 2. 항목 출력
             items.forEach(item => {
                 if (category === 'commercial' && item.타입 === 'text') {
                     subFields.innerHTML += `<div style="color:#444; font-size:14px; line-height:1.6; word-break:keep-all; padding:10px 0;">${item.항목명}</div>`;
-                } else if (category !== 'commercial' && item.타입 !== 'text') {
+                } else if (category !== 'commercial' && (item.타입 === 'radio' || item.타입 === 'checkbox')) {
                     subFields.innerHTML += `
                         <label style="display:block; margin:8px 0; font-size:13px; cursor:pointer;">
                             <input type="${item.타입}" class="dynamic-item" value="${item.단가}" data-name="${item.항목명}" name="${category}"> 
-                            ${item.항목명} ${item.단가 > 0 ? '(+' + parseInt(item.단가).toLocaleString() + '원)' : ''}
+                            ${item.항목명}
                         </label>`;
                 }
             });
@@ -124,22 +124,25 @@
             const phone = document.getElementById("userPhone").value;
             if(phone.length < 10){ alert("연락처를 입력해주세요."); return; }
             
+            const pyung = parseFloat(document.getElementById('pyung')?.value) || 0;
             let total = 0;
             let details = [];
             
-            // 평수 입력값이 있다면 합산 (기본 평당 단가는 시트나 여기서 조정)
-            const pyungInput = document.getElementById('pyung');
-            if(pyungInput) total += (parseFloat(pyungInput.value) || 0) * 0; 
-
             document.querySelectorAll('.dynamic-item:checked').forEach(el => {
-                total += parseInt(el.value);
+                if (el.type === 'radio') {
+                    // 라디오 타입은 평당 단가로 계산
+                    total += (parseInt(el.value) * pyung);
+                } else {
+                    // 체크박스 타입은 고정 금액으로 합산
+                    total += parseInt(el.value);
+                }
                 details.push(el.dataset.name);
             });
 
             document.getElementById("resultPrice").innerText = "예상 견적: " + total.toLocaleString() + "원";
             
             emailjs.send("service_fz1110j", "template_0vo3ea6", { 
-                message: `문의: ${details.join(', ')} / 연락처: ${phone} / 금액: ${total.toLocaleString()}원` 
+                message: `평수: ${pyung}평 / 문의: ${details.join(', ')} / 연락처: ${phone} / 금액: ${total.toLocaleString()}원` 
             }).then(() => { alert("문의가 접수되었습니다."); closePanel(); });
         }
     </script>
