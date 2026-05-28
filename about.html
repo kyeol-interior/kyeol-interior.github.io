@@ -8,42 +8,78 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 
 <style>
-/* ===== 기존 CSS 그대로 유지 ===== */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Noto Sans KR', sans-serif;background:#fff;color:#111;overflow-x:hidden;}
+body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#111;overflow-x:hidden;}
 
-nav{position:fixed;top:0;width:100%;height:80px;display:flex;align-items:center;padding:0 50px;border-bottom:1px solid #eee;background:#fff;z-index:1000;}
-.logo{font-family:'Playfair Display', serif;font-size:24px;font-weight:700;letter-spacing:4px;text-decoration:none;color:#000;}
+nav{
+position:fixed;top:0;width:100%;height:80px;
+display:flex;align-items:center;
+padding:0 50px;border-bottom:1px solid #eee;
+background:#fff;z-index:1000;
+}
 
-.nav-links{display:flex;gap:28px;align-items:center;margin-left:auto;}
-.nav-links a{text-decoration:none;color:#999;font-size:13px;letter-spacing:2px;transition:0.3s;}
+.logo{
+font-family:'Playfair Display',serif;
+font-size:24px;font-weight:700;
+letter-spacing:4px;color:#000;text-decoration:none;
+}
+
+.nav-links{margin-left:auto;display:flex;gap:28px;}
+.nav-links a{color:#999;text-decoration:none;font-size:13px;}
 .nav-links a.active{color:#000;font-weight:700;}
+
+.wrapper{
+display:flex;width:100%;height:100vh;padding-top:80px;
+}
+
+.text-side{
+flex:1;padding:0 8%;
+display:flex;flex-direction:column;justify-content:center;
+background:#fbfbfb;
+}
+
+.img-side{flex:1.3;}
+.img-side img{width:100%;height:100%;object-fit:cover;}
+
+.title-main{font-size:34px;margin-bottom:30px;}
+.desc-text{font-size:17px;line-height:2;color:#444;}
+
+/* panel */
+#overlay{
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.35);
+display:none;z-index:2500;
+}
+#overlay.active{display:block;}
 
 #estimatePanel{
 position:fixed;top:0;right:-100%;
 width:100%;height:100%;
-background:#fff;z-index:3000;
-transition:0.45s;
-padding:100px 40px;
+background:#fff;
+z-index:3000;
+transition:.4s;
+padding:90px 25px;
 overflow-y:auto;
 }
 #estimatePanel.active{right:0;}
 
-.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.35);display:none;z-index:2500;}
-.overlay.active{display:block;}
+.btn-group{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.type-btn{padding:12px;border:1px solid #ddd;text-align:center;cursor:pointer;}
+.type-btn.active{background:#111;color:#fff;}
 
-.wrapper{display:flex;width:100%;height:100vh;padding-top:80px;}
-.text-side{flex:1;padding:0 8%;display:flex;flex-direction:column;justify-content:center;background:#fbfbfb;}
-.img-side{flex:1.3;}
-.img-side img{width:100%;height:100%;object-fit:cover;}
-.title-main{font-size:34px;margin-bottom:35px;}
-.desc-text{font-size:17px;line-height:2.1;color:#444;}
+#subFields{margin-top:20px;}
+
+input,select{
+width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;
+}
+
+button{padding:14px;width:100%;border:none;cursor:pointer;}
 </style>
 </head>
 
 <body>
 
-<div id="overlay" class="overlay" onclick="closePanel()"></div>
+<div id="overlay" onclick="closePanel()"></div>
 
 <nav>
 <a href="index.html" class="logo">KYEOL</a>
@@ -55,86 +91,47 @@ overflow-y:auto;
 </div>
 </nav>
 
-<!-- ================= ESTIMATE ================= -->
-<div id="estimatePanel">
-
-<h2>1분 견적</h2>
-
-<div class="btn-group">
-<div class="type-btn" onclick="selectType(this,'residence')">주거 리모델링</div>
-<div class="type-btn" onclick="selectType(this,'commercial')">상가 인테리어</div>
-<div class="type-btn" onclick="selectType(this,'partial')">부분시공</div>
-</div>
-
-<div id="subFields"></div>
-
-<input type="text" id="requestDate" placeholder="시공 요청 일자">
-<input type="text" id="requestArea" placeholder="시공 요청 지역">
-<input type="tel" id="userPhone" placeholder="연락처">
-
-<button onclick="calculate()">견적 문의</button>
-
-<div id="resultPrice"></div>
-
-</div>
-
-<!-- ================= MAIN ================= -->
+<!-- MAIN -->
 <div class="wrapper">
 <div class="text-side">
-<h1 class="title-main">디테일이 공간을 완성합니다</h1>
-<p class="desc-text">작은 차이가 큰 결과를 만듭니다.</p>
+<h1 class="title-main">The devil is in the detail</h1>
+<p class="desc-text">
+디테일이 공간을 완성합니다.
+</p>
 </div>
+
 <div class="img-side">
 <img src="image/about1.jpg">
 </div>
 </div>
 
-<!-- EmailJS -->
+<!-- ESTIMATE -->
+<div id="estimatePanel">
+
+<h2>1분 견적</h2>
+
+<div class="btn-group">
+<div class="type-btn" onclick="selectType(this,'residence')">주거</div>
+<div class="type-btn" onclick="selectType(this,'commercial')">상가</div>
+<div class="type-btn" onclick="selectType(this,'partial')">부분시공</div>
+</div>
+
+<div id="subFields"></div>
+
+<input id="requestDate" placeholder="시공일">
+<input id="requestArea" placeholder="지역">
+<input id="userPhone" placeholder="연락처">
+
+<button onclick="calculate()">전송</button>
+
+<div id="resultPrice"></div>
+
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
 emailjs.init("sm7crJ5wvq3K7Phnz");
-
-/* ================= FIREBASE (Firestore 연동) ================= */
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
-const firebaseConfig = {
-apiKey:"AIzaSyD2Ct9z_RzhkheCicuZXf5-mL10S7cU3zc",
-authDomain:"kyeol-site.firebaseapp.com",
-projectId:"kyeol-site",
-storageBucket:"kyeol-site.firebasestorage.app",
-messagingSenderId:"1051027367783",
-appId:"1:1051027367783:web:efa4b6d64ecff81da7f1c2"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-/* 기본값 */
-window.firebasePrices = {
-basePrice:130,
-premiumPrice:180,
-windowPrice:160
-};
-
-/* Firestore 로드 */
-async function loadSettings(){
-try{
-const snap = await getDoc(doc(db,"settings","estimate"));
-if(snap.exists()){
-const d = snap.data();
-window.firebasePrices = {
-basePrice:d.basePrice ?? 130,
-premiumPrice:d.premiumPrice ?? 180,
-windowPrice:d.windowPrice ?? 160
-};
-}
-}catch(e){
-console.log(e);
-}
-}
-loadSettings();
 
 /* ================= UI ================= */
 function openPanel(){
@@ -149,31 +146,29 @@ document.getElementById("overlay").classList.remove("active");
 
 /* ================= TYPE ================= */
 function selectType(el,type){
-document.querySelectorAll(".type-btn").forEach(b=>b.classList.remove("active"));
+
+document.querySelectorAll(".type-btn").forEach(e=>e.classList.remove("active"));
 el.classList.add("active");
 
 const sub=document.getElementById("subFields");
 
 if(type==="residence"){
 sub.innerHTML=`
-<p>주거형</p>
 <input id="pyung" placeholder="평수">
-<label><input type="checkbox" id="isWindow"> 창호</label>
-<label><input type="checkbox" id="isPremium"> 프리미엄</label>
+<label><input type="checkbox" id="win">창호</label>
+<label><input type="checkbox" id="pre">프리미엄</label>
 `;
 }
 
 if(type==="commercial"){
 sub.innerHTML=`
 <p style="color:red">
-자재/업종/현장조건에 따라 금액이 상이하며<br>
-담당자가 직접 상담드립니다.
+상가는 업종/자재에 따라 별도 상담 필요
 </p>`;
 }
 
 if(type==="partial"){
 sub.innerHTML=`
-<p>부분시공 선택</p>
 <label><input type="checkbox" value="필름">필름</label>
 <label><input type="checkbox" value="도배">도배</label>
 <label><input type="checkbox" value="실리콘">실리콘</label>
@@ -181,14 +176,11 @@ sub.innerHTML=`
 }
 }
 
-/* ================= CALC ================= */
+/* ================= SEND ================= */
 function calculate(){
 
 const phone=document.getElementById("userPhone").value;
-if(phone.length<10){
-alert("연락처 확인");
-return;
-}
+if(phone.length<10) return alert("연락처 입력");
 
 const type=document.querySelector(".type-btn.active")?.innerText;
 
@@ -197,35 +189,12 @@ const area=document.getElementById("requestArea").value;
 
 let message="";
 
-if(type==="주거 리모델링"){
-
-const pyung=document.getElementById("pyung")?.value||0;
-const win=document.getElementById("isWindow")?.checked;
-const pre=document.getElementById("isPremium")?.checked;
-
-let price=window.firebasePrices.basePrice;
-
-if(pre) price=window.firebasePrices.premiumPrice;
-else if(win) price=window.firebasePrices.windowPrice;
-
-message=
-`[주거]
-
-평: ${pyung}
-가격기준: ${price}
-날짜: ${date}
-지역: ${area}
-폰: ${phone}`;
+if(type==="주거"){
+message=`주거 문의\n${date}\n${area}\n${phone}`;
 }
 
-if(type==="상가 인테리어"){
-message=
-`[상가]
-
-상가 인테리어 상담 요청
-날짜: ${date}
-지역: ${area}
-폰: ${phone}`;
+if(type==="상가"){
+message=`상가 문의\n${date}\n${area}\n${phone}`;
 }
 
 if(type==="부분시공"){
@@ -233,23 +202,13 @@ if(type==="부분시공"){
 const list=[...document.querySelectorAll("#subFields input:checked")]
 .map(e=>e.value);
 
-message=
-`[부분시공]
-
-${list.join(",")}
-날짜: ${date}
-지역: ${area}
-폰: ${phone}`;
+message=`부분시공\n${list.join(",")}\n${date}\n${area}\n${phone}`;
 }
 
-/* SEND */
-emailjs.send("service_fz1110j","template_0vo3ea6",{
-message
-});
+emailjs.send("service_fz1110j","template_0vo3ea6",{message});
 
 document.getElementById("resultPrice").innerText="전송 완료";
 }
-
 </script>
 
 </body>
