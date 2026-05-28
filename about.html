@@ -30,7 +30,12 @@
         .text-side{ flex:1; padding:0 8%; display:flex; flex-direction:column; justify-content:center; background:#fbfbfb; }
         .img-side{ flex:1.3; overflow:hidden; }
         .img-side img{ width:100%; height:100%; object-fit:cover; }
-        .title-main{ font-size:34px; line-height:1.4; margin-bottom:35px; }
+        .title-main { 
+    font-size: 30px; /* 34px에서 30px로 살짝 줄여서 한 줄에 들어갈 확률을 높였습니다 */
+    line-height: 1.4; 
+    margin-bottom: 35px; 
+    word-break: keep-all; /* 단어 단위로 끊기지 않게 설정합니다 */
+}
         .desc-text{ font-size:17px; line-height:2.1; color:#444; }
         .floating-estimate{ position:fixed; right:24px; bottom:24px; z-index:5000; background:#e60023; color:#fff; border-radius:22px; padding:18px 24px; cursor:pointer; box-shadow:0 12px 35px rgba(230,0,35,0.32); }
         @media(max-width:1024px){ nav{ padding:0 22px; } .nav-links{ display:none; } .mobile-menu-btn{ display:flex; } #estimatePanel{ width:100%; right:-100%; padding:90px 22px 140px; } .wrapper{ flex-direction:column; height:auto; } .img-side{ height:40vh; order:2; } .text-side{ padding:40px 24px; order:1; } }
