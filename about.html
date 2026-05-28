@@ -119,32 +119,19 @@ flex:1.3;
 width:100%;
 height:100%;
 object-fit:cover;
-display:block;
-}
-
-.title-main{
-font-size:34px;
-margin-bottom:30px;
-line-height:1.4;
-}
-
-.desc-text{
-font-size:17px;
-line-height:2;
-color:#444;
 }
 
 /* CTA */
-.cta-estimate{
+.cta{
 position:fixed;
 right:24px;
 bottom:24px;
-z-index:5000;
 background:#e60023;
 color:#fff;
 padding:18px 22px;
-border-radius:18px;
+border-radius:16px;
 cursor:pointer;
+z-index:5000;
 box-shadow:0 12px 35px rgba(230,0,35,0.35);
 }
 
@@ -154,17 +141,15 @@ box-shadow:0 12px 35px rgba(230,0,35,0.35);
 /* PANEL */
 #overlay{
 position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
+inset:0;
 background:rgba(0,0,0,0.35);
 display:none;
 z-index:2500;
 }
+
 #overlay.active{display:block;}
 
-#estimatePanel{
+#panel{
 position:fixed;
 top:0;
 right:-100%;
@@ -172,11 +157,12 @@ width:100%;
 height:100%;
 background:#fff;
 z-index:3000;
-transition:.4s;
+transition:.35s;
 padding:90px 25px;
-overflow-y:auto;
+overflow:auto;
 }
-#estimatePanel.active{right:0;}
+
+#panel.active{right:0;}
 
 .btn-group{
 display:grid;
@@ -185,20 +171,27 @@ gap:10px;
 margin-top:15px;
 }
 
-.type-btn{
+.btn{
 padding:12px;
 border:1px solid #ddd;
 text-align:center;
 cursor:pointer;
 }
 
-.type-btn.active{
+.btn.active{
 background:#111;
 color:#fff;
 }
 
-#subFields{
+/* FORM */
+#formArea{
 margin-top:20px;
+}
+
+.partial-group{
+margin-bottom:15px;
+padding:10px;
+border:1px solid #eee;
 }
 
 input,select{
@@ -206,12 +199,6 @@ width:100%;
 padding:12px;
 margin:8px 0;
 border:1px solid #ddd;
-}
-
-.partial-group{
-margin-top:15px;
-padding:10px;
-border:1px solid #eee;
 }
 
 /* MOBILE */
@@ -225,20 +212,10 @@ flex-direction:column;
 height:auto;
 }
 
-.img-side{
-height:40vh;
-order:2;
-}
+.img-side{height:40vh;}
+.text-side{padding:40px 20px;}
 
-.text-side{
-order:1;
-padding:40px 20px;
-}
-
-.title-main{font-size:24px;}
-.desc-text{font-size:15px;}
-
-.cta-estimate{
+.cta{
 width:calc(100% - 32px);
 right:16px;
 bottom:16px;
@@ -250,6 +227,7 @@ text-align:center;
 
 <body>
 
+<!-- OVERLAY -->
 <div id="overlay" onclick="closePanel()"></div>
 
 <!-- NAV -->
@@ -280,20 +258,12 @@ text-align:center;
 <div class="wrapper">
 
 <div class="text-side">
-<h1 class="title-main">
-"The devil is in the detail,<br>
-악마는 디테일에 있다."
+<h1 style="font-size:34px;line-height:1.4;">
+THE DEVIL IS IN THE DETAIL
 </h1>
 
-<p class="desc-text">
-단순해 보이는 공간일지라도,<br>
-그 완성도는 눈에 잘 띄지 않는<br>
-작은 디테일에서 결정됩니다.<br><br>
-
-<b>
-머무는 순간의 온기,<br>
-눈에 닿는 모든 곳에 결이 좋은 공간을 짓습니다.
-</b>
+<p style="margin-top:20px;line-height:2;color:#444;">
+디테일이 공간을 완성합니다.
 </p>
 </div>
 
@@ -304,148 +274,155 @@ text-align:center;
 </div>
 
 <!-- CTA -->
-<div class="cta-estimate" onclick="openPanel()">
+<div class="cta" onclick="openPanel()">
 <div class="cta-sub">무료 상담 가능</div>
 <div class="cta-main">1분 견적 →</div>
 </div>
 
 <!-- PANEL -->
-<div id="estimatePanel">
+<div id="panel">
 
 <h2>1분 견적</h2>
 
 <div class="btn-group">
-<div class="type-btn" onclick="selectType(this,'residence')">주거 리모델링</div>
-<div class="type-btn" onclick="selectType(this,'commercial')">상가 인테리어</div>
-<div class="type-btn" onclick="selectType(this,'partial')">부분시공</div>
+<div class="btn" onclick="setType(this,'residence')">주거 리모델링</div>
+<div class="btn" onclick="setType(this,'commercial')">상가 인테리어</div>
+<div class="btn" onclick="setType(this,'partial')">부분시공</div>
 </div>
 
-<div id="subFields"></div>
+<div id="formArea"></div>
 
-<input id="requestDate" placeholder="시공 요청 일자 (예: 26년 5월 27일)">
-<input id="requestArea" placeholder="시공 요청 지역 (예: 전주시 완산구)">
-<input id="userPhone" placeholder="연락처">
+<input id="date" placeholder="시공 요청 일자 (예: 26년 5월 27일)">
+<input id="area" placeholder="시공 요청 지역 (예: 전주시 완산구)">
+<input id="phone" placeholder="연락처">
 
-<button onclick="calculate()">견적 문의하기</button>
+<button onclick="submitEstimate()">견적 전송</button>
 
 </div>
 
 <script>
+
+/* MENU */
 function toggleMenu(){
 document.getElementById("mobileMenu").classList.toggle("active");
 }
 
+/* PANEL */
 function openPanel(){
-document.getElementById("estimatePanel").classList.add("active");
+document.getElementById("panel").classList.add("active");
 document.getElementById("overlay").classList.add("active");
 }
 
 function closePanel(){
-document.getElementById("estimatePanel").classList.remove("active");
+document.getElementById("panel").classList.remove("active");
 document.getElementById("overlay").classList.remove("active");
 }
 
-/* ================= FULL RESTORE ================= */
-function selectType(el,type){
+/* TYPE */
+function setType(el,type){
 
-document.querySelectorAll(".type-btn").forEach(e=>e.classList.remove("active"));
+document.querySelectorAll(".btn").forEach(b=>b.classList.remove("active"));
 el.classList.add("active");
 
-const sub=document.getElementById("subFields");
+const area=document.getElementById("formArea");
 
-/* 주거 */
+/* ================= 주거 ================= */
 if(type==="residence"){
-sub.innerHTML=`
+area.innerHTML=`
 <div class="partial-group">
-<label>주거 형태</label><br>
+주거 형태<br>
 <label><input type="radio" name="home"> 주택</label>
 <label><input type="radio" name="home"> 아파트</label>
 </div>
 
 <div class="partial-group">
-평수 : <input type="number" id="pyung"> 평
+평수 <input type="number" id="pyung">
 </div>
 
 <div class="partial-group">
-<label><input type="checkbox" id="window"> 창호 교체 포함</label><br>
-<label><input type="checkbox" id="premium"> 프리미엄 자재 선택</label>
+<label><input type="checkbox" id="window"> 창호 포함</label><br>
+<label><input type="checkbox" id="premium"> 프리미엄</label>
 </div>
 
 <div class="partial-group">
-화장실 공사 :
+화장실 :
 <select id="bath">
-<option value="0">0개소</option>
-<option value="1">1개소</option>
-<option value="2">2개소</option>
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
 </select>
 </div>
 `;
 }
 
-/* 상가 */
+/* ================= 상가 ================= */
 if(type==="commercial"){
-sub.innerHTML=`
-<p style="color:#e60023;line-height:1.8;">
-자재비, 요구사항, 업종, 현장 조건에 따라 금액이 달라집니다.<br>
-정확한 견적은 담당자 상담을 통해 안내드립니다.
-</p>
+area.innerHTML=`
+<div style="color:#e60023;line-height:1.8;">
+자재 / 업종 / 현장 조건에 따라 견적이 달라집니다.<br>
+담당자가 직접 상담드립니다.
+</div>
 `;
 }
 
-/* 부분시공 */
+/* ================= 부분시공 ================= */
 if(type==="partial"){
-sub.innerHTML=`
-<div class="partial-group">
-<b>필름</b><br>
-<label><input type="checkbox" value="방문"> 방문</label>
-<label><input type="checkbox" value="싱크대"> 싱크대</label>
-<label><input type="checkbox" value="붙박이장"> 붙박이장</label>
-<label><input type="checkbox" value="현관문"> 현관문</label>
+area.innerHTML=`
+<div class="partial-group"><b>필름</b><br>
+<label><input type="checkbox" value="방문">방문</label>
+<label><input type="checkbox" value="싱크대">싱크대</label>
+<label><input type="checkbox" value="붙박이장">붙박이장</label>
+<label><input type="checkbox" value="현관">현관</label>
 </div>
 
-<div class="partial-group">
-<b>실리콘</b><br>
-<label><input type="checkbox" value="세면대"> 세면대</label>
-<label><input type="checkbox" value="변기"> 변기</label>
-<label><input type="checkbox" value="샷시"> 샷시</label>
+<div class="partial-group"><b>실리콘</b><br>
+<label><input type="checkbox" value="세면대">세면대</label>
+<label><input type="checkbox" value="변기">변기</label>
+<label><input type="checkbox" value="샷시">샷시</label>
 </div>
 
-<div class="partial-group">
-<b>도배</b><br>
-<label><input type="checkbox" value="안방"> 안방</label>
-<label><input type="checkbox" value="거실"> 거실</label>
+<div class="partial-group"><b>도배</b><br>
+<label><input type="checkbox" value="안방">안방</label>
+<label><input type="checkbox" value="거실">거실</label>
 </div>
 
-<div class="partial-group">
-<b>도장</b><br>
-<label><input type="checkbox" value="베란다"> 베란다</label>
-<label><input type="checkbox" value="현관"> 현관</label>
+<div class="partial-group"><b>도장</b><br>
+<label><input type="checkbox" value="베란다">베란다</label>
+<label><input type="checkbox" value="현관">현관</label>
 </div>
 
-<div class="partial-group">
-<b>도어</b><br>
-<label><input type="checkbox" value="중문"> 중문</label><br>
-기타 : <input type="text" id="doorExtra">
+<div class="partial-group"><b>도어</b><br>
+<label><input type="checkbox" value="중문">중문</label><br>
+기타 <input id="doorExtra">
 </div>
 `;
 }
 }
 
-/* SEND */
-function calculate(){
+/* SUBMIT */
+function submitEstimate(){
 
-const phone=document.getElementById("userPhone").value;
-if(phone.length<10) return alert("연락처 입력");
+const phone=document.getElementById("phone").value;
+if(phone.length<10) return alert("연락처 확인");
 
-const type=document.querySelector(".type-btn.active")?.innerText;
-const date=document.getElementById("requestDate").value;
-const area=document.getElementById("requestArea").value;
+const type=document.querySelector(".btn.active")?.innerText;
+const date=document.getElementById("date").value;
+const area=document.getElementById("area").value;
 
-let message=`[1분견적]\n유형:${type}\n${date}\n${area}\n${phone}`;
+const items=[...document.querySelectorAll("#formArea input:checked")]
+.map(i=>i.value);
 
-alert("전송 완료 (구조 복구 버전)");
-console.log(message);
+const data={
+type,date,area,phone,items,
+createdAt:new Date().toISOString()
+};
+
+console.log("SEND:",data);
+
+alert("접수 완료");
+closePanel();
 }
+
 </script>
 
 </body>
