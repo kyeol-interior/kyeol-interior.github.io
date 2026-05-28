@@ -295,9 +295,17 @@ nav{
 /* Mobile */
 @media(max-width:1024px){
 
-    nav{padding:0 22px;}
-    .nav-links{display:none;}
-    .mobile-menu-btn{display:flex;}
+    nav{
+        padding:0 22px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .mobile-menu-btn{
+        display:flex;
+    }
 
     #estimatePanel{
         width:100%;
@@ -305,67 +313,43 @@ nav{
         padding:90px 22px 140px;
     }
 
-    .wrapper{flex-direction:column;height:auto;}
+    .wrapper{
+        flex-direction:column;
+        height:auto;
+    }
 
-    .img-side{height:40vh;order:2;}
-    .text-side{padding:40px 24px;order:1;}
+    .img-side{
+        height:40vh;
+        order:2;
+    }
 
-    .title-main{font-size:24px;}
-    .desc-text{font-size:15px;}
+    .text-side{
+        padding:40px 24px;
+        order:1;
+    }
 
-    .btn-group{grid-template-columns:1fr;}
-    .partial-checks{grid-template-columns:1fr;}
+    .title-main{
+        font-size:24px;
+    }
+
+    .desc-text{
+        font-size:15px;
+    }
+
+    .btn-group{
+        grid-template-columns:1fr;
+    }
+
+    .partial-checks{
+        grid-template-columns:1fr;
+    }
 
     .floating-estimate{
         width:calc(100% - 32px);
         right:16px;
         bottom:16px;
     }
-}
 
-/* ================= FIREBASE ADMIN (추가만) ================= */
-
-#adminBtn{
-    position:fixed;
-    bottom:20px;
-    left:20px;
-    background:#000;
-    color:#fff;
-    padding:10px 14px;
-    font-size:12px;
-    cursor:pointer;
-    z-index:9999;
-}
-
-#adminPanel{
-    position:fixed;
-    top:0;
-    left:-420px;
-    width:420px;
-    height:100%;
-    background:#111;
-    color:#fff;
-    z-index:4000;
-    transition:0.3s;
-    padding:20px;
-}
-
-#adminPanel.active{
-    left:0;
-}
-
-.admin-input{
-    width:100%;
-    padding:10px;
-    margin-bottom:10px;
-}
-
-.admin-btn{
-    width:100%;
-    padding:12px;
-    background:#fff;
-    border:none;
-    cursor:pointer;
 }
 
 </style>
@@ -378,147 +362,588 @@ nav{
 
 <!-- NAV -->
 <nav>
-    <a href="index.html" class="logo">KYEOL</a>
+
+    <a href="index.html" class="logo">
+        KYEOL
+    </a>
 
     <div class="nav-links">
+
         <a href="about.html" class="active">ABOUT</a>
         <a href="portfolio.html">PORTFOLIO</a>
         <a href="proposal.html">PROPOSAL</a>
         <a href="contact.html">CONTACT</a>
+
     </div>
 
+    <!-- Mobile Hamburger -->
     <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
-        <span></span><span></span><span></span>
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
+
 </nav>
-
-<!-- ADMIN (추가만) -->
-<div id="adminBtn" onclick="toggleAdmin()">ADMIN</div>
-
-<div id="adminPanel">
-    <h3>1분견적 관리자</h3>
-    <textarea id="adminText" class="admin-input" rows="12"></textarea>
-    <button class="admin-btn" onclick="saveEstimate()">저장</button>
-</div>
 
 <!-- Mobile Menu -->
 <div id="mobileMenu">
+
     <a href="about.html">ABOUT</a>
     <a href="portfolio.html">PORTFOLIO</a>
     <a href="proposal.html">PROPOSAL</a>
     <a href="contact.html">CONTACT</a>
+
 </div>
 
 <!-- Floating -->
 <div id="floatingEstimate" class="floating-estimate" onclick="openPanel()">
-    <div class="floating-sub">무료 상담 가능</div>
-    <div class="floating-main">1분견적 →</div>
-</div>
 
-<!-- Estimate Panel (원본 유지) -->
-<div id="estimatePanel">
-    <h2 style="margin-bottom:25px;">1분 견적</h2>
-
-    <label style="font-weight:700;">공사 유형</label>
-
-    <div class="btn-group">
-        <div class="type-btn" onclick="selectType(this,'residence')">주거 리모델링</div>
-        <div class="type-btn" onclick="selectType(this,'commercial')">상가 인테리어</div>
-        <div class="type-btn" onclick="selectType(this,'partial')">부분시공</div>
+    <div class="floating-sub">
+        무료 상담 가능
     </div>
 
-    <div id="subFields" class="detail-section"></div>
+    <div class="floating-main">
+        1분견적 →
+    </div>
 
-    <input id="requestDate" placeholder="시공일">
-    <input id="requestArea" placeholder="지역">
-    <input id="userPhone" placeholder="연락처">
-
-    <button onclick="calculate()">전송</button>
-
-    <div id="resultPrice"></div>
 </div>
 
-<!-- MAIN -->
+<!-- Estimate Panel -->
+<div id="estimatePanel">
+
+    <h2 style="margin-bottom:25px;">
+        1분 견적
+    </h2>
+
+    <!-- Type -->
+    <label style="font-weight:700; margin-bottom:10px; display:block;">
+        공사 유형
+    </label>
+
+    <div class="btn-group">
+
+        <div class="type-btn" onclick="selectType(this, 'residence')">
+            주거 리모델링
+        </div>
+
+        <div class="type-btn" onclick="selectType(this, 'commercial')">
+            상가 인테리어
+        </div>
+
+        <div class="type-btn" onclick="selectType(this, 'partial')">
+            부분시공
+        </div>
+
+    </div>
+
+    <!-- Dynamic -->
+    <div id="subFields" class="detail-section"></div>
+
+    <!-- Date -->
+    <label style="font-weight:700; margin-bottom:5px; display:block;">
+        시공 요청 일자
+    </label>
+
+    <input
+        type="text"
+        id="requestDate"
+        placeholder="예 : 26년 5월 27일"
+        style="width:100%; padding:14px; margin-bottom:18px; border:1px solid #ddd; border-radius:10px;"
+    >
+
+    <!-- Area -->
+    <label style="font-weight:700; margin-bottom:5px; display:block;">
+        시공 요청 지역
+    </label>
+
+    <input
+        type="text"
+        id="requestArea"
+        placeholder="예 : 전주시 완산구 평화동"
+        style="width:100%; padding:14px; margin-bottom:18px; border:1px solid #ddd; border-radius:10px;"
+    >
+
+    <!-- Phone -->
+    <label style="font-weight:700; margin-bottom:5px; display:block;">
+        연락처
+    </label>
+
+    <input
+        type="tel"
+        id="userPhone"
+        placeholder="010-0000-0000"
+        style="width:100%; padding:14px; margin-bottom:20px; border:1px solid #ddd; border-radius:10px;"
+    >
+
+    <!-- Buttons -->
+    <div style="display:flex; gap:10px;">
+
+        <button
+            onclick="resetEstimate()"
+            style="width:35%; padding:16px; background:#f5f5f5; border:1px solid #ddd; border-radius:10px; cursor:pointer; font-weight:700;"
+        >
+            초기화
+        </button>
+
+        <button
+            onclick="calculate()"
+            style="width:65%; padding:16px; background:#111; color:#fff; border:none; border-radius:10px; cursor:pointer; font-weight:700;"
+        >
+            견적 문의하기
+        </button>
+
+    </div>
+
+    <div id="resultPrice"
+         style="margin-top:20px; text-align:center; font-size:17px; font-weight:800; color:#e60023;">
+    </div>
+
+</div>
+
+<!-- Main -->
 <div class="wrapper">
+
     <div class="text-side">
-        <h1 class="title-main">The devil is in the detail</h1>
-        <p class="desc-text">디테일이 공간을 완성합니다.</p>
+
+         <h1 class="title-main">
+            "The devil is in the detail,<br>
+            악마는 디테일에 있다."
+        </h1>
+
+        <p class="desc-text">
+            단순해 보이는 공간일지라도,<br>
+            그 완성도는 눈에 잘 띄지 않는<br>
+            작은 디테일에서 결정됩니다.<br><br>
+
+            <b>
+                "머무는 순간의 온기, 눈에 닿는 모든 곳에<br>
+                결이 좋은 공간을 짓습니다."
+            </b>
+        </p>
+
     </div>
 
     <div class="img-side">
-        <img src="image/about1.jpg">
+        <img src="image/about1.jpg" alt="About">
     </div>
+
 </div>
 
-<!-- EMAILJS (원본 유지) -->
+<!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
+
 emailjs.init("sm7crJ5wvq3K7Phnz");
 
-/* 기존 코드 그대로 */
+/* Mobile Menu */
 function toggleMobileMenu(){
-    document.getElementById("mobileMenu").classList.toggle("active");
+
+    document
+        .getElementById("mobileMenu")
+        .classList
+        .toggle("active");
+
 }
 
+/* Open */
 function openPanel(){
+
     document.getElementById("estimatePanel").classList.add("active");
     document.getElementById("overlay").classList.add("active");
-    document.getElementById("floatingEstimate").style.display="none";
+
+    document.getElementById("floatingEstimate").style.display = "none";
+
 }
 
+/* Close */
 function closePanel(){
+
     document.getElementById("estimatePanel").classList.remove("active");
     document.getElementById("overlay").classList.remove("active");
-    document.getElementById("floatingEstimate").style.display="block";
+
+    document.getElementById("floatingEstimate").style.display = "block";
+
 }
 
-/* 나머지 기존 함수 그대로 유지 (생략 없음) */
-</script>
+/* House */
+function selectHouse(el){
 
-<!-- ================= FIREBASE ONLY ADD ================= -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    document.querySelectorAll('.house-btn').forEach(btn=>{
+        btn.classList.remove('active');
+    });
 
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID"
-};
+    el.classList.add('active');
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-/* ADMIN TOGGLE */
-window.toggleAdmin = function(){
-    document.getElementById("adminPanel").classList.toggle("active");
 }
 
-/* LOAD */
-async function loadEstimate(){
-    const snap = await getDoc(doc(db,"estimate","about"));
-    if(snap.exists()){
-        document.getElementById("adminText").value = snap.data().text || "";
+/* Type */
+function selectType(el, type){
+
+    document.querySelectorAll('.type-btn').forEach(btn=>{
+        btn.classList.remove('active');
+    });
+
+    el.classList.add('active');
+
+    const subFields = document.getElementById('subFields');
+
+    subFields.style.display = 'block';
+
+    /* Residence */
+    if(type === 'residence'){
+
+        subFields.innerHTML = `
+
+            <div style="margin-bottom:10px;">
+                주거형태
+            </div>
+
+            <div class="house-group">
+
+                <div class="house-btn" onclick="selectHouse(this)">
+                    주택
+                </div>
+
+                <div class="house-btn" onclick="selectHouse(this)">
+                    아파트
+                </div>
+
+            </div>
+
+            <div style="margin-bottom:12px;">
+                평수 :
+                <input type="number" id="pyung" style="width:70px; padding:6px;"> 평
+            </div>
+
+            <div style="margin-bottom:8px;">
+                <input type="checkbox" id="isWindow">
+                창호 교체 포함
+            </div>
+
+            <div style="margin-bottom:12px;">
+                <input type="checkbox" id="isPremium">
+                프리미엄 자재 선택
+            </div>
+
+            <div style="margin-bottom:10px;">
+                화장실 공사 :
+
+                <select id="bathQty">
+                    <option value="0">0개소</option>
+                    <option value="1">1개소</option>
+                    <option value="2">2개소</option>
+                </select>
+
+            </div>
+
+        `;
+
     }
+
+    /* Commercial */
+    else if(type === 'commercial'){
+
+        subFields.innerHTML = `
+
+            <div style="
+                font-size:13px;
+                line-height:1.9;
+                color:#e60023;
+            ">
+
+                자재 사양, 공사 범위, 업종 특성 및 현장 조건에 따라
+                견적 금액은 달라질 수 있습니다.<br><br>
+
+                보다 정확한 상담과 안내를 위해
+                담당자가 직접 상담 도와드리고 있습니다.
+
+            </div>
+
+        `;
+
+    }
+
+    /* Partial */
+    else if(type === 'partial'){
+
+        subFields.innerHTML = `
+
+            <!-- 필름 -->
+            <div class="partial-group">
+
+                <div class="partial-title">
+                    필름
+                </div>
+
+                <div class="partial-checks">
+
+                    <label><input type="checkbox" value="방문(도어)"> 방문(도어)</label>
+                    <label><input type="checkbox" value="방문틀(도어틀)"> 방문틀(도어틀)</label>
+                    <label><input type="checkbox" value="싱크대"> 싱크대</label>
+                    <label><input type="checkbox" value="붙박이장"> 붙박이장</label>
+                    <label><input type="checkbox" value="화장대"> 화장대</label>
+                    <label><input type="checkbox" value="신발장"> 신발장</label>
+                    <label><input type="checkbox" value="현관방화문"> 현관방화문</label>
+                    <label><input type="checkbox" value="샷시(창호)"> 샷시(창호)</label>
+
+                </div>
+
+            </div>
+
+            <!-- 실리콘 -->
+            <div class="partial-group">
+
+                <div class="partial-title">
+                    실리콘(코킹)
+                </div>
+
+                <div class="partial-checks">
+
+                    <label><input type="checkbox" value="화장실 세면대"> 화장실 세면대</label>
+                    <label><input type="checkbox" value="화장실 변기"> 화장실 변기</label>
+                    <label><input type="checkbox" value="싱크대 코킹"> 싱크대</label>
+                    <label><input type="checkbox" value="샷시 코킹"> 샷시(창호)</label>
+                    <label><input type="checkbox" value="필름지 시공부위"> 필름지 시공부위</label>
+
+                </div>
+
+            </div>
+
+            <!-- 도배 -->
+            <div class="partial-group">
+
+                <div class="partial-title">
+                    도배
+                </div>
+
+                <div class="partial-checks">
+
+                    <label><input type="checkbox" value="안방 도배"> 안방</label>
+                    <label><input type="checkbox" value="거실 도배"> 거실</label>
+                    <label><input type="checkbox" value="작은방 도배"> 작은방</label>
+
+                </div>
+
+            </div>
+
+            <!-- 도장 -->
+            <div class="partial-group">
+
+                <div class="partial-title">
+                    도장(페인트)
+                </div>
+
+                <div class="partial-checks">
+
+                    <label><input type="checkbox" value="베란다 도장"> 베란다</label>
+                    <label><input type="checkbox" value="현관 도장"> 현관</label>
+
+                </div>
+
+            </div>
+
+            <!-- 도어 -->
+            <div class="partial-group">
+
+                <div class="partial-title">
+                    도어시공
+                </div>
+
+                <div class="partial-checks">
+
+                    <label><input type="checkbox" value="중문"> 중문</label>
+
+                    <label style="grid-column:1/-1;">
+                        안방도어 외 몇개소 :
+                        <input
+                            type="text"
+                            id="doorExtra"
+                            placeholder="예 : 방문 3개"
+                            style="
+                                margin-top:6px;
+                                width:100%;
+                                padding:10px;
+                                border:1px solid #ddd;
+                                border-radius:8px;
+                            "
+                        >
+                    </label>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
 }
 
-/* SAVE */
-window.saveEstimate = async function(){
-    const text = document.getElementById("adminText").value;
+/* Reset */
+function resetEstimate(){
 
-    await setDoc(doc(db,"estimate","about"),{text});
+    document.querySelectorAll('.type-btn').forEach(btn=>{
+        btn.classList.remove('active');
+    });
 
-    alert("저장 완료");
+    document.getElementById('subFields').style.display = 'none';
+    document.getElementById('subFields').innerHTML = '';
+
+    document.getElementById('requestDate').value = '';
+    document.getElementById('requestArea').value = '';
+    document.getElementById('userPhone').value = '';
+    document.getElementById('resultPrice').innerText = '';
+
 }
 
-/* INIT */
-loadEstimate();
+/* Send */
+function calculate(){
+
+    const requestDate =
+        document.getElementById("requestDate").value || "미입력";
+
+    const requestArea =
+        document.getElementById("requestArea").value || "미입력";
+
+    const phone =
+        document.getElementById("userPhone").value;
+
+    if(phone.length < 10){
+
+        alert("연락처를 정확히 입력해주세요.");
+        return;
+
+    }
+
+    const type =
+        document.querySelector('.type-btn.active')?.innerText || "선택안함";
+
+    let message = "";
+
+    /* Residence */
+    if(type === "주거 리모델링"){
+
+        const houseType =
+            document.querySelector('.house-btn.active')?.innerText || "선택안함";
+
+        const pyung =
+            document.getElementById('pyung')?.value || "미입력";
+
+        const isWindow =
+            document.getElementById('isWindow')?.checked ? "포함" : "미포함";
+
+        const isPremium =
+            document.getElementById('isPremium')?.checked ? "선택" : "미선택";
+
+        const bathQty =
+            document.getElementById('bathQty')?.value || "0";
+
+        message =
+
+`[ 1분 견적 문의 ]
+
+공사 유형 : ${type}
+
+주거 형태 : ${houseType}
+
+평수 : ${pyung}평
+
+창호 교체 : ${isWindow}
+
+프리미엄 자재 : ${isPremium}
+
+화장실 공사 : ${bathQty}개소
+
+시공 요청 일자 : ${requestDate}
+
+시공 요청 지역 : ${requestArea}
+
+연락처 : ${phone}`;
+
+    }
+
+    /* Commercial */
+    else if(type === "상가 인테리어"){
+
+        message =
+
+`[ 1분 견적 문의 ]
+
+공사 유형 : ${type}
+
+상업 공간 인테리어 상담 요청
+
+시공 요청 일자 : ${requestDate}
+
+시공 요청 지역 : ${requestArea}
+
+연락처 : ${phone}`;
+
+    }
+
+    /* Partial */
+    else if(type === "부분시공"){
+
+        const checkedItems = [];
+
+        document
+            .querySelectorAll('#subFields input[type="checkbox"]:checked')
+            .forEach(el=>{
+
+                checkedItems.push(el.value);
+
+            });
+
+        const doorExtra =
+            document.getElementById("doorExtra")?.value || "";
+
+        message =
+
+`[ 1분 견적 문의 ]
+
+공사 유형 : ${type}
+
+선택 항목 :
+
+${checkedItems.length ? checkedItems.join('\n') : '선택 없음'}
+
+${doorExtra ? '\n추가 도어시공 : ' + doorExtra : ''}
+
+시공 요청 일자 : ${requestDate}
+
+시공 요청 지역 : ${requestArea}
+
+연락처 : ${phone}`;
+
+    }
+
+    document.getElementById("resultPrice").innerText =
+        "문의가 정상 접수되었습니다.";
+
+    emailjs.send(
+        "service_fz1110j",
+        "template_0vo3ea6",
+        {
+            message:message
+        }
+    )
+
+    .then(function(){
+
+        alert("담당자가 빠르게 연락드리겠습니다.");
+
+        closePanel();
+
+    })
+
+    .catch(function(){
+
+        alert("메일 전송에 실패했습니다.");
+
+    });
+
+}
 
 </script>
 
