@@ -44,58 +44,17 @@ color:#000;
 margin-left:auto;
 display:flex;
 gap:28px;
-align-items:center;
 }
 
 .nav-links a{
 text-decoration:none;
 color:#999;
 font-size:13px;
-cursor:pointer;
 }
 
 .nav-links a.active{
 color:#000;
 font-weight:700;
-}
-
-/* MOBILE HAMBURGER */
-.menu-btn{
-display:none;
-flex-direction:column;
-gap:5px;
-cursor:pointer;
-margin-left:auto;
-}
-
-.menu-btn span{
-width:24px;
-height:2px;
-background:#111;
-}
-
-.mobile-menu{
-position:fixed;
-top:80px;
-right:-100%;
-width:100%;
-height:calc(100vh - 80px);
-background:#fff;
-z-index:2000;
-padding:40px;
-transition:.3s;
-}
-
-.mobile-menu.active{
-right:0;
-}
-
-.mobile-menu a{
-display:block;
-padding:15px 0;
-border-bottom:1px solid #eee;
-text-decoration:none;
-color:#111;
 }
 
 /* MAIN */
@@ -141,7 +100,8 @@ color:#444;
 /* PANEL */
 #overlay{
 position:fixed;
-top:0;left:0;
+top:0;
+left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,0.35);
@@ -200,12 +160,39 @@ margin:8px 0;
 border:1px solid #ddd;
 }
 
-/* MOBILE */
+/* CTA BUTTON */
+.cta-estimate{
+position:fixed;
+right:24px;
+bottom:24px;
+z-index:5000;
+background:#e60023;
+color:#fff;
+padding:18px 22px;
+border-radius:18px;
+cursor:pointer;
+box-shadow:0 12px 35px rgba(230,0,35,0.35);
+transition:.2s;
+}
+
+.cta-estimate:hover{
+transform:scale(1.03);
+}
+
+.cta-sub{
+font-size:11px;
+opacity:0.85;
+}
+
+.cta-main{
+font-size:18px;
+font-weight:800;
+margin-top:3px;
+}
+
 @media(max-width:1024px){
 
 .nav-links{display:none;}
-
-.menu-btn{display:flex;}
 
 .wrapper{
 flex-direction:column;
@@ -224,6 +211,13 @@ padding:40px 20px;
 
 .title-main{font-size:24px;}
 .desc-text{font-size:15px;}
+
+.cta-estimate{
+width:calc(100% - 32px);
+right:16px;
+bottom:16px;
+text-align:center;
+}
 }
 </style>
 </head>
@@ -232,31 +226,17 @@ padding:40px 20px;
 
 <div id="overlay" onclick="closePanel()"></div>
 
-<!-- NAV -->
+<!-- NAV (1분견적 완전 제거) -->
 <nav>
 <a href="index.html" class="logo">KYEOL</a>
 
 <div class="nav-links">
-<a onclick="openPanel()">1분견적</a>
 <a href="about.html" class="active">ABOUT</a>
 <a href="portfolio.html">PORTFOLIO</a>
 <a href="proposal.html">PROPOSAL</a>
 <a href="contact.html">CONTACT</a>
 </div>
-
-<div class="menu-btn" onclick="toggleMenu()">
-<span></span><span></span><span></span>
-</div>
 </nav>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-<a href="about.html">ABOUT</a>
-<a href="portfolio.html">PORTFOLIO</a>
-<a href="proposal.html">PROPOSAL</a>
-<a href="contact.html">CONTACT</a>
-<a onclick="openPanel()">1분견적</a>
-</div>
 
 <!-- MAIN -->
 <div class="wrapper">
@@ -284,6 +264,14 @@ padding:40px 20px;
 <div class="img-side">
 <img src="image/about1.jpg">
 </div>
+
+</div>
+
+<!-- CTA BUTTON (핵심) -->
+<div class="cta-estimate" onclick="openPanel()">
+
+<div class="cta-sub">무료 상담 가능</div>
+<div class="cta-main">1분 견적 →</div>
 
 </div>
 
@@ -319,26 +307,34 @@ document.getElementById("estimatePanel").classList.remove("active");
 document.getElementById("overlay").classList.remove("active");
 }
 
-function toggleMenu(){
-document.getElementById("mobileMenu").classList.toggle("active");
-}
-
 function selectType(el,type){
+
 document.querySelectorAll(".type-btn").forEach(e=>e.classList.remove("active"));
 el.classList.add("active");
 
 const sub=document.getElementById("subFields");
 
 if(type==="residence"){
-sub.innerHTML=`<input placeholder="평수">`;
+sub.innerHTML=`
+<input placeholder="평수">
+<label><input type="checkbox">창호</label>
+<label><input type="checkbox">프리미엄</label>
+`;
 }
 
 if(type==="commercial"){
-sub.innerHTML=`<p>상가 상담 필요</p>`;
+sub.innerHTML=`
+<p style="color:#e60023;">
+자재 / 업종에 따라 담당자 상담이 필요합니다.
+</p>`;
 }
 
 if(type==="partial"){
-sub.innerHTML=`<label><input type="checkbox">필름</label>`;
+sub.innerHTML=`
+<label><input type="checkbox">필름</label>
+<label><input type="checkbox">도배</label>
+<label><input type="checkbox">실리콘</label>
+`;
 }
 }
 </script>
