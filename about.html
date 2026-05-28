@@ -57,7 +57,7 @@ color:#000;
 font-weight:700;
 }
 
-/* MOBILE HAMBURGER */
+/* MOBILE */
 .menu-btn{
 display:none;
 flex-direction:column;
@@ -183,7 +183,6 @@ background:#111;
 color:#fff;
 }
 
-/* FORM */
 #formArea{
 margin-top:20px;
 }
@@ -227,7 +226,6 @@ text-align:center;
 
 <body>
 
-<!-- OVERLAY -->
 <div id="overlay" onclick="closePanel()"></div>
 
 <!-- NAV -->
@@ -254,17 +252,22 @@ text-align:center;
 <a href="contact.html">CONTACT</a>
 </div>
 
-<!-- MAIN -->
+<!-- MAIN (원본 문구 복구) -->
 <div class="wrapper">
 
 <div class="text-side">
+
 <h1 style="font-size:34px;line-height:1.4;">
-THE DEVIL IS IN THE DETAIL
+"The devil is in the detail,<br>
+악마는 디테일에 있다."
 </h1>
 
-<p style="margin-top:20px;line-height:2;color:#444;">
-디테일이 공간을 완성합니다.
+<p style="margin-top:35px;font-size:17px;line-height:2;color:#444;">
+단순해 보이는 공간일지라도,<br>
+그 완성도는 눈에 잘 띄지 않는<br>
+작은 디테일에서 결정됩니다.
 </p>
+
 </div>
 
 <div class="img-side">
@@ -302,12 +305,10 @@ THE DEVIL IS IN THE DETAIL
 
 <script>
 
-/* MENU */
 function toggleMenu(){
 document.getElementById("mobileMenu").classList.toggle("active");
 }
 
-/* PANEL */
 function openPanel(){
 document.getElementById("panel").classList.add("active");
 document.getElementById("overlay").classList.add("active");
@@ -318,7 +319,7 @@ document.getElementById("panel").classList.remove("active");
 document.getElementById("overlay").classList.remove("active");
 }
 
-/* TYPE */
+/* 1분견적 (정상 복구) */
 function setType(el,type){
 
 document.querySelectorAll(".btn").forEach(b=>b.classList.remove("active"));
@@ -326,98 +327,53 @@ el.classList.add("active");
 
 const area=document.getElementById("formArea");
 
-/* ================= 주거 ================= */
 if(type==="residence"){
 area.innerHTML=`
-<div class="partial-group">
 주거 형태<br>
 <label><input type="radio" name="home"> 주택</label>
 <label><input type="radio" name="home"> 아파트</label>
-</div>
-
-<div class="partial-group">
-평수 <input type="number" id="pyung">
-</div>
-
-<div class="partial-group">
-<label><input type="checkbox" id="window"> 창호 포함</label><br>
-<label><input type="checkbox" id="premium"> 프리미엄</label>
-</div>
-
-<div class="partial-group">
+<br><br>
+평수 <input type="number">
+<br>
+<label><input type="checkbox"> 창호 포함</label>
+<label><input type="checkbox"> 프리미엄</label>
+<br><br>
 화장실 :
-<select id="bath">
-<option value="0">0</option>
-<option value="1">1</option>
-<option value="2">2</option>
+<select>
+<option>0</option>
+<option>1</option>
+<option>2</option>
 </select>
-</div>
 `;
 }
 
-/* ================= 상가 ================= */
 if(type==="commercial"){
 area.innerHTML=`
 <div style="color:#e60023;line-height:1.8;">
 자재 / 업종 / 현장 조건에 따라 견적이 달라집니다.<br>
-담당자가 직접 상담드립니다.
+담당자 상담 후 정확한 안내가 가능합니다.
 </div>
 `;
 }
 
-/* ================= 부분시공 ================= */
 if(type==="partial"){
 area.innerHTML=`
-<div class="partial-group"><b>필름</b><br>
-<label><input type="checkbox" value="방문">방문</label>
-<label><input type="checkbox" value="싱크대">싱크대</label>
-<label><input type="checkbox" value="붙박이장">붙박이장</label>
-<label><input type="checkbox" value="현관">현관</label>
-</div>
-
-<div class="partial-group"><b>실리콘</b><br>
-<label><input type="checkbox" value="세면대">세면대</label>
-<label><input type="checkbox" value="변기">변기</label>
-<label><input type="checkbox" value="샷시">샷시</label>
-</div>
-
-<div class="partial-group"><b>도배</b><br>
-<label><input type="checkbox" value="안방">안방</label>
-<label><input type="checkbox" value="거실">거실</label>
-</div>
-
-<div class="partial-group"><b>도장</b><br>
-<label><input type="checkbox" value="베란다">베란다</label>
-<label><input type="checkbox" value="현관">현관</label>
-</div>
-
-<div class="partial-group"><b>도어</b><br>
-<label><input type="checkbox" value="중문">중문</label><br>
-기타 <input id="doorExtra">
-</div>
+<b>필름</b><br>
+<label><input type="checkbox">방문</label>
+<label><input type="checkbox">싱크대</label>
+<label><input type="checkbox">붙박이장</label>
+<br><br>
+<b>실리콘</b><br>
+<label><input type="checkbox">세면대</label>
+<label><input type="checkbox">변기</label>
+<label><input type="checkbox">샷시</label>
 `;
 }
 }
 
-/* SUBMIT */
 function submitEstimate(){
-
 const phone=document.getElementById("phone").value;
 if(phone.length<10) return alert("연락처 확인");
-
-const type=document.querySelector(".btn.active")?.innerText;
-const date=document.getElementById("date").value;
-const area=document.getElementById("area").value;
-
-const items=[...document.querySelectorAll("#formArea input:checked")]
-.map(i=>i.value);
-
-const data={
-type,date,area,phone,items,
-createdAt:new Date().toISOString()
-};
-
-console.log("SEND:",data);
 
 alert("접수 완료");
 closePanel();
