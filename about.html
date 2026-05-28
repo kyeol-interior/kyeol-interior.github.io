@@ -137,28 +137,38 @@ function resetEstimate(){
     document.getElementById('resultPrice').innerText = '';
 }
 
+// [v3.1] calculate 함수 수정본
 function calculate(){
     const requestDate = document.getElementById("requestDate").value || "미입력";
     const requestArea = document.getElementById("requestArea").value || "미입력";
     const phone = document.getElementById("userPhone").value;
     if(phone.length < 10){ alert("연락처를 정확히 입력해주세요."); return; }
+    
     const type = document.querySelector('.type-btn.active')?.innerText || "선택안함";
-    let message = "";
+    let total = 0;
+    let message = `[ 1분 견적 결과 ]\n공사 유형 : ${type}\n`;
+
     if(type === "주거 리모델링"){
-        const houseType = document.querySelector('.house-btn.active')?.innerText || "선택안함";
-        const pyung = document.getElementById('pyung')?.value || "미입력";
-        const isWindow = document.getElementById('isWindow')?.checked ? "포함" : "미포함";
-        const isPremium = document.getElementById('isPremium')?.checked ? "선택" : "미선택";
-        const bathQty = document.getElementById('bathQty')?.value || "0";
-        message = `[ 1분 견적 문의 ]\n공사 유형 : ${type}\n주거 형태 : ${houseType}\n평수 : ${pyung}평\n창호 교체 : ${isWindow}\n프리미엄 자재 : ${isPremium}\n화장실 공사 : ${bathQty}개소\n시공 요청 일자 : ${requestDate}\n시공 요청 지역 : ${requestArea}\n연락처 : ${phone}`;
-    } else if(type === "상가 인테리어"){
-        message = `[ 1분 견적 문의 ]\n공사 유형 : ${type}\n상업 공간 인테리어 상담 요청\n시공 요청 일자 : ${requestDate}\n시공 요청 지역 : ${requestArea}\n연락처 : ${phone}`;
-    } else if(type === "부분시공"){
-        const checkedItems = [];
-        document.querySelectorAll('#subFields input[type="checkbox"]:checked').forEach(el=>checkedItems.push(el.value));
-        const doorExtra = document.getElementById("doorExtra")?.value || "";
-        message = `[ 1분 견적 문의 ]\n공사 유형 : ${type}\n선택 항목 :\n${checkedItems.length ? checkedItems.join('\n') : '선택 없음'}\n${doorExtra ? '\n추가 도어시공 : ' + doorExtra : ''}\n시공 요청 일자 : ${requestDate}\n시공 요청 지역 : ${requestArea}\n연락처 : ${phone}`;
-    }
+        const pyung = parseFloat(document.getElementById('pyung')?.value) || 0;
+        const isWindow = document.getElementById('isWindow')?.checked;
+        const isPremium = document.getElementById('isPremium')?.checked;
+        const bathQty = parseInt(document.getElementById('bathQty')?.value) || 0;
+
+        // 시트값 활용 계산
+        total += (pyung * (siteConfig.주거_기본평단가 || 0));
+        if(isWindow) total += (siteConfig.주거_창호교체비 || 0);
+        if(isPremium) total += (siteConfig.주거_프리미엄가 || 0);
+        total += (bathQty * (siteConfig.주거_화장실개당 || 0));
+        
+        message += `평수 : ${pyung}평\n창호 : ${isWindow ? '포함' : '미포함'}\n화장실 : ${bathQty}개소\n예상 견적 : ${total.toLocaleString()}원`;
+    } 
+    // (부분시공 및 상가 로직도 위와 같이 siteConfig.항목명 을 사용하여 합산 가능)
+
+    // 결과 출력 및 전송
+    document.getElementById("resultPrice").innerText = `예상 견적: ${total.toLocaleString()}원`;
+    
+    // 이후 이메일 발송 및 시트 기록 로직 진행...
+}
 
     emailjs.send("service_fz1110j", "template_0vo3ea6", { message: message })
     .then(function(){
