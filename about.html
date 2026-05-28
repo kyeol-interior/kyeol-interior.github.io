@@ -9,71 +9,222 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#111;overflow-x:hidden;}
 
+body{
+font-family:'Noto Sans KR',sans-serif;
+background:#fff;
+color:#111;
+overflow-x:hidden;
+}
+
+/* NAV */
 nav{
-position:fixed;top:0;width:100%;height:80px;
-display:flex;align-items:center;
-padding:0 50px;border-bottom:1px solid #eee;
-background:#fff;z-index:1000;
+position:fixed;
+top:0;
+width:100%;
+height:80px;
+display:flex;
+align-items:center;
+padding:0 50px;
+border-bottom:1px solid #eee;
+background:#fff;
+z-index:1000;
 }
 
 .logo{
 font-family:'Playfair Display',serif;
-font-size:24px;font-weight:700;
-letter-spacing:4px;color:#000;text-decoration:none;
+font-size:24px;
+font-weight:700;
+letter-spacing:4px;
+text-decoration:none;
+color:#000;
 }
 
-.nav-links{margin-left:auto;display:flex;gap:28px;}
-.nav-links a{color:#999;text-decoration:none;font-size:13px;}
-.nav-links a.active{color:#000;font-weight:700;}
+.nav-links{
+margin-left:auto;
+display:flex;
+gap:28px;
+align-items:center;
+}
 
+.nav-links a{
+text-decoration:none;
+color:#999;
+font-size:13px;
+cursor:pointer;
+}
+
+.nav-links a.active{
+color:#000;
+font-weight:700;
+}
+
+/* MOBILE HAMBURGER */
+.menu-btn{
+display:none;
+flex-direction:column;
+gap:5px;
+cursor:pointer;
+margin-left:auto;
+}
+
+.menu-btn span{
+width:24px;
+height:2px;
+background:#111;
+}
+
+.mobile-menu{
+position:fixed;
+top:80px;
+right:-100%;
+width:100%;
+height:calc(100vh - 80px);
+background:#fff;
+z-index:2000;
+padding:40px;
+transition:.3s;
+}
+
+.mobile-menu.active{
+right:0;
+}
+
+.mobile-menu a{
+display:block;
+padding:15px 0;
+border-bottom:1px solid #eee;
+text-decoration:none;
+color:#111;
+}
+
+/* MAIN */
 .wrapper{
-display:flex;width:100%;height:100vh;padding-top:80px;
+display:flex;
+width:100%;
+height:100vh;
+padding-top:80px;
 }
 
 .text-side{
-flex:1;padding:0 8%;
-display:flex;flex-direction:column;justify-content:center;
+flex:1;
+padding:0 8%;
+display:flex;
+flex-direction:column;
+justify-content:center;
 background:#fbfbfb;
 }
 
-.img-side{flex:1.3;}
-.img-side img{width:100%;height:100%;object-fit:cover;}
-
-.title-main{font-size:34px;margin-bottom:30px;}
-.desc-text{font-size:17px;line-height:2;color:#444;}
-
-/* panel */
-#overlay{
-position:fixed;top:0;left:0;width:100%;height:100%;
-background:rgba(0,0,0,0.35);
-display:none;z-index:2500;
+.img-side{
+flex:1.3;
 }
-#overlay.active{display:block;}
+
+.img-side img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.title-main{
+font-size:34px;
+margin-bottom:30px;
+line-height:1.4;
+}
+
+.desc-text{
+font-size:17px;
+line-height:2;
+color:#444;
+}
+
+/* PANEL */
+#overlay{
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.35);
+display:none;
+z-index:2500;
+}
+
+#overlay.active{
+display:block;
+}
 
 #estimatePanel{
-position:fixed;top:0;right:-100%;
-width:100%;height:100%;
+position:fixed;
+top:0;
+right:-100%;
+width:100%;
+height:100%;
 background:#fff;
 z-index:3000;
 transition:.4s;
 padding:90px 25px;
 overflow-y:auto;
 }
-#estimatePanel.active{right:0;}
 
-.btn-group{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
-.type-btn{padding:12px;border:1px solid #ddd;text-align:center;cursor:pointer;}
-.type-btn.active{background:#111;color:#fff;}
-
-#subFields{margin-top:20px;}
-
-input,select{
-width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;
+#estimatePanel.active{
+right:0;
 }
 
-button{padding:14px;width:100%;border:none;cursor:pointer;}
+.btn-group{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:10px;
+margin-top:15px;
+}
+
+.type-btn{
+padding:12px;
+border:1px solid #ddd;
+text-align:center;
+cursor:pointer;
+}
+
+.type-btn.active{
+background:#111;
+color:#fff;
+}
+
+#subFields{
+margin-top:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ddd;
+}
+
+/* MOBILE */
+@media(max-width:1024px){
+
+.nav-links{display:none;}
+
+.menu-btn{display:flex;}
+
+.wrapper{
+flex-direction:column;
+height:auto;
+}
+
+.img-side{
+height:40vh;
+order:2;
+}
+
+.text-side{
+order:1;
+padding:40px 20px;
+}
+
+.title-main{font-size:24px;}
+.desc-text{font-size:15px;}
+}
 </style>
 </head>
 
@@ -81,31 +232,62 @@ button{padding:14px;width:100%;border:none;cursor:pointer;}
 
 <div id="overlay" onclick="closePanel()"></div>
 
+<!-- NAV -->
 <nav>
 <a href="index.html" class="logo">KYEOL</a>
+
 <div class="nav-links">
+<a onclick="openPanel()">1분견적</a>
 <a href="about.html" class="active">ABOUT</a>
 <a href="portfolio.html">PORTFOLIO</a>
 <a href="proposal.html">PROPOSAL</a>
 <a href="contact.html">CONTACT</a>
 </div>
+
+<div class="menu-btn" onclick="toggleMenu()">
+<span></span><span></span><span></span>
+</div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+<a href="about.html">ABOUT</a>
+<a href="portfolio.html">PORTFOLIO</a>
+<a href="proposal.html">PROPOSAL</a>
+<a href="contact.html">CONTACT</a>
+<a onclick="openPanel()">1분견적</a>
+</div>
 
 <!-- MAIN -->
 <div class="wrapper">
+
 <div class="text-side">
-<h1 class="title-main">The devil is in the detail</h1>
+
+<h1 class="title-main">
+"The devil is in the detail,<br>
+악마는 디테일에 있다."
+</h1>
+
 <p class="desc-text">
-디테일이 공간을 완성합니다.
+단순해 보이는 공간일지라도,<br>
+그 완성도는 눈에 잘 띄지 않는<br>
+작은 디테일에서 결정됩니다.<br><br>
+
+<b>
+머무는 순간의 온기,<br>
+눈에 닿는 모든 곳에 결이 좋은 공간을 짓습니다.
+</b>
 </p>
+
 </div>
 
 <div class="img-side">
 <img src="image/about1.jpg">
 </div>
+
 </div>
 
-<!-- ESTIMATE -->
+<!-- PANEL -->
 <div id="estimatePanel">
 
 <h2>1분 견적</h2>
@@ -124,16 +306,9 @@ button{padding:14px;width:100%;border:none;cursor:pointer;}
 
 <button onclick="calculate()">전송</button>
 
-<div id="resultPrice"></div>
-
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
 <script>
-emailjs.init("sm7crJ5wvq3K7Phnz");
-
-/* ================= UI ================= */
 function openPanel(){
 document.getElementById("estimatePanel").classList.add("active");
 document.getElementById("overlay").classList.add("active");
@@ -144,70 +319,27 @@ document.getElementById("estimatePanel").classList.remove("active");
 document.getElementById("overlay").classList.remove("active");
 }
 
-/* ================= TYPE ================= */
-function selectType(el,type){
+function toggleMenu(){
+document.getElementById("mobileMenu").classList.toggle("active");
+}
 
+function selectType(el,type){
 document.querySelectorAll(".type-btn").forEach(e=>e.classList.remove("active"));
 el.classList.add("active");
 
 const sub=document.getElementById("subFields");
 
 if(type==="residence"){
-sub.innerHTML=`
-<input id="pyung" placeholder="평수">
-<label><input type="checkbox" id="win">창호</label>
-<label><input type="checkbox" id="pre">프리미엄</label>
-`;
+sub.innerHTML=`<input placeholder="평수">`;
 }
 
 if(type==="commercial"){
-sub.innerHTML=`
-<p style="color:red">
-상가는 업종/자재에 따라 별도 상담 필요
-</p>`;
+sub.innerHTML=`<p>상가 상담 필요</p>`;
 }
 
 if(type==="partial"){
-sub.innerHTML=`
-<label><input type="checkbox" value="필름">필름</label>
-<label><input type="checkbox" value="도배">도배</label>
-<label><input type="checkbox" value="실리콘">실리콘</label>
-`;
+sub.innerHTML=`<label><input type="checkbox">필름</label>`;
 }
-}
-
-/* ================= SEND ================= */
-function calculate(){
-
-const phone=document.getElementById("userPhone").value;
-if(phone.length<10) return alert("연락처 입력");
-
-const type=document.querySelector(".type-btn.active")?.innerText;
-
-const date=document.getElementById("requestDate").value;
-const area=document.getElementById("requestArea").value;
-
-let message="";
-
-if(type==="주거"){
-message=`주거 문의\n${date}\n${area}\n${phone}`;
-}
-
-if(type==="상가"){
-message=`상가 문의\n${date}\n${area}\n${phone}`;
-}
-
-if(type==="부분시공"){
-
-const list=[...document.querySelectorAll("#subFields input:checked")]
-.map(e=>e.value);
-
-message=`부분시공\n${list.join(",")}\n${date}\n${area}\n${phone}`;
-}
-
-emailjs.send("service_fz1110j","template_0vo3ea6",{message});
-
-document.getElementById("resultPrice").innerText="전송 완료";
 }
 </script>
 
